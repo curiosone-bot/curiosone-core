@@ -1,0 +1,13 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Declare files that will always have LF line endings on checkout.
+*.java text eol=lf
+
+# Declare files that should not be touched.
+*.jpg binary
+*.png binary
+*.gif binary
+*.svg binary
+*.ico binary
+*.ico binary
