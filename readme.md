@@ -1,6 +1,9 @@
 # curiosone-workflow
 This repo contains part of the source code of the [Curiosone](https://github.com/curiosone-ai/curiosone) chatbot project.
 
+[![travis-ci](https://travis-ci.org/curiosone-ai/curiosone-workflow.svg?branch=master)](https://travis-ci.org/curiosone-ai/curiosone-workflow)
+[![codecov](https://codecov.io/gh/curiosone-ai/curiosone-workflow/branch/master/graph/badge.svg)](https://codecov.io/gh/curiosone-ai/curiosone-workflow)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 ## 💻 Get Started
 Clone the repository to your local machine then cd into
