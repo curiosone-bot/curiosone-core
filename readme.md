@@ -1,8 +1,8 @@
-# curiosone-workflow
-This repo contains part of the source code of the [Curiosone](https://github.com/curiosone-ai/curiosone) chatbot project.
+# curiosone-core
+This repo contains part of the source code of the [Curiosone](https://github.com/curiosone-bot/curiosone) chatbot project.
 
-[![travis-ci](https://travis-ci.org/curiosone-ai/curiosone-workflow.svg?branch=master)](https://travis-ci.org/curiosone-ai/curiosone-workflow)
-[![codecov](https://codecov.io/gh/curiosone-ai/curiosone-workflow/branch/master/graph/badge.svg)](https://codecov.io/gh/curiosone-ai/curiosone-workflow)
+[![travis-ci](https://travis-ci.org/curiosone-bot/curiosone-core.svg?branch=master)](https://travis-ci.org/curiosone-bot/curiosone-core)
+[![codecov](https://codecov.io/gh/curiosone-bot/curiosone-core/branch/master/graph/badge.svg)](https://codecov.io/gh/curiosone-bot/curiosone-core)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 ## 💻 Get Started
@@ -10,8 +10,8 @@ Clone the repository to your local machine then cd into
 the directory that was created by the cloning.
 
 ```
-git clone https://github.com/curiosone-ai/curiosone-workflow.git
-cd curiosone-workflow
+git clone https://github.com/curiosone-bot/curiosone-core.git
+cd curiosone-core
 ```
 
 ## 👾 Dependencies
@@ -39,7 +39,7 @@ To start developing you can follow the simple workflow described below.
 3. If tests fail, fix the code and go back to step 2
 4. If you need to add more features, go back to step 1
 5. Run `gradle clean build`
-6. Open a new [Pull Request](https://github.com/curiosone-ai/curiosone-workflow/compare)
+6. Open a new [Pull Request](https://github.com/curiosone-bot/curiosone-core/compare)
 7. Let others review your code
 8. Marge the pull request into the master branch
 
