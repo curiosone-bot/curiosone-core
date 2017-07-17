@@ -413,6 +413,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+*.stackdump
 ### Windows - END ###
 
 
