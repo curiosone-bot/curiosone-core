@@ -10,5 +10,8 @@ public class MainTest {
     assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
     //bla bla bla
     //bla bla bla 2
+    
+    //bla bla bla 3
+    //bla bla bla 4
   }
 }
