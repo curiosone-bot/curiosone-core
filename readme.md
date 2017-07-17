@@ -10,7 +10,7 @@ Clone the repository to your local machine then cd into
 the directory that was created by the cloning.
 
 ```
-git clone https://github.com/curiosone-bot/curiosone-core.git
+git clone -b <nome_branch> https://github.com/curiosone-bot/curiosone-core.git
 cd curiosone-core
 ```
 
