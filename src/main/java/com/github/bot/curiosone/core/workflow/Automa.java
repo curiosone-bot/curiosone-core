@@ -7,6 +7,8 @@ public class Automa
 	{
 		START,
 		WAITING,
+		WRONG_TOKEN,
+		WRONG_LANGUAGE,
 		GET_QUESTION,
 		ASK_QUESTION,
 		ANSWER_QUESTION,
@@ -33,15 +35,18 @@ public class Automa
 	public Automa()
 	{
 		state = States.START;
-		operation();
+		nextState();
+		
 	}
 	
-	public void operation()
+	public void nextState()
 	{
 		switch(state)
 		{
 			case START: start(); break;
 			case WAITING: waiting(); break;
+		//	case WRONG_TOKEN: wrongToken(); break;
+			case WRONG_LANGUAGE: wrongLanguage(); break;
 			case GET_QUESTION: getQuestion(); break;
 			case ASK_QUESTION: askQuestion(); break;
 			case ANSWER_QUESTION: answerQuestion(); break;
@@ -58,7 +63,6 @@ public class Automa
 	{
 		System.out.println("Hi I'm Curiosone, ask me something!");
 		state = States.WAITING;
-		operation();
 	}
 
 	public void waiting()
@@ -86,7 +90,8 @@ public class Automa
 		  *   4) Riceve "/exit, /close, /bye etc.." va nello stato END e si chiude la sessione
 		  */
 	}
-
+	//public void wrongToken() { return gram.parse(session.getLast()).params; }
+	public String wrongLanguage() { return "Non ho capito nulla"; }
 	public void getQuestion() {  /* ... */ }
 	public void askQuestion() {  /* ... */ }
 	public void answerQuestion() {/* ... */}
