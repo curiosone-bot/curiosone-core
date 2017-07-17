@@ -32,6 +32,7 @@ The project comes with some useful tools that will help you automatize some comm
 * `gradle test` to run unit tests
 * `gradle javadoc` to generate the javadoc
 
+
 ## ⏳ Basic Workflow
 To start developing you can follow the simple workflow described below.
 
