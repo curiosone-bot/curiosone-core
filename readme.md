@@ -14,6 +14,7 @@ git clone https://github.com/curiosone-bot/curiosone-core.git
 cd curiosone-core
 ```
 
+
 ## 👾 Dependencies
 If you don't have them already, you need to install some prerequisites:
 
