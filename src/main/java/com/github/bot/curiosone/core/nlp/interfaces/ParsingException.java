@@ -1,4 +1,4 @@
-package interfaces;
+package com.github.bot.curiosone.core.nlp.interfaces;
 
 public class ParsingException extends Exception
 {

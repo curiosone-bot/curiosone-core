@@ -1,4 +1,4 @@
-package processing;
+package com.github.bot.curiosone.core.nlp.processing;
 
 import java.util.ArrayList;
 import java.util.List;

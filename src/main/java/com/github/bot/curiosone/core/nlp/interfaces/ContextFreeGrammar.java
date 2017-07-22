@@ -1,9 +1,9 @@
-package interfaces;
+package com.github.bot.curiosone.core.nlp.interfaces;
 
 import java.util.List;
 
-import processing.ParseTree;
-import processing.Token;
+import com.github.bot.curiosone.core.nlp.processing.ParseTree;
+import com.github.bot.curiosone.core.nlp.processing.Token;
 
 @FunctionalInterface
 public interface ContextFreeGrammar 

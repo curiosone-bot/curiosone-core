@@ -1,8 +1,8 @@
-package processing;
+package com.github.bot.curiosone.core.nlp.processing;
 
 import java.util.List;
 
-import interfaces.ParsingNode;
+import com.github.bot.curiosone.core.nlp.interfaces.ParsingNode;
 
 public class Token implements ParsingNode
 {

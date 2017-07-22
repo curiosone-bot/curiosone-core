@@ -1,4 +1,4 @@
-package processing;
+package com.github.bot.curiosone.core.nlp.processing;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,8 +10,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import interfaces.ContextFreeGrammar;
-import interfaces.ParsingException;
+import com.github.bot.curiosone.core.nlp.interfaces.ContextFreeGrammar;
+import com.github.bot.curiosone.core.nlp.interfaces.ParsingException;
 
 public final class Grammar implements ContextFreeGrammar 
 {

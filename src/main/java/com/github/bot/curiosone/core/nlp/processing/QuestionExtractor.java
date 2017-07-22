@@ -1,7 +1,7 @@
-package processing;
+package com.github.bot.curiosone.core.nlp.processing;
 
-import interfaces.ExtractionRoute;
-import interfaces.ModularExtractor;
+import com.github.bot.curiosone.core.nlp.interfaces.ExtractionRoute;
+import com.github.bot.curiosone.core.nlp.interfaces.ModularExtractor;
 
 public class QuestionExtractor implements ExtractionRoute 
 {

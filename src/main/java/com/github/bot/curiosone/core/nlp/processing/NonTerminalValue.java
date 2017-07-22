@@ -1,6 +1,6 @@
-package processing;
+package com.github.bot.curiosone.core.nlp.processing;
 
-import interfaces.ParsingNode;
+import com.github.bot.curiosone.core.nlp.interfaces.ParsingNode;
 
 public enum NonTerminalValue 
 {

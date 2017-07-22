@@ -1,8 +1,8 @@
-package interfaces;
+package com.github.bot.curiosone.core.nlp.interfaces;
 
 import java.util.List;
 
-import processing.NonTerminalValue;
+import com.github.bot.curiosone.core.nlp.processing.NonTerminalValue;
 
 public interface ParsingNode 
 {

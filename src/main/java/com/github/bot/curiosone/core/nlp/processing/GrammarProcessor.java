@@ -1,13 +1,13 @@
-package processing;
+package com.github.bot.curiosone.core.nlp.processing;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import interfaces.ContextFreeGrammar;
-import interfaces.GrammarProcessingUnit;
-import interfaces.ParsingException;
-import processing.Sentence;
+import com.github.bot.curiosone.core.nlp.interfaces.ContextFreeGrammar;
+import com.github.bot.curiosone.core.nlp.interfaces.GrammarProcessingUnit;
+import com.github.bot.curiosone.core.nlp.interfaces.ParsingException;
+import com.github.bot.curiosone.core.nlp.processing.Sentence;
 
 public class GrammarProcessor implements GrammarProcessingUnit
 {

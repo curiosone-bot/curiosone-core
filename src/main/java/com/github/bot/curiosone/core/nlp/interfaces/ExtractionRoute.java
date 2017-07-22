@@ -1,6 +1,6 @@
-package interfaces;
+package com.github.bot.curiosone.core.nlp.interfaces;
 
-import processing.Sentence;
+import com.github.bot.curiosone.core.nlp.processing.Sentence;
 
 public interface ExtractionRoute 
 {
