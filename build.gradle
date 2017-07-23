@@ -11,6 +11,7 @@
 apply plugin: 'java'
 apply plugin: 'java-library'
 apply plugin: 'jacoco'
+apply plugin: 'checkstyle'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -34,6 +35,10 @@ jacocoTestReport {
         xml.enabled true
         html.enabled false
     }
+}
+
+checkstyle {
+    showViolations = true
 }
 
 check.dependsOn jacocoTestReport
