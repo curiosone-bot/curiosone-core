@@ -8,41 +8,37 @@ import com.github.bot.curiosone.core.nlp.interfaces.ParsingNode;
 
 public class NonTerminal implements ParsingNode
 {
-	private NonTerminalValue value;
-	
-	private List<ParsingNode> sons;
-	
-	public NonTerminal(NonTerminalValue value, ParsingNode token1, ParsingNode token2)
-	{
-		this.value = value;
-		this.sons = new ArrayList<ParsingNode>(Arrays.asList(token1,token2));
-	}
+  private NonTerminalValue value;
 
+  private List<ParsingNode> sons;
 
-	public NonTerminalValue getValue()
-	{
-		return value;
-	}
+  public NonTerminal(NonTerminalValue value, ParsingNode token1, ParsingNode token2)
+  {
+    this.value = value;
+    this.sons = new ArrayList<ParsingNode>(Arrays.asList(token1, token2));
+  }
 
+  public NonTerminalValue getValue()
+  {
+    return value;
+  }
 
-	@Override
-	public List<ParsingNode> getSons()
-	{
+  @Override
+  public List<ParsingNode> getSons()
+  {
 
-		return sons;
-	}
+    return sons;
+  }
 
+  @Override
+  public boolean isRadix()
+  {
+    return false;
+  }
 
-	@Override
-	public boolean isRadix()
-	{
-		return false;
-	}
-
-
-	@Override
-	public boolean isLeaf() 
-	{
-		return false;
-	}
+  @Override
+  public boolean isLeaf()
+  {
+    return false;
+  }
 }

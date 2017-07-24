@@ -1,7 +1,7 @@
 package com.github.bot.curiosone.core.nlp.processing;
 
-public enum Language 
+public enum Language
 {
-	ENG;
+  ENG;
 
 }

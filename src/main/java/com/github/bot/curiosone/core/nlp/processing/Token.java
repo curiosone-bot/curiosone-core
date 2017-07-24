@@ -6,42 +6,47 @@ import com.github.bot.curiosone.core.nlp.interfaces.ParsingNode;
 
 public class Token implements ParsingNode
 {
-	String word;
-	NonTerminalValue value;
-	
-	Token(String word, NonTerminalValue value)
-	{
-		this.value = value;
-		this.word = word;
-	}
-	
-	public String getWord() { return word; }
-	
-	public NonTerminalValue getTerminalValue() { return value; }
+  String word;
+  NonTerminalValue value;
 
-	@Override
-	public NonTerminalValue getValue() 
-	{
-		return null;
-	}
+  Token(String word, NonTerminalValue value)
+  {
+    this.value = value;
+    this.word = word;
+  }
 
-	@Override
-	public List<ParsingNode> getSons() 
-	{
-		return null;
-	}
+  public String getWord()
+  {
+    return word;
+  }
 
-	@Override
-	public boolean isRadix() 
-	{
-		return false;
-	}
+  public NonTerminalValue getTerminalValue()
+  {
+    return value;
+  }
 
-	@Override
-	public boolean isLeaf()
-	{
-		return true;
-	}
-	
+  @Override
+  public NonTerminalValue getValue()
+  {
+    return null;
+  }
+
+  @Override
+  public List<ParsingNode> getSons()
+  {
+    return null;
+  }
+
+  @Override
+  public boolean isRadix()
+  {
+    return false;
+  }
+
+  @Override
+  public boolean isLeaf()
+  {
+    return true;
+  }
 
 }

@@ -6,10 +6,10 @@ import com.github.bot.curiosone.core.nlp.interfaces.ModularExtractor;
 public class AffirmationExtractor implements ExtractionRoute
 {
 
-	@Override
-	public ModularExtractor decode(Sentence s) 
-	{
-		return null;
-	}
+  @Override
+  public ModularExtractor decode(Sentence s)
+  {
+    return null;
+  }
 
 }

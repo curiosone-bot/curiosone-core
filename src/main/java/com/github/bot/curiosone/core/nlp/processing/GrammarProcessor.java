@@ -11,59 +11,55 @@ import com.github.bot.curiosone.core.nlp.processing.Sentence;
 
 public class GrammarProcessor implements GrammarProcessingUnit
 {
-	private SessionEnvironment session;
-	private String input;
-	
-	GrammarProcessor(SessionEnvironment session) 
-	{
-		this.session = session;
-	}
-	
-	private void setInput(String input)
-	{
-		this.input = input;
-	}
-	
-	@Override
-	public Sentence parse(String input) 
-	{
-		setInput(input);
-		
-		Sentence sen = Tokenizer.getSentence(input); // modulo raffinamento e tokenaggio
-		
-		try
-		{
-			sen.setParseTree(Grammar.get().getParseTree(sen.getTokens()));
-		}
-		catch (ParsingException e)
-		{
-			// risponde "non ho capito"
-		}
-		
-		return analyze(sen);
-	}
+  private SessionEnvironment session;
+  private String input;
 
-	@Override
-	public String generate(Sentence input) 
-	{
-		return null;
-	}
-	
-	private Sentence analyze(Sentence s)
-	{	
-		s.setType(s.getParseTree().getRoute());
-		
-		if (s.getParseTree().getRoute()==Typology.QUESTION)
-		{
-			s.setParams(new QuestionExtractor().decode(s).getParams(s));
-		}
-		
-		if (s.getParseTree().getRoute()==Typology.AFFIRMATION)
-		{
-			s.setParams(new AffirmationExtractor().decode(s).getParams(s));
-		}
-		
-		return s;	
-	}
-	
+  GrammarProcessor(SessionEnvironment session)
+  {
+    this.session = session;
+  }
+
+  private void setInput(String input)
+  {
+    this.input = input;
+  }
+
+  @Override
+  public Sentence parse(String input)
+  {
+    setInput(input);
+
+    Sentence sen = Tokenizer.getSentence(input); // modulo raffinamento e
+                                                 // tokenaggio
+
+    try {
+      sen.setParseTree(Grammar.get().getParseTree(sen.getTokens()));
+    } catch (ParsingException e) {
+      // risponde "non ho capito"
+    }
+
+    return analyze(sen);
+  }
+
+  @Override
+  public String generate(Sentence input)
+  {
+    return null;
+  }
+
+  private Sentence analyze(Sentence s)
+  {
+    s.setType(s.getParseTree().getRoute());
+
+    if (s.getParseTree().getRoute() == Typology.QUESTION) {
+      s.setParams(new QuestionExtractor().decode(s).getParams(s));
+    }
+
+    if (s.getParseTree().getRoute() == Typology.AFFIRMATION) {
+      s.setParams(new AffirmationExtractor().decode(s).getParams(s));
+    }
+
+    return s;
+  }
+
 }

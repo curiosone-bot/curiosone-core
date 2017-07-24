@@ -6,7 +6,7 @@ import com.github.bot.curiosone.core.nlp.processing.ParseTree;
 import com.github.bot.curiosone.core.nlp.processing.Token;
 
 @FunctionalInterface
-public interface ContextFreeGrammar 
+public interface ContextFreeGrammar
 {
-	ParseTree getParseTree(List<Token> tokens) throws ParsingException;
+  ParseTree getParseTree(List<Token> tokens) throws ParsingException;
 }
