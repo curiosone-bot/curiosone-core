@@ -1,7 +1,6 @@
 package com.github.bot.curiosone.core.nlp.processing;
 
-public enum Scope
-{
+public enum Scope {
   PUBLIC, PRIVATE;
 
 }

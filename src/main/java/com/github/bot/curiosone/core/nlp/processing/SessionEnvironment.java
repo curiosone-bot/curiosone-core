@@ -2,8 +2,7 @@ package com.github.bot.curiosone.core.nlp.processing;
 
 import java.time.LocalDateTime;
 
-public class SessionEnvironment
-{
+public class SessionEnvironment {
   String sessionID;
 
   String userID;

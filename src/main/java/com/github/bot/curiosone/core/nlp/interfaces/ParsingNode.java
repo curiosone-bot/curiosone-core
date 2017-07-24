@@ -4,8 +4,7 @@ import java.util.List;
 
 import com.github.bot.curiosone.core.nlp.processing.NonTerminalValue;
 
-public interface ParsingNode
-{
+public interface ParsingNode {
   NonTerminalValue getValue();
 
   List<ParsingNode> getSons();

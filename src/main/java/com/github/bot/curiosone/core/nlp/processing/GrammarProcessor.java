@@ -9,24 +9,20 @@ import com.github.bot.curiosone.core.nlp.interfaces.GrammarProcessingUnit;
 import com.github.bot.curiosone.core.nlp.interfaces.ParsingException;
 import com.github.bot.curiosone.core.nlp.processing.Sentence;
 
-public class GrammarProcessor implements GrammarProcessingUnit
-{
+public class GrammarProcessor implements GrammarProcessingUnit {
   private SessionEnvironment session;
   private String input;
 
-  GrammarProcessor(SessionEnvironment session)
-  {
+  GrammarProcessor(SessionEnvironment session) {
     this.session = session;
   }
 
-  private void setInput(String input)
-  {
+  private void setInput(String input) {
     this.input = input;
   }
 
   @Override
-  public Sentence parse(String input)
-  {
+  public Sentence parse(String input) {
     setInput(input);
 
     Sentence sen = Tokenizer.getSentence(input); // modulo raffinamento e
@@ -42,13 +38,11 @@ public class GrammarProcessor implements GrammarProcessingUnit
   }
 
   @Override
-  public String generate(Sentence input)
-  {
+  public String generate(Sentence input) {
     return null;
   }
 
-  private Sentence analyze(Sentence s)
-  {
+  private Sentence analyze(Sentence s) {
     s.setType(s.getParseTree().getRoute());
 
     if (s.getParseTree().getRoute() == Typology.QUESTION) {

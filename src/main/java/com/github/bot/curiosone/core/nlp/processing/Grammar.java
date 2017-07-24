@@ -13,14 +13,12 @@ import java.util.Map;
 import com.github.bot.curiosone.core.nlp.interfaces.ContextFreeGrammar;
 import com.github.bot.curiosone.core.nlp.interfaces.ParsingException;
 
-public final class Grammar implements ContextFreeGrammar
-{
+public final class Grammar implements ContextFreeGrammar {
   private static Grammar grammar;
 
   private List<Rule> procedures = new ArrayList<Rule>();
 
-  private Grammar()
-  {
+  private Grammar() {
     StringBuilder sb = new StringBuilder();
 
     try (BufferedReader br = Files.newBufferedReader(Paths.get("resources/grammar.txt"))) {
@@ -49,8 +47,7 @@ public final class Grammar implements ContextFreeGrammar
     }
   }
 
-  public static Grammar get()
-  {
+  public static Grammar get() {
     if (grammar == null)
       grammar = new Grammar();
 
@@ -58,15 +55,13 @@ public final class Grammar implements ContextFreeGrammar
   }
 
   @Override
-  public ParseTree getParseTree(List<Token> tokens) throws ParsingException
-  {
+  public ParseTree getParseTree(List<Token> tokens) throws ParsingException {
     ParseTree tree = new ParseTree(tokens);
 
     return tree;
   }
 
-  public List<Rule> getProcedures()
-  {
+  public List<Rule> getProcedures() {
     return procedures;
   }
 

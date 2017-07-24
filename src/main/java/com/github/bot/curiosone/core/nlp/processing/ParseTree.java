@@ -7,20 +7,17 @@ import java.util.List;
 import com.github.bot.curiosone.core.nlp.interfaces.ParsingException;
 import com.github.bot.curiosone.core.nlp.interfaces.ParsingNode;
 
-public class ParseTree
-{
+public class ParseTree {
   List<Token> tokens;
   ParsingNode radix;
 
-  ParseTree(List<Token> tokens) throws ParsingException
-  {
+  ParseTree(List<Token> tokens) throws ParsingException {
     this.tokens = tokens;
 
     parse();
   }
 
-  private void parse() throws ParsingException
-  {
+  private void parse() throws ParsingException {
     ArrayList<ParsingNode> parsed = new ArrayList<>(tokens);
 
     ParsingNode node = null;
@@ -45,8 +42,7 @@ public class ParseTree
     this.radix = node;
   }
 
-  private ParsingNode verifyRule(ParsingNode node1, ParsingNode node2)
-  {
+  private ParsingNode verifyRule(ParsingNode node1, ParsingNode node2) {
     for (Rule r : Grammar.get().getProcedures()) {
       if (r.getOut().contains(node1) && r.getOut().contains(node2))
         return new NonTerminal(r.getIn(), node1, node2);
@@ -55,13 +51,11 @@ public class ParseTree
     return null;
   }
 
-  public Typology getRoute()
-  {
+  public Typology getRoute() {
     return getRoute(radix);
   }
 
-  private Typology getRoute(ParsingNode node)
-  {
+  private Typology getRoute(ParsingNode node) {
     for (ParsingNode n : node.getSons()) {
       switch (n.getValue()) {
       case WH:

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.github.bot.curiosone.core.nlp.processing.Sentence;
 
-public interface ModularExtractor
-{
+public interface ModularExtractor {
   ArrayList<String> getParams(Sentence s);
 }
