@@ -5,10 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import com.github.bot.curiosone.core.nlp.interfaces.ContextFreeGrammar;
 import com.github.bot.curiosone.core.nlp.interfaces.ParsingException;
@@ -19,8 +16,7 @@ public final class Grammar implements ContextFreeGrammar {
   private List<Rule> procedures = new ArrayList<Rule>();
 
   private Grammar() {
-    StringBuilder sb = new StringBuilder();
-
+    
     try (BufferedReader br = Files.newBufferedReader(Paths.get("resources/grammar.txt"))) {
       while (br.ready()) {
         String[] array = br.readLine().split(",");

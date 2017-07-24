@@ -1,7 +1,5 @@
 package com.github.bot.curiosone.core.nlp.processing;
 
-import com.github.bot.curiosone.core.nlp.interfaces.ParsingNode;
-
 public enum NonTerminalValue {
   S, // sentence
   QNP, // question nominal part

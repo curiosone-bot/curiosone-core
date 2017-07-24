@@ -1,7 +1,6 @@
 package com.github.bot.curiosone.core.nlp.processing;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.github.bot.curiosone.core.nlp.interfaces.ParsingException;
@@ -17,6 +16,7 @@ public class ParseTree {
     parse();
   }
 
+  @SuppressWarnings("unused")
   private void parse() throws ParsingException {
     ArrayList<ParsingNode> parsed = new ArrayList<>(tokens);
 
