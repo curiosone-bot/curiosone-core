@@ -1,6 +1,6 @@
 package com.github.bot.curiosone.core.nlp.tokenizer.interfaces;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.*;
+import com.github.bot.curiosone.core.nlp.tokenizer.SentenceT;
 
 import java.util.List;
 

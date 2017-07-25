@@ -1,9 +1,10 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
-public enum WordST {
+public enum LexT {
 	/**
 	 * Cfr. https://wordnet.princeton.edu/man/lexnames.5WN.html
 	 *    e http://www.ucl.ac.uk/internet-grammar/wordclas/open.htm
+	 *    @author riva
 	 */
 	ALL,	            // all adjective/adverb
 	PERT,               // relational adjectives (pertainyms)

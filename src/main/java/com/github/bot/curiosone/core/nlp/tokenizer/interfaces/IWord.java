@@ -8,6 +8,7 @@ public interface IWord {
 	 * @author riva
 	 */
 	public String getValue();
-	public List<IMeaning> getMeanings();
+	public List<ISynset> getSynsets();
+	public String getLemma();
 	public boolean isKnown();
 }

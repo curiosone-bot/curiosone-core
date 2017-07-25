@@ -1,10 +1,11 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.*;
+import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord;
+import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
 
 public class Token implements IToken {
 	/**
-	 * Class used to point to grammar and semantic word information
+	 * Pointer to word information
 	 * @author riva
 	 */
 	private IWord word;

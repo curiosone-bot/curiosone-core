@@ -1,28 +1,63 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.*;
+import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.ISynset;
+import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord;
 
 import java.util.List;
 
-public class Word {
+public class Word implements IWord {
 	/**
-	 * Class used in information exchange with class dictionary
+	 * Word attribute and relative Synset
 	 * @author riva
 	 */
 	private String value;
-	private List<IMeaning> meanings; 
+	private List<ISynset> synsets; 
 	private boolean known;
+	private String lemma;
 	
-	public Word(String s, boolean k) {
+	public Word(String s, boolean k, String lemma) {
 		this.value = s;
 		this.known = k;
+		this.lemma = lemma;
 	}
 	
 	/**
 	 * @return the value
 	 */
+	@Override
 	public String getValue() {
 		return value;
+	}
+	
+	/**
+	 * @return the known
+	 */
+	@Override
+	public boolean isKnown() {
+		return known;
+	}
+	
+	/**
+	 * @return the List of Synset 
+	 */
+	@Override
+	public List<ISynset> getSynsets() {
+		return synsets;
+	}
+
+	/**
+	 * @return the lemma
+	 */
+	@Override
+	public String getLemma() {
+		return lemma;
+	}
+	
+	/**
+	 * @param known the known to set
+	 */
+	public void setKnown(boolean known) {
+		this.known = known;
 	}
 	
 	/**
@@ -31,18 +66,19 @@ public class Word {
 	public void setValue(String value) {
 		this.value = value;
 	}
-
+	
 	/**
-	 * @return the known
+	 * @param lemma the lemma to set
 	 */
-	public boolean isKnown() {
-		return known;
+	public void setLemma(String lemma) {
+		this.lemma = lemma;
 	}
+	
 	/**
-	 * @param known the known to set
+	 * @param synset the synset to add
 	 */
-	public void setKnown(boolean known) {
-		this.known = known;
+	public void addSynset(ISynset synset) {
+		this.synsets.add(synset);
 	}
 	
 }
