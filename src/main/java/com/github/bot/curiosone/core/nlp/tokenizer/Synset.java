@@ -93,8 +93,8 @@ public class Synset implements ISynset{
 	/**
 	 * @param relations the relations to set
 	 */
-	public void setRelations(Map<PointerT, List<String>> relations) {
-		this.relations = relations;
+	public void addRelation(PointerT p, List<String> value) {
+		this.relations.put(p, value);
 	}
 	
 }
