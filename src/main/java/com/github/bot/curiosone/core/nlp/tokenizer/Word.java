@@ -4,78 +4,103 @@ import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.ISynset;
 import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord;
 
 import java.util.List;
-
+/**
+ * Word attribute and relative Synset
+ * @author Andrea Rivitto && Eugenio Schintu
+ * @see IWord
+ * @see Synset
+ */
 public class Word implements IWord {
 	/**
-	 * Word attribute and relative Synset
-	 * @author riva
+	 * Value of the single word in the original Sentence
+	 * @see Sentence
 	 */
 	private String value;
-	private List<ISynset> synsets; 
+	/**
+	 * Various semantic informations' list
+	 * @see Synset
+	 * @see ISynset
+	 */
+	private List<ISynset> synsets;
+	/**
+	 * Flag used to verify if we have found a corrispondence in dictonary 
+	 */
 	private boolean known;
+	/**
+	 * Lemma of a specific word
+	 */
 	private String lemma;
-	
-	public Word(String s, boolean k, String lemma) {
-		this.value = s;
-		this.known = k;
+	/**
+	 * Constructor
+	 * @param value
+	 * @param known
+	 * @param lemma
+	 */
+	public Word(String value, boolean known, String lemma) {
+		this.value = value;
+		this.known = known;
 		this.lemma = lemma;
-	}
-	
+	}	
 	/**
 	 * @return the value
 	 */
 	@Override
 	public String getValue() {
 		return value;
-	}
-	
+	}	
 	/**
 	 * @return the known
+	 * @see #known
 	 */
 	@Override
 	public boolean isKnown() {
 		return known;
-	}
-	
+	}	
 	/**
-	 * @return the List of Synset 
+	 * @return the List of Synset
+	 * @see #synsets 
 	 */
 	@Override
 	public List<ISynset> getSynsets() {
 		return synsets;
 	}
-
 	/**
 	 * @return the lemma
+	 * @see #lemma
 	 */
 	@Override
 	public String getLemma() {
 		return lemma;
-	}
-	
+	}	
 	/**
-	 * @param known the known to set
+	 * Set known to a specific value
+	 * @param new known
+	 * @see #value
 	 */
 	public void setKnown(boolean known) {
 		this.known = known;
-	}
-	
+	}	
 	/**
-	 * @param value the value to set
+	 * Set value to a specific value
+	 * @param new value
+	 * @see #value
 	 */
 	public void setValue(String value) {
 		this.value = value;
-	}
-	
+	}	
 	/**
-	 * @param lemma the lemma to set
+	 * Set lemma to a specific value
+	 * @param new lemma
+	 * @see #lemma
 	 */
 	public void setLemma(String lemma) {
 		this.lemma = lemma;
-	}
-	
+	}	
 	/**
-	 * @param synset the synset to add
+	 * Add to synset a new instance of Synset
+	 * @param new Synset
+	 * @see #synsets
+	 * 
 	 */
 	public void addSynset(ISynset synset) {
 		this.synsets.add(synset);
