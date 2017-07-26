@@ -12,4 +12,3 @@ public interface IWord {
 	public String getLemma();
 	public boolean isKnown();
 }
-}
