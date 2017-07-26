@@ -11,7 +11,7 @@
 apply plugin: 'java'
 apply plugin: 'java-library'
 apply plugin: 'jacoco'
-apply plugin: 'checkstyle'
+// apply plugin: 'checkstyle'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -25,9 +25,16 @@ javadoc {
     classpath = configurations.compile
 }
 
+repositories {
+	mavenCentral()
+}
+
 dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    
+    // WordNet
+    compile group: 'org.apache.lucene', name: 'lucene-wordnet', version: '3.2.0'
 }
 
 jacocoTestReport {
@@ -37,8 +44,8 @@ jacocoTestReport {
     }
 }
 
-checkstyle {
-    showViolations = true
-}
+//checkstyle {
+//    showViolations = true
+//}
 
 check.dependsOn jacocoTestReport
