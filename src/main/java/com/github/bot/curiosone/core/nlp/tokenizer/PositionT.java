@@ -1,20 +1,23 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
 /**
- * Type of String in Dictionary call. It is used for organize the calling to the Dictionary
- * 
- * @see Token
- * 
+ * Type of String in Dictionary call. It is used for organize the calling to the Dictionary. 
+ * @see Token 
  * @author Andrea Rivitto && Eugenio Schintu
  */
 public enum PositionT {	
 	/**
-	 * Type of String in Dictionary call
-	 * @author riva
+	 * The previous string of ELE.
+	 * @see #ELE
 	 */
-	
+	PRE,
 	/**
-	 * String to analyz
+	 * String to analyze.
 	 */
-	ELE
+	ELE,
+	/**
+	 * The following string of ELE.
+	 * @see #ELE
+	 */
+	POST
 }
