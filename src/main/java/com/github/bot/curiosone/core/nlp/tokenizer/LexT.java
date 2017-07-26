@@ -1,19 +1,20 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 /**
- * Enumeraton that contains all sub-tipology of elements in a generic grammar
- * 
+ * Enumeraton that contains all sub-tipology of elements in a generic grammar. * 
  * @see com.github.bot.curiosone.core.nlp.tokenizer.Word
  * @see https://wordnet.princeton.edu/man/lexnames.5WN.html         
- * @see http://www.ucl.ac.uk/internet-grammar/wordclas/open.htm
- * 
+ * @see http://www.ucl.ac.uk/internet-grammar/wordclas/open.htm 
  * @author Andrea Rivitto && Eugenio Schintu
  */
 public enum LexT {
-	/**
-	 * All adjective/adverb
-	 */
-	ALL,	            // all adjective/adverb
-	PERT,               // relational adjectives (pertainyms)
+  /**
+  * All adjective/adverb
+  */
+	ALL,
+  /**
+  * Pertainyms: relational adjectives
+  */
+	PERT,
 	TOPS,               // unique beginner for nouns
 	ACT,                // nouns denoting acts or actions
 	ANIMAL,             // nouns denoting animals
