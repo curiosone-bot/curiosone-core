@@ -5,26 +5,39 @@ import java.util.Map;
 
 import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.ISynset;
 
+/**
+ * Syntax/Semantic information of a Word 
+ * @see ISynset
+ * @author Andrea Rivitto && Eugenio Schintu
+ */
 public class Synset implements ISynset{
 	/**
-	 * Syntax/Semantic information of a Word:
-	 * pos: part of speech
-	 * lex: lexicographic file name
-	 * lemma: lemma of word
-	 * gloss: glossary information
-	 * realation: semantic relation with other word
-	 * 
-	 * @author riva
+	 * Part of speech 
+	 * @see POST
 	 */
-	
 	private POST pos;
+	/**
+	 * Lexicographic file name 
+	 * @see LexT
+	 */
 	private LexT lexType;
+	/**
+	 * Lemma of word
+	 */
 	private String lemma;
+	/**
+	 * Glossary information
+	 */
 	private String gloss;
+	/**
+	 * Semantic relation with other word
+	 * @see PointerT
+	 */
 	private Map<PointerT, List<String>> relations;
 	
 	/**
 	 * @return the pos
+	 * @see #pos
 	 */
 	@Override
 	public POST getPOS() {
@@ -32,7 +45,9 @@ public class Synset implements ISynset{
 	}
 	
 	/**
-	 * @param pos the pos to set
+	 * Set the pos to a specific value
+	 * @param new pos
+	 * @see #pos 
 	 */
 	public void setPOS(POST pos) {
 		this.pos = pos;
@@ -40,6 +55,7 @@ public class Synset implements ISynset{
 
 	/**
 	 * @return the lexType
+	 * @see #lexType
 	 */
 	@Override
 	public LexT getLexType() {
@@ -47,7 +63,9 @@ public class Synset implements ISynset{
 	}
 
 	/**
-	 * @param lexType the lexType to set
+	 * Set le lexType to a specific value
+	 * @param new lexType
+	 * @see #lexType
 	 */
 	public void setLexType(LexT lexType) {
 		this.lexType = lexType;
@@ -55,6 +73,7 @@ public class Synset implements ISynset{
 
 	/**
 	 * @return the lemma
+	 * @see #lemma
 	 */
 	@Override
 	public String getLemma() {
@@ -62,7 +81,9 @@ public class Synset implements ISynset{
 	}
 
 	/**
-	 * @param lemma the lemma to set
+	 * Set the lemma to a specific value
+	 * @param new lemma
+	 * @see #lemma
 	 */
 	public void setLemma(String lemma) {
 		this.lemma = lemma;
@@ -70,6 +91,7 @@ public class Synset implements ISynset{
 
 	/**
 	 * @return the gloss
+	 * @see #gloss
 	 */
 	@Override
 	public String getGloss() {
@@ -77,7 +99,9 @@ public class Synset implements ISynset{
 	}
 
 	/**
-	 * @param gloss the gloss to set
+	 * Set the gloss to a speficic value
+	 * @param new gloss
+	 * @see #gloss
 	 */
 	public void setGloss(String gloss) {
 		this.gloss = gloss;
@@ -85,13 +109,17 @@ public class Synset implements ISynset{
 
 	/**
 	 * @return the relations
+	 * @see #relations
 	 */
 	public Map<PointerT, List<String>> getRelations() {
 		return relations;
 	}
 
 	/**
-	 * @param relations the relations to set
+	 * Add a new element to reletions
+	 * @param p
+	 * @param value
+	 * @see #relations
 	 */
 	public void addRelation(PointerT p, List<String> value) {
 		this.relations.put(p, value);

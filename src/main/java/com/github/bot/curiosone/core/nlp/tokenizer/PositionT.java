@@ -1,13 +1,25 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
-public enum PositionT {
+/**
+ * Type of String in Dictionary call. It is used for organize the calling to the Dictionary
+ * 
+ * @see Token
+ * 
+ * @author Andrea Rivitto && Eugenio Schintu
+ */
+public enum PositionT {	
 	/**
-	 * Type of String in Dictionary call
-	 * @author riva
+	 * String before the one analyzed
 	 */
+	PRE,
 	
-	PRE,     // string before
-	POS, 	 // string after
-	ELE      // String to search
-
+	/**
+	 * String after the one analyzed
+	 */
+	POS,
+	
+	/**
+	 * String to analyz
+	 */
+	ELE
 }

@@ -1,11 +1,11 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
-
+/**
+ * Lexical/semantic link  
+ * @see https://web.stanford.edu/class/cs276a/projects/docs/jwnl/javadoc/net/didion/jwnl/data/PointerType.html
+ * 
+ * @author Andrea Rivitto && Eugenio schintu
+ */
 public enum PointerT {
-	/**
-	 * Lexical/semantic link  
-	 * Cfr. https://web.stanford.edu/class/cs276a/projects/docs/jwnl/javadoc/net/didion/jwnl/data/PointerType.html
-	 * @author riva
-	 */
 	ANTONYM, 
 	ATTRIBUTE,
 	CAUSE,

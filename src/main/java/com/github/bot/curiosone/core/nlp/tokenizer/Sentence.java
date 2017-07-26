@@ -4,53 +4,77 @@ import java.util.List;
 
 import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.ISentence;
 import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
-
+/**
+ * Structure that grammar's module needs to understand what the user says and to generate an appropriate answer
+ * 
+ *  @see ISentence
+ *  
+ * @author Andrea Rivitto && Eugenio Schintu
+ *
+ */
 public class Sentence implements ISentence {
-	/**
-	 * Tokenizer result
-	 * @author riva
-	 */
 	
+	/**
+	 * Tipology of a sentence
+	 * @see SentenceT
+	 */
 	private SentenceT type;
+	
+	/**
+	 * String provided in input
+	 */
 	private String original;
+	
+	/**
+	 * List of all tokens that are in the string provided in input
+	 * @see #original
+	 * @see Token
+	 * @see IToken
+	 */
 	private List<IToken> tokens;
 
-	@Override
 	/**
-	 * @return type
+	 * @return the type of the sentence
+	 * @see #type
+	 * @see Sentence
 	 */
+	@Override
 	public SentenceT getType() {
 		return type;
 	}
 
-	@Override
 	/**
-	 * @return original String in input to tokenizer 
+	 * @return the original string parovided in input
+	 * @see #original
 	 */
+	@Override
 	public String getOriginal() {
 		return original;
 	}
-	
+
 	/**
-	 * @return list of token
+	 * @return the list of sentence's token
+	 * @see #tokens
+	 * @see Token
+	 * @see IToken
 	 */
 	@Override
 	public List<IToken> getTokens() {
 		return tokens;
 	}
 
-	/**
-	 * @param type the type to set
-	 */
 	public void setType(SentenceT type) {
 		this.type = type;
 	}
-	
+
 	/**
-	 * @param token the token to add
+	 * Add a token to the List named tokens
+	 * @param token to add
+	 * @return tokens with a new element
+	 * @see tokens
+	 * @see Token
 	 */
 	public void addToken(IToken token) {
 		this.tokens.add(token);
 	}
-	
 }

@@ -3,13 +3,14 @@ package com.github.bot.curiosone.core.nlp.tokenizer.interfaces;
 import com.github.bot.curiosone.core.nlp.tokenizer.SentenceT;
 
 import java.util.List;
-
+/**
+ * Sentence info
+ * @see SentenceT
+ * @see IToken
+ * @author Andrea Rivitto && Eugenio Schintu
+ */
 public interface ISentence {
-	/**
-	 * Sentence info
-	 * @author riva
-	 */
-	public SentenceT getType();
-	public String getOriginal();
-	public List<IToken> getTokens();
+	SentenceT getType();
+	String getOriginal();
+	List<IToken> getTokens();
 }

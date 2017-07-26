@@ -6,16 +6,18 @@ import com.github.bot.curiosone.core.nlp.tokenizer.PointerT;
 
 import java.util.List;
 import java.util.Map;
-
+/**
+ * Syntact/Semantic attribute of a word
+ * @see https://projects.csail.mit.edu/jwi/api/index.html
+ * @see POST
+ * @see LexT
+ * @see PointerT
+ * @author Andrea Rivitto && Eugenio Schintu
+ */
 public interface ISynset {
-	/**
-	 * Syntact/Semantic attribute of a word
-	 * Cfr. https://projects.csail.mit.edu/jwi/api/index.html
-	 */
-
-	public POST getPOS();
-	public LexT  getLexType();
-	public String getLemma();
-	public String getGloss();
-	public Map<PointerT, List<String>> getRelations();
+	POST getPOS();
+	LexT  getLexType();
+	String getLemma();
+	String getGloss();
+	Map<PointerT, List<String>> getRelations();
 }
