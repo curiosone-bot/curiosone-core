@@ -21,6 +21,8 @@ If you don't have them already, you need to install some prerequisites:
 * [Git](http://git-scm.com/downloads)
 * [Java 8 JDK](http://www.oracle.com/technetwork/pt/java/javase/downloads/index.html)
 * [Gradle](https://gradle.org/install)
+* [Google Styleguide Settings](https://github.com/HPI-Information-Systems/Metanome/wiki/Installing-the-google-styleguide-settings-in-intellij-and-eclipse) (only for IDE)
+* Checkstyle Plugin for [Eclipse](http://eclipse-cs.sourceforge.net/) - [IntelliJ](https://plugins.jetbrains.com/plugin/1065-checkstyle-idea) (only for IDE)
 * [GitHub Desktop](https://desktop.github.com/) (optional)
 
 
