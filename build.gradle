@@ -41,6 +41,7 @@ jacocoTestReport {
 
 checkstyle {
     showViolations = true
+    toolVersion ="8.1" 
 }
 
 check.dependsOn jacocoTestReport
