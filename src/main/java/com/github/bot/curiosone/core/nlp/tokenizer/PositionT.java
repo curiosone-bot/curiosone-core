@@ -9,14 +9,9 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
  */
 public enum PositionT {	
 	/**
-	 * String before the one analyzed
+	 * Type of String in Dictionary call
+	 * @author riva
 	 */
-	PRE,
-	
-	/**
-	 * String after the one analyzed
-	 */
-	POS,
 	
 	/**
 	 * String to analyz

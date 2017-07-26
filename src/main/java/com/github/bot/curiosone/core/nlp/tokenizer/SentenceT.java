@@ -11,6 +11,8 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
 public enum SentenceT {
 	
 	/**
+	 * Sentence type
+	 * @author riva 
 	 * Sentence in input is a question
 	 */
 	QUESTION,

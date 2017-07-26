@@ -12,18 +12,18 @@ import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.ISynset;
  */
 public class Synset implements ISynset{
 	/**
-	 * Part of speech 
-	 * @see POST
+	 * Syntax/Semantic information of a Word:
+	 * pos: part of speech
+	 * lex: lexicographic file name
+	 * lemma: lemma of word
+	 * gloss: glossary information
+	 * realation: semantic relation with other word
+	 * 
+	 * @author riva
 	 */
+	
 	private POST pos;
-	/**
-	 * Lexicographic file name 
-	 * @see LexT
-	 */
 	private LexT lexType;
-	/**
-	 * Lemma of word
-	 */
 	private String lemma;
 	/**
 	 * Glossary information

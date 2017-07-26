@@ -1,14 +1,12 @@
 package com.github.bot.curiosone.core.nlp.tokenizer.interfaces;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord;
-/**
- * Token info from Tokenizer
- * @see IWord
- * @see Token
- * @author Andrea Rivitto && Eugenio Schintu
- */
-public interface IToken {	
-	IWord getWord();
-	String getOValue();
-	boolean isCorrected();
+public interface IToken {
+	/**
+	 * Token info from Tokenizer
+	 * @author riva
+	 */
+	
+	public IWord getWord();
+	public String getOValue();
+	public boolean isCorrected();
 }

@@ -13,45 +13,31 @@ import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
  *
  */
 public class Sentence implements ISentence {
-	
 	/**
-	 * Tipology of a sentence
-	 * @see SentenceT
+	 * Tokenizer result
+	 * @author riva
 	 */
+	
 	private SentenceT type;
-	
-	/**
-	 * String provided in input
-	 */
 	private String original;
-	
-	/**
-	 * List of all tokens that are in the string provided in input
-	 * @see #original
-	 * @see Token
-	 * @see IToken
-	 */
 	private List<IToken> tokens;
 
-	/**
-	 * @return the type of the sentence
-	 * @see #type
-	 * @see Sentence
-	 */
 	@Override
+	/**
+	 * @return type
+	 */
 	public SentenceT getType() {
 		return type;
 	}
 
-	/**
-	 * @return the original string parovided in input
-	 * @see #original
-	 */
 	@Override
+	/**
+	 * @return original String in input to tokenizer 
+	 */
 	public String getOriginal() {
 		return original;
 	}
-
+	
 	/**
 	 * @return the list of sentence's token
 	 * @see #tokens
@@ -63,18 +49,18 @@ public class Sentence implements ISentence {
 		return tokens;
 	}
 
+	/**
+	 * @param type the type to set
+	 */
 	public void setType(SentenceT type) {
 		this.type = type;
 	}
-
+	
 	/**
-	 * Add a token to the List named tokens
-	 * @param token to add
-	 * @return tokens with a new element
-	 * @see tokens
-	 * @see Token
+	 * @param token the token to add
 	 */
 	public void addToken(IToken token) {
 		this.tokens.add(token);
 	}
+	
 }
