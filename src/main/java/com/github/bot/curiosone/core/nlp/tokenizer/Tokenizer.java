@@ -1,10 +1,15 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
-// import it.uniroma1.lcl.tokenizer.interfaces.*;
 
 public class Tokenizer {
-/**
- * public Sentence getSentence(String s) {
- * }
- */
+
+  /**
+   * Tokenize the string provided in input by the user.
+   * @param s string provided
+   * @return a new Sentence
+   */
+  public Sentence getSentence(String s) {
+    return null;
+  }
+
 }
