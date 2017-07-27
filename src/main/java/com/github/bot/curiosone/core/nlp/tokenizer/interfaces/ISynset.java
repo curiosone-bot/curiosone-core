@@ -14,39 +14,39 @@ import java.util.Map;
  * @author Andrea Rivitto && Eugenio Schintu
  */
 public interface ISynset {
- 
+
   /**
    * Get pos.
-   * @see Synset#getPOS()
+   * @see Synset#getPost()
    */
-  
+
   public Post getPost();
-  
+
   /**
    * Get lexType.
    * @see Synset#getLexType()
    */
-  
+
   public LexT  getLexType();
-  
+
   /**
    * Get lemma.
    * @see Synset#getLemma()
    */
-  
+
   public String getLemma();
-  
+
   /**
    * Get gloss.
    * @see Synset#getGloss()
    */
-  
+
   public String getGloss();
-  
+
   /**
    * Get relations.
    * @see Synset#getRelations()
    */
-  
+
   public Map<PointerT, List<String>> getRelations();
 }
