@@ -3,7 +3,7 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
 /**
  * Enumeraton that contains all sub-tipology of elements in a generic grammar.
  * @see com.github.bot.curiosone.core.nlp.tokenizer.Word
- * @see https://wordnet.princeton.edu/man/lexnames.5WN.html         
+ * @see https://wordnet.princeton.edu/man/lexnames.5WN.html
  * @see http://www.ucl.ac.uk/internet-grammar/wordclas/open.htm 
  * @author Andrea Rivitto && Eugenio Schintu
  */
@@ -206,7 +206,8 @@ public enum LexT {
      */
     INTERROGATIVE,
     /**
-     * As pronouns: anything, anybody, anyone, something, somebody, someone, nothing, nobody, none, no one.
+     * As pronouns: anything, anybody, anyone, something, 
+     * somebody, someone, nothing, nobody, none, no one.
      * As determiners: a, an.
      */
     INDEFINITE,

@@ -8,19 +8,25 @@ import com.github.bot.curiosone.core.nlp.tokenizer.Token;
  */
 
 public interface IToken {
-	/**
-	 * Get word.
-	 * @see Token#getWord()
-	 */
-	public IWord getWord();
-	/**
-	 * Get oValue.
-	 * @see Token#getOValue()
-	 */
-	public String getOValue();
-	/**
-	 * Get corrected.
-	 * @see Token#isCorrected()
-	 */
-	public boolean isCorrected();
+  
+  /**
+   * Get word.
+   * @see Token#getWord()
+   */
+  
+  public IWord getWord();
+  
+  /**
+   * Get oValue.
+   * @see Token#getOValue()
+   */
+  
+  public String getOValue();
+  
+  /**
+   * Get corrected.
+   * @see Token#isCorrected()
+   */
+
+  public boolean isCorrected();
 }

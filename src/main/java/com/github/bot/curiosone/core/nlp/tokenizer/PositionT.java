@@ -5,19 +5,19 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
  * @see Token 
  * @author Andrea Rivitto && Eugenio Schintu
  */
-public enum PositionT {	
-	/**
-	 * The previous string of ELE.
-	 * @see #ELE
-	 */
-	PRE,
-	/**
-	 * String to analyze.
-	 */
-	ELE,
-	/**
-	 * The following string of ELE.
-	 * @see #ELE
-	 */
-	POST
+public enum PositionT { 
+  /**
+   * The previous string of ELE.
+   * @see #ELE
+   */
+  PRE,
+  /**
+   * String to analyze.
+   */
+  ELE,
+  /**
+   * The following string of ELE.
+   * @see #ELE
+   */
+  POST
 }
