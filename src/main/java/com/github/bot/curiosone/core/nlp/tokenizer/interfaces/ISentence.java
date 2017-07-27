@@ -7,27 +7,31 @@ import java.util.List;
 
 /**
  * Sentence info.
+ *
  * @author Andrea Rivitto && Eugenio Schintu
  */
 
 public interface ISentence {
-  
+
   /**
    * Get type.
+   *
    * @see Sentence#getType()
    */
-  
+
   public SentenceT getType();
-  
+
   /**
    * Get original.
+   *
    * @see Sentence#getOriginal()
    */
-  
+
   public String getOriginal();
-  
+
   /**
    * Get tokens.
+   *
    * @see Sentence#getTokens()
    */
 

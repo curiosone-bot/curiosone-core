@@ -10,43 +10,49 @@ import java.util.Map;
 
 /**
  * Syntact/Semantic attribute of a word.
- * @see https://projects.csail.mit.edu/jwi/api/index.html
+ *
  * @author Andrea Rivitto && Eugenio Schintu
+ * @see https://projects.csail.mit.edu/jwi/api/index.html
  */
 public interface ISynset {
 
   /**
    * Get pos.
+   *
    * @see Synset#getPost()
    */
 
-  public Post getPost();
+  Post getPost();
 
   /**
    * Get lexType.
+   *
    * @see Synset#getLexType()
    */
 
-  public LexT  getLexType();
+  LexT getLexType();
 
   /**
    * Get lemma.
+   *
    * @see Synset#getLemma()
    */
 
-  public String getLemma();
+  String getLemma();
 
   /**
    * Get gloss.
+   *
    * @see Synset#getGloss()
    */
 
-  public String getGloss();
+  String getGloss();
 
   /**
    * Get relations.
+   *
    * @see Synset#getRelations()
    */
 
-  public Map<PointerT, List<String>> getRelations();
+  Map<PointerT, List<String>> getRelations();
 }
