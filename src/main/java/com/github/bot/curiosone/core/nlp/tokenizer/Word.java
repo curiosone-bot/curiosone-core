@@ -10,6 +10,7 @@ import java.util.List;
  * @see Synset
  * @author Andrea Rivitto && Eugenio Schintu
  */
+
 public class Word implements IWord {
     /**
      * Value of the single word in the original Sentence.
@@ -32,9 +33,6 @@ public class Word implements IWord {
     private String lemma;
     /**
      * Constructor.
-     * @param value
-     * @param known
-     * @param lemma
      */
     public Word(String value, boolean known, String lemma) {
         this.value = value;
@@ -46,6 +44,7 @@ public class Word implements IWord {
      * @return the value
      * @see #value
      */
+    
     @Override
     public String getValue() {
         return value;
@@ -55,15 +54,18 @@ public class Word implements IWord {
      * @return the known
      * @see #known
      */
+    
     @Override
     public boolean isKnown() {
         return known;
     }   
+    
     /**
      * Get synsets.
      * @return the List of Synset
      * @see #synsets 
      */
+    
     @Override
     public List<ISynset> getSynsets() {
         return synsets;
@@ -73,21 +75,21 @@ public class Word implements IWord {
      * @return the lemma
      * @see #lemma
      */
+    
     @Override
     public String getLemma() {
         return lemma;
     }   
     /**
      * Set a new {@link #known} value that is provided in input.
-     * @param known
      * @see #known
      */
+    
     public void setKnown(boolean known) {
         this.known = known;
     }   
     /**
      * Set a new {@link #value} value that is provided in input.
-     * @param value
      * @see #value
      */
     public void setValue(String value) {
@@ -95,18 +97,17 @@ public class Word implements IWord {
     }   
     /**
      * Set a new {@link #lemma} value that is provided in input.
-     * @param new lemma
      * @see #lemma
      */
+    
     public void setLemma(String lemma) {
         this.lemma = lemma;
     }   
     /**
-     * Add to synset a new instance of Synset.
-     * @param new Synset
+     * Add to {@link #synset} a new instance of Synset.
      * @see #synsets
-     * 
      */
+    
     public void addSynset(ISynset synset) {
         this.synsets.add(synset);
     }   
