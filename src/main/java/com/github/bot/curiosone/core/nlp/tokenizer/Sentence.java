@@ -1,66 +1,88 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
-import java.util.List;
-
 import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.ISentence;
 import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
+import java.util.List;
+
 /**
- * Structure that grammar's module needs to understand what the user says and to generate an appropriate answer
- * 
- *  @see ISentence
- *  
+ * Structure that grammar's module needs to understand what 
+ * the user says and to generate an appropriate answer. 
+ * @see ISentence 
  * @author Andrea Rivitto && Eugenio Schintu
- *
  */
 public class Sentence implements ISentence {
-	/**
-	 * Tokenizer result
-	 * @author riva
-	 */
-	
-	private SentenceT type;
-	private String original;
-	private List<IToken> tokens;
 
-	@Override
-	/**
-	 * @return type
-	 */
-	public SentenceT getType() {
-		return type;
-	}
-
-	@Override
-	/**
-	 * @return original String in input to tokenizer 
-	 */
-	public String getOriginal() {
-		return original;
-	}
-	
-	/**
-	 * @return the list of sentence's token
-	 * @see #tokens
-	 * @see Token
-	 * @see IToken
-	 */
-	@Override
-	public List<IToken> getTokens() {
-		return tokens;
-	}
-
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(SentenceT type) {
-		this.type = type;
-	}
-	
-	/**
-	 * @param token the token to add
-	 */
-	public void addToken(IToken token) {
-		this.tokens.add(token);
-	}
-	
+  /**
+   * Sentence typology.
+   * @see SentenceT 
+   */
+  
+  private SentenceT type;
+ 
+  /**
+   * Original string provided in input by the user.
+   */
+  
+  private String original;
+  
+  /**
+   * Tokens' list.
+   * @see IToken
+   */
+  
+  private List<IToken> tokens;
+  
+  /**
+   * Get type.
+   * @return type
+   * @see #type
+   */
+  
+  @Override
+  public SentenceT getType() {
+    return type;
+  }
+  
+  /**
+   * Get original.
+   * @return original
+   * @see #original 
+   */
+  
+  @Override
+  public String getOriginal() {
+    return original;
+  }
+  
+  /**
+   * Get tokens.
+   * @return tokens
+   * @see #tokens
+   * @see Token
+   * @see IToken
+   */
+  
+  @Override
+  public List<IToken> getTokens() {
+    return tokens;
+  }
+  
+  /**
+   * Set a new {@link #type} value provided in input.
+   * @see #type
+   */
+  
+  public void setType(SentenceT type) {
+    this.type = type;
+  }
+  
+  /**
+   * Add a new token to {@link #tokens} .
+   * @see #tokens
+   * @see Token
+   */
+  
+  public void addToken(IToken token) {
+    this.tokens.add(token);
+  } 
 }
