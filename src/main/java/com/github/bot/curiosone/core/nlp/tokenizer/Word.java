@@ -12,103 +12,109 @@ import java.util.List;
  */
 
 public class Word implements IWord {
-    /**
-     * Value of the single word in the original Sentence.
-     * @see Sentence
-     */
-    private String value;
-    /**
-     * Various semantic informations' list.
-     * @see Synset
-     * @see ISynset
-     */
-    private List<ISynset> synsets;
-    /**
-     * Flag used to verify if we have found a corrispondence in dictonary. 
-     */
-    private boolean known;
-    /**
-     * Lemma of a specific word.
-     */
-    private String lemma;
-    /**
-     * Constructor.
-     */
-    public Word(String value, boolean known, String lemma) {
-        this.value = value;
-        this.known = known;
-        this.lemma = lemma;
-    }   
-    /**
-     * Get value.
-     * @return the value
-     * @see #value
-     */
+  /**
+   * Value of the single word in the original Sentence.
+   * @see Sentence
+   */
+  private String value;
+  /**
+   * Various semantic informations' list.
+   * @see Synset
+   * @see ISynset
+   */
+  private List<ISynset> synsets;
+  /**
+   * Flag used to verify if we have found a corrispondence in dictonary. 
+   */
+  private boolean known;
+  /**
+   * Lemma of a specific word.
+   */
+  private String lemma;
+  /**
+   * Constructor.
+   */
+  
+  public Word(String value, boolean known, String lemma) {
+    this.value = value;
+    this.known = known;
+    this.lemma = lemma;
+  }   
+  /**
+   * Get value.
+   * @return the value
+   * @see #value
+   */
     
-    @Override
-    public String getValue() {
-        return value;
-    }   
-    /**
-     * Get known.
-     * @return the known
-     * @see #known
-     */
+  @Override
+  public String getValue() {
+    return value;
+  }   
+  /**
+   * Get known.
+   * @return the known
+   * @see #known
+   */
+
+  @Override
+  public boolean isKnown() {
+    return known;
+  }   
     
-    @Override
-    public boolean isKnown() {
-        return known;
-    }   
+  /**
+   * Get synsets.
+   * @return the List of Synset
+   * @see #synsets 
+   */
     
-    /**
-     * Get synsets.
-     * @return the List of Synset
-     * @see #synsets 
-     */
+  @Override
+  public List<ISynset> getSynsets() {
+    return synsets;
+  }
+  /**
+   * Get lemma.
+   * @return the lemma
+   * @see #lemma
+   */
+  
+  @Override
+  public String getLemma() {
+    return lemma;
+  }   
+  
+  /**
+   * Set a new {@link #known} value that is provided in input.
+   * @see #known
+   */
+  
+  public void setKnown(boolean known) {
+    this.known = known;
+  }   
+  
+  /**
+   * Set a new {@link #value} value that is provided in input.
+   * @see #value
+   */
+  
+  public void setValue(String value) {
+    this.value = value;
+  }   
+  
+  /**
+   * Set a new {@link #lemma} value that is provided in input.
+   * @see #lemma
+   */
+  
+  public void setLemma(String lemma) {
+    this.lemma = lemma;
+  }   
+  
+  /**
+   * Add to {@link #synset} a new instance of Synset.
+   * @see #synsets
+   */
     
-    @Override
-    public List<ISynset> getSynsets() {
-        return synsets;
-    }
-    /**
-     * Get lemma.
-     * @return the lemma
-     * @see #lemma
-     */
-    
-    @Override
-    public String getLemma() {
-        return lemma;
-    }   
-    /**
-     * Set a new {@link #known} value that is provided in input.
-     * @see #known
-     */
-    
-    public void setKnown(boolean known) {
-        this.known = known;
-    }   
-    /**
-     * Set a new {@link #value} value that is provided in input.
-     * @see #value
-     */
-    public void setValue(String value) {
-        this.value = value;
-    }   
-    /**
-     * Set a new {@link #lemma} value that is provided in input.
-     * @see #lemma
-     */
-    
-    public void setLemma(String lemma) {
-        this.lemma = lemma;
-    }   
-    /**
-     * Add to {@link #synset} a new instance of Synset.
-     * @see #synsets
-     */
-    
-    public void addSynset(ISynset synset) {
-        this.synsets.add(synset);
-    }   
+  public void addSynset(ISynset synset) {
+    this.synsets.add(synset);
+  }  
 }
