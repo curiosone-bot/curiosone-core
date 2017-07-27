@@ -12,8 +12,8 @@ public class Main {
   public void testStemmer() throws IOException {
     
     assertTrue("run".equals(Stemmer.toStem("running")));
-    assertTrue("cat".equals(Stemmer.toStem("cats")));
-    assertTrue("fish".equals(Stemmer.toStem("fishes")));
+    assertTrue("woman".equals(Stemmer.toStem("women")));
+    assertTrue("goose".equals(Stemmer.toStem("geese")));
   }
 
 }

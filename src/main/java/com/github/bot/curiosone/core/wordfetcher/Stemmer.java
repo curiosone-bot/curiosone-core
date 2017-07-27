@@ -11,20 +11,20 @@ import java.util.List;
 public class Stemmer {
   
   /**
-   * Get a base form of a word.
+   * Gets a base form of a word.
    * @param input non-base word
    * @return base word
    * @throws IOException stuff may go wrong
    */
   public static String toStem(String input) throws IOException {
-      
-    String path = "src/main/res/dict";
-      
-    IDictionary dict = new Dictionary(new URL("file", null , path));
+    
+    URL path = new URL("file", null, "src/main/res/dict");
+    IDictionary dict = new Dictionary(path);
     dict.open();
     
     List<String> stems =  new WordnetStemmer(dict).findStems(input, null);
-      
+     
+    stems.forEach(System.out::println);
     return stems.get(stems.size() - 1);
   }  
 }
