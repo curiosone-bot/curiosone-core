@@ -6,7 +6,7 @@ import edu.mit.jwi.IDictionary;
 import java.io.IOException;
 import java.net.URL;
 
-public class WDictionary { 
+public class WNDict { 
 
   //===========================================================================
   // STATIC PRIVATE
@@ -14,7 +14,7 @@ public class WDictionary {
   /*
    * Singleton instance on class loading is thread-safe
    */
-  private static final WDictionary INSTANCE = new WDictionary();
+  private static final WNDict INSTANCE = new WNDict();
 
   //===========================================================================
   // STATIC PUBLIC
@@ -23,7 +23,7 @@ public class WDictionary {
    * Returns the singleton instance.
    * @return object instance
    */
-  public static WDictionary getInstance() {
+  public static WNDict getInstance() {
     return INSTANCE;
   }
   
@@ -33,7 +33,7 @@ public class WDictionary {
   /*
    * Private empty constructor
    */
-  private WDictionary() {}
+  private WNDict() {}
   
   /*
    * Starts with an empty dictionary

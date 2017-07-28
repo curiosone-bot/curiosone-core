@@ -16,11 +16,11 @@ public class Stemmer {
    */
   public static String toStem(String input) throws IOException {
     
-    IDictionary dict = WDictionary.getInstance().getDictionary();
+    IDictionary dict = WNDict.getInstance().getDictionary();
     
     List<String> stems = new WordnetStemmer(dict).findStems(input, null);
     
-    stems.forEach(System.out::println);
+    stems.forEach(System.out::println); // <- REMOVE ME
     return stems.get(stems.size() - 1);
   }  
 }
