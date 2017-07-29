@@ -1,10 +1,9 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
+import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
 
 /**
  * Tokenization of the input string.
@@ -17,7 +16,7 @@ public class Tokenizer {
    * String provided in input by the user.
    */
 
-  private String input;
+  private StringBuilder sb;
 
   /**
    * Typology of Sentence.
@@ -41,18 +40,12 @@ public class Tokenizer {
       "6", "7", "8", "9", "0");
 
   /**
-   * Most common verbs abbreviation.
-   */
-
-  private final List<String> commVerbAbbr = Arrays.asList("'s", "'m", "'ll", "'re", "'ve", "'d");
-
-  /**
    * Constructor.
    * @param input is a string provided directly from the user
    */
 
   public Tokenizer(String input) {
-    this.input = input;
+    sb = new StringBuilder(input);
     type = null;
     tokens = new ArrayList<IToken>();
   }
@@ -63,29 +56,32 @@ public class Tokenizer {
    */
 
   public Sentence getSentence() {
-    checkSentenceAndType();
-    return new Sentence(getType(), input, tokens);
+    type = checkSentence();
+    return new Sentence(getType(), sb.toString(), tokens);
   }
 
   /**
    * Detected in the {@link #input} if there is more than one sentence, and if it contains more
    * than one sentence, {@link #type} has a special value.
-   * Only if the number of sentence in the input string is equal to one,
-   * it sees if the {@link #input} is a question or an affirmation and set a {@link #type}.
+   * @return type as a special value
    */
-  public void checkSentenceAndType() {
-    if (input.charAt(input.length() - 1) == '?') {
-      setType(SentenceT.QUESTION);
-    } else if (input.charAt(input.length() - 1) == '!' || input.charAt(input.length() - 1) == '.') {
-      setType(SentenceT.ANSWER);
+  public SentenceT checkSentence() {
+    if (sb.length() - 1 == sb.indexOf("?") || sb.length() - 1 == sb.indexOf("!")
+        || sb.length() - 1 == sb.indexOf(".")) {
+      return setType(checkType());
     }
+    return setType(SentenceT.MORE_SENTENCE);
+  }
 
-    for (int i = 0; i > input.length(); i++) {
-      if ((input.charAt(i) == '?' || input.charAt(i) == '!') && i != input.length() - 1) {
-        setType(SentenceT.MORE_SENTENCE);
-        break;
-      }
-    }
+  /**
+   * Checks if the {@link #input} string is a question or an affirmation/answer.
+   * @return type of sentence
+   * @see SentenceT
+   */
+
+  public SentenceT checkType() {
+    return sb.charAt(sb.length() - 1) == '?'
+        ? SentenceT.QUESTION : SentenceT.ANSWER;
   }
 
   /**
@@ -94,18 +90,100 @@ public class Tokenizer {
    */
 
   public String checkPunct() {
-    StringBuilder sb = new StringBuilder(input);
     for (int i = 0; i < sb.length(); i++) {
-      char letter = sb.charAt(i);
-      if (!alphaNum.contains(letter)) {
-        if (i > 0) {
-          if (Character.isDigit(sb.charAt(i)-1 )) {
-
-          }
+      if (!alphaNum.contains(("" + sb.charAt(i)).toLowerCase())) {
+        switch (sb.charAt(i) + "") {
+          case "." :
+            sb = checkPoint(i);
+            break;
+          case "'":
+            sb = checkApost(i + 1);
+            break;
+          case "@":
+            sb = checkNet(i);
+            break;
+          case " ":
+            continue;
+          default:
+            sb.delete(i, i + 1);
+            sb.insert(i, " ");
         }
       }
     }
     return sb.toString();
+  }
+
+  /**
+   * Checks if before and/or after a point there are some numeric value and in the case it's false,
+   * the point will be deleted.
+   * @param startIndex the point where is the point
+   * @return sb modified and cleaned by typing errors
+   */
+
+  private StringBuilder checkPoint(int startIndex) {
+    if (startIndex < 1) {
+      if (!Character.isDigit(sb.charAt(startIndex + 1)) && sb.indexOf("@") == -1) {
+        delete(startIndex);
+      }
+    } else if (startIndex == sb.length() - 1) {
+      delete(startIndex);
+    } else {
+      if (!(Character.isDigit(sb.charAt(startIndex - 1))
+          || Character.isDigit(sb.charAt(startIndex + 1))) && sb.indexOf("@") == -1) {
+        delete(startIndex);
+      }
+    }
+    return sb;
+  }
+
+  private StringBuilder delete(int index) {
+    sb.deleteCharAt(index);
+    sb.insert(index, " ");
+    return sb;
+  }
+
+  /**
+   * MANCANO 'd E 's PERCHE' NON SO COME IMPLEMENTARLI
+   * Checks if the apostrophe in the {@link #input} is a typing error
+   * or an abbreviation for a particular verb (ex: 's -> is/has, 'm -> am, 'll -> will, etc...).
+   * @param startIndex index after the apostrophe
+   * @return sb modified and cleaned by typing errors
+   */
+
+  private StringBuilder checkApost(int startIndex) {
+    boolean flag = false;
+    if (sb.charAt(startIndex) == 'm') {
+      sb.replace(startIndex - 1, startIndex + 1, " am");
+      flag = true;
+    }
+    if (("" + sb.charAt(startIndex) + sb.charAt(startIndex + 1)).equals("re")) {
+      sb.replace(startIndex - 1, startIndex + 2, " are");
+      flag = true;
+    }
+    if (("" + sb.charAt(startIndex) + sb.charAt(startIndex + 1)).equals("ll")) {
+      sb.replace(startIndex - 1, startIndex + 2 , " will");
+      flag = true;
+    }
+    if (("" + sb.charAt(startIndex) + sb.charAt(startIndex + 1)).equals("ve")) {
+      sb.replace(startIndex - 1, startIndex + 2, " have");
+      flag = true;
+    }
+
+    if (!flag) {
+      delete(startIndex - 1);
+    }
+    return sb;
+  }
+
+  /**
+   * Check if the net found is a typing error or belongs to an email address.
+   * @param startIndex index where is the net
+   * @return sb modified and cleanded by typing errors
+   */
+
+  private StringBuilder checkNet(int startIndex) {
+
+    return sb;
   }
 
   /**
