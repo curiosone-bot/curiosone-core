@@ -1,7 +1,10 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
 
 /**
  * Tokenization of the input string.
@@ -24,22 +27,24 @@ public class Tokenizer {
   private SentenceT type;
 
   /**
-   * Acronyms with punctuation.
+   * Generated tokens' list.
    */
 
-  private final List<String> acronPunc = Arrays.asList("I.O.U.", "M.D.", "N.B.", "P.O.", "U.K.",
-                                                       "U.S.","U.S.A.", "P.S.");
-  /**
-   * Common words containing periods.
-   */
-
-  private final List<String> comWordsPer = Arrays.asList("mr.", "mrs.", ".com", "dr.", "st.");
+  private List<IToken> tokens;
 
   /**
-   * Common verbs abbreviation.
+   * Alphanumeric values' list.
    */
 
-  private final List<String> commVerbAbbr = Arrays.asList("'s", "'m", "'ll", "'re", "'ve");
+  private final List<String> alphaNum = Arrays.asList("a","b","c","d","e","f","g","h","j","k","i",
+      "l", "m","n","o","p","q","r","s","t","u","v","w", "x", "y", "z","1", "2","3","4", "5",
+      "6", "7", "8", "9", "0");
+
+  /**
+   * Most common verbs abbreviation.
+   */
+
+  private final List<String> commVerbAbbr = Arrays.asList("'s", "'m", "'ll", "'re", "'ve", "'d");
 
   /**
    * Constructor.
@@ -49,6 +54,7 @@ public class Tokenizer {
   public Tokenizer(String input) {
     this.input = input;
     type = null;
+    tokens = new ArrayList<IToken>();
   }
 
   /**
@@ -58,7 +64,7 @@ public class Tokenizer {
 
   public Sentence getSentence() {
     checkSentenceAndType();
-    return new Sentence(null, input, null);
+    return new Sentence(getType(), input, tokens);
   }
 
   /**
@@ -80,6 +86,26 @@ public class Tokenizer {
         break;
       }
     }
+  }
+
+  /**
+   * This method checks if in {@link #input} there is an incorrect punctuation.
+   * @return {@link #input} cleaned from punctuation errors
+   */
+
+  public String checkPunct() {
+    StringBuilder sb = new StringBuilder(input);
+    for (int i = 0; i < sb.length(); i++) {
+      char letter = sb.charAt(i);
+      if (!alphaNum.contains(letter)) {
+        if (i > 0) {
+          if (Character.isDigit(sb.charAt(i)-1 )) {
+
+          }
+        }
+      }
+    }
+    return sb.toString();
   }
 
   /**
