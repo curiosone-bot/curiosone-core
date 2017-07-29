@@ -3,7 +3,7 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
 /**
  * Part Of Speech (POS) type.
  *
- * @author Andrea Rivetto && Eugenio Schintu
+ * @author Andrea Rivitto && Eugenio Schintu
  * @see https://en.oxforddictionaries.com/grammar/word-classes-or-parts-of-speech
  */
 
@@ -11,28 +11,36 @@ public enum Post {
   /**
    * Noun.
    */
-  NOUN, /**
+  NOUN,
+  /**
    * Verb.
    */
-  VERB, /**
+  VERB,
+  /**
    * Adjective.
    */
-  ADJECTIVE, /**
+  ADJECTIVE,
+  /**
    * Adverb.
    */
-  ADVERB, /**
+  ADVERB,
+  /**
    * Pronoun.
    */
-  PRONOUM, /**
+  PRONOUM,
+  /**
    * Preposition.
    */
-  PREPOSITION, /**
+  PREPOSITION,
+  /**
    * Comjunction.
    */
-  CONJUNCTION, /**
+  CONJUNCTION,
+  /**
    * Determiner.
    */
-  DETERMINER, /**
+  DETERMINER,
+  /**
    * Interjection.
    */
   INTERJECTION

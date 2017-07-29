@@ -5,7 +5,6 @@ import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord;
 
 /**
  * Class used to point to grammar and semantic word information.
- *
  * @author Andrea Rivitto && Eugenio Schintu
  * @see IToken
  */
@@ -13,7 +12,6 @@ public class Token implements IToken {
 
   /**
    * Word.
-   *
    * @see Word
    * @see IWord
    */
@@ -44,7 +42,6 @@ public class Token implements IToken {
 
   /**
    * Get word.
-   *
    * @return the word
    * @see #word
    */
@@ -55,7 +52,6 @@ public class Token implements IToken {
 
   /**
    * Get corrected.
-   *
    * @return the corrected
    * @see #corrected
    */
@@ -66,18 +62,17 @@ public class Token implements IToken {
 
   /**
    * Get originalValue.
-   *
    * @return originalValue
    * @see #originalValue
    */
 
+  @Override
   public String getOValue() {
     return originalValue;
   }
 
   /**
    * Set a new {@link #originalValue} value that is provided in input.
-   *
    * @param originalValue the oValue to set
    * @see #originalValue
    */
@@ -88,7 +83,6 @@ public class Token implements IToken {
 
   /**
    * Set a new {@link #corrected} value that is provided in input.
-   *
    * @param corrected the corrected to set
    * @see #corrected
    */
