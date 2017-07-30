@@ -1,6 +1,7 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
 import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +17,13 @@ public class Tokenizer {
    * String provided in input by the user.
    */
 
-  private StringBuilder sb;
+  private StringBuilder inputUser;
+
+  /**
+   * String that at the beginnig is equals to {@link #iu},
+   * but it will be modified.
+   */
+  private StringBuilder iu;
 
   /**
    * Typology of Sentence.
@@ -36,8 +43,8 @@ public class Tokenizer {
    */
 
   private final List<String> alphaNum = Arrays.asList("a","b","c","d","e","f","g","h","j","k","i",
-      "l", "m","n","o","p","q","r","s","t","u","v","w", "x", "y", "z","1", "2","3","4", "5",
-      "6", "7", "8", "9", "0");
+      "l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5",
+      "6", "7","8","9","0");
 
   /**
    * Constructor.
@@ -45,7 +52,8 @@ public class Tokenizer {
    */
 
   public Tokenizer(String input) {
-    sb = new StringBuilder(input);
+    inputUser = new StringBuilder(input);
+    iu = new StringBuilder(input);
     type = null;
     tokens = new ArrayList<IToken>();
   }
@@ -56,32 +64,64 @@ public class Tokenizer {
    */
 
   public Sentence getSentence() {
-    type = checkSentence();
-    return new Sentence(getType(), sb.toString(), tokens);
+    checkSentence();
+    checkPunct();
+    createListOfTokens();
+    return new Sentence(getType(), getInputUser(), getTokens());
   }
 
   /**
    * Detected in the {@link #input} if there is more than one sentence, and if it contains more
    * than one sentence, {@link #type} has a special value.
+   * Also checks if the {@link #input} string is a question or an affirmation/answer.
    * @return type as a special value
    */
   public SentenceT checkSentence() {
-    if (sb.length() - 1 == sb.indexOf("?") || sb.length() - 1 == sb.indexOf("!")
-        || sb.length() - 1 == sb.indexOf(".")) {
-      return type = checkType();
+    for (int i = 0; i < iu.length(); i++) {
+      if (i < iu.length() - 2) {
+        if (!alphaNum.contains(("" + iu.charAt(i)).toLowerCase())) {
+          switch ("" + iu.charAt(i)) {
+            case ".":
+              setType(SentenceT.MORE_SENTENCE);
+              return getType();
+            case "?":
+              setType(SentenceT.MORE_SENTENCE);
+              return getType();
+            case "!":
+              setType(SentenceT.MORE_SENTENCE);
+              return getType();
+            default:
+              continue;
+          }
+        }
+      } else {
+        setType(checkType());
+      }
     }
-    return type = SentenceT.MORE_SENTENCE;
+    return getType();
   }
 
   /**
    * Checks if the {@link #input} string is a question or an affirmation/answer.
    * @return type of sentence
-   * @see SentenceT
+  * @see SentenceT
+  */
+
+  private SentenceT checkType() {
+    return iu.charAt(iu.length() - 1) == '?'
+         ? SentenceT.QUESTION : SentenceT.ANSWER;
+  }
+  /**
+   * This method creates the elements of {@link #tokens} from {@link #iu}.
+   * @return {@link #tokens} with all elements
    */
 
-  public SentenceT checkType() {
-    return sb.charAt(sb.length() - 1) == '?'
-        ? SentenceT.QUESTION : SentenceT.ANSWER;
+  public List<IToken> createListOfTokens() {
+    String[] tok = checkPunct().split(" ");
+    for (String t : tok) {
+      addToken(new Token(new Word(t, false, " "), t, false));
+    }
+    return tokens;
   }
 
   /**
@@ -90,27 +130,27 @@ public class Tokenizer {
    */
 
   public String checkPunct() {
-    for (int i = 0; i < sb.length(); i++) {
-      if (!alphaNum.contains(("" + sb.charAt(i)).toLowerCase())) {
-        switch (sb.charAt(i) + "") {
+    for (int i = 0; i < iu.length(); i++) {
+      if (!alphaNum.contains(("" + iu.charAt(i)).toLowerCase())) {
+        switch (iu.charAt(i) + "") {
           case "." :
-            sb = checkPoint(i);
+            iu = checkPoint(i);
             break;
           case "'":
-            sb = checkApost(i + 1);
+            iu = checkApost(i + 1);
             break;
           case "@":
-            sb = checkNet(i);
+            iu = checkNet(i);
             break;
           case " ":
             continue;
           default:
-            sb.delete(i, i + 1);
-            sb.insert(i, " ");
+            iu.delete(i, i + 1);
+            iu.insert(i, " ");
         }
       }
     }
-    return sb.toString();
+    return iu.toString();
   }
 
   /**
@@ -122,21 +162,23 @@ public class Tokenizer {
 
   private StringBuilder checkPoint(int startIndex) {
     if (startIndex < 1) {
-      if (!Character.isDigit(sb.charAt(startIndex + 1)) && sb.indexOf("@") == -1) {
-        delete(startIndex);
+      if (!Character.isDigit(iu.charAt(startIndex + 1)) && iu.indexOf("@") == -1) {
+        return delete(startIndex);
       }
-    } else if ((!(Character.isDigit(sb.charAt(startIndex - 1))
-          || Character.isDigit(sb.charAt(startIndex + 1))) && sb.indexOf("@") == -1)
-          || startIndex == sb.length() - 1) {
-      delete(startIndex);
+    } else {
+      if ((!(Character.isDigit(iu.charAt(startIndex - 1))
+          || Character.isDigit(iu.charAt(startIndex + 1))) && iu.indexOf("@") == -1)
+          || startIndex == iu.length() - 1) {
+        return delete(startIndex);
+      }
     }
-    return sb;
+    return iu;
   }
 
   private StringBuilder delete(int index) {
-    sb.deleteCharAt(index);
-    sb.insert(index, " ");
-    return sb;
+    iu.deleteCharAt(index);
+    iu.insert(index, " ");
+    return iu;
   }
 
   /**
@@ -149,27 +191,27 @@ public class Tokenizer {
 
   private StringBuilder checkApost(int startIndex) {
     boolean flag = false;
-    if (sb.charAt(startIndex) == 'm') {
-      sb.replace(startIndex - 1, startIndex + 1, " am");
+    if (iu.charAt(startIndex) == 'm') {
+      iu.replace(startIndex - 1, startIndex + 1, " am");
       flag = true;
     }
-    if (("" + sb.charAt(startIndex) + sb.charAt(startIndex + 1)).equals("re")) {
-      sb.replace(startIndex - 1, startIndex + 2, " are");
+    if (("" + iu.charAt(startIndex) + iu.charAt(startIndex + 1)).equals("re")) {
+      iu.replace(startIndex - 1, startIndex + 2, " are");
       flag = true;
     }
-    if (("" + sb.charAt(startIndex) + sb.charAt(startIndex + 1)).equals("ll")) {
-      sb.replace(startIndex - 1, startIndex + 2 , " will");
+    if (("" + iu.charAt(startIndex) + iu.charAt(startIndex + 1)).equals("ll")) {
+      iu.replace(startIndex - 1, startIndex + 2 , " will");
       flag = true;
     }
-    if (("" + sb.charAt(startIndex) + sb.charAt(startIndex + 1)).equals("ve")) {
-      sb.replace(startIndex - 1, startIndex + 2, " have");
+    if (("" + iu.charAt(startIndex) + iu.charAt(startIndex + 1)).equals("ve")) {
+      iu.replace(startIndex - 1, startIndex + 2, " have");
       flag = true;
     }
 
     if (!flag) {
       delete(startIndex - 1);
     }
-    return sb;
+    return iu;
   }
 
   /**
@@ -180,12 +222,28 @@ public class Tokenizer {
 
   private StringBuilder checkNet(int startIndex) {
 
-    return sb;
+    return iu;
+  }
+
+  /**
+   * Get {@link #inputUser} as string.
+   * @return {@link #inputUser}
+   */
+  public String getInputUser() {
+    return inputUser.toString();
+  }
+
+  /**
+   * Get {@link #iu} as string.
+   * @return {@link #iu}
+   */
+  public String getModifiedInputUser() {
+    return iu.toString();
   }
 
   /**
    * Get the type.
-   * @return type
+   * @return {@link #type}
    */
 
   public SentenceT getType() {
@@ -194,10 +252,27 @@ public class Tokenizer {
 
   /**
    * Set {@link #type} to a new value provided in input.
-   * @param t of new value
+   * @param t type of new value
    */
 
   public void setType(SentenceT t) {
     this.type = t;
+  }
+
+  /**
+   * Get {@link #tokens}.
+   * @return  {@link #tokens}
+   */
+  public List<IToken> getTokens() {
+    return tokens;
+  }
+
+  /**
+   * Add a new element to {@link #tokens}.
+   * @param t token to be add
+   * @see #tokens
+   */
+  public void addToken(Token t) {
+    tokens.add(t);
   }
 }
