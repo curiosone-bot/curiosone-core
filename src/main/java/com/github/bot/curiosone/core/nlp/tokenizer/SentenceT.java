@@ -12,7 +12,7 @@ public enum SentenceT {
    */
   QUESTION,
   /**
-   * Sentence in input is a affirmation.
+   * Sentence in input is an affirmation.
    */
   ANSWER,
   /**

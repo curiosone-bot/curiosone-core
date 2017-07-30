@@ -68,9 +68,9 @@ public class Tokenizer {
   public SentenceT checkSentence() {
     if (sb.length() - 1 == sb.indexOf("?") || sb.length() - 1 == sb.indexOf("!")
         || sb.length() - 1 == sb.indexOf(".")) {
-      return setType(checkType());
+      return type = checkType();
     }
-    return setType(SentenceT.MORE_SENTENCE);
+    return type = SentenceT.MORE_SENTENCE;
   }
 
   /**
@@ -125,13 +125,10 @@ public class Tokenizer {
       if (!Character.isDigit(sb.charAt(startIndex + 1)) && sb.indexOf("@") == -1) {
         delete(startIndex);
       }
-    } else if (startIndex == sb.length() - 1) {
+    } else if ((!(Character.isDigit(sb.charAt(startIndex - 1))
+          || Character.isDigit(sb.charAt(startIndex + 1))) && sb.indexOf("@") == -1)
+          || startIndex == sb.length() - 1) {
       delete(startIndex);
-    } else {
-      if (!(Character.isDigit(sb.charAt(startIndex - 1))
-          || Character.isDigit(sb.charAt(startIndex + 1))) && sb.indexOf("@") == -1) {
-        delete(startIndex);
-      }
     }
     return sb;
   }
@@ -198,10 +195,9 @@ public class Tokenizer {
   /**
    * Set {@link #type} to a new value provided in input.
    * @param t of new value
-   * @return type modified
    */
 
-  public SentenceT setType(SentenceT t) {
-    return this.type = t;
+  public void setType(SentenceT t) {
+    this.type = t;
   }
 }
