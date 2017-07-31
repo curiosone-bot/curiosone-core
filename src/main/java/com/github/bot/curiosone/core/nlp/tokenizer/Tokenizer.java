@@ -161,16 +161,22 @@ public class Tokenizer {
    */
 
   private StringBuilder checkPoint(int startIndex) {
+    boolean delete = false;
     if (startIndex < 1) {
-      if (!Character.isDigit(iu.charAt(startIndex + 1)) && iu.indexOf("@") == -1) {
+      if (!Character.isDigit(iu.charAt(startIndex + 1))) {
+        delete = true;
         return delete(startIndex);
       }
     } else {
       if ((!(Character.isDigit(iu.charAt(startIndex - 1))
           || Character.isDigit(iu.charAt(startIndex + 1))) && iu.indexOf("@") == -1)
           || startIndex == iu.length() - 1) {
+        delete = true;
         return delete(startIndex);
       }
+    }
+    if (!delete) {
+      setType(checkType());
     }
     return iu;
   }
@@ -182,7 +188,7 @@ public class Tokenizer {
   }
 
   /**
-   * MANCANO 'd E 's PERCHE' NON SO COME IMPLEMENTARLI
+   * MANCA 's PERCHE' NON SO COME IMPLEMENTARLO
    * Checks if the apostrophe in the {@link #input} is a typing error
    * or an abbreviation for a particular verb (ex: 's -> is/has, 'm -> am, 'll -> will, etc...).
    * @param startIndex index after the apostrophe
@@ -190,25 +196,25 @@ public class Tokenizer {
    */
 
   private StringBuilder checkApost(int startIndex) {
-    boolean flag = false;
+    boolean substitute = false;
     if (iu.charAt(startIndex) == 'm') {
       iu.replace(startIndex - 1, startIndex + 1, " am");
-      flag = true;
+      substitute = true;
     }
     if (("" + iu.charAt(startIndex) + iu.charAt(startIndex + 1)).equals("re")) {
       iu.replace(startIndex - 1, startIndex + 2, " are");
-      flag = true;
+      substitute = true;
     }
     if (("" + iu.charAt(startIndex) + iu.charAt(startIndex + 1)).equals("ll")) {
       iu.replace(startIndex - 1, startIndex + 2 , " will");
-      flag = true;
+      substitute = true;
     }
     if (("" + iu.charAt(startIndex) + iu.charAt(startIndex + 1)).equals("ve")) {
       iu.replace(startIndex - 1, startIndex + 2, " have");
-      flag = true;
+      substitute = true;
     }
 
-    if (!flag) {
+    if (!substitute) {
       delete(startIndex - 1);
     }
     return iu;
