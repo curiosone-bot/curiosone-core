@@ -9,39 +9,71 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
 
 public enum Post {
   /**
-   * Noun.
+   * Nominal part.
    */
-  NOUN,
+  NP,
   /**
-   * Verb.
+   * Verbal part.
    */
-  VERB,
+  VP,
   /**
    * Adjective.
    */
-  ADJECTIVE,
+  ADJ,
   /**
    * Adverb.
    */
-  ADVERB,
+  ADV,
   /**
    * Pronoun.
    */
-  PRONOUM,
+  PRON,
   /**
    * Preposition.
    */
-  PREPOSITION,
+  PREP,
   /**
    * Comjunction.
    */
-  CONJUNCTION,
+  CONJ,
   /**
    * Determiner.
    */
-  DETERMINER,
+  DET,
   /**
-   * Interjection.
+   * Verb preposition phrase.
    */
-  INTERJECTION
+  VPP,
+  /**
+   * Noun.
+   */
+  N,
+  /**
+   * Noun preposition phrase.
+   */
+  NPP,
+  /**
+   * Negation.
+   */
+  NEG,
+  /**
+   * Verb.
+   */
+  V,
+  /**
+   * Number.
+   */
+  NUMB,
+  /**
+   * Adjective Phrase.
+   */
+  AP,
+  /**
+   * Sentence.
+   */
+  S,
+  /**
+   * Adjective preposition phrase.
+   */
+  APP
 }
