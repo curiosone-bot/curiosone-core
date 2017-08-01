@@ -176,7 +176,11 @@ public class Tokenizer {
       }
     }
     if (!delete) {
-      setType(checkType());
+      if (!iu.substring(0, startIndex - 1).contains(".")) {
+        setType(checkType());
+      } else {
+        delete(startIndex);
+      }
     }
     return iu;
   }
