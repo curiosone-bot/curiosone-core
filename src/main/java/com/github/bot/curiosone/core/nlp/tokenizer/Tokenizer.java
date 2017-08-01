@@ -192,7 +192,7 @@ public class Tokenizer {
   }
 
   /**
-   * MANCA 's PERCHE' NON SO COME IMPLEMENTARLO
+   * MANCA 's
    * Checks if the apostrophe in the {@link #input} is a typing error
    * or an abbreviation for a particular verb (ex: 's -> is/has, 'm -> am, 'll -> will, etc...).
    * @param startIndex index after the apostrophe
