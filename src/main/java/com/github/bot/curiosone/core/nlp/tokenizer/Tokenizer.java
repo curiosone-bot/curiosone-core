@@ -217,7 +217,6 @@ public class Tokenizer {
       iu.replace(startIndex - 1, startIndex + 2, " have");
       substitute = true;
     }
-
     if (!substitute) {
       delete(startIndex - 1);
     }
