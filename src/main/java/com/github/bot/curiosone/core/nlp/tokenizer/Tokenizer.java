@@ -47,6 +47,11 @@ public class Tokenizer {
       "6", "7","8","9","0");
 
   /**
+   * List of common ends of email address.
+   */
+  private final List<String> email = Arrays.asList(".com", ".net", ".it ", ".org");
+
+  /**
    * Constructor.
    * @param input is a string provided directly from the user
    */
@@ -119,6 +124,15 @@ public class Tokenizer {
   public List<IToken> createListOfTokens() {
     String[] tok = checkPunct().split(" ");
     for (String t : tok) {
+      if (t.contains(" ")) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < t.length(); i++) {
+          if (t.charAt(i) != ' ') {
+            sb.append(t.charAt(i));
+          }
+        }
+        t = sb.toString();
+      }
       addToken(new Token(new Word(t, false, " "), t, false));
     }
     return tokens;
@@ -169,7 +183,7 @@ public class Tokenizer {
       }
     } else {
       if ((!(Character.isDigit(iu.charAt(startIndex - 1))
-          || Character.isDigit(iu.charAt(startIndex + 1))) && iu.indexOf("@") == -1)
+          || Character.isDigit(iu.charAt(startIndex + 1))))
           || startIndex == iu.length() - 1) {
         delete = true;
         return delete(startIndex);
@@ -192,7 +206,9 @@ public class Tokenizer {
   }
 
   /**
-   * MANCA 's
+   * MANCANO
+   * 1)caso in cui is/has ha valore base (essere/avere -> "lui è bello" o "lei ha una macchina")
+   * 2)caso di avverbi tra is/has e verbo
    * Checks if the apostrophe in the {@link #input} is a typing error
    * or an abbreviation for a particular verb (ex: 's -> is/has, 'm -> am, 'll -> will, etc...).
    * @param startIndex index after the apostrophe
@@ -217,6 +233,16 @@ public class Tokenizer {
       iu.replace(startIndex - 1, startIndex + 2, " have");
       substitute = true;
     }
+    if (iu.charAt(startIndex) == 's') {
+      String[] iuSplittato = iu.toString().substring(startIndex + 2).split(" ");
+      if (iuSplittato[0].substring(iuSplittato[0].length() - 2).equalsIgnoreCase("ed")) {
+        iu.replace(startIndex - 1, startIndex + 1, " has");
+        substitute = true;
+      } else if (iuSplittato[0].substring(iuSplittato[0].length() - 3).equalsIgnoreCase("ing")) {
+        iu.replace(startIndex - 1, startIndex + 1, " is");
+        substitute = true;
+      }
+    }
     if (!substitute) {
       delete(startIndex - 1);
     }
@@ -226,11 +252,26 @@ public class Tokenizer {
   /**
    * Check if the net found is a typing error or belongs to an email address.
    * @param startIndex index where is the net
-   * @return sb modified and cleanded by typing errors
+   * @return {@link #iu} modified and cleanded by typing errors
    */
 
-  private StringBuilder checkNet(int startIndex) {
-
+  public StringBuilder checkNet(int startIndex) {
+    boolean deleted = false;
+    if (iu.charAt(startIndex - 1) == ' ') {
+      deleted = true;
+      delete(startIndex);
+      return iu;
+    }
+    for (int i = startIndex + 1; i < iu.length(); i++) {
+      if (iu.charAt(i) == '.') {
+        if (email.contains(iu.subSequence(i, i + 4))) {
+          break;
+        }
+      }
+      if (i == iu.length() - 1 && !deleted) {
+        delete(startIndex);
+      }
+    }
     return iu;
   }
 
