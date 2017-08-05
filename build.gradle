@@ -37,6 +37,7 @@ dependencies {
   // Use JUnit test framework
   testImplementation 'junit:junit:4.12'
   compile name: 'edu.mit.jwi_2.4.0'
+  compile name: 'babelnet-api-3.7'
 }
 
 jacocoTestReport {
