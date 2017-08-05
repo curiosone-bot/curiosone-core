@@ -348,10 +348,10 @@ local.properties
 .worksheet
 
 ### Eclipse Patch ###
-# Eclipse Core		
+# Eclipse Core
 .project
 
-# JDT-specific (Eclipse Java Development Tools)		
+# JDT-specific (Eclipse Java Development Tools)
 .classpath
 ### Eclipse - END ###
 
@@ -468,3 +468,10 @@ Temporary Items
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
 ### Linux - END ###
+
+### Overrides - START ###
+
+# Local deps
+!libs/*.jar
+
+### Overrides - END ###
