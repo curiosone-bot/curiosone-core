@@ -3,12 +3,13 @@ package com.github.bot.curiosone.core.wordfetcher;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Fetcher {
 
   public static void fetch(String word) throws IOException {
     
-    String stem = Stemmer.toStem(word);
+    String stem = Stemmer.seek(word).get();
     /*
     //init
     BabelNet bn = BabelNet.getInstance();

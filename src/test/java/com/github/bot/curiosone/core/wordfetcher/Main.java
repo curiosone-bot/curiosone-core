@@ -11,9 +11,9 @@ public class Main {
   @Test  
   public void testStemmer() throws IOException {
     
-    assertTrue("run".equals(Stemmer.toStem("running")));
-    assertTrue("woman".equals(Stemmer.toStem("women")));
-    assertTrue("goose".equals(Stemmer.toStem("geese")));
+    assertTrue("run".equals(Stemmer.seek("running").get()));
+    assertTrue("woman".equals(Stemmer.seek("women").get()));
+    assertTrue("goose".equals(Stemmer.seek("geese").get()));
   }
 
 }
