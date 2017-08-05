@@ -20,7 +20,7 @@ public class Stemmer {
   /*
    * Path of Wordnet database files
    */
-  private static final String PATH = "src/main/res/dict";
+  private static final String WND_PATH = "src/main/res/dict";
 
   //===============================================================================================
   
@@ -46,7 +46,7 @@ public class Stemmer {
   private void load() {
 
     try {
-      dictionary = Optional.of(new edu.mit.jwi.Dictionary(new URL("file", null, PATH)));
+      dictionary = Optional.of(new edu.mit.jwi.Dictionary(new URL("file", null, WND_PATH)));
       dictionary.get().open();
       
     } catch (Exception e) {
@@ -57,13 +57,14 @@ public class Stemmer {
   //-----------------------------------------------------------------------------------------------
 
   /*
-   * Close dictionary
+   * Remove dictionary
    */
   private void lift() {
     
     if (dictionary.isPresent()) {
       if (dictionary.get().isOpen()) {
         dictionary.get().close();
+        dictionary = Optional.empty();
       }
     }
   }
@@ -85,7 +86,7 @@ public class Stemmer {
    * @param word surface form
    * @return root form
    */
-  public static final Optional<String> seek(String word) {
+  public static final Optional<String> search(String word) {
     
     List<String> stems;
     
