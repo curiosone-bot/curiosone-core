@@ -23,6 +23,9 @@ repositories {
   // You can declare any Maven/Ivy/file repository here.
   jcenter()
   mavenCentral()
+  flatDir {
+    dirs 'libs'
+  }
 }
 
 javadoc {
@@ -33,7 +36,8 @@ javadoc {
 dependencies {
   // Use JUnit test framework
   testImplementation 'junit:junit:4.12'
-  compile 'edu.mit:jwi:2.2.3'
+  compile name: 'edu.mit.jwi_2.4.0'
+  compile name: 'babelnet-api-3.7'
 }
 
 jacocoTestReport {
