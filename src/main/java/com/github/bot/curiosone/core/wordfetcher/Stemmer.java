@@ -25,7 +25,7 @@ public class Stemmer {
   //===============================================================================================
   
   /*
-   * Private empty constructor
+   * Private constructor
    */
   private Stemmer() {
     load();
@@ -41,7 +41,7 @@ public class Stemmer {
   //-----------------------------------------------------------------------------------------------
   
   /*
-   * Open dictionary (if possible)
+   * Open dictionary
    */
   private void load() {
 
@@ -57,7 +57,7 @@ public class Stemmer {
   //-----------------------------------------------------------------------------------------------
 
   /*
-   * Close dictionary (if any)
+   * Close dictionary
    */
   private void lift() {
     
