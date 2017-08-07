@@ -14,6 +14,8 @@ public class Main {
     assertTrue("run".equals(Stemmer.search("running").get()));
     assertTrue("woman".equals(Stemmer.search("women").get()));
     assertTrue("goose".equals(Stemmer.search("geese").get()));
+    
+    Fetcher.fetch("running");
   }
 
 }
