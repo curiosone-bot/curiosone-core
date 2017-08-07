@@ -1,38 +1,42 @@
 package com.github.bot.curiosone.core.wordfetcher;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import it.uniroma1.lcl.babelnet.BabelNet;
 import it.uniroma1.lcl.babelnet.BabelSynset;
+import it.uniroma1.lcl.babelnet.data.BabelPOS;
 import it.uniroma1.lcl.jlt.util.Language;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Fetcher {
 
   /**
    * Returns a list of sysnsets of a word.
-   * @param word input surface word
+   * @param word input word
    * @return list of synsets
    */
   public static final List<BabelSynset> getSynsets(String word) {
-    
-    // search for the root word, exit on failure
-    
-    Optional<String> stem = Stemmer.search(word);
-    
-    if (!stem.isPresent()) {
-      return new ArrayList<>();
-    }
-    
-    // interrogate BabelNet
-    
+        
     BabelNet bn = BabelNet.getInstance();
         
     try {
-      return bn.getSynsets(stem.get(), Language.EN);
+      return bn.getSynsets(word, Language.EN);
     } catch (Exception e) {
       return new ArrayList<>();
     }
+  }
+  
+  /**
+   * Return the possible part of speech for a given word.
+   * @param word input
+   * @return list of POSs
+   */
+  public static final List<BabelPOS> getTypes(String word) {
+    
+    return Fetcher.getSynsets(word).stream()
+        .map(BabelSynset::getPOS)
+        .distinct()
+        .collect(Collectors.toList());
   }
 }
