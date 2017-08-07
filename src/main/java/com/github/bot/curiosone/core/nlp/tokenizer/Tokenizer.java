@@ -133,9 +133,18 @@ public class Tokenizer {
         }
         t = sb.toString();
       }
-      addToken(new Token(new Word(t, false, " "), t, false));
+      addToken(new Token(getWord(), t, false));
     }
     return tokens;
+  }
+
+  /**
+   * This method creates a new word.
+   * @return a new word
+   */
+
+  public Word getWord() {
+    return null;
   }
 
   /**
