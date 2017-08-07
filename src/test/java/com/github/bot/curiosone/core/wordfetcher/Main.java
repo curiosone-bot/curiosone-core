@@ -15,7 +15,7 @@ public class Main {
     assertTrue("woman".equals(Stemmer.search("women").get()));
     assertTrue("goose".equals(Stemmer.search("geese").get()));
     
-    Fetcher.fetch("running");
+    Fetcher.getSynsets("running").forEach(System.out::println);
   }
 
 }
