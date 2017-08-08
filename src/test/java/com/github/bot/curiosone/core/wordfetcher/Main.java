@@ -1,5 +1,6 @@
 package com.github.bot.curiosone.core.wordfetcher;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -15,5 +16,13 @@ public class Main {
     assertTrue("woman".equals(Stemmer.search("women").get()));
     assertTrue("goose".equals(Stemmer.search("geese").get()));
   }
-
+  
+  //-----------------------------------------------------------------------------------------------
+  
+  @Test  
+  public void testContains() throws IOException {
+    
+    assertTrue(Stemmer.contains("run"));
+    assertFalse(Stemmer.contains("supercalifragilisticoespiralidoso"));
+  }
 }

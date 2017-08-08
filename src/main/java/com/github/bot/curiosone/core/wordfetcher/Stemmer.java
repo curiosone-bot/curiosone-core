@@ -1,5 +1,6 @@
 package com.github.bot.curiosone.core.wordfetcher;
 
+import edu.mit.jwi.item.POS;
 import edu.mit.jwi.morph.SimpleStemmer;
 import edu.mit.jwi.morph.WordnetStemmer;
 
@@ -7,6 +8,7 @@ import java.net.URL;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class Stemmer { 
 
@@ -96,5 +98,23 @@ public class Stemmer {
     
     Comparator<String> longer = (a, b) -> a.length() > b.length() ? 1 : -1; 
     return stems.stream().min(longer);
+  }
+  
+  //-----------------------------------------------------------------------------------------------
+
+  /**
+   * Returns true if Wordnet contains the input word.
+   * @param word word to check
+   * @return true if Wordnet contains the word
+   */
+  public static final boolean contains(String word) {
+    
+    for (POS p : POS.values()) {
+      if (INSTANCE.dictionary.get().getIndexWord(word, p) != null) {
+        return true;
+      }
+    }
+    
+    return false;
   }
 }
