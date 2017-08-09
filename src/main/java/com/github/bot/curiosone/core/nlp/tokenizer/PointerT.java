@@ -6,60 +6,114 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
  * @author Andrea Rivitto && Eugenio Schintu
  * @see https://web.stanford.edu/class/cs276a/projects/docs/jwnl/javadoc/net/didion/jwnl/data/PointerType.html
  */
+
 public enum PointerT {
+
   /**
    * Antonym.
    */
-  ANTONYM, /**
+
+  ANTONYM,
+
+  /**
    * Attribute.
    */
-  ATTRIBUTE, /**
+
+  ATTRIBUTE,
+
+  /**
    * Cause.
    */
-  CAUSE, /**
+
+  CAUSE,
+
+  /**
    * Derived.
    */
-  DERIVED, /**
+
+  DERIVED,
+
+  /**
    * Entailed by.
    */
-  ENTAILED_BY, /**
+
+  ENTAILED_BY,
+
+  /**
    * Entailment.
    */
-  ENTAILMENT, /**
+
+  ENTAILMENT,
+
+  /**
    * Hyperonym.
    */
-  HYPERNYM, /**
+
+  HYPERNYM,
+
+  /**
    * Hyponym.
    */
-  HYPONYM, /**
+
+  HYPONYM,
+
+  /**
    * Member of holonym.
    */
-  MEMBER_HOLONYM, /**
+
+  MEMBER_HOLONYM,
+
+  /**
    * Member of meronym.
    */
-  MEMBER_MERONYM, /**
+
+  MEMBER_MERONYM,
+
+  /**
    * Part of holonym.
    */
-  PART_HOLONYM, /**
+
+  PART_HOLONYM,
+
+  /**
    * Part of meronym.
    */
-  PART_MERONYM, /**
+
+  PART_MERONYM,
+
+  /**
    * Participle of.
    */
-  PARTICIPLE_OF, /**
+
+  PARTICIPLE_OF,
+
+  /**
    * See also.
    */
-  SEE_ALSO, /**
+
+  SEE_ALSO,
+
+  /**
    * Similar.
    */
-  SIMILAR_TO, /**
+
+  SIMILAR_TO,
+
+  /**
    * Substance of holomyn.
    */
-  SUBSTANCE_HOLONYM, /**
+
+  SUBSTANCE_HOLONYM,
+
+  /**
    * Substanc of meronym.
    */
-  SUBSTANCE_MERONYM, /**
+
+  SUBSTANCE_MERONYM,
+
+  /**
    * Verb group.
    */
+
   VERB_GROUP
 }

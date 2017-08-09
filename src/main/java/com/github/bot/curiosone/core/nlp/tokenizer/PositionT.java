@@ -7,18 +7,24 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
  * @see Token
  */
 public enum PositionT {
+
   /**
    * The previous string of ELE.
-   *
    * @see #ELE
    */
-  PRE, /**
+
+  PRE,
+
+  /**
    * String to analyze.
    */
-  ELE, /**
+
+  ELE,
+
+  /**
    * The following string of ELE.
-   *
    * @see #ELE
    */
+
   POST
 }
