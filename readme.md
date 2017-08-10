@@ -40,8 +40,8 @@ The project comes with some useful tools that will help you automatize some comm
 To start developing you can follow the simple workflow described below.
 
 1. Develop a new feature with unit tests
-2. Run `gradle test`
-3. If tests fail, fix the code and go back to step 2
+2. Run `gradle check`
+3. If checks fail, fix the code and go back to step 2
 4. If you need to add more features, go back to step 1
 5. Run `gradle clean build`
 6. Open a new [Pull Request](https://github.com/curiosone-bot/curiosone-core/compare)
