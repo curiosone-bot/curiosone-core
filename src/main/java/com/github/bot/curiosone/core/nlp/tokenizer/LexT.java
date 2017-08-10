@@ -8,166 +8,318 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
  * @see https://wordnet.princeton.edu/man/lexnames.5WN.html
  * @see http://www.ucl.ac.uk/internet-grammar/wordclas/open.htm
  */
+
 public enum LexT {
+
   /**
    * All adjective/adverb.
    */
-  ALL, /**
+
+  ALL,
+
+  /**
    * Pertainyms: relational adjectives.
    */
-  PERT, /**
+
+  PERT,
+
+  /**
    * Unique beginner for nouns.
    */
-  TOPS, /**
+
+  TOPS,
+
+  /**
    * Nouns denoting acts or actions.
    */
-  ACT, /**
+
+  ACT,
+
+  /**
    * Nouns denoting animals.
    */
-  ANIMAL, /**
+
+  ANIMAL,
+
+  /**
    * Denoting man-made objects.
    */
-  ARTIFACT, /**
+
+  ARTIFACT,
+
+  /**
    * Nouns denoting attributes of people and objects.
    */
-  ATTRIBUTE, /**
+
+  ATTRIBUTE,
+
+  /**
    * As nuon: denoting body parts.
    * As verb: verbs of grooming, dressing and bodily care.
    */
-  BODY, /**
+
+  BODY,
+
+  /**
    * As noun: denoting cognitive processes and contents.
    * As verb: verbs of thinking, judging, analyzing, doubting.
    */
-  COGNITION, /**
+
+  COGNITION,
+
+  /**
    * As noun: denoting communicative processes and contents.
    * As verb: verbs of telling, asking, ordering, singing.
    */
-  COMMUNICATION, /**
+
+  COMMUNICATION,
+
+  /**
    * Nouns denoting natural events.
    */
-  EVENT, /**
+
+  EVENT,
+
+  /**
    * Nouns denoting feelings and emotions.
    */
-  FEELING, /**
+
+  FEELING,
+
+  /**
    * Nouns denoting foods and drinks.
    */
-  FOOD, /**
+
+  FOOD,
+  /**
    * Nouns denoting groupings of people or objects.
    */
-  GROUP, /**
+
+  GROUP,
+
+  /**
    * Nouns denoting spatial position.
    */
-  LOCATION, /**
+
+  LOCATION,
+
+  /**
    * Nouns denoting goals.
    */
-  MOTIVE, /**
+
+  MOTIVE,
+
+  /**
    * Nouns denoting natural objects (not man-made).
    */
-  OBJECT, /**
+
+  OBJECT,
+
+  /**
    * Nouns denoting people.
    */
-  PERSON, /**
+
+  PERSON,
+
+  /**
    * Nouns denoting natural phenomena.
    */
-  PHENOMENON, /**
+
+  PHENOMENON,
+
+  /**
    * Nouns denoting plants.
    */
-  PLANT, /**
+
+  PLANT,
+
+  /**
    * As noun: nouns denoting possession and transfer of possession.
    * As verb: verbs of buying, selling, owning.
    */
-  POSSESSION, /**
+
+  POSSESSION,
+
+  /**
    * Nouns denoting natural processes.
    */
-  PROCESS, /**
+
+  PROCESS,
+
+  /**
    * Nouns denoting quantities and units of measure determiners
    * before a noun (all,both,many,each,every,several,few,enough,no).
    */
-  QUANTITY, /**
+
+  QUANTITY,
+
+  /**
    * Nouns denoting relations between people or things or ideas.
    */
-  RELATION, /**
+
+  RELATION,
+
+  /**
    * Nouns denoting two and three dimensional shapes.
    */
-  SHAPE, /**
+
+  SHAPE,
+
+  /**
    * Nouns denoting stable states of affairs.
    */
-  STATE, /**
+
+  STATE,
+
+  /**
    * Nouns denoting substances.
    */
-  SUBSTANCE, /**
+
+  SUBSTANCE,
+
+  /**
    * Nouns denoting time and temporal relations.
    */
-  TIME, /**
+
+  TIME,
+
+  /**
    * Verbs of size, temperature change, intensifying, etc.
    */
-  CHANGE, /**
+
+  CHANGE,
+
+  /**
    * Verbs of fighting, athletic activities.
    */
-  COMPETITION, /**
+
+  COMPETITION,
+
+  /**
    * Verbs of eating and drinking.
    */
-  CONSUMPTION, /**
+
+  CONSUMPTION,
+
+  /**
    * Verbs of touching, hitting, tying, digging.
    */
-  CONTACT, /**
+
+  CONTACT,
+
+  /**
    * Verbs of sewing, baking, painting, performing.
    */
-  CREATION, /**
+
+  CREATION,
+
+  /**
    * Verbs of feeling.
    */
-  EMOTION, /**
+
+  EMOTION,
+
+  /**
    * Verbs of walking, flying, swimming.
    */
-  MOTION, /**
+
+  MOTION,
+
+  /**
    * Verbs of seeing, hearing, feeling.
    */
-  PERCEPTION, /**
+
+  PERCEPTION,
+
+  /**
    * Verbs of political and social activities and events.
    */
-  SOCIAL, /**
+
+  SOCIAL,
+
+  /**
    * Verbs of being, having, spatial relations.
    */
-  STATIVE, /**
+
+  STATIVE,
+
+  /**
    * Verbs of raining, snowing, thawing, thundering.
    */
-  WEATHER, /**
-   * Participial adjectives.
+
+  WEATHER,
+
+  /**
+   * Participal adjectives.
    */
-  ADJ_PPL, /**
-   * i, you, he, she, it, we, you, they.
+
+  ADJ_PPL,
+
+  /**
+   * I, You, He, She, It, We, You, They.
    */
-  PERSONAL_SUBJECTIVE, /**
+
+  PERSONAL_SUBJECTIVE,
+
+  /**
    * me, you, him, her, it, us, you, them.
    */
-  PERSONAL_OBJECTIVE, /**
+
+  PERSONAL_OBJECTIVE,
+
+  /**
    * mine, yours, his, hers, ours, theirs.
    */
-  POSSESSIVE, /**
+
+  POSSESSIVE,
+
+  /**
    * myself, yourself, himself, herself, itself, oneself, ourselves, yourselves, themselves.
    */
-  REFLEXIVE, /**
+
+  REFLEXIVE,
+
+  /**
    * each other, one another.
    */
-  RECIPROCAL, /**
+
+  RECIPROCAL,
+
+  /**
    * that, which, who, whose, whom, where, when.
    */
-  RELATIVE, /**
+
+  RELATIVE,
+
+  /**
    * this, that, these, those.
    */
-  DEMONSTRATIVE, /**
+
+  DEMONSTRATIVE,
+
+  /**
    * who, what, why, where, when, whatever.
    */
-  INTERROGATIVE, /**
+
+  INTERROGATIVE,
+
+  /**
    * As pronouns: anything, anybody, anyone, something,
    * somebody, someone, nothing, nobody, none, no one.
    * As determiners: a, an.
    */
-  INDEFINITE, /**
+
+  INDEFINITE,
+
+  /**
    * The.
    */
-  DEFINITE, /**
+
+  DEFINITE,
+
+  /**
    * before a noun (any, that, those, this, some, whatever, whichever).
    */
+
   OTHER
 }
