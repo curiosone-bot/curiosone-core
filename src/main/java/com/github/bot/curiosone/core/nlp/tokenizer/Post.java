@@ -3,37 +3,111 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
 /**
  * Part Of Speech (POS) type.
  *
- * @author Andrea Rivetto && Eugenio Schintu
+ * @author Andrea Rivitto && Eugenio Schintu
  * @see https://en.oxforddictionaries.com/grammar/word-classes-or-parts-of-speech
  */
 
 public enum Post {
+
+  /**
+   * Nominal part.
+   */
+
+  NP,
+
+  /**
+   * Verbal part.
+   */
+
+  VP,
+
+  /**
+   * Adjective.
+   */
+
+  ADJ,
+
+  /**
+   * Adverb.
+   */
+
+  ADV,
+
+  /**
+   * Pronoun.
+   */
+
+  PRON,
+
+  /**
+   * Preposition.
+   */
+
+  PREP,
+
+  /**
+   * Comjunction.
+   */
+
+  CONJ,
+
+  /**
+   * Determiner.
+   */
+
+  DET,
+
+  /**
+   * Verb preposition phrase.
+   */
+
+  VPP,
+
   /**
    * Noun.
    */
-  NOUN, /**
+
+  N,
+
+  /**
+   * Noun preposition phrase.
+   */
+
+  NPP,
+
+  /**
+   * Negation.
+   */
+
+  NEG,
+
+  /**
    * Verb.
    */
-  VERB, /**
-   * Adjective.
+
+  V,
+
+  /**
+   * Number.
    */
-  ADJECTIVE, /**
-   * Adverb.
+
+  NUMB,
+
+  /**
+   * Adjective Phrase.
    */
-  ADVERB, /**
-   * Pronoun.
+
+  AP,
+
+  /**
+   * Sentence.
    */
-  PRONOUM, /**
-   * Preposition.
+
+  S,
+
+  /**
+   * Adjective preposition phrase.
    */
-  PREPOSITION, /**
-   * Comjunction.
-   */
-  CONJUNCTION, /**
-   * Determiner.
-   */
-  DETERMINER, /**
-   * Interjection.
-   */
-  INTERJECTION
+
+  APP
 }
