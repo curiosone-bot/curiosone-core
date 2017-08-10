@@ -1,5 +1,4 @@
 package com.github.bot.curiosone.core.knowledge.Interfaces;
-import semantic_network.*;
 
 /**
  * Arco del grafo
