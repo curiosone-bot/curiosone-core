@@ -15,6 +15,17 @@ public class Main {
     assertTrue("run".equals(Stemmer.search("running").get()));
     assertTrue("woman".equals(Stemmer.search("women").get()));
     assertTrue("goose".equals(Stemmer.search("geese").get()));
+    
+    /* REQUIRES WORKING KEY
+      
+    System.out.println("\nrun\n");
+    Fetcher.getTypes("run").forEach(System.out::println);
+    System.out.println("\nwoman\n");
+    Fetcher.getTypes("woman").forEach(System.out::println);
+    System.out.println("\ngoose\n");
+    Fetcher.getTypes("goose").forEach(System.out::println);
+    
+    */
   }
   
   //-----------------------------------------------------------------------------------------------

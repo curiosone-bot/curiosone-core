@@ -1,27 +1,42 @@
 package com.github.bot.curiosone.core.wordfetcher;
 
+import it.uniroma1.lcl.babelnet.BabelNet;
+import it.uniroma1.lcl.babelnet.BabelSynset;
+import it.uniroma1.lcl.babelnet.data.BabelPOS;
+import it.uniroma1.lcl.jlt.util.Language;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Fetcher {
 
   /**
-   * wip.
-   * @param word aaa
+   * Returns a list of sysnsets of a word.
+   * @param word input word
+   * @return list of synsets
    */
-  public static void fetch(String word) {
-    
-    String stem = Stemmer.search(word).get();
-    /*
-    //init
+  public static final List<BabelSynset> getSynsets(String word) {
+        
     BabelNet bn = BabelNet.getInstance();
+        
+    try {
+      return bn.getSynsets(word, Language.EN);
+    } catch (Exception e) {
+      return new ArrayList<>();
+    }
+  }
+  
+  /**
+   * Return the possible part of speech for a given word.
+   * @param word input
+   * @return list of POSs
+   */
+  public static final List<BabelPOS> getTypes(String word) {
     
-    //synsets
-    List<BabelSynset> syl = bn.getSynsets(w, Language.EN, BabelPOS.VERB, BabelSenseSource.WN);      
-    
-    //senses
-    List<BabelSense>  sel = new ArrayList<>();
-    syl.forEach(sy -> sel.add(sy.getMainSense(Language.EN)));
-    
-    
-    sel.forEach(se -> System.out.println(se)); // <- DELETE ME
-    */
+    return Fetcher.getSynsets(word).stream()
+        .map(BabelSynset::getPOS)
+        .distinct()
+        .collect(Collectors.toList());
   }
 }
