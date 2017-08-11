@@ -3,6 +3,8 @@ package com.github.bot.curiosone.core.knowledge.Interfaces;
 import java.util.Collection;
 import java.util.Set;
 
+import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
+
 /**
  * Interfaccia che rappresenta un grafo
  * @author navigli

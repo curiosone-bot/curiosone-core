@@ -1,5 +1,7 @@
 package com.github.bot.curiosone.core.knowledge.Interfaces;
 
+import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
+
 /**
  * Arco del grafo
  * @author navigli
