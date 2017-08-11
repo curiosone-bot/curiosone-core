@@ -18,7 +18,7 @@ public class HTMLGraphExporter implements GraphExporter
 	/**
 	 * utilizzo uno stringBuffer per leggere il contenuto del file test.html che poi dovrò andare a modificare
 	 * utilizzo un'array per spezzare il file in 3 parti e di queste 3 andrò a sostituire quella al centro con il JSON
-	 * da me creato, infine salverò il nuovi file.
+	 * da me creato, infine salvero il nuovi file.
 	 */
 	@Override
 	public String export(Graph g) {

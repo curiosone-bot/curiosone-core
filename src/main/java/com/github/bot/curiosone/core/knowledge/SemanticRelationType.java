@@ -7,10 +7,10 @@ package com.github.bot.curiosone.core.knowledge;
 public enum SemanticRelationType
 {
 	/** Identificatori univoci dell'enumerazioni */
-	HYPERONYM,		// è un iperonimo                
-	ANTONYM,		// è il contrario di
-	HYPONYM,		// è un iponimo
-	MERONYM_PART,	// è parte di 
+	HYPERONYM,		// e' un iperonimo                
+	ANTONYM,		// e' il contrario di
+	HYPONYM,		// e' un iponimo
+	MERONYM_PART,	// e' parte di 
 	SIMILIAR_TO,	// simile a
 	USAGE,			// viene usato per
 	TIME,			// Data

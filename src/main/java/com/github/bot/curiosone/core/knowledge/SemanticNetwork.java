@@ -13,6 +13,14 @@ import java.util.stream.Collectors;
 import com.github.bot.curiosone.core.knowledge.Interfaces.Edge;
 import com.github.bot.curiosone.core.knowledge.Interfaces.Graph;
 import com.github.bot.curiosone.core.knowledge.Interfaces.Vertex;
+
+import it.uniroma1.lcl.babelnet.BabelNet;
+import it.uniroma1.lcl.babelnet.BabelSense;
+import it.uniroma1.lcl.babelnet.BabelSynset;
+import it.uniroma1.lcl.babelnet.BabelSynsetIDRelation;
+import it.uniroma1.lcl.babelnet.BabelSynsetSource;
+import it.uniroma1.lcl.babelnet.iterators.BabelSynsetIterator;
+import it.uniroma1.lcl.jlt.util.Language;
 /**
  * 
  * @author Christian
@@ -113,7 +121,7 @@ private Map<Vertex,Set<Edge>> grafo;
 	@Override
 	public void add(Edge e) {addEdge(e.getSource(), e.getTarget(), e.getType());}  // richiamo di un metodo con spacchettamento
 	/**																				// del parametro
-	 * aggiungo un vertice senza archi se non è già presente
+	 * aggiungo un vertice senza archi se non e' gia presente
 	 */
 	@Override
 	public void add(Vertex v) {
@@ -124,7 +132,7 @@ private Map<Vertex,Set<Edge>> grafo;
 		}
 	}
 	/**
-	 * aggiungo un'arco e se in vertice dell'arco non sono presenti li crea
+	 * aggiungo un'arco e se i vertici dell'arco non sono presenti li crea
 	 */
 	@Override
 	public void addEdge(Vertex v1, Vertex v2, SemanticRelationType type) {

@@ -14,7 +14,7 @@ import com.github.bot.curiosone.core.knowledge.Interfaces.Vertex;
  */
 public class JSONGraphExporter implements GraphExporter{
 	/**
-	 *  tramite uno stringBuffer creo la stringa necessaria che servirà poi 
+	 *  tramite uno stringBuffer creo la stringa necessaria che servira poi 
 	 *  per creare l'html del grafo scegliendo randomicamente il colore 
 	 *  e facendo la stessa procedura per tutti i grafi e tutti i vertici
 	 */
