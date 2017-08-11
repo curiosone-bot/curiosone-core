@@ -8,32 +8,67 @@
 
 // Apply the java-library plugin to add support for Java Library
 
+plugins {
+  id "com.github.sherter.google-java-format" version "0.6"
+}
+
 apply plugin: 'java'
 apply plugin: 'java-library'
 apply plugin: 'jacoco'
+apply plugin: 'checkstyle'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
-    // Use jcenter for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+  // Use jcenter for resolving your dependencies.
+  // You can declare any Maven/Ivy/file repository here.
+  jcenter()
+  mavenCentral()
+  flatDir {
+    dirs 'libs'
+  }
 }
 
 javadoc {
-    source = sourceSets.main.allJava
-    classpath = configurations.compile
+  source = sourceSets.main.allJava
+  classpath = configurations.compile
 }
 
 dependencies {
-    // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+  // Use JUnit test framework
+  testImplementation 'junit:junit:4.12'
+  compile name: 'edu.mit.jwi_2.4.0'
+  compile name: 'babelnet-api-3.7'
+  compile name: 'commons-beanutils-1.7.0'
+  compile name: 'commons-beanutils-core-1.7.0'
+  compile name: 'commons-codec-1.8'
+  compile name: 'commons-collections-3.2'
+  compile name: 'commons-configuration-1.5'
+  compile name: 'commons-digester-1.8'
+  compile name: 'commons-lang-2.3'
+  compile name: 'commons-logging-1.2'
+  compile name: 'gson-2.2.4'
+  compile name: 'guava-18.0'
+  compile name: 'httpclient-4.3.6'
+  compile name: 'httpcore-4.3.3'
+  compile name: 'icu4j-56.1'
+  compile name: 'jltutils-2.2'
+  compile name: 'log4j-api-2.1'
+  compile name: 'log4j-core-2.1'
+  compile name: 'lucene-core-4.9.0'
+  compile name: 'lucene-queryparser-4.9.0'
 }
 
 jacocoTestReport {
-    reports {
-        xml.enabled true
-        html.enabled false
-    }
+  reports {
+    xml.enabled true
+    html.enabled false
+  }
 }
 
+checkstyle {
+  showViolations = true
+  toolVersion ="8.1"
+}
+
+check.dependsOn -= tasks['verifyGoogleJavaFormat']
 check.dependsOn jacocoTestReport
