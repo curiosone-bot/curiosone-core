@@ -7,7 +7,7 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
  * @see https://en.oxforddictionaries.com/grammar/word-classes-or-parts-of-speech
  */
 
-public enum Post {
+public enum PosT {
 
   /**
    * Nominal part.
@@ -46,7 +46,7 @@ public enum Post {
   PREP,
 
   /**
-   * Comjunction.
+   * Conjunction.
    */
 
   CONJ,
@@ -109,5 +109,11 @@ public enum Post {
    * Adjective preposition phrase.
    */
 
-  APP
+  APP,
+
+  /**
+   * Unknown.
+   */
+
+  UNKN
 }

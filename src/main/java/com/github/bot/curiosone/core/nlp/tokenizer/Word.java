@@ -1,17 +1,20 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.ISynset;
+import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord;
+
+import edu.mit.jwi.item.IWordID;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Syntax/Semantic information of a Word.
  *
  * @author Andrea Rivitto && Eugenio Schintu
- * @see ISynset
+ * @see IWord
  */
-public class Synset implements ISynset {
+public class Word implements IWord {
 
   /**
    * Part of speech.
@@ -19,7 +22,7 @@ public class Synset implements ISynset {
    * @see POST
    */
 
-  private Post pos;
+  private PosT pos;
 
   /**
    * Lexicographic file name.
@@ -38,9 +41,30 @@ public class Synset implements ISynset {
   private String lemma;
 
   /**
+   * IWordID.
+   *
+   * @see IWordID
+   */
+
+  private IWordID wordID;
+  
+  /**
    * Glossary information.
    */
+
   private String gloss;
+
+  /**
+   * Semantic relation with other word.
+   *
+   * @see PointerT
+   */
+
+  /**
+   * Number of occurrence 
+   *
+   */
+  private int number;
 
   /**
    * Semantic relation with other word.
@@ -51,14 +75,35 @@ public class Synset implements ISynset {
   private Map<PointerT, List<String>> relations;
 
   /**
+   * Get WordID.
+   *
+   * @return the WordID
+   * @see #IWordID
+   */
+
+  @Override public IWordID getWordID() {
+	    return wordID;
+  }
+
+  /**
+   * Set a new {@link #wordID} value that is provided in input.
+   *
+   * @see #wordID
+   */
+
+  public void setWordID(IWordID wordID) {
+    this.wordID = wordID;
+  }
+
+  /**
    * Get pos.
    *
    * @return the pos
    * @see #pos
    */
 
-  @Override public Post getPost() {
-    return pos;
+  @Override public PosT getPos() {
+	    return pos;
   }
 
   /**
@@ -67,7 +112,7 @@ public class Synset implements ISynset {
    * @see #pos
    */
 
-  public void setPos(Post pos) {
+  public void setPos(PosT pos) {
     this.pos = pos;
   }
 
@@ -88,7 +133,7 @@ public class Synset implements ISynset {
    * @see #lexType
    */
 
-  public void setLexType(LexT lexType) {
+  @Override public void setLexType(LexT lexType) {
     this.lexType = lexType;
   }
 
@@ -109,7 +154,7 @@ public class Synset implements ISynset {
    * @see #lemma
    */
 
-  public void setLemma(String lemma) {
+  @Override public void setLemma(String lemma) {
     this.lemma = lemma;
   }
 
@@ -128,8 +173,24 @@ public class Synset implements ISynset {
    *
    * @see #gloss
    */
-  public void setGloss(String gloss) {
+  @Override public void setGloss(String gloss) {
     this.gloss = gloss;
+  }
+
+  /**
+   * Get the number of occurrence.
+   *
+   */
+  @Override public int getNum() {
+    return this.number;
+  }
+
+  /**
+   * Set the number of occurrence of word.
+   *
+   */
+  @Override public void setNum(int num) {
+    this.number = num;
   }
 
   /**
@@ -138,17 +199,54 @@ public class Synset implements ISynset {
    * @return the relations
    * @see #relations
    */
-  public Map<PointerT, List<String>> getRelations() {
+  @Override public Map<PointerT, List<String>> getRelations() {
     return relations;
   }
 
   /**
-   * Add a new element to reletions.
+   * Add a new element to relations.
    *
    * @see #relations
    */
 
-  public void addRelation(PointerT p, List<String> value) {
-    this.relations.put(p, value);
+  @Override public void addRelation(PointerT p, List<String> value) {
+	  this.relations.put(p, value);
   }
+
+  /**
+   * Set the map of relations.
+   *
+   * @see #relations
+   */
+
+  @Override public void setRelations(Map<PointerT, List<String>> relations) {
+	  this.relations.clear();
+	  this.relations.putAll(relations);
+  }
+
+  /**
+   * toString.
+   *
+   */
+
+  @Override public String toString() {
+	return "WordID=" + this.wordID 
+			+ " Lemma=" + this.lemma
+			+ " POS=" + this.pos
+			+ " LextT=" + this.lexType
+			+ " Gloss=" + this.gloss
+			+ " Occurrence=" + this.number;
+  }
+  
+  @Override public boolean equals(Object obj) {
+	  if (obj == null || !(obj instanceof Word)) return false;
+	  if (obj == this) return true;
+	  Word w = (Word) obj;
+	  return this.getWordID().equals(w.getWordID());
+  }
+	
+  @Override public int hashCode() {
+	  return Objects.hash(getGloss());
+  }
+  
 }
