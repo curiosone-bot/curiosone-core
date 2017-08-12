@@ -362,10 +362,18 @@ public class Tokenizer {
     return inputUser.toString();
   }
 
+  /**
+   * Get {@link #stringToken}.
+   * @return {@link #stringToken}
+   */
   public List<String> getStringToken() {
     return stringToken;
   }
 
+  /**
+   * Add a new element to {@link #stringToken}.
+   * @param stringToken element to add to {@link #stringToken}
+   */
   public void addStringToken(String stringToken) {
     this.stringToken.add(stringToken);
   }
