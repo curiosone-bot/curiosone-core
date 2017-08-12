@@ -1,45 +1,58 @@
 package com.github.bot.curiosone.core.nlp.tokenizer.interfaces;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.Word;
+import com.github.bot.curiosone.core.nlp.tokenizer.LexT;
+import com.github.bot.curiosone.core.nlp.tokenizer.PointerT;
+import com.github.bot.curiosone.core.nlp.tokenizer.Post;
+import com.github.bot.curiosone.core.nlp.tokenizer.Synset;
 
 import java.util.List;
+import java.util.Map;
 
 /**
- * Word info from Dictionary.
+ * Syntact/Semantic attribute of a word.
  *
- * @author Andrea Rivetto && Eugenio Schintu
+ * @author Andrea Rivitto && Eugenio Schintu
+ * @see https://projects.csail.mit.edu/jwi/api/index.html
  */
-public interface IWord {
+public interface ISynset {
 
   /**
-   * Get value.
+   * Get pos.
    *
-   * @see Word#getValue()
+   * @see Synset#getPost()
    */
 
-  String getValue();
+  Post getPost();
 
   /**
-   * Get synsets.
+   * Get lexType.
    *
-   * @see Word#getSynsets()
+   * @see Synset#getLexType()
    */
 
-  List<ISynset> getSynsets();
+  LexT getLexType();
 
   /**
    * Get lemma.
    *
-   * @see Word#getLemma()
+   * @see Synset#getLemma()
    */
 
   String getLemma();
 
   /**
-   * Get known.
+   * Get gloss.
    *
-   * @see Word#isKnown()
+   * @see Synset#getGloss()
    */
 
-  boolean isKnown();
+  String getGloss();
+
+  /**
+   * Get relations.
+   *
+   * @see Synset#getRelations()
+   */
+
+  Map<PointerT, List<String>> getRelations();
 }

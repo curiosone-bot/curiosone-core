@@ -1,82 +1,95 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
 import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.ISynset;
-import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord;
 
 import java.util.List;
+import java.util.Map;
 
 /**
- * Word attribute and relative Synset.
+ * Syntax/Semantic information of a Word.
  *
  * @author Andrea Rivitto && Eugenio Schintu
- * @see IWord
- * @see Synset
+ * @see ISynset
  */
+public class Synset implements ISynset {
 
-public class Word implements IWord {
   /**
-   * Value of the single word in the original Sentence.
+   * Part of speech.
    *
-   * @see Sentence
+   * @see POST
    */
-  private String value;
+
+  private Post pos;
+
   /**
-   * Various semantic informations' list.
+   * Lexicographic file name.
    *
-   * @see Synset
-   * @see ISynset
+   * @see LexT
    */
-  private List<ISynset> synsets;
+
+  private LexT lexType;
+
   /**
-   * Flag used to verify if we have found a corrispondence in dictonary.
+   * Lemma of word.
+   *
+   * @see Word
    */
-  private boolean known;
-  /**
-   * Lemma of a specific word.
-   */
+
   private String lemma;
 
   /**
-   * Constructor.
+   * Glossary information.
+   */
+  private String gloss;
+
+  /**
+   * Semantic relation with other word.
+   *
+   * @see PointerT
    */
 
-  public Word(String value, boolean known, String lemma) {
-    this.value = value;
-    this.known = known;
-    this.lemma = lemma;
+  private Map<PointerT, List<String>> relations;
+
+  /**
+   * Get pos.
+   *
+   * @return the pos
+   * @see #pos
+   */
+
+  @Override public Post getPost() {
+    return pos;
   }
 
   /**
-   * Get value.
+   * Set a new {@link #pos} value that is provided in input.
    *
-   * @return the value
-   * @see #value
+   * @see #pos
    */
 
-  @Override public String getValue() {
-    return value;
+  public void setPos(Post pos) {
+    this.pos = pos;
   }
 
   /**
-   * Get known.
+   * Get lexType.
    *
-   * @return the known
-   * @see #known
+   * @return lexType
+   * @see #lexType
    */
 
-  @Override public boolean isKnown() {
-    return known;
+  @Override public LexT getLexType() {
+    return lexType;
   }
 
   /**
-   * Get synsets.
+   * Set a new {@link #lexType} value that is provided in input.
    *
-   * @return the List of Synset
-   * @see #synsets
+   * @see #lexType
    */
 
-  @Override public List<ISynset> getSynsets() {
-    return synsets;
+  public void setLexType(LexT lexType) {
+    this.lexType = lexType;
   }
 
   /**
@@ -91,26 +104,6 @@ public class Word implements IWord {
   }
 
   /**
-   * Set a new {@link #known} value that is provided in input.
-   *
-   * @see #known
-   */
-
-  public void setKnown(boolean known) {
-    this.known = known;
-  }
-
-  /**
-   * Set a new {@link #value} value that is provided in input.
-   *
-   * @see #value
-   */
-
-  public void setValue(String value) {
-    this.value = value;
-  }
-
-  /**
    * Set a new {@link #lemma} value that is provided in input.
    *
    * @see #lemma
@@ -121,12 +114,41 @@ public class Word implements IWord {
   }
 
   /**
-   * Add to {@link #synset} a new instance of Synset.
+   * Get gloss.
    *
-   * @see #synsets
+   * @return the gloss
+   * @see #gloss
+   */
+  @Override public String getGloss() {
+    return gloss;
+  }
+
+  /**
+   * Set a new {@link #gloss} value that is provided in input.
+   *
+   * @see #gloss
+   */
+  public void setGloss(String gloss) {
+    this.gloss = gloss;
+  }
+
+  /**
+   * Get relations.
+   *
+   * @return the relations
+   * @see #relations
+   */
+  public Map<PointerT, List<String>> getRelations() {
+    return relations;
+  }
+
+  /**
+   * Add a new element to reletions.
+   *
+   * @see #relations
    */
 
-  public void addSynset(ISynset synset) {
-    this.synsets.add(synset);
+  public void addRelation(PointerT p, List<String> value) {
+    this.relations.put(p, value);
   }
 }
