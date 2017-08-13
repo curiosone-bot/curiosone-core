@@ -1,4 +1,3 @@
-<a name="cc"/>
 # curiosone-core
 This repo contains part of the source code of the [Curiosone](https://github.com/curiosone-bot/curiosone) chatbot project.
 
@@ -8,11 +7,14 @@ This repo contains part of the source code of the [Curiosone](https://github.com
 
 
 # 📕 Table of contents
-- 💻 __Get Started__
-- 👾 __Dependencies__
-- 🍹 __Gradle__
-- 👔 __Code Style__
-- ⏳ __Basic Workflow__
+- [🖤 __Curiosone Core__](#curiosone-core)
+- [💻 __Get Started__](#-get-started)
+- [👾 __Dependencies__](#-dependencies)
+- [🍹 __Gradle__](#-gradle)
+- [👔 __Code Style__](#-code-style)
+    - [_Eclipse_](#eclipse)
+    - [_IntelliJ_](#intellij)
+- [⏳ __Basic Workflow__](#-basic-workflow)
 
 
 # 💻 Get Started
