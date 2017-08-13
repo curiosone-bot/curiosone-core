@@ -7,7 +7,7 @@ This repo contains part of the source code of the [Curiosone](https://github.com
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 
-## 📕 Table of contents
+# 📕 Table of contents
 - [curiosone-core](#c)
 - [💻 Get Started](#gs)
 - [👾 Dependencies](#d)
@@ -15,11 +15,11 @@ This repo contains part of the source code of the [Curiosone](https://github.com
 - [👔 Code Style](#cs)
 - [⏳ Basic Workflow](#bw)
 
-<a name="gs"/>  
-## 💻 Get Started
+<a name="gs">
+# 💻 Get Started
 Clone the repository to your local machine then cd into
 the directory that was created by the cloning.
-
+</a>
 ```
 git clone https://github.com/curiosone-bot/curiosone-core.git
 cd curiosone-core
