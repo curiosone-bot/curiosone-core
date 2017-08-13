@@ -15,7 +15,7 @@ This repo contains part of the source code of the [Curiosone](https://github.com
 - [👔 Code Style](#cs)
 - [⏳ Basic Workflow](#bw)
 
-<a name="gs"/>
+<a name="gs"/>  
 ## 💻 Get Started
 Clone the repository to your local machine then cd into
 the directory that was created by the cloning.
