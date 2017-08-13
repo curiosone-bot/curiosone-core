@@ -8,25 +8,23 @@ This repo contains part of the source code of the [Curiosone](https://github.com
 
 
 # 📕 Table of contents
-- [curiosone-core](#c)
-- [💻 Get Started](#gs)
-- [👾 Dependencies](#d)
-- [🍹 Gradle](#g)
-- [👔 Code Style](#cs)
-- [⏳ Basic Workflow](#bw)
+- 💻 __Get Started__
+- 👾 __Dependencies__
+- 🍹 __Gradle__
+- 👔 __Code Style__
+- ⏳ __Basic Workflow__
 
-<a name="gs">
+
 # 💻 Get Started
 Clone the repository to your local machine then cd into
 the directory that was created by the cloning.
-</a>
+
 ```
 git clone https://github.com/curiosone-bot/curiosone-core.git
 cd curiosone-core
 ```
 
 
-<a name="d"/>
 # 👾 Dependencies
 If you don't have them already, you need to install some prerequisites:
 
@@ -38,7 +36,6 @@ If you don't have them already, you need to install some prerequisites:
 * [GitHub Desktop](https://desktop.github.com/) (optional)
 
 
-<a name="g"/>
 # 🍹 Gradle
 The project comes with some useful tools that will help you automatize some common tasks:
 
@@ -48,7 +45,6 @@ The project comes with some useful tools that will help you automatize some comm
 * `gradle javadoc` to generate the javadoc
 
 
-<a name="cs"/>
 # 👔 Code Style
 This project embraces [Google Java Code Style](https://google.github.io/styleguide/javaguide.html).
 Make sure to activate the Checkstyle plugin correctly:
@@ -70,7 +66,6 @@ From now on, `Code -> Reformat Code` to automatically fix code style errors.
 __Always double check__ if your code is free from code style errors, using `gradle check`.
 
 
-<a name="bw"/>
 # ⏳ Basic Workflow
 To start developing you can follow the simple workflow described below.
 
