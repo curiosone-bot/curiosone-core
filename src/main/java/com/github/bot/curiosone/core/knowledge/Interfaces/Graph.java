@@ -10,8 +10,7 @@ import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
  * @author navigli
  *
  */
-public interface Graph
-{
+public interface Graph{
 	/**
 	 * Aggiunge un arco
 	 * @param e l'arco da aggiungere

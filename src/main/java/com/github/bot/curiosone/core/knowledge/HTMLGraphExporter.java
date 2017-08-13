@@ -37,10 +37,10 @@ public class HTMLGraphExporter implements GraphExporter
 		finale.append(text_exporter.export(g)+"\n");               // aggiungo il json da me creato
 		finale.append(pezzi[2]); 									// aggiungo la parte finale
 		try{
-			 PrintWriter writer = new PrintWriter("resources/text3.html", "UTF-8");		//
-			    writer.println(finale.toString());											//  salvo il file
-			    writer.close();																//
-			} 
+		    PrintWriter writer = new PrintWriter("resources/text3.html", "UTF-8");		//
+		    writer.println(finale.toString());
+		    writer.close();
+		    } 
 		catch (IOException e){e.printStackTrace();}
 		//return finale.toString();
 		return "ciao";

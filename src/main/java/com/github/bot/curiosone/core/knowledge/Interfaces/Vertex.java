@@ -5,8 +5,7 @@ package com.github.bot.curiosone.core.knowledge.Interfaces;
  * @author navigli
  *
  */
-public interface Vertex
-{
+public interface Vertex{
 	/**
 	 * Identificativo univoco del vertice
 	 * @return l'identificativo del vertice

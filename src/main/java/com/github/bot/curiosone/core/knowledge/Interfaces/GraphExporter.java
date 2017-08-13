@@ -6,8 +6,7 @@ package com.github.bot.curiosone.core.knowledge.Interfaces;
  *
  */
 @FunctionalInterface
-public interface GraphExporter
-{
+public interface GraphExporter{
 	/**
 	 * Restituisce la stringa che rappresenta il grafo in input
 	 * @param g il grafo in input

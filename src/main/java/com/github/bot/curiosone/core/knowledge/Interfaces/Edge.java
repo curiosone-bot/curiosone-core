@@ -7,8 +7,7 @@ import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
  * @author navigli
  *
  */
-public interface Edge
-{
+public interface Edge{
 	/**
 	 * Restituisce il vertice di partenza
 	 * @return vertice di partenza
