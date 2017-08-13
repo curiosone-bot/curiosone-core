@@ -81,6 +81,5 @@ public interface Graph{
 	 * @param token vertice del quale cercare il significato collegato
 	 * @return vertice collegato se presente
 	 */
-	Vertex search(SemanticRelationType tipo, String token);
-		
+	Vertex search(SemanticRelationType tipo, String token);		
 }
