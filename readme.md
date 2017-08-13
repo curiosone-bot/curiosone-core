@@ -8,7 +8,7 @@ This repo contains part of the source code of the [Curiosone](https://github.com
 
 ## 📕 Table of contents
 - [curiosone-core](#curiosone-core)
-  * [💻 Get Started](#---get-started)
+- [💻 Get Started](#💻-Get-Started)
 - [👾 Dependencies](#---dependencies)
 - [🍹 Gradle](#---gradle)
 - [👔 Code Style](#---code-style)
