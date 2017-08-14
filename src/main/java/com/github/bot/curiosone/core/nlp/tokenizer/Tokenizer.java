@@ -20,12 +20,6 @@ public class Tokenizer {
   private StringBuilder inputUser;
 
   /**
-   * String that at the beginnig is equals to {@link #iu},
-   * but it will be modified.
-   */
-  private StringBuilder iu;
-
-  /**
    * Typology of Sentence.
    * @see SentenceT
    */
@@ -39,17 +33,11 @@ public class Tokenizer {
   private List<IToken> tokens;
 
   /**
-   * Alphanumeric values' list.
+   * First form of {@link #tokens}: a list of single word cleaned from any punctuation error
+   * or any blank space error.
    */
 
-  private final List<String> alphaNum = Arrays.asList("a","b","c","d","e","f","g","h","j","k","i",
-      "l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5",
-      "6", "7","8","9","0");
-
-  /**
-   * List of common ends of email address.
-   */
-  private final List<String> email = Arrays.asList(".com", ".net", ".it ", ".org");
+  private List<String> stringToken;
 
   /**
    * Constructor.
@@ -58,9 +46,9 @@ public class Tokenizer {
 
   public Tokenizer(String input) {
     inputUser = new StringBuilder(input);
-    iu = new StringBuilder(input);
     type = null;
     tokens = new ArrayList<IToken>();
+    stringToken = new ArrayList<String>();
   }
 
   /**
@@ -70,218 +58,300 @@ public class Tokenizer {
 
   public Sentence getSentence() {
     checkSentence();
-    checkPunct();
+    stringToken = Arrays.asList(checkPunct().toString().split(" "));
     createListOfTokens();
     return new Sentence(getType(), getInputUser(), getTokens());
   }
 
   /**
-   * Detected in the {@link #input} if there is more than one sentence, and if it contains more
+   * Detected in the {@link #inputUser} if there is more than one sentence, and if it contains more
    * than one sentence, {@link #type} has a special value.
-   * Also checks if the {@link #input} string is a question or an affirmation/answer.
-   * @return type as a special value
+   * Also checks if the {@link #inputUser} string is a question or an affirmation/answer.
+   * @return {@link #type}
    */
+
   public SentenceT checkSentence() {
-    for (int i = 0; i < iu.length(); i++) {
-      if (i < iu.length() - 2) {
-        if (!alphaNum.contains(("" + iu.charAt(i)).toLowerCase())) {
-          switch ("" + iu.charAt(i)) {
-            case ".":
-              setType(SentenceT.MORE_SENTENCE);
-              return getType();
+    for (int i = 0; i < inputUser.length(); i++) {
+      if (isSpecial(inputUser.charAt(i))) {
+        if (i < inputUser.length() - 2) {
+          switch ("" + inputUser.charAt(i)) {
             case "?":
               setType(SentenceT.MORE_SENTENCE);
               return getType();
             case "!":
               setType(SentenceT.MORE_SENTENCE);
               return getType();
+            case ".":
+              setType(verifyPunct(i));
+              break;
             default:
               continue;
           }
+        } else {
+          setType(checkType());
+          break;
         }
-      } else {
-        setType(checkType());
       }
     }
     return getType();
   }
 
   /**
-   * Checks if the {@link #input} string is a question or an affirmation/answer.
-   * @return type of sentence
-  * @see SentenceT
-  */
-
-  private SentenceT checkType() {
-    return iu.charAt(iu.length() - 1) == '?'
-         ? SentenceT.QUESTION : SentenceT.ANSWER;
-  }
-  /**
-   * This method creates the elements of {@link #tokens} from {@link #iu}.
-   * @return {@link #tokens} with all elements
+   * Verify if the punctuation in the phrase is an error (if true, the {@link #type}'ll be setted
+   * to {@link SentenceT#MORE_SENTENCE}, or if a symbol used for something else
+   * (and in thise case {@link #type} will be setted to {@link SentenceT#ANSWER}.
+   * @param index of start
+   * @return {@link #type}
    */
+  private SentenceT verifyPunct(int index) {
+    char before = inputUser.charAt(index - 1);
+    char next = inputUser.charAt(index - 1);
+    if ((isBlank(before) && isBlank(next))
+        || (isSpecial(before) || isSpecial(next))) {
+      setType(SentenceT.MORE_SENTENCE);
+    } else {
+      setType(SentenceT.ANSWER);
+    }
+    return getType();
+  }
 
-  public List<IToken> createListOfTokens() {
-    String[] tok = checkPunct().split(" ");
-    for (String t : tok) {
-      if (t.contains(" ")) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < t.length(); i++) {
-          if (t.charAt(i) != ' ') {
-            sb.append(t.charAt(i));
+  /**
+   * Check if the last character of {@link #inputUser} represents
+   * an {@link SentenceT#ANSWER} or a {@link SentenceT#QUESTION}.
+   * @return {@link #type}
+   */
+  private SentenceT checkType() {
+    if (getType().equals(SentenceT.MORE_SENTENCE)) {
+      return getType();
+    } else {
+      return inputUser.charAt(inputUser.length() - 1) == '?'
+        ? SentenceT.QUESTION : SentenceT.ANSWER;
+    }
+  }
+
+  /**
+   * Check for every syntax errors in {@link #inputUser} and correct them.
+   * @return an instance of StringBuilder that represents {@link #inputUser} cleared from errors
+   */
+  public StringBuilder checkPunct() {
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < inputUser.length(); i++) {
+      char elem = inputUser.charAt(i);
+      //simple letter
+      if (isAlpha(elem)) {
+        sb.append(elem);
+        //eveutual numeric sequence (first case)
+      } else if (isNumber(elem)) {
+        List<String> ls = checkNumbers(i);
+        sb.append(" ").append(ls.get(0)).append(" ");
+        i = Integer.parseInt(ls.get(1));
+
+      } else if (isBlank(elem)) {
+        if (!isBlank(sb.charAt(sb.length() - 1))) {
+          sb.append(elem);
+        }
+
+      } else if (isSpecial(elem)) {
+        char last = sb.charAt(sb.length() - 1);
+        //acronyms or names separated by a dash or numeric sequence (second case)
+        if (elem == '.' || elem == '-') {
+          if (isAlpha(last)) {
+            List<String> ls = checkAcronyms(i);
+            sb.append(ls.get(0));
+            i = Integer.parseInt(ls.get(1));
+          } else if (isNumber(last)) {
+            List<String> ls = checkNumbers(i);
+            sb.append(" ").append(ls.get(0)).append(" ");
+            i = Integer.parseInt(ls.get(1));
+          }
+          //verbal apostrophe
+        } else if (("" + elem).equals("'")) {
+          sb.append(checkApost(i + 1));
+          i += 2;
+          //email
+        } else if (elem == '@') {
+          List<String> ls = checkNet(i);
+          sb.replace(Integer.parseInt(ls.get(1)), Integer.parseInt(ls.get(2)),ls.get(0));
+          i = Integer.parseInt(ls.get(2));
+          //URLs or mistakes
+        } else if (elem == ':') {
+          if (inputUser.substring(i - 4, i).equals("http")) {
+            List<String> ls = checkUrl(i - 4);
+            sb.replace(i - 4, i, ls.get(0));
+            i = Integer.parseInt(ls.get(1));
+          } else {
+            if (!isBlank(sb.charAt(sb.length() - 1))) {
+              sb.append(" ");
+            }
+          }
+          //all insignificant symbols
+        } else {
+          if (!isBlank(sb.charAt(sb.length() - 1))) {
+            sb.append(" ");
           }
         }
-        t = sb.toString();
       }
-      addToken(new Token(getWord(), t, false));
     }
-    return tokens;
+    return sb;
   }
 
   /**
-   * This method creates a new word.
-   * @return a new word
+   * Check any acronyms in {@link #inputUser}.
+   * @param index where to start looking for
+   * @return a list of two elements: in the first position the value of acronyms
+   *        and in second position the value of the current index
    */
-
-  public Word getWord() {
-    return null;
+  private List<String> checkAcronyms(int index) {
+    List<String> ls = new ArrayList<>();
+    StringBuilder sb = new StringBuilder();
+    while (isAlpha(inputUser.charAt(index))
+        || (inputUser.charAt(index) == '.' && inputUser.charAt(index - 1) != '.')
+        || (inputUser.charAt(index) == '-'
+        && (!isSpecial(inputUser.charAt(index - 1)) && !isBlank(inputUser.charAt(index - 1))))) {
+      sb.append(inputUser.charAt(index));
+      index++;
+    }
+    ls.add(sb.toString());
+    ls.add("" + index);
+    return ls;
   }
 
   /**
-   * This method checks if in {@link #input} there is an incorrect punctuation.
-   * @return {@link #input} cleaned from punctuation errors
+   * Check any numeric sequences (IP address, arithmetic values, etc) in {@link #inputUser}.
+   * @param index where to start looking for
+   * @return a list of two elements: in the first position the value of the numeric sequence
+   *        and in second position the value of the current index
    */
-
-  public String checkPunct() {
-    for (int i = 0; i < iu.length(); i++) {
-      if (!alphaNum.contains(("" + iu.charAt(i)).toLowerCase())) {
-        switch (iu.charAt(i) + "") {
-          case "." :
-            iu = checkPoint(i);
-            break;
-          case "'":
-            iu = checkApost(i + 1);
-            break;
-          case "@":
-            iu = checkNet(i);
-            break;
-          case " ":
-            continue;
-          default:
-            iu.delete(i, i + 1);
-            iu.insert(i, " ");
-        }
-      }
+  private List<String> checkNumbers(int index) {
+    List<String> ls = new ArrayList<>();
+    StringBuilder sb = new StringBuilder();
+    while (isNumber(inputUser.charAt(index))
+        || (inputUser.charAt(index) == '.' && inputUser.charAt(index - 1) != '.')) {
+      sb.append(inputUser.charAt(index));
+      index++;
     }
-    return iu.toString();
+    ls.add(sb.toString());
+    ls.add("" + index);
+    return ls;
   }
 
   /**
-   * Checks if before and/or after a point there are some numeric value and in the case it's false,
-   * the point will be deleted.
-   * @param startIndex the point where is the point
-   * @return sb modified and cleaned by typing errors
+   * Convert every apostrophe in its real semantic value.
+   * @param index where to start looking for
+   * @return string with the extended verbal form
    */
-
-  private StringBuilder checkPoint(int startIndex) {
-    boolean delete = false;
-    if (startIndex < 1) {
-      if (!Character.isDigit(iu.charAt(startIndex + 1))) {
-        delete = true;
-        return delete(startIndex);
+  private String checkApost(int index) {
+    StringBuilder sb = new StringBuilder();
+    char verb = inputUser.charAt(index);
+    char verb2 = inputUser.charAt(index + 1);
+    if (verb == 'm') {
+      sb.append(" am ");
+    } else if (verb == 'r' && verb2 == 'e') {
+      sb.append(" are");
+    } else if (verb == 'v' && verb2 == 'e') {
+      sb.append(" have");
+    } else if (verb == 'l' && verb2 == 'l') {
+      sb.append(" will");
+    } else if (verb == 's') {
+      int end = index + 2;
+      while (isAlpha(inputUser.charAt(end))) {
+        end++;
       }
-    } else {
-      if ((!(Character.isDigit(iu.charAt(startIndex - 1))
-          || Character.isDigit(iu.charAt(startIndex + 1))))
-          || startIndex == iu.length() - 1) {
-        delete = true;
-        return delete(startIndex);
-      }
-    }
-    if (!delete) {
-      if (!iu.substring(0, startIndex - 1).contains(".")) {
-        setType(checkType());
+      String sub = inputUser.substring(index + 2, end++);
+      if (sub.substring(sub.length() - 2, sub.length()).equals("ed")) {
+        sb.append(" has ");
       } else {
-        delete(startIndex);
+        sb.append(" is ");
       }
     }
-    return iu;
-  }
-
-  private StringBuilder delete(int index) {
-    iu.deleteCharAt(index);
-    iu.insert(index, " ");
-    return iu;
+    return sb.toString();
   }
 
   /**
-   * MANCANO
-   * 1)caso in cui is/has ha valore base (essere/avere -> "lui � bello" o "lei ha una macchina")
-   * 2)caso di avverbi tra is/has e verbo
-   * Checks if the apostrophe in the {@link #input} is a typing error
-   * or an abbreviation for a particular verb (ex: 's -> is/has, 'm -> am, 'll -> will, etc...).
-   * @param startIndex index after the apostrophe
-   * @return sb modified and cleaned by typing errors
+   * Check any email address in {@link #inputUser}.
+   * @param index where to start looking for
+   * @return a list of two elements: in the first position the email address,
+   *         in second position the index the start of email
+   *         and in third position the and of the email
    */
+  private List<String> checkNet(int index) {
+    int start = index - 1;
+    int end = index;
+    List<String> ls = new ArrayList<>();
+    StringBuilder sb = new StringBuilder();
+    while (!isBlank(inputUser.charAt(start))) {
+      start--;
+    }
 
-  private StringBuilder checkApost(int startIndex) {
-    boolean substitute = false;
-    if (iu.charAt(startIndex) == 'm') {
-      iu.replace(startIndex - 1, startIndex + 1, " am");
-      substitute = true;
+    while (!isBlank(inputUser.charAt(end))) {
+      end++;
     }
-    if (("" + iu.charAt(startIndex) + iu.charAt(startIndex + 1)).equals("re")) {
-      iu.replace(startIndex - 1, startIndex + 2, " are");
-      substitute = true;
-    }
-    if (("" + iu.charAt(startIndex) + iu.charAt(startIndex + 1)).equals("ll")) {
-      iu.replace(startIndex - 1, startIndex + 2 , " will");
-      substitute = true;
-    }
-    if (("" + iu.charAt(startIndex) + iu.charAt(startIndex + 1)).equals("ve")) {
-      iu.replace(startIndex - 1, startIndex + 2, " have");
-      substitute = true;
-    }
-    if (iu.charAt(startIndex) == 's') {
-      String[] iuSplittato = iu.toString().substring(startIndex + 2).split(" ");
-      if (iuSplittato[0].substring(iuSplittato[0].length() - 2).equalsIgnoreCase("ed")) {
-        iu.replace(startIndex - 1, startIndex + 1, " has");
-        substitute = true;
-      } else if (iuSplittato[0].substring(iuSplittato[0].length() - 3).equalsIgnoreCase("ing")) {
-        iu.replace(startIndex - 1, startIndex + 1, " is");
-        substitute = true;
-      }
-    }
-    if (!substitute) {
-      delete(startIndex - 1);
-    }
-    return iu;
+    ls.add(sb.append(inputUser.substring(start, end)).toString());
+    ls.add("" + start);
+    ls.add("" + end);
+    return ls;
   }
 
   /**
-   * Check if the net found is a typing error or belongs to an email address.
-   * @param startIndex index where is the net
-   * @return {@link #iu} modified and cleanded by typing errors
+   * Check any URL address in {@link #inputUser}.
+   * @param index where to start looking for
+   * @return a list of two elements: in the first position the URL
+   *        and in second position the value of the current index
    */
+  private List<String> checkUrl(int index) {
+    List<String> ls = new ArrayList<>();
+    StringBuilder sb = new StringBuilder();
+    while (!isBlank(inputUser.charAt(index++))) {
+      sb.append(inputUser.charAt(index));
+    }
+    ls.add(sb.toString());
+    ls.add("" + index);
+    return ls;
+  }
 
-  public StringBuilder checkNet(int startIndex) {
-    boolean deleted = false;
-    if (iu.charAt(startIndex - 1) == ' ') {
-      deleted = true;
-      delete(startIndex);
-      return iu;
-    }
-    for (int i = startIndex + 1; i < iu.length(); i++) {
-      if (iu.charAt(i) == '.') {
-        if (email.contains(iu.subSequence(i, i + 4))) {
-          break;
-        }
-      }
-      if (i == iu.length() - 1 && !deleted) {
-        delete(startIndex);
-      }
-    }
-    return iu;
+  /**
+   * Create final tokens' list.
+   * @return {@link #tokens}
+   */
+  public List<IToken> createListOfTokens() {
+    return tokens;
+
+  }
+
+  /**
+   * Verify if the input is a letter of alphabet.
+   * @param c character to check
+   * @return a boolean
+   */
+  private boolean isAlpha(char c) {
+    return Character.isLetter(c);
+  }
+
+  /**
+   * Verify if the input is a number of alphabet.
+   * @param c character to check
+   * @return a boolean
+   */
+  private boolean isNumber(char c) {
+    return Character.isDigit(c);
+  }
+
+  /**
+   * Verify if the input is a blanck space.
+   * @param c character to check
+   * @return a boolean
+   */
+  private boolean isBlank(char c) {
+    return c == ' ';
+  }
+
+  /**
+   * Verify if the input is a special value.
+   * @param c character to check
+   * @return a boolean
+   */
+  private boolean isSpecial(char c) {
+    return !(isNumber(c)) && !(isAlpha(c)) && !(isBlank(c));
   }
 
   /**
@@ -293,11 +363,19 @@ public class Tokenizer {
   }
 
   /**
-   * Get {@link #iu} as string.
-   * @return {@link #iu}
+   * Get {@link #stringToken}.
+   * @return {@link #stringToken}
    */
-  public String getModifiedInputUser() {
-    return iu.toString();
+  public List<String> getStringToken() {
+    return stringToken;
+  }
+
+  /**
+   * Add a new element to {@link #stringToken}.
+   * @param stringToken element to add to {@link #stringToken}
+   */
+  public void addStringToken(String stringToken) {
+    this.stringToken.add(stringToken);
   }
 
   /**
