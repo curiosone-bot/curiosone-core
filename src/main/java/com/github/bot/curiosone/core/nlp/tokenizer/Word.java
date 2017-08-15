@@ -1,82 +1,140 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.ISynset;
 import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord;
 
+import edu.mit.jwi.item.IWordID;
+
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
- * Word attribute and relative Synset.
+ * Syntax/Semantic information of a Word.
  *
  * @author Andrea Rivitto && Eugenio Schintu
  * @see IWord
- * @see Synset
  */
-
 public class Word implements IWord {
+
   /**
-   * Value of the single word in the original Sentence.
+   * Part of speech.
    *
-   * @see Sentence
+   * @see POST
    */
-  private String value;
+
+  private PosT pos;
+
   /**
-   * Various semantic informations' list.
+   * Lexicographic file name.
    *
-   * @see Synset
-   * @see ISynset
+   * @see LexT
    */
-  private List<ISynset> synsets;
+
+  private LexT lexType;
+
   /**
-   * Flag used to verify if we have found a corrispondence in dictonary.
+   * Lemma of word.
+   *
+   * @see Word
    */
-  private boolean known;
-  /**
-   * Lemma of a specific word.
-   */
+
   private String lemma;
 
   /**
-   * Constructor.
+   * IWordID.
+   *
+   * @see IWordID
    */
 
-  public Word(String value, boolean known, String lemma) {
-    this.value = value;
-    this.known = known;
-    this.lemma = lemma;
+  private IWordID wordID;
+  
+  /**
+   * Glossary information.
+   */
+
+  private String gloss;
+
+  /**
+   * Semantic relation with other word.
+   *
+   * @see PointerT
+   */
+
+  /**
+   * Number of occurrence 
+   *
+   */
+  private int number;
+
+  /**
+   * Semantic relation with other word.
+   *
+   * @see PointerT
+   */
+
+  private Map<PointerT, List<String>> relations;
+
+  /**
+   * Get WordID.
+   *
+   * @return the WordID
+   * @see #IWordID
+   */
+
+  @Override public IWordID getWordID() {
+	    return wordID;
   }
 
   /**
-   * Get value.
+   * Set a new {@link #wordID} value that is provided in input.
    *
-   * @return the value
-   * @see #value
+   * @see #wordID
    */
 
-  @Override public String getValue() {
-    return value;
+  public void setWordID(IWordID wordID) {
+    this.wordID = wordID;
   }
 
   /**
-   * Get known.
+   * Get pos.
    *
-   * @return the known
-   * @see #known
+   * @return the pos
+   * @see #pos
    */
 
-  @Override public boolean isKnown() {
-    return known;
+  @Override public PosT getPos() {
+	    return pos;
   }
 
   /**
-   * Get synsets.
+   * Set a new {@link #pos} value that is provided in input.
    *
-   * @return the List of Synset
-   * @see #synsets
+   * @see #pos
    */
 
-  @Override public List<ISynset> getSynsets() {
-    return synsets;
+  public void setPos(PosT pos) {
+    this.pos = pos;
+  }
+
+  /**
+   * Get lexType.
+   *
+   * @return lexType
+   * @see #lexType
+   */
+
+  @Override public LexT getLexType() {
+    return lexType;
+  }
+
+  /**
+   * Set a new {@link #lexType} value that is provided in input.
+   *
+   * @see #lexType
+   */
+
+  @Override public void setLexType(LexT lexType) {
+    this.lexType = lexType;
   }
 
   /**
@@ -91,42 +149,104 @@ public class Word implements IWord {
   }
 
   /**
-   * Set a new {@link #known} value that is provided in input.
-   *
-   * @see #known
-   */
-
-  public void setKnown(boolean known) {
-    this.known = known;
-  }
-
-  /**
-   * Set a new {@link #value} value that is provided in input.
-   *
-   * @see #value
-   */
-
-  public void setValue(String value) {
-    this.value = value;
-  }
-
-  /**
    * Set a new {@link #lemma} value that is provided in input.
    *
    * @see #lemma
    */
 
-  public void setLemma(String lemma) {
+  @Override public void setLemma(String lemma) {
     this.lemma = lemma;
   }
 
   /**
-   * Add to {@link #synset} a new instance of Synset.
+   * Get gloss.
    *
-   * @see #synsets
+   * @return the gloss
+   * @see #gloss
+   */
+  @Override public String getGloss() {
+    return gloss;
+  }
+
+  /**
+   * Set a new {@link #gloss} value that is provided in input.
+   *
+   * @see #gloss
+   */
+  @Override public void setGloss(String gloss) {
+    this.gloss = gloss;
+  }
+
+  /**
+   * Get the number of occurrence.
+   *
+   */
+  @Override public int getNum() {
+    return this.number;
+  }
+
+  /**
+   * Set the number of occurrence of word.
+   *
+   */
+  @Override public void setNum(int num) {
+    this.number = num;
+  }
+
+  /**
+   * Get relations.
+   *
+   * @return the relations
+   * @see #relations
+   */
+  @Override public Map<PointerT, List<String>> getRelations() {
+    return relations;
+  }
+
+  /**
+   * Add a new element to relations.
+   *
+   * @see #relations
    */
 
-  public void addSynset(ISynset synset) {
-    this.synsets.add(synset);
+  @Override public void addRelation(PointerT p, List<String> value) {
+	  this.relations.put(p, value);
   }
+
+  /**
+   * Set the map of relations.
+   *
+   * @see #relations
+   */
+
+  @Override public void setRelations(Map<PointerT, List<String>> relations) {
+	  this.relations.clear();
+	  this.relations.putAll(relations);
+  }
+
+  /**
+   * toString.
+   *
+   */
+
+  @Override public String toString() {
+	return "WordID=" + this.wordID 
+			+ " Lemma=" + this.lemma
+			+ " POS=" + this.pos
+			+ " LextT=" + this.lexType
+			+ " Gloss=" + this.gloss
+			+ " Occurrence=" + this.number;
+  }
+  
+  @Override public boolean equals(Object obj) {
+	  if (obj == null || !(obj instanceof Word)) return false;
+	  if (obj == this) return true;
+	  Word w = (Word) obj;
+	  return this.getWordID().equals(w.getWordID());
+  }
+	
+  @Override public int hashCode() {
+	  return Objects.hash(getGloss());
+  }
+  
 }
