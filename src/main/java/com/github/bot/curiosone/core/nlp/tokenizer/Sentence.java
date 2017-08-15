@@ -82,7 +82,7 @@ public class Sentence implements ISentence {
    * @see #type
    */
 
-  public void setType(SentenceT type) {
+  @Override public void setType(SentenceT type) {
     this.type = type;
   }
 
@@ -92,7 +92,7 @@ public class Sentence implements ISentence {
    * @see Token
    */
 
-  public void addToken(IToken token) {
+  @Override public void addToken(IToken token) {
     this.tokens.add(token);
   }
 }
