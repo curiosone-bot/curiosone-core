@@ -1,11 +1,11 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
+import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
+import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord;
-import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
 
 /**
  * Class used to point to grammar and semantic word information.
@@ -128,8 +128,10 @@ public class Token implements IToken {
    */
 
   @Override public String getLemma() {
-	  if (!isKnown()) return null;
-	  return words.get(0).getLemma();
+    if (!isKnown()) {
+      return null;
+    }
+    return words.get(0).getLemma();
   }
 
   /**
@@ -140,8 +142,10 @@ public class Token implements IToken {
    */
 
   @Override public PosT getPos() {
-	  if (!isKnown()) return null;
-	  return words.get(0).getPos();
+    if (!isKnown()) {
+      return null;
+    }
+    return words.get(0).getPos();
   }
 
   /**
@@ -152,8 +156,10 @@ public class Token implements IToken {
    */
 
   @Override public LexT getLexT() {
-	  if (!isKnown()) return null;
-	  return words.get(0).getLexType();
+    if (!isKnown()) {
+      return null;
+    }
+    return words.get(0).getLexType();
   }
 
   /**
@@ -214,18 +220,22 @@ public class Token implements IToken {
 
   @Override public String toString() {
 
-	String out =  "Token - OValue:" + getOValue()
-	        + " Value:" + getValue()
-	        + " Corrected:" + isCorrected()
-	        + " Known:" + isKnown();
-    if (!isKnown()) return out;
-	out += "\n Main Word (with more occurrence):"
-			+ "WordID=" + this.words.get(0).getWordID()
-			+ " Lemma=" + this.getLemma()
-			+ " POS=" + this.getPos()
-			+ " LextT=" + this.getLexT()
-			+ " \n All words:";
-	for (IWord w: this.words) out += "\n->" + w;
-	return out;
+    String out =  "Token - OValue:" + getOValue()
+        + " Value:" + getValue()
+        + " Corrected:" + isCorrected()
+        + " Known:" + isKnown();
+    if (!isKnown()) {
+      return out;
+    }
+    out += "\n Main Word (with more occurrence):"
+        + "WordID=" + this.words.get(0).getWordId()
+        + " Lemma=" + this.getLemma()
+        + " POS=" + this.getPos()
+        + " LextT=" + this.getLexT()
+        + " \n All words:";
+    for (IWord w: this.words) {
+      out += "\n->" + w;
+    }
+    return out;
   }
 }

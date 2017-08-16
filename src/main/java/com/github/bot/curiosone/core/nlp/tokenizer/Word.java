@@ -46,8 +46,8 @@ public class Word implements IWord {
    * @see IWordID
    */
 
-  private IWordID wordID;
-  
+  private IWordID wordId;
+
   /**
    * Glossary information.
    */
@@ -61,7 +61,7 @@ public class Word implements IWord {
    */
 
   /**
-   * Number of occurrence 
+   * Number of occurrence.
    *
    */
   private int number;
@@ -81,18 +81,19 @@ public class Word implements IWord {
    * @see #IWordID
    */
 
-  @Override public IWordID getWordID() {
-	    return wordID;
+  @Override public IWordID getWordId() {
+    return wordId;
   }
 
   /**
-   * Set a new {@link #wordID} value that is provided in input.
+   * Set a new {@link #wordId} value that is provided in input.
    *
-   * @see #wordID
+   * @see #wordId
    */
 
-  public void setWordID(IWordID wordID) {
-    this.wordID = wordID;
+  @Override
+  public void setWordId(IWordID wordId) {
+    this.wordId = wordId;
   }
 
   /**
@@ -103,7 +104,7 @@ public class Word implements IWord {
    */
 
   @Override public PosT getPos() {
-	    return pos;
+    return pos;
   }
 
   /**
@@ -112,6 +113,7 @@ public class Word implements IWord {
    * @see #pos
    */
 
+  @Override
   public void setPos(PosT pos) {
     this.pos = pos;
   }
@@ -210,7 +212,7 @@ public class Word implements IWord {
    */
 
   @Override public void addRelation(PointerT p, List<String> value) {
-	  this.relations.put(p, value);
+    this.relations.put(p, value);
   }
 
   /**
@@ -220,8 +222,8 @@ public class Word implements IWord {
    */
 
   @Override public void setRelations(Map<PointerT, List<String>> relations) {
-	  this.relations.clear();
-	  this.relations.putAll(relations);
+    this.relations.clear();
+    this.relations.putAll(relations);
   }
 
   /**
@@ -230,23 +232,27 @@ public class Word implements IWord {
    */
 
   @Override public String toString() {
-	return "WordID=" + this.wordID 
-			+ " Lemma=" + this.lemma
-			+ " POS=" + this.pos
-			+ " LextT=" + this.lexType
-			+ " Gloss=" + this.gloss
-			+ " Occurrence=" + this.number;
+    return "WordId=" + this.wordId
+        + " Lemma=" + this.lemma
+        + " POS=" + this.pos
+        + " LextT=" + this.lexType
+        + " Gloss=" + this.gloss
+        + " Occurrence=" + this.number;
   }
-  
+
   @Override public boolean equals(Object obj) {
-	  if (obj == null || !(obj instanceof Word)) return false;
-	  if (obj == this) return true;
-	  Word w = (Word) obj;
-	  return this.getWordID().equals(w.getWordID());
+    if (obj == null || !(obj instanceof Word)) {
+      return false;
+    }
+    if (obj == this) {
+      return true;
+    }
+    Word w = (Word) obj;
+    return this.getWordId().equals(w.getWordId());
   }
-	
+
   @Override public int hashCode() {
-	  return Objects.hash(getGloss());
+    return Objects.hash(getGloss());
   }
-  
+
 }

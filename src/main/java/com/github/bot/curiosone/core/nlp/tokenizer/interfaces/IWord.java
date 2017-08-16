@@ -48,8 +48,8 @@ public interface IWord {
    * @see IWordID()
    */
 
-  IWordID getWordID();
-  
+  IWordID getWordId();
+
   /**
    * Get gloss.
    *
@@ -72,15 +72,15 @@ public interface IWord {
    */
 
   Map<PointerT, List<String>> getRelations();
-  
+
   /**
-   * Set a new {@link #wordID} value that is provided in input.
+   * Set a new {@link #wordId} value that is provided in input.
    *
-   * @see #wordID
+   * @see #wordId
    */
 
-  public void setWordID(IWordID wordID);
-  
+  public void setWordId(IWordID wordId);
+
   /**
    * Set a new {@link #pos} value that is provided in input.
    *
@@ -118,7 +118,7 @@ public interface IWord {
    *
    */
   public void setNum(int num);
-  
+
   /**
    * Add a new element to relations.
    *

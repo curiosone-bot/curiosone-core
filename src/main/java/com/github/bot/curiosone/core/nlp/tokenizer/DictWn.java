@@ -72,7 +72,9 @@ public class DictWn {
    * @see com.github.bot.curiosone.core.nlp.tokenizer.Token
    */
   public static Token getToken(String item) {
-    if (item.length()==0 || item.equals(" ")) return null;
+    if (item.length() == 0 || item.equals(" ")) {
+      return null;
+    }
     Token token = new Token(item);
     token = getTokenNotWn(token, item);
     token = getTokenWn(token, item);
@@ -222,7 +224,7 @@ public class DictWn {
                             .toUpperCase()
                             ));
             retWord.setGloss(word.getSynset().getGloss());
-            retWord.setWordID(id);
+            retWord.setWordId(id);
             retWord.setNum(dictionary
                 .getSenseEntry(word.getSenseKey())
                 .getTagCount());
