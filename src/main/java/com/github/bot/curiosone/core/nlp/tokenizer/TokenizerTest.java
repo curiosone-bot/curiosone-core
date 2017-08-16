@@ -10,7 +10,7 @@ public class TokenizerTest {
    * temporary.
    */
   public static void main(String[] args) {
-    Tokenizer t = new Tokenizer("ciao::co_me's going U-S-A, http://hfjdi/deifi0/cnd feecasa@gmail.com 163.100.98.7 va!");
+    Tokenizer t = new Tokenizer("ciao::co_me's going U.S.A., http://hfjdi/deifi0/cnd fee.cas/a@gm.ail.com 163.100.98.7 va!");
     System.out.println(t.getType());
     t.getSentence();
     System.out.println(t.getInputUser());

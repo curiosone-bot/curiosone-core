@@ -1,10 +1,11 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+
+import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
 
 /**
  * Tokenization of the input string.
@@ -171,7 +172,7 @@ public class Tokenizer {
           //email
         } else if (elem == '@') {
           List<String> ls = checkNet(i);
-          sb.replace(Integer.parseInt(ls.get(1)), Integer.parseInt(ls.get(2)),ls.get(0));
+          sb.replace(Integer.parseInt(ls.get(1)), Integer.parseInt(ls.get(2)), ls.get(0));
           i = Integer.parseInt(ls.get(2));
           //URLs or mistakes
         } else if (elem == ':') {
@@ -204,12 +205,21 @@ public class Tokenizer {
   private List<String> checkAcronyms(int index) {
     List<String> ls = new ArrayList<>();
     StringBuilder sb = new StringBuilder();
-    while (isAlpha(inputUser.charAt(index))
-        || (inputUser.charAt(index) == '.' && inputUser.charAt(index - 1) != '.')
-        || (inputUser.charAt(index) == '-'
-        && (!isSpecial(inputUser.charAt(index - 1)) && !isBlank(inputUser.charAt(index - 1))))) {
-      sb.append(inputUser.charAt(index));
-      index++;
+    int ind = index;
+    while (!isBlank(inputUser.charAt(ind))) {
+      ind++;
+    }
+    if (!inputUser.substring(index, ind + 1).contains("@")) {
+      while (isAlpha(inputUser.charAt(index))
+          || (inputUser.charAt(index) == '.' && inputUser.charAt(index - 1) != '.')
+          || (inputUser.charAt(index) == '-'
+             && (!isSpecial(inputUser.charAt(index - 1))
+                 && !isBlank(inputUser.charAt(index - 1))))) {
+        sb.append(inputUser.charAt(index));
+        index++;
+      }
+    } else {
+      checkNet(index);
     }
     ls.add(sb.toString());
     ls.add("" + index);
@@ -287,7 +297,7 @@ public class Tokenizer {
       end++;
     }
     ls.add(sb.append(inputUser.substring(start, end)).toString());
-    ls.add("" + start);
+    ls.add("" + (start));
     ls.add("" + end);
     return ls;
   }
@@ -314,8 +324,14 @@ public class Tokenizer {
    * @return {@link #tokens}
    */
   public List<IToken> createListOfTokens() {
+
     return tokens;
 
+  }
+
+  private List<IToken> createListOfTokens(String s) {
+    List<IToken> lt = new ArrayList<>();
+    return lt;
   }
 
   /**
@@ -407,9 +423,16 @@ public class Tokenizer {
   /**
    * Add a new element to {@link #tokens}.
    * @param t token to be add
-   * @see #tokens
    */
   public void addToken(Token t) {
     tokens.add(t);
+  }
+
+  /**
+   * Add a new collection of tokens to {@link #tokens}.
+   * @param toks collection of token to be add all
+   */
+  public void addAllTokens(Collection<? extends IToken> toks) {
+    tokens.addAll(toks);
   }
 }
