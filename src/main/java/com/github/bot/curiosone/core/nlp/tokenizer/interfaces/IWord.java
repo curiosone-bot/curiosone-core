@@ -20,6 +20,7 @@ public interface IWord {
 
   /**
    * Get pos.
+   *
    * @see Word#getPos()
    */
 
@@ -27,6 +28,7 @@ public interface IWord {
 
   /**
    * Get lexType.
+   *
    * @see Word#getLexType()
    */
 
@@ -34,6 +36,7 @@ public interface IWord {
 
   /**
    * Get lemma.
+   *
    * @see Word#getLemma()
    */
 
@@ -41,13 +44,15 @@ public interface IWord {
 
   /**
    * Get WordID.
+   *
    * @see IWordID()
    */
 
-  IWordID getWordId();
-
+  IWordID getWordID();
+  
   /**
    * Get gloss.
+   *
    * @see Word#getGloss()
    */
 
@@ -55,27 +60,30 @@ public interface IWord {
 
   /**
    * Get number of occurence.
-   * @see Word#getNum()
+   *
    */
 
   int getNum();
 
   /**
    * Get relations.
+   *
    * @see Word#getRelations()
    */
 
   Map<PointerT, List<String>> getRelations();
-
+  
   /**
    * Set a new {@link #wordID} value that is provided in input.
+   *
    * @see #wordID
    */
 
-  public void setWordId(IWordID wordId);
-
+  public void setWordID(IWordID wordID);
+  
   /**
    * Set a new {@link #pos} value that is provided in input.
+   *
    * @see #pos
    */
 
@@ -83,6 +91,7 @@ public interface IWord {
 
   /**
    * Set a new {@link #lexType} value that is provided in input.
+   *
    * @see #lexType
    */
 
@@ -90,6 +99,7 @@ public interface IWord {
 
   /**
    * Set a new {@link #lemma} value that is provided in input.
+   *
    * @see #lemma
    */
 
@@ -97,6 +107,7 @@ public interface IWord {
 
   /**
    * Set a new {@link #gloss} value that is provided in input.
+   *
    * @see #gloss
    */
 
@@ -104,11 +115,13 @@ public interface IWord {
 
   /**
    * Set the number of occurrence of word.
+   *
    */
   public void setNum(int num);
-
+  
   /**
    * Add a new element to relations.
+   *
    * @see #relations
    */
 
@@ -116,6 +129,7 @@ public interface IWord {
 
   /**
    * Set the map of relations.
+   *
    * @see #relations
    */
 

@@ -6,6 +6,7 @@ import edu.mit.jwi.item.IWordID;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Syntax/Semantic information of a Word.
@@ -16,7 +17,8 @@ import java.util.Map;
 public class Word implements IWord {
 
   /**
-   * Part of speech type.
+   * Part of speech.
+   *
    * @see POST
    */
 
@@ -24,6 +26,7 @@ public class Word implements IWord {
 
   /**
    * Lexicographic file name.
+   *
    * @see LexT
    */
 
@@ -31,6 +34,7 @@ public class Word implements IWord {
 
   /**
    * Lemma of word.
+   *
    * @see Word
    */
 
@@ -38,11 +42,12 @@ public class Word implements IWord {
 
   /**
    * IWordID.
+   *
    * @see IWordID
    */
 
-  private IWordID wordId;
-
+  private IWordID wordID;
+  
   /**
    * Glossary information.
    */
@@ -51,154 +56,197 @@ public class Word implements IWord {
 
   /**
    * Semantic relation with other word.
+   *
    * @see PointerT
    */
 
   /**
-   * Number of occurrence.
+   * Number of occurrence 
+   *
    */
   private int number;
 
   /**
    * Semantic relation with other word.
+   *
    * @see PointerT
    */
 
   private Map<PointerT, List<String>> relations;
 
   /**
-   * Get {@link #pos}.
-   * @return {@link #pos}
+   * Get WordID.
+   *
+   * @return the WordID
+   * @see #IWordID
    */
-  @Override
-  public PosT getPos() {
-    return pos;
+
+  @Override public IWordID getWordID() {
+	    return wordID;
   }
 
   /**
-   * Get {@link #lexType}.
-   * @return {@link #lexType}
+   * Set a new {@link #wordID} value that is provided in input.
+   *
+   * @see #wordID
    */
-  @Override
-  public LexT getLexType() {
-    return lexType;
+
+  public void setWordID(IWordID wordID) {
+    this.wordID = wordID;
   }
 
   /**
-   * Get {@link #lemma}.
-   * @return {@link #lemma}
+   * Get pos.
+   *
+   * @return the pos
+   * @see #pos
    */
-  @Override
-  public String getLemma() {
-    return lemma;
+
+  @Override public PosT getPos() {
+	    return pos;
   }
 
   /**
-   * Get {@link #wordId}.
-   * @return {@link #wordId}
+   * Set a new {@link #pos} value that is provided in input.
+   *
+   * @see #pos
    */
-  @Override
-  public IWordID getWordId() {
-    return wordId;
-  }
 
-  /**
-   * Get {@link #gloss}.
-   * @return {@link #gloss}
-   */
-  @Override
-  public String getGloss() {
-    return gloss;
-  }
-
-  /**
-   * Get {@link #number}.
-   * @return {@link #number}
-   */
-  @Override
-  public int getNum() {
-    return number;
-  }
-
-  /**
-   * Get {@link #relations}.
-   * @return {@link #relations}
-   */
-  @Override
-  public Map<PointerT, List<String>> getRelations() {
-    return relations;
-  }
-
-  /**
-   * Set {@link #wordId} to a new value provided in input.
-   * @param wordId new value of {@link #wordId}
-   */
-  @Override
-  public void setWordId(IWordID wordId) {
-    this.wordId = wordId;
-  }
-
-  /**
-   * Set {@link #pos} to a new value provided in input.
-   * @param pos new value of {@link #pos}
-   */
-  @Override
   public void setPos(PosT pos) {
     this.pos = pos;
   }
 
   /**
-   * Set {@link #lexType} to a new value provided in input.
-   * @param lexType new value of {@link #lexType}
+   * Get lexType.
+   *
+   * @return lexType
+   * @see #lexType
    */
-  @Override
-  public void setLexType(LexT lexType) {
+
+  @Override public LexT getLexType() {
+    return lexType;
+  }
+
+  /**
+   * Set a new {@link #lexType} value that is provided in input.
+   *
+   * @see #lexType
+   */
+
+  @Override public void setLexType(LexT lexType) {
     this.lexType = lexType;
   }
 
   /**
-   * Set {@link #lemma} to a new value provided in input.
-   * @param lemma new value of {@link #lemma}
+   * Get lemma.
+   *
+   * @return the lemma
+   * @see #lemma
    */
-  @Override
-  public void setLemma(String lemma) {
+
+  @Override public String getLemma() {
+    return lemma;
+  }
+
+  /**
+   * Set a new {@link #lemma} value that is provided in input.
+   *
+   * @see #lemma
+   */
+
+  @Override public void setLemma(String lemma) {
     this.lemma = lemma;
   }
 
   /**
-   * Set {@link #gloss} to a new value provided in input.
-   * @param gloss new value of {@link #gloss}
+   * Get gloss.
+   *
+   * @return the gloss
+   * @see #gloss
    */
-  @Override
-  public void setGloss(String gloss) {
+  @Override public String getGloss() {
+    return gloss;
+  }
+
+  /**
+   * Set a new {@link #gloss} value that is provided in input.
+   *
+   * @see #gloss
+   */
+  @Override public void setGloss(String gloss) {
     this.gloss = gloss;
   }
 
   /**
-   * Set {@link #number} to a new value provided in input.
-   * @param num new value of {@link #number}
+   * Get the number of occurrence.
+   *
    */
-  @Override
-  public void setNum(int num) {
+  @Override public int getNum() {
+    return this.number;
+  }
+
+  /**
+   * Set the number of occurrence of word.
+   *
+   */
+  @Override public void setNum(int num) {
     this.number = num;
   }
 
   /**
-   * Add a new couple key-value to {@link #relations}.
-   * @param p key of new element
-   * @param value value of new element
+   * Get relations.
+   *
+   * @return the relations
+   * @see #relations
    */
-  @Override
-  public void addRelation(PointerT p, List<String> value) {
-    relations.put(p, value);
+  @Override public Map<PointerT, List<String>> getRelations() {
+    return relations;
   }
 
   /**
-   * Set {@link #relations} to a new value provided in input.
-   * @param relations ne value of {@link #relations}
+   * Add a new element to relations.
+   *
+   * @see #relations
    */
-  @Override
-  public void setRelations(Map<PointerT, List<String>> relations) {
-    this.relations = relations;
+
+  @Override public void addRelation(PointerT p, List<String> value) {
+	  this.relations.put(p, value);
   }
+
+  /**
+   * Set the map of relations.
+   *
+   * @see #relations
+   */
+
+  @Override public void setRelations(Map<PointerT, List<String>> relations) {
+	  this.relations.clear();
+	  this.relations.putAll(relations);
+  }
+
+  /**
+   * toString.
+   *
+   */
+
+  @Override public String toString() {
+	return "WordID=" + this.wordID 
+			+ " Lemma=" + this.lemma
+			+ " POS=" + this.pos
+			+ " LextT=" + this.lexType
+			+ " Gloss=" + this.gloss
+			+ " Occurrence=" + this.number;
+  }
+  
+  @Override public boolean equals(Object obj) {
+	  if (obj == null || !(obj instanceof Word)) return false;
+	  if (obj == this) return true;
+	  Word w = (Word) obj;
+	  return this.getWordID().equals(w.getWordID());
+  }
+	
+  @Override public int hashCode() {
+	  return Objects.hash(getGloss());
+  }
+  
 }
