@@ -47,7 +47,6 @@ public class Token implements IToken {
   /**
    * Constructor.
    */
-
   public Token(String originalValue) {
     this.originalValue = originalValue;
     this.corrected = false;
@@ -61,7 +60,6 @@ public class Token implements IToken {
    * @return originalValue
    * @see #originalValue
    */
-
   @Override
   public String getOValue() {
     return originalValue;
@@ -72,7 +70,6 @@ public class Token implements IToken {
    * @param originalValue the oValue to set
    * @see #originalValue
    */
-
   public void setOValue(String originalValue) {
     this.originalValue = originalValue;
   }
@@ -82,7 +79,6 @@ public class Token implements IToken {
    * @return the corrected
    * @see #corrected
    */
-
   @Override
   public boolean isCorrected() {
     return corrected;
@@ -93,7 +89,6 @@ public class Token implements IToken {
    * @param corrected the corrected to set
    * @see #corrected
    */
-
   @Override
   public void setCorrected(boolean corrected) {
     this.corrected = corrected;
@@ -104,7 +99,6 @@ public class Token implements IToken {
    * @return the value
    * @see #value
    */
-
   @Override
   public String getValue() {
     return value;
@@ -115,7 +109,6 @@ public class Token implements IToken {
    * @return the known
    * @see #known
    */
-
   @Override
   public boolean isKnown() {
     return known;
@@ -126,7 +119,6 @@ public class Token implements IToken {
    * @return the lemma
    * @see #lemma
    */
-
   @Override
   public String getLemma() {
     if (!isKnown()) {
@@ -140,7 +132,6 @@ public class Token implements IToken {
    * @return the PosT
    * @see #PosT
    */
-
   @Override
   public PosT getPos() {
     if (!isKnown()) {
@@ -154,7 +145,6 @@ public class Token implements IToken {
    * @return the lexT
    * @see #LexT
    */
-
   @Override
   public LexT getLexT() {
     if (!isKnown()) {
@@ -167,7 +157,6 @@ public class Token implements IToken {
    * Set a new {@link #known} value that is provided in input.
    * @see #known
    */
-
   @Override
   public void setKnown(boolean known) {
     this.known = known;
@@ -177,7 +166,6 @@ public class Token implements IToken {
    * Set a new {@link #value} value that is provided in input.
    * @see #value
    */
-
   @Override
   public void setValue(String value) {
     this.value = value;
@@ -188,7 +176,6 @@ public class Token implements IToken {
    * @return the List of Word
    * @see #words
    */
-
   @Override
   public List<IWord> getWords() {
     return words;
@@ -198,7 +185,6 @@ public class Token implements IToken {
    * Add to {@link #word} a new instance of Word.
    * @see #words
    */
-
   @Override
   public void addWord(IWord word) {
     this.words.add(word);
@@ -208,7 +194,6 @@ public class Token implements IToken {
    * Set to {@link #words} the list of Words.
    * @see #words
    */
-
   @Override
   public void setWords(Collection<? extends IWord> words) {
     this.words.clear();
@@ -219,7 +204,6 @@ public class Token implements IToken {
    * toString.
    * @return the string rappresentation
    */
-
   @Override
   public String toString() {
     String out =  "Token:\n Word with more occurrence:"
