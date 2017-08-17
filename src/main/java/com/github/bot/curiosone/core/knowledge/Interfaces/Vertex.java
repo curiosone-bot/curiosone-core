@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.knowledge.Interfaces;
+package com.github.bot.curiosone.core.knowledge.interfaces;
 
 /**
  * Vertice di un grafo
@@ -6,9 +6,9 @@ package com.github.bot.curiosone.core.knowledge.Interfaces;
  *
  */
 public interface Vertex{
-	/**
-	 * Identificativo univoco del vertice
-	 * @return l'identificativo del vertice
-	 */
-	String getId();
+  /**
+   * Identificativo univoco del vertice
+   * @return l'identificativo del vertice
+   */
+  String getId();
 }

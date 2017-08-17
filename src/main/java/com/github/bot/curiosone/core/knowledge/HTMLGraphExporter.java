@@ -1,7 +1,7 @@
 package com.github.bot.curiosone.core.knowledge;
 
-import com.github.bot.curiosone.core.knowledge.Interfaces.Graph;
-import com.github.bot.curiosone.core.knowledge.Interfaces.GraphExporter;
+import com.github.bot.curiosone.core.knowledge.interfaces.Graph;
+import com.github.bot.curiosone.core.knowledge.interfaces.GraphExporter;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class HtmlGraphExporter implements GraphExporter {
     String[] pezzi = finale.toString().split("#END");
     finale.delete(0, finale.length());
     finale.append(pezzi[0] + "\n");
-    JSONGraphExporter textExporter = new JSONGraphExporter();
+    JsonGraphExporter textExporter = new JsonGraphExporter();
     finale.append(textExporter.export(g) + "\n");
     finale.append(pezzi[2]);
     try {
@@ -44,6 +44,7 @@ public class HtmlGraphExporter implements GraphExporter {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    //return finale.toString();
     return "ciao";
   }
 }

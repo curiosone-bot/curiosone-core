@@ -1,6 +1,6 @@
 package com.github.bot.curiosone.core.knowledge;
 
-import com.github.bot.curiosone.core.knowledge.Interfaces.Vertex;
+import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
 /**
  * This class represents a Concept of a Semantic Network.

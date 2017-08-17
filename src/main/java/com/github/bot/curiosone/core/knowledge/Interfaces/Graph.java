@@ -1,4 +1,6 @@
-package com.github.bot.curiosone.core.knowledge.Interfaces;
+package com.github.bot.curiosone.core.knowledge.interfaces;
+
+import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
 
 import java.util.Collection;
 import java.util.Set;

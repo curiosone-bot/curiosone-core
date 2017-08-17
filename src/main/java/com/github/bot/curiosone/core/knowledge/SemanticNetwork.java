@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.github.bot.curiosone.core.knowledge.Interfaces.Edge;
-import com.github.bot.curiosone.core.knowledge.Interfaces.Graph;
-import com.github.bot.curiosone.core.knowledge.Interfaces.Vertex;
+import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
+import com.github.bot.curiosone.core.knowledge.interfaces.Graph;
+import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
 import it.uniroma1.lcl.babelnet.BabelNet;
 import it.uniroma1.lcl.babelnet.BabelSense;
