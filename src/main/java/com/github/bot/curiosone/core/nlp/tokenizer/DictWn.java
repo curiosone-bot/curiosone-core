@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Dictionary for tokenizer using WordNet DB .
+ * Dictionary for tokenizer using WordNet DB.
  *
  * @author Andrea Rivitto && Eugenio Schintu
  * @see https://wordnet.princeton.edu/
@@ -129,6 +129,67 @@ public class DictWn {
   }
 
   /**
+   * Conjunctions outside WN.
+   */
+  private enum ConjunctionsOutWn {
+
+    COORDINATOR("and", "or", "but"),
+    SUBORDINATOR("while", "because", "before", "since", "till", "unless", "whereas", "wheter");
+
+    private String[] items;
+
+    private ConjunctionsOutWn(String...items) {
+      this.items = items;
+    }
+
+    public String[] getItems() {
+      return items;
+    }
+  }
+
+  /**
+   * Adverbs outside WN.
+   */
+  private enum AdverbsOutWn {
+
+    INTERROGATIVE("how");
+
+    private String[] items;
+
+    private AdverbsOutWn(String...items) {
+      this.items = items;
+    }
+
+    public String[] getItems() {
+      return items;
+    }
+  }
+
+  /**
+   * Interjections outside WN.
+   */
+  private enum InterjectionsOutWn {
+
+    GENERIC("ah", "eh", "hmm", "phew", "tsk", "uhm"),
+    REGARDS("bye", "goodbye", "hello", "farewell", "hi"),
+    APOLOGIZE("so long excuse me", "sorry", "pardon", "i am sorry", "i'm sorry"),
+    GRATITUDE("thanks", "thank you", "thanks a lot"),
+    DISGUST("yuk"),
+    SURPRISE("oh"),
+    PAIN("ouch", "ohi");
+
+    private String[] items;
+
+    private InterjectionsOutWn(String...items) {
+      this.items = items;
+    }
+
+    public String[] getItems() {
+      return items;
+    }
+  }
+
+  /**
    * Verify if an array of String contains a String.
    *
    */
@@ -141,7 +202,9 @@ public class DictWn {
    *
    */
   private static Token getTokenNotWn(Token token, String item) {
-
+    /**
+     * Check Nouns.
+     */
     for (NounsOutWn n: NounsOutWn.values()) {
       if (!contains(n.getItems(),item)) {
         continue;
@@ -157,6 +220,9 @@ public class DictWn {
       token.addWord(retWord);
       return token;
     }
+    /**
+     * Check Determiners.
+     */
     for (DeterminersOutWn n: DeterminersOutWn.values()) {
       if (!contains(n.getItems(),item)) {
         continue;
@@ -168,7 +234,61 @@ public class DictWn {
       retWord.setLemma(item);
       retWord.setPos(PosT.DET);
       retWord.setLexType(LexT.valueOf(n.toString()));
-      retWord.setGloss("Pronoun outside WordNet");
+      retWord.setGloss("Determiners outside WordNet");
+      token.addWord(retWord);
+      return token;
+    }
+    /**
+     * Check Conjunctions.
+     */
+    for (ConjunctionsOutWn n: ConjunctionsOutWn.values()) {
+      if (!contains(n.getItems(),item)) {
+        continue;
+      }
+
+      token.setKnown(true);
+      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
+          retWord = new Word();
+      retWord.setLemma(item);
+      retWord.setPos(PosT.CONJ);
+      retWord.setLexType(LexT.valueOf(n.toString()));
+      retWord.setGloss("Conjunctions outside WordNet");
+      token.addWord(retWord);
+      return token;
+    }
+    /**
+     * Check Interjections.
+     */
+    for (InterjectionsOutWn n: InterjectionsOutWn.values()) {
+      if (!contains(n.getItems(),item)) {
+        continue;
+      }
+
+      token.setKnown(true);
+      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
+          retWord = new Word();
+      retWord.setLemma(item);
+      retWord.setPos(PosT.INTERJ);
+      retWord.setLexType(LexT.valueOf(n.toString()));
+      retWord.setGloss("Interjections outside WordNet");
+      token.addWord(retWord);
+      return token;
+    }
+    /**
+     * Check Adverbs.
+     */
+    for (AdverbsOutWn n: AdverbsOutWn.values()) {
+      if (!contains(n.getItems(),item)) {
+        continue;
+      }
+
+      token.setKnown(true);
+      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
+          retWord = new Word();
+      retWord.setLemma(item);
+      retWord.setPos(PosT.ADV);
+      retWord.setLexType(LexT.valueOf(n.toString()));
+      retWord.setGloss("Adverbs outside WordNet");
       token.addWord(retWord);
       return token;
     }
@@ -267,7 +387,10 @@ public class DictWn {
     //item = "speed up";
     //item = "feet";
     //item = "pull down";
-    item = "or";
+    //item = "and";
+    //item = "break down";
+    //item = "ouch";
+    item = "how";
     //item = "yourghj";
     System.out.println(getToken(item));
   }
