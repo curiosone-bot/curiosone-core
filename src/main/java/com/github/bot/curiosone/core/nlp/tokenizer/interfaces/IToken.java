@@ -1,13 +1,11 @@
 package com.github.bot.curiosone.core.nlp.tokenizer.interfaces;
 
-import java.util.Collection;
-import java.util.List;
-
-import com.github.bot.curiosone.core.nlp.tokenizer.Token;
-
 import com.github.bot.curiosone.core.nlp.tokenizer.LexT;
 import com.github.bot.curiosone.core.nlp.tokenizer.PosT;
+import com.github.bot.curiosone.core.nlp.tokenizer.Token;
 
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Token info from Tokenizer.
@@ -17,108 +15,108 @@ import com.github.bot.curiosone.core.nlp.tokenizer.PosT;
 
 public interface IToken {
 
-	/**
-	 * Get value.
-	 *
-	 * @see Word#getValue()
-	 */
+  /**
+   * Get value.
+   *
+   * @see Word#getValue()
+   */
 
-	String getValue();
+  String getValue();
 
-	/**
-	 * Get oValue.
-	 *
-	 * @see Token#getOValue()
-	 */
+  /**
+   * Get oValue.
+   *
+   * @see Token#getOValue()
+   */
 
-	public String getOValue();
+  public String getOValue();
 
-	/**
-	 * Get lemma.
-	 *
-	 * @see Word#getLemma()
-	 */
+  /**
+   * Get lemma.
+   *
+   * @see Word#getLemma()
+   */
 
-	String getLemma();
+  String getLemma();
 
-	/**
-	 * Get known.
-	 *
-	 * @see Word#isKnown()
-	 */
+  /**
+   * Get known.
+   *
+   * @see Word#isKnown()
+   */
 
-	boolean isKnown();
+  boolean isKnown();
 
-	/**
-	 * Get Part Of Speech (POS).
-	 *
-	 * @see PosT()
-	 */
+  /**
+   * Get Part Of Speech (POS).
+   *
+   * @see PosT()
+   */
 
-	PosT getPos();
+  PosT getPos();
 
-	/**
-	 * Get LexT.
-	 *
-	 * @see LexT()
-	 */
+  /**
+   * Get LexT.
+   *
+   * @see LexT()
+   */
 
-	LexT getLexT();
+  LexT getLexT();
 
-	/**
-	 * Get synsets.
-	 *
-	 * @see Word#getSynsets()
-	 */
+  /**
+   * Get synsets.
+   *
+   * @see Word#getSynsets()
+   */
 
-	List<IWord> getWords();
+  List<IWord> getWords();
 
-	/**
-	 * Get corrected.
-	 *
-	 * @see Token#isCorrected()
-	 */
+  /**
+   * Get corrected.
+   *
+   * @see Token#isCorrected()
+   */
 
-	public boolean isCorrected();
+  public boolean isCorrected();
 
-	  /**
-	   * Set a new {@link #corrected} value that is provided in input.
-	   * @param corrected the corrected to set
-	   * @see #corrected
-	   */
+  /**
+   * Set a new {@link #corrected} value that is provided in input.
+   * @param corrected the corrected to set
+   * @see #corrected
+   */
 
-	  public void setCorrected(boolean corrected);
+  public void setCorrected(boolean corrected);
 
-	  /**
-	   * Set a new {@link #known} value that is provided in input.
-	   *
-	   * @see #known
-	   */
+  /**
+   * Set a new {@link #known} value that is provided in input.
+   *
+   * @see #known
+   */
 
-	  public void setKnown(boolean known);
+  public void setKnown(boolean known);
 
-	  /**
-	   * Set a new {@link #value} value that is provided in input.
-	   *
-	   * @see #value
-	   */
+  /**
+   * Set a new {@link #value} value that is provided in input.
+   *
+   * @see #value
+   */
 
-	  public void setValue(String value);
+  public void setValue(String value);
 
-	  /**
-	   * Add to {@link #word} a new instance of Word.
-	   *
-	   * @see #words
-	   */
+  /**
+   * Add to {@link #word} a new instance of Word.
+   *
+   * @see #words
+   */
 
-	  public void addWord(IWord word);
+  public void addWord(IWord word);
 
-	  /**
-	   * Set to {@link #words} the list of Words.
-	   *
-	   * @see #words
-	   */
+  /**
+   * Set to {@link #words} the list of Words.
+   *
+   * @see #words
+   */
 
-	  public void setWords(Collection<? extends IWord> words);
+  public void setWords(Collection<? extends IWord> words);
 
 }

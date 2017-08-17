@@ -4,6 +4,7 @@ import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,34 +17,29 @@ public class Tokenizer {
   /**
    * String provided in input by the user.
    */
-
   private StringBuilder inputUser;
 
   /**
    * Typology of Sentence.
    * @see SentenceT
    */
-
   private SentenceT type;
 
   /**
    * Generated tokens' list.
    */
-
   private List<IToken> tokens;
 
   /**
    * First form of {@link #tokens}: a list of single word cleaned from any punctuation error
    * or any blank space error.
    */
-
   private List<String> stringToken;
 
   /**
    * Constructor.
    * @param input is a string provided directly from the user
    */
-
   public Tokenizer(String input) {
     inputUser = new StringBuilder(input);
     type = null;
@@ -55,8 +51,7 @@ public class Tokenizer {
    * Tokenizes the string provided in input by the user.
    * @return a new Sentence
    */
-
-  public Sentence getSentence() {
+  public Sentence getSentence() throws TokenNotFound {
     checkSentence();
     stringToken = Arrays.asList(checkPunct().toString().split(" "));
     createListOfTokens();
@@ -69,7 +64,6 @@ public class Tokenizer {
    * Also checks if the {@link #inputUser} string is a question or an affirmation/answer.
    * @return {@link #type}
    */
-
   public SentenceT checkSentence() {
     for (int i = 0; i < inputUser.length(); i++) {
       if (isSpecial(inputUser.charAt(i))) {
@@ -171,7 +165,7 @@ public class Tokenizer {
           //email
         } else if (elem == '@') {
           List<String> ls = checkNet(i);
-          sb.replace(Integer.parseInt(ls.get(1)), Integer.parseInt(ls.get(2)),ls.get(0));
+          sb.replace(Integer.parseInt(ls.get(1)), Integer.parseInt(ls.get(2)), ls.get(0));
           i = Integer.parseInt(ls.get(2));
           //URLs or mistakes
         } else if (elem == ':') {
@@ -204,12 +198,21 @@ public class Tokenizer {
   private List<String> checkAcronyms(int index) {
     List<String> ls = new ArrayList<>();
     StringBuilder sb = new StringBuilder();
-    while (isAlpha(inputUser.charAt(index))
-        || (inputUser.charAt(index) == '.' && inputUser.charAt(index - 1) != '.')
-        || (inputUser.charAt(index) == '-'
-        && (!isSpecial(inputUser.charAt(index - 1)) && !isBlank(inputUser.charAt(index - 1))))) {
-      sb.append(inputUser.charAt(index));
-      index++;
+    int ind = index;
+    while (!isBlank(inputUser.charAt(ind))) {
+      ind++;
+    }
+    if (!inputUser.substring(index, ind + 1).contains("@")) {
+      while (isAlpha(inputUser.charAt(index))
+          || (inputUser.charAt(index) == '.' && inputUser.charAt(index - 1) != '.')
+          || (inputUser.charAt(index) == '-'
+             && (!isSpecial(inputUser.charAt(index - 1))
+                 && !isBlank(inputUser.charAt(index - 1))))) {
+        sb.append(inputUser.charAt(index));
+        index++;
+      }
+    } else {
+      checkNet(index);
     }
     ls.add(sb.toString());
     ls.add("" + index);
@@ -287,7 +290,7 @@ public class Tokenizer {
       end++;
     }
     ls.add(sb.append(inputUser.substring(start, end)).toString());
-    ls.add("" + start);
+    ls.add("" + (start));
     ls.add("" + end);
     return ls;
   }
@@ -313,9 +316,61 @@ public class Tokenizer {
    * Create final tokens' list.
    * @return {@link #tokens}
    */
-  public List<IToken> createListOfTokens() {
-    return tokens;
+  public List<IToken> createListOfTokens() throws TokenNotFound {
+    StringBuilder sb = new StringBuilder();
+    stringToken.stream().filter(s -> !s.equals(" ")).forEach(s -> sb.append(s + " "));
+    addAllTokens(createToken(sb.toString(), new ArrayList<Token>(), 0, 4));
+    return getTokens();
+  }
 
+  /**
+   * This method creates the final tokens' list.
+   * @param sentence the string representation of {@link #stringToken}
+   * @param t a provisional new array of token, useful for recursion
+   * @param index setting out where to start watching
+   * @param indexForTok has a maximum value of four and is used for the recursion
+   * @return the list with all tokens of the {@link #inputUser} after that
+   *        it'll be cleaned and analyzed
+   * @throws TokenNotFound it was launch because a word passed in input by the user
+   *        is bad written
+   */
+  private List<Token> createToken(String sentence, ArrayList<Token> t, int index, int indexForTok)
+      throws TokenNotFound {
+    // base case 1:IndexOutOfBounds
+    if (index <= sentence.length() - 1) {
+      // base case 2: last element of the string
+      if (index == (sentence.length() - 1)) {
+        t.add(pincopallo(sentence.split(" ")[index]));
+        return t;
+        // base case 3: remain only the first element of quartet to analyze
+      } else if (indexForTok == 1) {
+        Token tk = pincopallo(sentence.split(" ")[index]);
+        if (!tk.isKnown()) {
+          throw new TokenNotFound();
+        }
+        t.add(tk);
+        return index < sentence.length() ? createToken(sentence, t, index + 1, 4) : t;
+
+        // recursive step
+      } else {
+        String st = sentence.substring(index, index + indexForTok);
+        Token tk = pincopallo(st);
+        if (tk.isKnown()) {
+          t.add(tk);
+          return t;
+        } else {
+          return indexForTok == 1
+              ?  createToken(sentence, t, index + 1, 4)
+                  : createToken(sentence, t, index, indexForTok - 1);
+        }
+      }
+    }
+    return t;
+  }
+
+  private Token pincopallo(String s) {
+    System.out.println(s);
+    return null;
   }
 
   /**
@@ -382,7 +437,6 @@ public class Tokenizer {
    * Get the type.
    * @return {@link #type}
    */
-
   public SentenceT getType() {
     return type;
   }
@@ -391,7 +445,6 @@ public class Tokenizer {
    * Set {@link #type} to a new value provided in input.
    * @param t type of new value
    */
-
   public void setType(SentenceT t) {
     this.type = t;
   }
@@ -407,9 +460,17 @@ public class Tokenizer {
   /**
    * Add a new element to {@link #tokens}.
    * @param t token to be add
-   * @see #tokens
    */
   public void addToken(Token t) {
     tokens.add(t);
+  }
+
+  /**
+   * Add a new collection of tokens to {@link #tokens}.
+   * @param toks collection of token to be add all
+   * @return true if this list changed as a result of the call, false otherwise
+   */
+  public boolean addAllTokens(Collection<? extends IToken> toks) {
+    return tokens.addAll(toks);
   }
 }

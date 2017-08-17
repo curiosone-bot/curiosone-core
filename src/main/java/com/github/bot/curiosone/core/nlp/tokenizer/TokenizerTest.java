@@ -5,12 +5,12 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
  *
  * @author Eugenio
  */
-public class TokenizerTest {
+public class TokenizerTest  {
   /**
    * temporary.
    */
-  public static void main(String[] args) {
-    Tokenizer t = new Tokenizer("ciao::co_me's going U-S-A, http://hfjdi/deifi0/cnd feecasa@gmail.com 163.100.98.7 va!");
+  public static void main(String[] args) throws TokenNotFound {
+    Tokenizer t = new Tokenizer("Hi, how's going U.S.A., http://hfjdi/deifi0/cnd fee.cas/a@gm.ail.com 163.100.98.7 go!");
     System.out.println(t.getType());
     t.getSentence();
     System.out.println(t.getInputUser());
