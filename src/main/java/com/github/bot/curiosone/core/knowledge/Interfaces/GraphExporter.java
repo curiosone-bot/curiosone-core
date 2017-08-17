@@ -1,13 +1,14 @@
 package com.github.bot.curiosone.core.knowledge.interfaces;
+
 /**
- * Interfaccia per l'esportazione di grafi
+ * Interfaccia per l'esportazione di grafi.
  * @author navigli
- *
  */
 @FunctionalInterface
-public interface GraphExporter{
+public interface GraphExporter {
+
   /**
-   * Restituisce la stringa che rappresenta il grafo in input
+   * Restituisce la stringa che rappresenta il grafo in input.
    * @param g il grafo in input
    * @return la stringa che rappresenta il grafo
    */
