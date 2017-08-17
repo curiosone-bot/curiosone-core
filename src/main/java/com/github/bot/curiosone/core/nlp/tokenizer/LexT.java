@@ -315,6 +315,29 @@ public enum LexT {
    * The.
    */
 
-  DEFINITE_ARTICLE
+  DEFINITE_ARTICLE,
 
+  /**
+   * Conjunctions: Coordinators (and, or, but).
+   */
+
+  COORDINATOR,
+
+  /**
+   * Conjunctions: Subordinators (while, because, before, since, till, unless, whereas, wheter).
+   */
+
+  SUBORDINATOR,
+
+  /**
+   * Interjections.
+   */
+
+  GENERIC,
+  REGARDS,
+  APOLOGIZE,
+  GRATITUDE,
+  DISGUST,
+  SURPRISE,
+  PAIN;
 }

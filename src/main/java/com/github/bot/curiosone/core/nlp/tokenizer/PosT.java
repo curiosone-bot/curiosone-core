@@ -112,6 +112,13 @@ public enum PosT {
   APP,
 
   /**
+   * Interjections (bye, goodbye, hello, farewell, hi, so long excuse me,
+   *    thanks, thank you, thanks a lot, sorry, pardon).
+   */
+
+  INTERJ,
+
+  /**
    * Unknown.
    */
 
