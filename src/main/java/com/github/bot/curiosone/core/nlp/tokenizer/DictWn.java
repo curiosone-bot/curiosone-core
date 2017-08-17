@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Dictionary for tokenizer using WordNet DB .
+ * Dictionary for tokenizer using WordNet DB.
  *
  * @author Andrea Rivitto && Eugenio Schintu
  * @see https://wordnet.princeton.edu/
@@ -148,6 +148,24 @@ public class DictWn {
   }
 
   /**
+   * Adverbs outside WN.
+   */
+  private enum AdverbsOutWn {
+
+    INTERROGATIVE("how");
+
+    private String[] items;
+
+    private AdverbsOutWn(String...items) {
+      this.items = items;
+    }
+
+    public String[] getItems() {
+      return items;
+    }
+  }
+
+  /**
    * Interjections outside WN.
    */
   private enum InterjectionsOutWn {
@@ -256,6 +274,24 @@ public class DictWn {
       token.addWord(retWord);
       return token;
     }
+    /**
+     * Check Adverbs.
+     */
+    for (AdverbsOutWn n: AdverbsOutWn.values()) {
+      if (!contains(n.getItems(),item)) {
+        continue;
+      }
+
+      token.setKnown(true);
+      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
+          retWord = new Word();
+      retWord.setLemma(item);
+      retWord.setPos(PosT.ADV);
+      retWord.setLexType(LexT.valueOf(n.toString()));
+      retWord.setGloss("Adverbs outside WordNet");
+      token.addWord(retWord);
+      return token;
+    }
     return token;
   }
 
@@ -354,7 +390,7 @@ public class DictWn {
     //item = "and";
     //item = "break down";
     //item = "ouch";
-    //item = "or";
+    item = "how";
     //item = "yourghj";
     System.out.println(getToken(item));
   }

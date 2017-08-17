@@ -328,9 +328,11 @@ public enum LexT {
    */
 
   SUBORDINATOR,
+
   /**
    * Interjections.
    */
+
   GENERIC,
   REGARDS,
   APOLOGIZE,
