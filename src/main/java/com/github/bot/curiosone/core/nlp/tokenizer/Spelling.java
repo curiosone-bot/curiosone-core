@@ -2,6 +2,7 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -82,5 +83,11 @@ public class Spelling {
         .max((a, b) -> dict.get(a) - dict.get(b));
     return dict.containsKey(word)
       ? word : (e1.isPresent() ? e1.get() : (e2.isPresent() ? e2.get() : word));
+  }
+
+  public static void main(String[] args) throws Exception {
+    Spelling sp = new Spelling(Paths.get("resources/spellCheckTxt/big.txt"));
+    System.out.println(sp.correct("candla"));
+    System.out.println(sp.correct("tabli"));
   }
 }
