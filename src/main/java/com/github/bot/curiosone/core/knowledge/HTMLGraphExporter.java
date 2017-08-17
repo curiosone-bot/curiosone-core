@@ -1,48 +1,49 @@
 package com.github.bot.curiosone.core.knowledge;
 
+import com.github.bot.curiosone.core.knowledge.Interfaces.Graph;
+import com.github.bot.curiosone.core.knowledge.Interfaces.GraphExporter;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-import com.github.bot.curiosone.core.knowledge.Interfaces.Graph;
-import com.github.bot.curiosone.core.knowledge.Interfaces.GraphExporter;
-
 /**
- * 
- * @author Christian
+ * A class to export a Semantic Network, in order to provide a HTML representation.
+ * @author Christian Sordi.
  *
  */
-public class HTMLGraphExporter implements GraphExporter
-{
-	/**
-	 * utilizzo uno stringBuffer per leggere il contenuto del file test.html che poi dovrò andare a modificare
-	 * utilizzo un'array per spezzare il file in 3 parti e di queste 3 andrò a sostituire quella al centro con il JSON
-	 * da me creato, infine salvero il nuovi file.
-	 */
-	@Override
-	public String export(Graph g) {
-		StringBuffer finale = new StringBuffer();
-		    try {
-		    	Scanner s = new Scanner(new File("resources/test.html")); //
-		        while (s.hasNextLine())										  //   leggo il file
-		        	finale.append(s.nextLine()+"\n");						  //
-		        }
-		        catch (Exception e){System.out.println(e);}
-		    
-		String[] pezzi = finale.toString().split("#END");    //splitto il file 
-		finale.delete(0, finale.length());					//svuoto lo stringbuffer
-		finale.append(pezzi[0] +"\n");						// aggiungo la prima parte dello split
-		JSONGraphExporter text_exporter = new JSONGraphExporter();
-		finale.append(text_exporter.export(g)+"\n");               // aggiungo il json da me creato
-		finale.append(pezzi[2]); 									// aggiungo la parte finale
-		try{
-		    PrintWriter writer = new PrintWriter("resources/text3.html", "UTF-8");		//
-		    writer.println(finale.toString());
-		    writer.close();
-		    } 
-		catch (IOException e){e.printStackTrace();}
-		//return finale.toString();
-		return "ciao";
-	}
+public class HtmlGraphExporter implements GraphExporter {
+  /**
+   * Convert a Semantic Network into a HTML Graph.
+   * @param g the Graph to be converted
+   * @return a String containing the HTML code of the HTML representation.
+   */
+  @Override
+  public String export(Graph g) {
+    StringBuffer finale = new StringBuffer();
+    try {
+      Scanner s = new Scanner(new File("resources/test.html"));
+      while (s.hasNextLine()) {
+        finale.append(s.nextLine() + "\n");
+      }
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+
+    String[] pezzi = finale.toString().split("#END");
+    finale.delete(0, finale.length());
+    finale.append(pezzi[0] + "\n");
+    JSONGraphExporter textExporter = new JSONGraphExporter();
+    finale.append(textExporter.export(g) + "\n");
+    finale.append(pezzi[2]);
+    try {
+      PrintWriter writer = new PrintWriter("resources/text3.html", "UTF-8");
+      writer.println(finale.toString());
+      writer.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return "ciao";
+  }
 }
