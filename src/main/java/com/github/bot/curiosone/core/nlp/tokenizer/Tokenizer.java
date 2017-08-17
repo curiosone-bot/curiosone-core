@@ -4,6 +4,7 @@ import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,34 +17,29 @@ public class Tokenizer {
   /**
    * String provided in input by the user.
    */
-
   private StringBuilder inputUser;
 
   /**
    * Typology of Sentence.
    * @see SentenceT
    */
-
   private SentenceT type;
 
   /**
    * Generated tokens' list.
    */
-
   private List<IToken> tokens;
 
   /**
    * First form of {@link #tokens}: a list of single word cleaned from any punctuation error
    * or any blank space error.
    */
-
   private List<String> stringToken;
 
   /**
    * Constructor.
    * @param input is a string provided directly from the user
    */
-
   public Tokenizer(String input) {
     inputUser = new StringBuilder(input);
     type = null;
@@ -55,8 +51,7 @@ public class Tokenizer {
    * Tokenizes the string provided in input by the user.
    * @return a new Sentence
    */
-
-  public Sentence getSentence() {
+  public Sentence getSentence() throws Exception {
     checkSentence();
     stringToken = Arrays.asList(checkPunct().toString().split(" "));
     createListOfTokens();
@@ -69,20 +64,22 @@ public class Tokenizer {
    * Also checks if the {@link #inputUser} string is a question or an affirmation/answer.
    * @return {@link #type}
    */
-
   public SentenceT checkSentence() {
     for (int i = 0; i < inputUser.length(); i++) {
       if (isSpecial(inputUser.charAt(i))) {
         if (i < inputUser.length() - 2) {
-          switch ("" + inputUser.charAt(i)) {
-            case "?":
+          switch (inputUser.charAt(i)) {
+            case '?':
               setType(SentenceT.MORE_SENTENCE);
               return getType();
-            case "!":
+            case '!':
               setType(SentenceT.MORE_SENTENCE);
               return getType();
-            case ".":
+            case '.':
               setType(verifyPunct(i));
+              if (getType().equals(SentenceT.MORE_SENTENCE)) {
+                return getType();
+              }
               break;
             default:
               continue;
@@ -105,9 +102,11 @@ public class Tokenizer {
    */
   private SentenceT verifyPunct(int index) {
     char before = inputUser.charAt(index - 1);
-    char next = inputUser.charAt(index - 1);
-    if ((isBlank(before) && isBlank(next))
-        || (isSpecial(before) || isSpecial(next))) {
+    char next = inputUser.charAt(index + 1);
+    boolean case1 = isBlank(before) && (!isAlpha(next) && !isNumber(next));
+    boolean case2 = isBlank(before) && (!isAlpha(before) && !isNumber(before));
+    boolean case3 = isSpecial(before) || isSpecial(next);
+    if ((case1 || case2) || case3) {
       setType(SentenceT.MORE_SENTENCE);
     } else {
       setType(SentenceT.ANSWER);
@@ -171,7 +170,7 @@ public class Tokenizer {
           //email
         } else if (elem == '@') {
           List<String> ls = checkNet(i);
-          sb.replace(Integer.parseInt(ls.get(1)), Integer.parseInt(ls.get(2)),ls.get(0));
+          sb.replace(Integer.parseInt(ls.get(1)), Integer.parseInt(ls.get(2)), ls.get(0));
           i = Integer.parseInt(ls.get(2));
           //URLs or mistakes
         } else if (elem == ':') {
@@ -204,14 +203,23 @@ public class Tokenizer {
   private List<String> checkAcronyms(int index) {
     List<String> ls = new ArrayList<>();
     StringBuilder sb = new StringBuilder();
-    while (isAlpha(inputUser.charAt(index))
-        || (inputUser.charAt(index) == '.' && inputUser.charAt(index - 1) != '.')
-        || (inputUser.charAt(index) == '-'
-        && (!isSpecial(inputUser.charAt(index - 1)) && !isBlank(inputUser.charAt(index - 1))))) {
-      sb.append(inputUser.charAt(index));
-      index++;
+    int ind = index;
+    while (!isBlank(inputUser.charAt(ind))) {
+      ind++;
     }
-    ls.add(sb.toString());
+    if (!inputUser.substring(index, ind + 1).contains("@")) {
+      while (isAlpha(inputUser.charAt(index))
+          || (inputUser.charAt(index) == '.' && inputUser.charAt(index - 1) != '.')
+          || (inputUser.charAt(index) == '-'
+             && (!isSpecial(inputUser.charAt(index - 1))
+                 && !isBlank(inputUser.charAt(index - 1))))) {
+        sb.append(inputUser.charAt(index));
+        index++;
+      }
+    } else {
+      checkNet(index);
+    }
+    ls.add(sb.toString() + " ");
     ls.add("" + index);
     return ls;
   }
@@ -287,7 +295,7 @@ public class Tokenizer {
       end++;
     }
     ls.add(sb.append(inputUser.substring(start, end)).toString());
-    ls.add("" + start);
+    ls.add("" + (start));
     ls.add("" + end);
     return ls;
   }
@@ -300,7 +308,7 @@ public class Tokenizer {
    */
   private List<String> checkUrl(int index) {
     List<String> ls = new ArrayList<>();
-    StringBuilder sb = new StringBuilder();
+    StringBuilder sb = new StringBuilder("h");
     while (!isBlank(inputUser.charAt(index++))) {
       sb.append(inputUser.charAt(index));
     }
@@ -312,10 +320,86 @@ public class Tokenizer {
   /**
    * Create final tokens' list.
    * @return {@link #tokens}
+   * @throws Exception see {@link #createToken(int, int)}
    */
-  public List<IToken> createListOfTokens() {
-    return tokens;
+  public List<IToken> createListOfTokens() throws Exception {
+    return createToken(0, 4);
+  }
 
+  /**
+   * This method creates the final tokens' list recursively.
+   * @param sentence the string representation of {@link #stringToken}
+   * @param t a provisional new array of token, useful for recursion
+   * @param index setting out where to start watching
+   * @param indexForTok has a maximum value of four and is used for the recursion
+   * @return the list with all tokens of the {@link #inputUser} after that
+   *        it'll be cleaned and analyzed
+   * @throws TokenNotFound token not found in dictionary after a {@link Spelling#correct(String)}
+   * @throws Exception general error
+   */
+  private List<IToken> createToken(int index, int indexForTok)
+      throws Exception {
+    // base case: index must be <= string
+    if (index <= (stringToken.size() - 1)) {
+      // last word
+      if (index == (stringToken.size() - 1)) {
+        Token tk = DictWn.getToken(stringToken.get(index));
+        if (!tk.isKnown()) {
+          tk = correctWord(stringToken.get(index));
+          if (tk != null) {
+            addToken(tk);
+            return tokens;
+          } else {
+            throw new TokenNotFound();
+          }
+        }
+        // last word of original quartet
+      } else if (indexForTok == 1) {
+        Token tk = DictWn.getToken(stringToken.get(index));
+        if (!tk.isKnown()) {
+          tk = correctWord(stringToken.get(index));
+          if (tk != null) {
+
+            addToken(tk);
+            return createToken(index + 1, 4);
+          } else {
+            throw new TokenNotFound();
+          }
+        } else {
+          addToken(tk);
+          return createToken(index + 1, 4);
+        }
+        // common case
+      } else {
+        StringBuilder sb = new StringBuilder();
+        if ((index + indexForTok) <= (stringToken.size() - 1)) {
+          stringToken.subList(index, (index + indexForTok + 1)).forEach(s -> sb.append(s + " "));
+          Token tk = DictWn.getToken(sb.toString());
+          if (!tk.isKnown()) {
+            return createToken(index, (indexForTok - 1));
+          } else {
+            addToken(tk);
+            return createToken(index + 1, 4);
+          }
+        } else {
+          stringToken.subList(index, stringToken.size()).forEach(s -> sb.append(s + " "));
+          Token tk = DictWn.getToken(sb.toString());
+          if (!tk.isKnown()) {
+            return createToken(index, (indexForTok - 1));
+          } else {
+            addToken(tk);
+            return createToken((index + 1), 4);
+          }
+        }
+      }
+    }
+    return tokens;
+  }
+
+  private Token correctWord(String s) throws Exception {
+    String correct = new Spelling().correct(s);
+    Token tk = DictWn.getToken(correct);
+    return tk.isKnown() ? tk : null;
   }
 
   /**
@@ -382,7 +466,6 @@ public class Tokenizer {
    * Get the type.
    * @return {@link #type}
    */
-
   public SentenceT getType() {
     return type;
   }
@@ -391,7 +474,6 @@ public class Tokenizer {
    * Set {@link #type} to a new value provided in input.
    * @param t type of new value
    */
-
   public void setType(SentenceT t) {
     this.type = t;
   }
@@ -407,9 +489,17 @@ public class Tokenizer {
   /**
    * Add a new element to {@link #tokens}.
    * @param t token to be add
-   * @see #tokens
    */
   public void addToken(Token t) {
     tokens.add(t);
+  }
+
+  /**
+   * Add a new collection of tokens to {@link #tokens}.
+   * @param toks collection of token to be add all
+   * @return true if this list changed as a result of the call, false otherwise
+   */
+  public boolean addAllTokens(Collection<? extends IToken> toks) {
+    return tokens.addAll(toks);
   }
 }
