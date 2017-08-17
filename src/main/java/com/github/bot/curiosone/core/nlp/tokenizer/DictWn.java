@@ -66,7 +66,7 @@ public class DictWn {
   }
 
   /**
-   *
+   * Method to create Token Structure that contains Dictionary info.
    * @param item String to search in WordNet
    * @return Token Structure that contains Dictionary info
    * @see com.github.bot.curiosone.core.nlp.tokenizer.Token
