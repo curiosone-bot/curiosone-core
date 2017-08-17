@@ -24,6 +24,7 @@ public class Spelling {
 
   private Map<String, Integer> dict = new HashMap<>();
 
+  private static Path dictionaryFile = Paths.get("resources/spellCheckTxt/big.txt");
   /**
    * It spells.
    *
@@ -31,7 +32,7 @@ public class Spelling {
    * @throws Exception if something goes wrong while spelling
    */
 
-  public Spelling(Path dictionaryFile) throws Exception {
+  public Spelling() throws Exception {
     Stream.of(new String(Files.readAllBytes(dictionaryFile)).toLowerCase().replaceAll("[^a-z ]", "")
         .split(" ")).forEach((word) -> {
           dict.compute(word, (k, v) -> v == null ? 1 : v + 1);
@@ -85,9 +86,14 @@ public class Spelling {
       ? word : (e1.isPresent() ? e1.get() : (e2.isPresent() ? e2.get() : word));
   }
 
+  /**
+   *  For test only.
+   * @param args
+
   public static void main(String[] args) throws Exception {
-    Spelling sp = new Spelling(Paths.get("resources/spellCheckTxt/big.txt"));
+    Spelling sp = new Spelling();
     System.out.println(sp.correct("candla"));
     System.out.println(sp.correct("tabli"));
   }
+  */
 }
