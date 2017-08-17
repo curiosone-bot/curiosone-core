@@ -117,6 +117,6 @@ public interface IToken {
    * @see #words
    */
 
-  public void setWords(Collection<? extends IWord> words);
+  public void addAllWords(Collection<? extends IWord> words);
 
 }

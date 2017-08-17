@@ -39,6 +39,7 @@ public class Token implements IToken {
 
   /**
    * Various semantic informations' list.
+   *
    * @see Word
    * @see IWord
    */
@@ -47,6 +48,7 @@ public class Token implements IToken {
   /**
    * Constructor.
    */
+
   public Token(String originalValue) {
     this.originalValue = originalValue;
     this.corrected = false;
@@ -60,6 +62,7 @@ public class Token implements IToken {
    * @return originalValue
    * @see #originalValue
    */
+
   @Override
   public String getOValue() {
     return originalValue;
@@ -70,6 +73,7 @@ public class Token implements IToken {
    * @param originalValue the oValue to set
    * @see #originalValue
    */
+
   public void setOValue(String originalValue) {
     this.originalValue = originalValue;
   }
@@ -79,8 +83,8 @@ public class Token implements IToken {
    * @return the corrected
    * @see #corrected
    */
-  @Override
-  public boolean isCorrected() {
+
+  @Override public boolean isCorrected() {
     return corrected;
   }
 
@@ -89,38 +93,41 @@ public class Token implements IToken {
    * @param corrected the corrected to set
    * @see #corrected
    */
-  @Override
-  public void setCorrected(boolean corrected) {
+
+  @Override public void setCorrected(boolean corrected) {
     this.corrected = corrected;
   }
 
   /**
    * Get value.
+   *
    * @return the value
    * @see #value
    */
-  @Override
-  public String getValue() {
+
+  @Override public String getValue() {
     return value;
   }
 
   /**
    * Get known.
+   *
    * @return the known
    * @see #known
    */
-  @Override
-  public boolean isKnown() {
+
+  @Override public boolean isKnown() {
     return known;
   }
 
   /**
    * Get lemma.
+   *
    * @return the lemma
    * @see #lemma
    */
-  @Override
-  public String getLemma() {
+
+  @Override public String getLemma() {
     if (!isKnown()) {
       return null;
     }
@@ -129,11 +136,12 @@ public class Token implements IToken {
 
   /**
    * Get Part of Speech (POS).
+   *
    * @return the PosT
    * @see #PosT
    */
-  @Override
-  public PosT getPos() {
+
+  @Override public PosT getPos() {
     if (!isKnown()) {
       return null;
     }
@@ -142,11 +150,12 @@ public class Token implements IToken {
 
   /**
    * Get LexT.
+   *
    * @return the lexT
    * @see #LexT
    */
-  @Override
-  public LexT getLexT() {
+
+  @Override public LexT getLexT() {
     if (!isKnown()) {
       return null;
     }
@@ -155,63 +164,75 @@ public class Token implements IToken {
 
   /**
    * Set a new {@link #known} value that is provided in input.
+   *
    * @see #known
    */
-  @Override
-  public void setKnown(boolean known) {
+
+  @Override public void setKnown(boolean known) {
     this.known = known;
   }
 
   /**
    * Set a new {@link #value} value that is provided in input.
+   *
    * @see #value
    */
-  @Override
-  public void setValue(String value) {
+
+  @Override public void setValue(String value) {
     this.value = value;
   }
 
   /**
    * Get words.
+   *
    * @return the List of Word
    * @see #words
    */
-  @Override
-  public List<IWord> getWords() {
+
+  @Override public List<IWord> getWords() {
     return words;
   }
 
   /**
    * Add to {@link #word} a new instance of Word.
+   *
    * @see #words
    */
-  @Override
-  public void addWord(IWord word) {
+
+  @Override public void addWord(IWord word) {
     this.words.add(word);
   }
 
   /**
    * Set to {@link #words} the list of Words.
+   *
    * @see #words
    */
-  @Override
-  public void setWords(Collection<? extends IWord> words) {
-    this.words.clear();
+
+  @Override public void addAllWords(Collection<? extends IWord> words) {
     this.words.addAll(words);
   }
 
   /**
    * toString.
-   * @return the string rappresentation
+   *
    */
-  @Override
-  public String toString() {
-    String out =  "Token:\n Word with more occurrence:"
-        + "\n WordID=" + this.words.get(0).getWordId()
+
+  @Override public String toString() {
+
+    String out =  "Token - OValue:" + getOValue()
+        + " Value:" + getValue()
+        + " Corrected:" + isCorrected()
+        + " Known:" + isKnown();
+    if (!isKnown()) {
+      return out;
+    }
+    out += "\n Main Word (with more occurrence):"
+        + "WordID=" + this.words.get(0).getWordId()
         + " Lemma=" + this.getLemma()
         + " POS=" + this.getPos()
         + " LextT=" + this.getLexT()
-        + " \n\n All words:";
+        + " \n All words:";
     for (IWord w: this.words) {
       out += "\n->" + w;
     }
