@@ -25,13 +25,11 @@ public class Spelling {
   private Map<String, Integer> dict = new HashMap<>();
 
   private static Path dictionaryFile = Paths.get("resources/spellCheckTxt/big.txt");
+
   /**
    * It spells.
-   *
-   * @param dictionaryFile from a specific path
    * @throws Exception if something goes wrong while spelling
    */
-
   public Spelling() throws Exception {
     Stream.of(new String(Files.readAllBytes(dictionaryFile)).toLowerCase().replaceAll("[^a-z ]", "")
         .split(" ")).forEach((word) -> {
