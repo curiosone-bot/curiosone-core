@@ -339,5 +339,10 @@ public enum LexT {
   GRATITUDE,
   DISGUST,
   SURPRISE,
-  PAIN;
+  PAIN,
+
+  /**
+   * Mail address.
+   */
+  MAIL;
 }
