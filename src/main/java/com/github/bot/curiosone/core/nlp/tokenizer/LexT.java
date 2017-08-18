@@ -256,49 +256,50 @@ public enum LexT {
   ADJ_PPL,
 
   /**
-   * I, You, He, She, It, We, You, They.
+   * Nouns: I, You, He, She, It, We, You, They.
    */
 
   PERSONAL_SUBJECTIVE,
 
   /**
-   * me, you, him, her, it, us, you, them.
+   * Pronouns: me, you, him, her, it, us, you, them.
    */
 
   PERSONAL_OBJECTIVE,
 
   /**
-   * mine, yours, his, hers, ours, theirs.
+   * Pronouns: mine, yours, his, hers, ours, theirs.
    */
 
   POSSESSIVE,
 
   /**
-   * myself, yourself, himself, herself, itself, oneself, ourselves, yourselves, themselves.
+   * Pronouns: myself, yourself, himself, herself, itself, oneself, ourselves,
+   * yourselves, themselves.
    */
 
   REFLEXIVE,
 
   /**
-   * each other, one another.
+   * Pronouns: each other, one another.
    */
 
   RECIPROCAL,
 
   /**
-   * that, which, who, whose, whom, where, when.
+   * Pronouns: that, which, who, whose, whom, where, when.
    */
 
   RELATIVE,
 
   /**
-   * this, that, these, those.
+   * Pronouns: this, that, these, those.
    */
 
   DEMONSTRATIVE,
 
   /**
-   * who, what, why, where, when, whatever.
+   * Pronouns: who, what, why, where, when, whatever.
    */
 
   INTERROGATIVE,
@@ -309,17 +310,35 @@ public enum LexT {
    * As determiners: a, an.
    */
 
-  INDEFINITE,
+  INDEFINITE_ARTICLE,
 
   /**
    * The.
    */
 
-  DEFINITE,
+  DEFINITE_ARTICLE,
 
   /**
-   * before a noun (any, that, those, this, some, whatever, whichever).
+   * Conjunctions: Coordinators (and, or, but).
    */
 
-  OTHER
+  COORDINATOR,
+
+  /**
+   * Conjunctions: Subordinators (while, because, before, since, till, unless, whereas, wheter).
+   */
+
+  SUBORDINATOR,
+
+  /**
+   * Interjections.
+   */
+
+  GENERIC,
+  REGARDS,
+  APOLOGIZE,
+  GRATITUDE,
+  DISGUST,
+  SURPRISE,
+  PAIN;
 }

@@ -2,6 +2,7 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -23,14 +24,13 @@ public class Spelling {
 
   private Map<String, Integer> dict = new HashMap<>();
 
+  private static Path dictionaryFile = Paths.get("resources/spellCheckTxt/big.txt");
+
   /**
    * It spells.
-   *
-   * @param dictionaryFile from a specific path
    * @throws Exception if something goes wrong while spelling
    */
-
-  public Spelling(Path dictionaryFile) throws Exception {
+  public Spelling() throws Exception {
     Stream.of(new String(Files.readAllBytes(dictionaryFile)).toLowerCase().replaceAll("[^a-z ]", "")
         .split(" ")).forEach((word) -> {
           dict.compute(word, (k, v) -> v == null ? 1 : v + 1);
@@ -83,4 +83,15 @@ public class Spelling {
     return dict.containsKey(word)
       ? word : (e1.isPresent() ? e1.get() : (e2.isPresent() ? e2.get() : word));
   }
+
+  /**
+   *  For test only.
+   * @param args
+
+  public static void main(String[] args) throws Exception {
+    Spelling sp = new Spelling();
+    System.out.println(sp.correct("candla"));
+    System.out.println(sp.correct("tabli"));
+  }
+  */
 }
