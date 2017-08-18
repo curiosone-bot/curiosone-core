@@ -1,26 +1,21 @@
 package com.github.bot.curiosone.core.knowledge;
 
-import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
-import com.github.bot.curiosone.core.knowledge.interfaces.Graph;
-import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
-
-import it.uniroma1.lcl.babelnet.BabelNet;
-import it.uniroma1.lcl.babelnet.BabelSense;
-import it.uniroma1.lcl.babelnet.BabelSynset;
-import it.uniroma1.lcl.babelnet.BabelSynsetIDRelation;
-import it.uniroma1.lcl.babelnet.BabelSynsetSource;
-import it.uniroma1.lcl.babelnet.iterators.BabelSynsetIterator;
-import it.uniroma1.lcl.jlt.util.Language;
-
+import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
+
+import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
+import com.github.bot.curiosone.core.knowledge.interfaces.Graph;
+import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
 /**
  * This class is used to implement a Semantic Network.
@@ -29,7 +24,7 @@ import java.util.stream.Collectors;
 public class SemanticNetwork implements Graph {
 
   private Map<Vertex,Set<Edge>> grafo;
-
+  private Path percorso = new File("C:Users/Christian/Desktop/SemanticNetwork.txt").toPath();
   private static SemanticNetwork curiosoneSemanticNetwork;
 
   /**
@@ -45,70 +40,16 @@ public class SemanticNetwork implements Graph {
 
   private SemanticNetwork() throws IOException {
     this.grafo = new HashMap<>();
-    /*
-    BabelSynsetIterator bni = BabelNet.getInstance().getSynsetIterator();
-    while(bni.hasNext())
-    {
-      BabelSynset synset = bni.next();
-      BabelSense source = synset.getMainSense((Language.EN));
-      if(source.getSource()==BabelSenseSource.WN)
-      {
-        List<BabelSynsetIDRelation> edges = synset.getEdges();
-        for ( BabelSynsetIDRelation relazione : edges)
-        {
-          if (relazione.getLanguage()==Language.EN)
-          {
-            BabelSense target = BabelNet.getInstance()
-              .getSynset(relazione.getBabelSynsetIDTarget())
-              .getMainSense(Language.EN);
-            if (target.getSource()== BabelSenseSource.WN)
-            {
-              SemanticRelationType relation = null;
-              BabelPointer pointer = relazione.getPointer();
-              Set<String> relazioni = Arrays.stream(SemanticRelationType
-                .values())
-                .map(SemanticRelationType::toString)
-                .collect(Collectors.toSet());
-              if (relazioni.contains(pointer.toString().toUpperCase()))
-              {
-                Vertex v1 = new Concept(source.getLemma());
-                Vertex v2 = new Concept(target.getLemma());
-                this.addEdge(v1, v2, SemanticRelationType.valueOf(pointer
-                  .toString().toUpperCase()));
-              }
-            }
-          }
-        }
-      }
-    }*/
-    //------------------------------SECOND VERSION----------------------
-    int k = 0;
-    BabelNet bn = BabelNet.getInstance();
-    Set<String> ourSemanticRType = Arrays.stream(SemanticRelationType.values())
-          .map(SemanticRelationType::toString)
-          .collect(Collectors.toSet());
-    BabelSynsetIterator bsi = bn.getSynsetIterator();
-    while (bsi.hasNext()) {
-      BabelSynset bs = bsi.next();
-      if (bs.getSynsetSource() == BabelSynsetSource.WN) {
-        BabelSense source = bs.getMainSense(Language.EN);
-        List<BabelSynsetIDRelation> edges = bs.getEdges();
-        for (BabelSynsetIDRelation edge : edges) {
-          BabelSynset bst = bn.getSynset(edge.getBabelSynsetIDTarget());
-          if (edge.getLanguage() == Language.EN && bst.getSynsetSource() == BabelSynsetSource.WN) {
-            BabelSense target = bst.getMainSense(Language.EN);
-            String pointer = edge.getPointer().toString().toUpperCase();
-            if (ourSemanticRType.contains(pointer.toString().toUpperCase())) {
-              Vertex v1 = new Concept(source.getLemma());
-              Vertex v2 = new Concept(target.getLemma());
-              this.addEdge(v1, v2, SemanticRelationType.valueOf(pointer.toString().toUpperCase()));
-              System.out.println(k);
-              k++;
-            }
-          }
-        }
-      }
-    }
+	List<String> linee_file = new ArrayList<>();
+	linee_file = Files.readAllLines(this.percorso);
+	for(String linea : linee_file) {
+	  String[] linee = linea.split(",");
+	  Concept source = new Concept(linee[0]);	
+	  Concept target = new Concept(linee[2]);
+	  SemanticRelationType type = SemanticRelationType.valueOf(linee[1].trim());
+	  SemanticRelation Arco = new SemanticRelation(source,target,type);
+	  this.add(Arco);
+	}
   }
 
   public Map<Vertex,Set<Edge>> getGrafo() {
@@ -196,22 +137,45 @@ public class SemanticNetwork implements Graph {
     return new HashSet<Edge>();
   }
 
+  /**
+   * Prendo tutti gli archi che hanno come destinazione il vertice v
+   * controllando il getTarget di ogni arco.
+   */
   @Override
-  public void addVertices(Collection<? extends Vertex> vertexSet) {
-    for (Vertex nodo : vertexSet) {
-      add(nodo);
-    }
+  public Set<Edge> incomingEdges(Vertex v) {
+	if (containsVertex(v)) {
+	  Set<Edge> incomingEdges = new HashSet<>();
+	  for (Edge arco : grafo.get(v)) {
+		if (arco.getTarget().equals(v)) {
+		  incomingEdges.add(arco);
+		}  
+	  }
+	return incomingEdges;
+	}
+	return new HashSet<Edge>();
   }
 
-  /**
-  * Riuso dei metodi soprastanti.
-  */
   @Override
   public void addEdges(Collection<? extends Edge> edgeSet) {
     for (Edge arco : edgeSet) {
       add(arco);
     }
+  }
+  
+  @Override
+  public Boolean isPresent(SemanticRelationType tipo, String token) {
+	for (Edge e : this.edgeSet()) {
+      if (e.getSource().getId().equals(token)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
+  @Override
+  public Optional<Set<Edge>> getAnswer(SemanticRelationType tipo, String token) {
+    // TODO Auto-generated method stub
+    return null;
   }
 
   @Override
@@ -233,15 +197,5 @@ public class SemanticNetwork implements Graph {
     result = 31 * result + edgeSet().hashCode();
     result = 31 * result + vertexSet().hashCode();
     return result;
-  }
-
-  @Override
-  public Vertex search(SemanticRelationType tipo, String token) {
-    for (Edge e : this.edgeSet()) {
-      if (e.getSource().getId().equals(token)) {
-        return e.getTarget();
-      }
-    }
-    return null;
   }
 }
