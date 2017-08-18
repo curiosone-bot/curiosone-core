@@ -390,7 +390,7 @@ public class DictWn {
     //item = "and";
     //item = "break down";
     //item = "ouch";
-    item = "how";
+    item = "house";
     //item = "yourghj";
     System.out.println(getToken(item));
   }
