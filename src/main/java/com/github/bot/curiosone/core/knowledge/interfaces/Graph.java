@@ -4,6 +4,7 @@ import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
 import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -64,12 +65,13 @@ public interface Graph {
    * @return insieme degli archi uscenti
    */
   Set<Edge> outgoingEdges(Vertex v);
-
+  
   /**
-   * Aggiunge tutti i vertici forniti in input.
-   * @param vertexSet i vertici da aggiungere
+   * Restituisce l'insieme di archi entranti.
+   * @param v vertice su cui calcolare l'insieme di archi
+   * @return insieme degli archi uscenti
    */
-  void addVertices(Collection<? extends Vertex> vertexSet);
+  Set<Edge> incomingEdges(Vertex v);
 
   /**
    * Aggiunge tutti gli archi forniti in input.
@@ -78,9 +80,18 @@ public interface Graph {
   void addEdges(Collection<? extends Edge> edgeSet);
 
   /**
-   * Returns the linked vertex, if present.
+   * Checks if a SemanticRelation is present.
    * @param tipo del collegamento dell'arco da cercare
    * @param token vertice del quale cercare il significato collegato
+   * @return a Boolean that Checks if a SemanticRelation is present.
    */
-  Vertex search(SemanticRelationType tipo, String token);
+  Boolean isPresent(SemanticRelationType tipo, String token);
+  
+  /**
+   * Returns a Set<Edge> related to Concept token, if present.
+   * @param tipo del collegamento dell'arco da cercare
+   * @param token vertice del quale cercare il significato collegato
+   * @return Option<Set<Edge>>
+   */
+  Optional<Set<Edge>> getAnswer(SemanticRelationType tipo, String token);
 }
