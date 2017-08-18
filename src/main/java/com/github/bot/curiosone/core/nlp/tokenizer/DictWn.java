@@ -371,27 +371,4 @@ public class DictWn {
     return token;
     // end getToken
   }
-
-  /**
-   * Test DictWn.
-   * @param args Argument list
-   */
-  public static void main(String[] args) {
-
-    String item = "";
-    //item = "next door";
-    //item = "Mark Twain";
-    //item = "fast food";
-    //item = "Calamity Jane";
-    //item = "running";
-    //item = "speed up";
-    //item = "feet";
-    //item = "pull down";
-    //item = "and";
-    //item = "break down";
-    //item = "ouch";
-    item = "house";
-    //item = "yourghj";
-    System.out.println(getToken(item));
-  }
 }
