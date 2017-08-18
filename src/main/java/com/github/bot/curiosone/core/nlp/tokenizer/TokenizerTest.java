@@ -10,7 +10,7 @@ public class TokenizerTest {
    * temporary.
    */
   public static void main(String[] args) throws Exception {
-    Tokenizer t = new Tokenizer("hi how's going U.S.A.,  house?");
+    Tokenizer t = new Tokenizer("hi how is U.S.A., car me what house?");
     //    System.out.println(t.getType());
     t.getSentence();
     //    System.out.println(t.getType());

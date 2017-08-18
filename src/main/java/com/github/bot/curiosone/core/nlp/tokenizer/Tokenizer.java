@@ -353,13 +353,13 @@ public class Tokenizer {
             throw new TokenNotFound();
           }
         }
+        addToken(tk);
         // last word of original quartet
-      } else if (indexForTok == 1) {
+      } else if (indexForTok == 0) {
         Token tk = DictWn.getToken(stringToken.get(index));
         if (!tk.isKnown()) {
           tk = correctWord(stringToken.get(index));
           if (tk != null) {
-
             addToken(tk);
             return createToken(index + 1, 4);
           } else {
@@ -388,7 +388,11 @@ public class Tokenizer {
             return createToken(index, (indexForTok - 1));
           } else {
             addToken(tk);
-            return createToken((index + 1), 4);
+            if (index < stringToken.size() - 1) {
+              return createToken((index + 1), 4);
+            } else {
+              return createToken(index, indexForTok - 1);
+            }
           }
         }
       }
