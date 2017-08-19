@@ -1,9 +1,9 @@
 package com.github.bot.curiosone.core.knowledge;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 public class SemanticNetwork implements Graph {
 
   private Map<Vertex,Set<Edge>> grafo;
-  private Path percorso = new File("C:Users/Christian/Desktop/SemanticNetwork.txt").toPath();
+  private Path percorso = Paths.get("BasicSemanticNetwork/CuriosoneSemanticNetwork.txt");
   private static SemanticNetwork curiosoneSemanticNetwork;
 
   /**
@@ -41,7 +41,8 @@ public class SemanticNetwork implements Graph {
   private SemanticNetwork() throws IOException {
     this.grafo = new HashMap<>();
 	List<String> linee_file = new ArrayList<>();
-	linee_file = Files.readAllLines(this.percorso);
+	linee_file = Files.readAllLines(percorso);
+	linee_file.remove(linee_file.size()-1);
 	for(String linea : linee_file) {
 	  String[] linee = linea.split(",");
 	  Concept source = new Concept(linee[0]);	

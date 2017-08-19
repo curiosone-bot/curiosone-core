@@ -92,7 +92,7 @@ public class WNSemanticNetworkTxtExporter {
     if (LastNewLine >= 0) {
   	  exporter.delete(LastNewLine, exporter.length());
     }
-    PrintWriter writer = new PrintWriter("BasicSemanticNetwork/curiosoneSemanticNetwork.txt", "UTF-8");
+    PrintWriter writer = new PrintWriter("BasicSemanticNetwork/CuriosoneSemanticNetwork.txt", "UTF-8");
     writer.println(exporter.toString());
     writer.close();
     System.out.println("Rete Semantica di WordNet creata con successo");
