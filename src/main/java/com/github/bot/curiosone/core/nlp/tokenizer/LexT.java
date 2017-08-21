@@ -274,7 +274,8 @@ public enum LexT {
   POSSESSIVE,
 
   /**
-   * Pronouns: myself, yourself, himself, herself, itself, oneself, ourselves, yourselves, themselves.
+   * Pronouns: myself, yourself, himself, herself, itself, oneself, ourselves,
+   * yourselves, themselves.
    */
 
   REFLEXIVE,

@@ -68,7 +68,7 @@ public class DictWn {
   }
 
   /**
-   *
+   * Method to create Token Structure that contains Dictionary info.
    * @param item String to search in WordNet
    * @return Token Structure that contains Dictionary info
    * @see com.github.bot.curiosone.core.nlp.tokenizer.Token
@@ -427,12 +427,11 @@ public class DictWn {
     }
     return token;
     // end getToken
-  }
 
   /**
    * For test only.
    * @param args input args
-  */
+ 
   public static void main(String[] args) {
 
     System.out.println(DictWn.getToken("arivitto@gmail.com"));
@@ -441,5 +440,6 @@ public class DictWn {
     System.out.println("\n" + DictWn.getToken("12.34"));
     System.out.println("\n" + DictWn.getToken("0.45"));
   }
-
+  */
+  }
 }
