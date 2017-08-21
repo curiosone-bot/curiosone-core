@@ -15,6 +15,8 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Dictionary for tokenizer using WordNet DB.
@@ -198,10 +200,65 @@ public class DictWn {
   }
 
   /**
+   * Verify Mail String.
+   * @see http://howtodoinjava.com/regex/java-regex-validate-email-address/
+   * @see http://www.rfc-editor.org/rfc/rfc5322.txt
+   */
+
+  public static boolean isValidEmailAddress(String email) {
+    String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]"
+        + "+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+
+    return Pattern.compile(regex).matcher(email).matches();
+  }
+
+  /**
+   * Verify Numeric String.
+   */
+  private static boolean isNumeric(String str) {
+    try {
+      Double.parseDouble(str);
+    } catch (NumberFormatException nfe) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
    * Get Token outside of WordNet Database.
    *
    */
+
   private static Token getTokenNotWn(Token token, String item) {
+
+    /**
+     * Check Numeric.
+     */
+    if (isNumeric(item)) {
+      token.setKnown(true);
+      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
+              retWord = new Word();
+      retWord.setLemma(item);
+      retWord.setPos(PosT.NUMB);
+      retWord.setLexType(LexT.QUANTITY);
+      retWord.setGloss("Numeric outside WordNet");
+      token.addWord(retWord);
+      return token;
+    }
+    /**
+     * Check mail address.
+     */
+    if (isValidEmailAddress(item)) {
+      token.setKnown(true);
+      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
+              retWord = new Word();
+      retWord.setLemma(item);
+      retWord.setPos(PosT.N);
+      retWord.setLexType(LexT.MAIL);
+      retWord.setGloss("Mail address outside WordNet");
+      token.addWord(retWord);
+      return token;
+    }
     /**
      * Check Nouns.
      */
@@ -370,5 +427,19 @@ public class DictWn {
     }
     return token;
     // end getToken
+
+  /**
+   * For test only.
+   * @param args input args
+ 
+  public static void main(String[] args) {
+
+    System.out.println(DictWn.getToken("arivitto@gmail.com"));
+    System.out.println("\n" + DictWn.getToken("rivitto.662503@studenti.uniroma1.it"));
+    System.out.println("\n" + DictWn.getToken("13410"));
+    System.out.println("\n" + DictWn.getToken("12.34"));
+    System.out.println("\n" + DictWn.getToken("0.45"));
+  }
+  */
   }
 }
