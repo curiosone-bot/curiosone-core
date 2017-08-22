@@ -462,21 +462,22 @@ public class DictWn {
     // end getToken
 
   }
+
   /**
    * For test only.
    * @param args input args
-   */
 
   public static void main(String[] args) {
 
-    System.out.println(DictWn.getToken("arivitto@gmail.com"));
-    System.out.println("\n" + DictWn.getToken("rivitto.662503@studenti.uniroma1.it"));
-    System.out.println("\n" + DictWn.getToken("13410"));
-    System.out.println("\n" + DictWn.getToken("12.34"));
-    System.out.println("\n" + DictWn.getToken("dog"));
-    System.out.println("\n" + DictWn.getToken("crawler"));
-    System.out.println("\n" + DictWn.getToken("dog"));
+    //System.out.println(DictWn.getToken("arivitto@gmail.com"));
+    //System.out.println("\n" + DictWn.getToken("rivitto.662503@studenti.uniroma1.it"));
+    //System.out.println("\n" + DictWn.getToken("13410"));
+    //System.out.println("\n" + DictWn.getToken("12.34"));
+    //System.out.println("\n" + DictWn.getToken("dog"));
+    //System.out.println("\n" + DictWn.getToken("crawler"));
+    //System.out.println("\n" + DictWn.getToken("dog"));
     System.out.println("\n" + DictWn.getToken("come back"));
-    System.out.println("\n" + DictWn.getToken("projector"));
+    //System.out.println("\n" + DictWn.getToken("projector"));
   }
+  */
 }
