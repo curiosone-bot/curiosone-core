@@ -5,9 +5,16 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
  *
  * @author Andrea Rivitto && Eugenio Schintu
  * @see https://web.stanford.edu/class/cs276a/projects/docs/jwnl/javadoc/net/didion/jwnl/data/PointerType.html
+ * @see http://javadox.com/edu.mit/jwi/2.2.3/edu/mit/jwi/item/Pointer.html
  */
 
 public enum PointerT {
+
+  /**
+   * Also See.
+   */
+
+  ALSO_SEE,
 
   /**
    * Antonym.
@@ -28,16 +35,16 @@ public enum PointerT {
   CAUSE,
 
   /**
-   * Derived.
+   * Derivationally related.
    */
 
-  DERIVED,
+  DERIVATIONALLY_RELATED_FORM,
 
   /**
-   * Entailed by.
+   * Derived from adjective.
    */
 
-  ENTAILED_BY,
+  DERIVED_FROM_ADJ,
 
   /**
    * Entailment.
@@ -52,46 +59,82 @@ public enum PointerT {
   HYPERNYM,
 
   /**
+   * Hyperonym instance.
+   */
+
+  INSTANCE_HYPERNYM,
+
+  /**
    * Hyponym.
    */
 
   HYPONYM,
 
   /**
-   * Member of holonym.
+   * Hyponym instance.
+   */
+
+  INSTANCE_HYPONYM,
+
+  /**
+   * Member holonym.
    */
 
   MEMBER_HOLONYM,
 
   /**
-   * Member of meronym.
+   * Holonym substance.
    */
 
-  MEMBER_MERONYM,
+  SUBSTANCE_HOLONYM,
 
   /**
-   * Part of holonym.
+   * Part holonym.
    */
 
   PART_HOLONYM,
 
   /**
-   * Part of meronym.
+   * Meronym member.
+   */
+
+  MEMBER_MERONYM,
+
+  /**
+   * Meronym substance.
+   */
+
+  SUBSTANCE_MERONYM,
+
+  /**
+   * Meronym part.
    */
 
   PART_MERONYM,
 
   /**
-   * Participle of.
+   * Participle.
    */
 
-  PARTICIPLE_OF,
+  PARTICIPLE,
 
   /**
-   * See also.
+   * Pertainym.
    */
 
-  SEE_ALSO,
+  PERTAINYM,
+
+  /**
+   * Region.
+   */
+
+  REGION,
+
+  /**
+   * Region member.
+   */
+
+  REGION_MEMBER,
 
   /**
    * Similar.
@@ -100,16 +143,28 @@ public enum PointerT {
   SIMILAR_TO,
 
   /**
-   * Substance of holomyn.
+   * Topic.
    */
 
-  SUBSTANCE_HOLONYM,
+  TOPIC,
 
   /**
-   * Substanc of meronym.
+   * Topic member.
    */
 
-  SUBSTANCE_MERONYM,
+  TOPIC_MEMBER,
+
+  /**
+   * Usage.
+   */
+
+  USAGE,
+
+  /**
+   * Usage member.
+   */
+
+  USAGE_MEMBER,
 
   /**
    * Verb group.

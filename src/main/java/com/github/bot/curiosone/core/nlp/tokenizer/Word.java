@@ -4,6 +4,9 @@ import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord;
 
 import edu.mit.jwi.item.IWordID;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -84,6 +87,15 @@ public class Word implements IWord {
   @Override public IWordID getWordId() {
     return wordId;
   }
+
+  /**
+   * Constructor.
+   */
+
+  public Word() {
+    relations = new HashMap<PointerT, List<String>>();
+  }
+
 
   /**
    * Set a new {@link #wordId} value that is provided in input.
@@ -211,8 +223,12 @@ public class Word implements IWord {
    * @see #relations
    */
 
-  @Override public void addRelation(PointerT p, List<String> value) {
-    this.relations.put(p, value);
+  @Override public void addRelation(PointerT p, String v) {
+    this.relations.merge(p,
+        new ArrayList<String>(Arrays.asList(v)),(v1,v2) -> {
+            v1.add(v);
+            return v1;
+        });
   }
 
   /**
@@ -232,12 +248,16 @@ public class Word implements IWord {
    */
 
   @Override public String toString() {
-    return "WordId=" + this.wordId
-        + " Lemma=" + this.lemma
-        + " POS=" + this.pos
-        + " LextT=" + this.lexType
-        + " Gloss=" + this.gloss
-        + " Occurrence=" + this.number;
+
+    String out = "WordId = " + this.wordId
+        + " Lemma = " + this.lemma
+        + " POS = " + this.pos
+        + " LextT = " + this.lexType
+        + " Gloss = " + this.gloss
+        + " Occurrence = " + this.number;
+
+    out += "\n" + relations.entrySet().toString();
+    return out;
   }
 
   @Override public boolean equals(Object obj) {
