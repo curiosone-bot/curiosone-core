@@ -125,7 +125,7 @@ public interface IWord {
    * @see #relations
    */
 
-  public void addRelation(PointerT p, List<String> value);
+  public void addRelation(PointerT p, String value);
 
   /**
    * Set the map of relations.
