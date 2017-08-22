@@ -45,6 +45,7 @@ The project comes with some useful tools that will help you automatize some comm
 * `gradle build` to build and compile the entire project
 * `gradle check` to run unit checks
 * `gradle test` to run unit tests
+* `gradle check` to run unit checks
 * `gradle javadoc` to generate the javadoc
 
 
