@@ -2,9 +2,12 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
 
 import edu.mit.jwi.IDictionary;
 import edu.mit.jwi.item.IIndexWord;
+import edu.mit.jwi.item.ISynset;
+import edu.mit.jwi.item.ISynsetID;
 import edu.mit.jwi.item.IWord;
 import edu.mit.jwi.item.IWordID;
 import edu.mit.jwi.item.POS;
+import edu.mit.jwi.item.Pointer;
 import edu.mit.jwi.morph.WordnetStemmer;
 
 import java.net.URL;
@@ -13,9 +16,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -84,9 +87,9 @@ public class DictWn {
   }
 
   /**
-   * Nouns outside WN.
+   * Pronouns outside WN.
    */
-  private enum NounsOutWn {
+  private enum PronounsOutWn {
 
       PERSONAL_SUBJECTIVE("i", "you", "he", "she", "it", "we", "you", "they"),
       PERSONAL_OBJECTIVE("me", "you", "him", "her", "it", "us", "you", "them"),
@@ -102,7 +105,7 @@ public class DictWn {
 
     private String[] items;
 
-    private NounsOutWn(String...items) {
+    private PronounsOutWn(String...items) {
       this.items = items;
     }
 
@@ -260,9 +263,9 @@ public class DictWn {
       return token;
     }
     /**
-     * Check Nouns.
+     * Check Pronouns.
      */
-    for (NounsOutWn n: NounsOutWn.values()) {
+    for (PronounsOutWn n: PronounsOutWn.values()) {
       if (!contains(n.getItems(),item)) {
         continue;
       }
@@ -354,7 +357,7 @@ public class DictWn {
 
   /**
    * Get Token from WordNet Database.
-   * List of Word were ordered descending based on frequency occurrence (getTagCount()).
+   * List of Word descending ordered based on frequency occurrence (getTagCount()).
    * @See https://stackoverflow.com/questions/21264158/how-to-access-frequency-count-in-wordnet-in-any-java-wordnet-interface
    */
   private static Token getTokenWn(Token token, String item) {
@@ -406,6 +409,36 @@ public class DictWn {
                 .getSenseEntry(word.getSenseKey())
                 .getTagCount());
 
+            /**
+             * Get semantic relations from synset.
+            */
+
+            ISynset synset = word.getSynset();
+
+            for (Pointer pt: Pointer.values()) {
+              List<ISynsetID> synList = synset.getRelatedSynsets(pt) ;
+              List<IWord> words;
+              for (ISynsetID sid: synList) {
+                words = dictionary.getSynset(sid).getWords();
+                for (Iterator<IWord> i = words.iterator(); i.hasNext();) {
+                  retWord.addRelation(PointerT.valueOf(pt.toString().toUpperCase()),
+                      i.next().getLemma());
+                }
+              }
+            }
+
+            /**
+             * Get lexical relations from word.
+             */
+
+            for (Pointer pt: Pointer.values()) {
+              for (IWordID wid: word.getRelatedWords(pt)) {
+                retWord.addRelation(PointerT.valueOf(pt.toString().toUpperCase()),
+                    dictionary.getWord(wid).getLemma());
+              }
+            }
+
+            //add retWord
             retWords.add(retWord);
 
           } // end for IWordID
@@ -428,18 +461,23 @@ public class DictWn {
     return token;
     // end getToken
 
+  }
+
   /**
    * For test only.
    * @param args input args
- 
+
   public static void main(String[] args) {
 
-    System.out.println(DictWn.getToken("arivitto@gmail.com"));
-    System.out.println("\n" + DictWn.getToken("rivitto.662503@studenti.uniroma1.it"));
-    System.out.println("\n" + DictWn.getToken("13410"));
-    System.out.println("\n" + DictWn.getToken("12.34"));
-    System.out.println("\n" + DictWn.getToken("0.45"));
+    //System.out.println(DictWn.getToken("arivitto@gmail.com"));
+    //System.out.println("\n" + DictWn.getToken("rivitto.662503@studenti.uniroma1.it"));
+    //System.out.println("\n" + DictWn.getToken("13410"));
+    //System.out.println("\n" + DictWn.getToken("12.34"));
+    //System.out.println("\n" + DictWn.getToken("dog"));
+    //System.out.println("\n" + DictWn.getToken("crawler"));
+    //System.out.println("\n" + DictWn.getToken("dog"));
+    System.out.println("\n" + DictWn.getToken("come back"));
+    //System.out.println("\n" + DictWn.getToken("projector"));
   }
   */
-  }
 }
