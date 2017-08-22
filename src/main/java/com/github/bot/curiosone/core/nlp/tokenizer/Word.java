@@ -218,6 +218,17 @@ public class Word implements IWord {
   }
 
   /**
+   * Get relations by PointerT.
+   *
+   * @see Word#getRelationsByPointerT()
+   */
+
+  @Override
+  public List<String> getRelationsByPointerT(PointerT pointer) {
+    return new ArrayList<String>(relations.getOrDefault(pointer, null));
+  }
+
+  /**
    * Add a new element to relations.
    *
    * @see #relations

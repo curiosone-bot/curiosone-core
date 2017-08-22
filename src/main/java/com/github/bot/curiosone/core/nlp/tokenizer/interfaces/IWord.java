@@ -74,6 +74,13 @@ public interface IWord {
   Map<PointerT, List<String>> getRelations();
 
   /**
+   * Get relations by PointerT.
+   *
+   * @see Word#getRelationsByPointerT()
+   */
+  List<String> getRelationsByPointerT(PointerT pointer);
+
+  /**
    * Set a new {@link #wordId} value that is provided in input.
    *
    * @see #wordId
