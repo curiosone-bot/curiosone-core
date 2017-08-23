@@ -220,18 +220,20 @@ public class Token implements IToken {
 
   @Override public String toString() {
 
-    String out =  "Token - OValue:" + getOValue()
-        + " Value:" + getValue()
-        + " Corrected:" + isCorrected()
-        + " Known:" + isKnown();
+    String out =  "Token - OValue = " + getOValue()
+        + " Value = " + getValue()
+        + " Corrected = " + isCorrected()
+        + " Known = " + isKnown();
     if (!isKnown()) {
       return out;
     }
     out += "\n Main Word (with more occurrence):"
-        + "WordID=" + this.words.get(0).getWordId()
-        + " Lemma=" + this.getLemma()
-        + " POS=" + this.getPos()
-        + " LextT=" + this.getLexT()
+        + "WordId = " + this.words.get(0).getWordId()
+        + " Lemma = " + this.words.get(0).getLemma()
+        + " POS = " + this.words.get(0).getPos()
+        + " LextT = " + this.words.get(0).getLexType()
+        + " Gloss = " + this.words.get(0).getGloss()
+        + " Occurrence = " + this.words.get(0).getNum()
         + " \n All words:";
     for (IWord w: this.words) {
       out += "\n->" + w;
