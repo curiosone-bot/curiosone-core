@@ -164,13 +164,16 @@ public class SemanticNetwork implements Graph {
   }
   
   @Override
-  public Boolean isPresent(SemanticRelationType tipo, String token) {
-	for (Edge e : this.edgeSet()) {
-      if (e.getSource().getId().equals(token)) {
-        return true;
-      }
-    }
-    return false;
+  public Boolean isPresent(SemanticRelationType type, String token) {
+	Vertex Vtoken = new Concept(token);
+	if (this.containsVertex(Vtoken)) {
+	  for (Edge e : grafo.get(Vtoken)) {
+		if (e.getType().equals(type)) {
+		  return true;
+		}
+	  }
+	}
+	return false;
   }
 
   @Override
