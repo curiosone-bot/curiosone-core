@@ -1,5 +1,8 @@
 package com.github.bot.curiosone.core.knowledge;
 
+import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
+import com.github.bot.curiosone.core.knowledge.interfaces.Graph;
+import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,9 +16,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
-import com.github.bot.curiosone.core.knowledge.interfaces.Graph;
-import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
 /**
  * This class is used to implement a Semantic Network.
@@ -40,17 +40,17 @@ public class SemanticNetwork implements Graph {
 
   private SemanticNetwork() throws IOException {
     this.grafo = new HashMap<>();
-	List<String> linee_file = new ArrayList<>();
-	linee_file = Files.readAllLines(percorso);
-	linee_file.remove(linee_file.size()-1);
-	for(String linea : linee_file) {
-	  String[] linee = linea.split(",");
-	  Concept source = new Concept(linee[0]);	
-	  Concept target = new Concept(linee[2]);
-	  SemanticRelationType type = SemanticRelationType.valueOf(linee[1].trim());
-	  SemanticRelation Arco = new SemanticRelation(source,target,type);
-	  this.add(Arco);
-	}
+    List<String> lineefile = new ArrayList<>();
+    lineefile = Files.readAllLines(percorso);
+    lineefile.remove(lineefile.size() - 1);
+    for (String linea : lineefile) {
+      String[] linee = linea.split(",");
+      Concept source = new Concept(linee[0]);
+      Concept target = new Concept(linee[2]);
+      SemanticRelationType type = SemanticRelationType.valueOf(linee[1].trim());
+      SemanticRelation arco = new SemanticRelation(source,target,type);
+      this.add(arco);
+    }
   }
 
   public Map<Vertex,Set<Edge>> getGrafo() {
@@ -144,16 +144,16 @@ public class SemanticNetwork implements Graph {
    */
   @Override
   public Set<Edge> incomingEdges(Vertex v) {
-	if (containsVertex(v)) {
-	  Set<Edge> incomingEdges = new HashSet<>();
-	  for (Edge arco : grafo.get(v)) {
-		if (arco.getTarget().equals(v)) {
-		  incomingEdges.add(arco);
-		}  
-	  }
-	return incomingEdges;
-	}
-	return new HashSet<Edge>();
+    if (containsVertex(v)) {
+      Set<Edge> incomingEdges = new HashSet<>();
+      for (Edge arco : grafo.get(v)) {
+        if (arco.getTarget().equals(v)) {
+          incomingEdges.add(arco);
+        }  
+      }
+      return incomingEdges;
+    }
+    return new HashSet<Edge>();
   }
 
   @Override
@@ -165,15 +165,15 @@ public class SemanticNetwork implements Graph {
   
   @Override
   public Boolean isPresent(SemanticRelationType type, String token) {
-	Vertex Vtoken = new Concept(token);
-	if (this.containsVertex(Vtoken)) {
-	  for (Edge e : grafo.get(Vtoken)) {
-		if (e.getType().equals(type)) {
-		  return true;
-		}
-	  }
-	}
-	return false;
+    Vertex vtoken = new Concept(token);
+    if (this.containsVertex(vtoken)) {
+      for (Edge e : grafo.get(vtoken)) {
+        if (e.getType().equals(type)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   @Override
