@@ -57,8 +57,9 @@ public class BasicSemanticNetworkExporter {
           }
         }
       }
-    }*/
-    //------------------------------SECOND VERSION----------------------
+    }
+    */
+    /*   SECOND VERSION   */
     BabelNet bn = BabelNet.getInstance();
     StringBuffer exporter = new StringBuffer();
     Set<String> ourSemanticRType = Arrays.stream(SemanticRelationType.values())
