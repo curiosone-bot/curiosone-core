@@ -443,25 +443,22 @@ public class DictWn {
 
           } // end for IWordID
         } // end if indexWOrd is null
-        // end for lemma
-      } // end for POS
-
-      Comparator<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord> cmp =
-          Comparator.comparing(
-              com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord::getNum).reversed();
-      List<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord> retOrderedWords =
-              new ArrayList<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord>();
-      retOrderedWords.addAll(retWords);
-      Collections.sort(retOrderedWords, cmp);
-      if (retOrderedWords.size() > 0) {
-        token.setKnown(true);
-        token.addAllWords(retOrderedWords);
-      }
+      } // end for lemma
+    } // end for POS
+    Comparator<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord> cmp =
+        Comparator.comparing(
+            com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord::getNum).reversed();
+    List<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord> retOrderedWords =
+            new ArrayList<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord>();
+    retOrderedWords.addAll(retWords);
+    Collections.sort(retOrderedWords, cmp);
+    if (retOrderedWords.size() > 0) {
+      token.setKnown(true);
+      token.addAllWords(retOrderedWords);
     }
-    return token;
-    // end getToken
 
-  }
+    return token;
+  } // end getToken
 
   /**
    * For test only.
@@ -476,8 +473,8 @@ public class DictWn {
     //System.out.println("\n" + DictWn.getToken("dog"));
     //System.out.println("\n" + DictWn.getToken("crawler"));
     //System.out.println("\n" + DictWn.getToken("dog"));
-    System.out.println("\n" + DictWn.getToken("come back"));
-    //System.out.println("\n" + DictWn.getToken("projector"));
+    //System.out.println("\n" + DictWn.getToken("come back"));
+    //System.out.println("\n" + DictWn.getToken("like"));
   }
-  */
+*/
 }
