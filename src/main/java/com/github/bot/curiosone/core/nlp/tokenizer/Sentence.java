@@ -95,4 +95,19 @@ public class Sentence implements ISentence {
   @Override public void addToken(IToken token) {
     this.tokens.add(token);
   }
+
+  /**
+   * toString.
+   */
+  @Override public String toString() {
+    String out = "Sentence: Type = " + getType() + "  Original = " + getOriginal();
+    out += "\n --- Lista Tokens ---";
+    int count = 0;
+    for (IToken t: getTokens()) {
+      out += "\n" + " <" + count + ">" + t.toString();
+      count++;
+    }
+    out += "\n ------- End --------";
+    return out;
+  }
 }
