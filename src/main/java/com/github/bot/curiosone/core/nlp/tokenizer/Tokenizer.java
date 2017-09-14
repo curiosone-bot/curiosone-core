@@ -506,4 +506,18 @@ public class Tokenizer {
   public boolean addAllTokens(Collection<? extends IToken> toks) {
     return tokens.addAll(toks);
   }
+
+  /**
+   * For test only.
+   * @param args (variable args)
+
+  public static void main(String[] args) {
+    Tokenizer t = new Tokenizer("i like cats");
+    try {
+      System.out.println(t.getSentence());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+  */
 }
