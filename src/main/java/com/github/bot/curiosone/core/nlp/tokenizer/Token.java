@@ -1,243 +1,189 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
-import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord;
-
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.ArrayList;
 
-/**
- * Class used to point to grammar and semantic word information.
- * @author Andrea Rivitto && Eugenio Schintu
- * @see IToken
- */
-public class Token implements IToken {
+import com.github.bot.curiosone.core.nlp.tokenizer.raw.RawDict;
+import com.github.bot.curiosone.core.nlp.tokenizer.raw.RawToken;
+// import com.github.bot.curiosone.core.nlp.tokenizer.raw.RawWord;
 
-  /**
-   * Value of the original string unmodified.
-   */
+public class Token {
 
-  private String originalValue;
+  /** Description */
+  String text;
 
-  /**
-   * Value of the string modified.
-   */
+  /** Description */
+  boolean known;
 
-  private String value;
+  /** Description */
+  int preferred;
 
-  /**
-   * Verify if a word is correct or not.
-   */
-
-  private boolean corrected;
+  /** Description */
+  List<Word> words = new ArrayList<>();
 
   /**
-   * Flag used to verify if we have found a corrispondence in dictonary.
+   * [Token description]
+   * @param  text [description]
+   * @return [description]
    */
-  private boolean known;
-
-  /**
-   * Various semantic informations' list.
-   *
-   * @see Word
-   * @see IWord
-   */
-  private List<IWord> words;
-
-  /**
-   * Constructor.
-   */
-
-  public Token(String originalValue) {
-    this.originalValue = originalValue;
-    this.corrected = false;
-    this.value = originalValue;
-    this.known = false;
-    this.words = new ArrayList<IWord>();
+  public Token(String text) {
+    this.text = text;
+    preferred = 0;
+    RawToken rt = RawDict.getInstance().getRawToken(text);
+    known = rt.isKnown();
+    rt.getWords().forEach(rw -> {
+      Word word = new Word(rw.getLemma(), rw.getPos(), rw.getLexType());
+      words.add(word);
+    });
   }
 
   /**
-   * Get originalValue.
-   * @return originalValue
-   * @see #originalValue
+   * [isKnown description]
+   * @return [description]
    */
-
-  @Override
-  public String getOValue() {
-    return originalValue;
-  }
-
-  /**
-   * Set a new {@link #originalValue} value that is provided in input.
-   * @param originalValue the oValue to set
-   * @see #originalValue
-   */
-
-  public void setOValue(String originalValue) {
-    this.originalValue = originalValue;
-  }
-
-  /**
-   * Get corrected.
-   * @return the corrected
-   * @see #corrected
-   */
-
-  @Override public boolean isCorrected() {
-    return corrected;
-  }
-
-  /**
-   * Set a new {@link #corrected} value that is provided in input.
-   * @param corrected the corrected to set
-   * @see #corrected
-   */
-
-  @Override public void setCorrected(boolean corrected) {
-    this.corrected = corrected;
-  }
-
-  /**
-   * Get value.
-   *
-   * @return the value
-   * @see #value
-   */
-
-  @Override public String getValue() {
-    return value;
-  }
-
-  /**
-   * Get known.
-   *
-   * @return the known
-   * @see #known
-   */
-
-  @Override public boolean isKnown() {
+  public boolean isKnown() {
     return known;
   }
 
   /**
-   * Get lemma.
-   *
-   * @return the lemma
-   * @see #lemma
+   * [getText description]
+   * @return [description]
    */
+  public String getText() {
+    return text;
+  }
 
-  @Override public String getLemma() {
+  /**
+   * [getWords description]
+   * @return [description]
+   */
+  public ArrayList<Word> getWords() {
+    return new ArrayList<Word>(words);
+  }
+
+  /**
+   * [getLemma description]
+   * @return [description]
+   */
+  public String getLemma() {
     if (!isKnown()) {
       return null;
     }
-    return words.get(0).getLemma();
+    return words.get(preferred).getLemma();
   }
 
   /**
-   * Get Part of Speech (POS).
-   *
-   * @return the PosT
-   * @see #PosT
+   * [getPartOfSpeechType description]
+   * @return [description]
    */
-
-  @Override public PosT getPos() {
+  public PartOfSpeechType getPartOfSpeechType() {
     if (!isKnown()) {
       return null;
     }
-    return words.get(0).getPos();
+    return words.get(preferred).getPartOfSpeechType();
   }
 
   /**
-   * Get LexT.
-   *
-   * @return the lexT
-   * @see #LexT
+   * [getLexicalType description]
+   * @return [description]
    */
-
-  @Override public LexT getLexT() {
+  public LexicalType getLexicalType() {
     if (!isKnown()) {
       return null;
     }
-    return words.get(0).getLexType();
+    return words.get(preferred).getLexicalType();
   }
 
   /**
-   * Set a new {@link #known} value that is provided in input.
-   *
-   * @see #known
+   * [getPreferredIndex description]
+   * @return [description]
    */
-
-  @Override public void setKnown(boolean known) {
-    this.known = known;
+  public int getPreferredIndex() {
+    return preferred;
   }
 
   /**
-   * Set a new {@link #value} value that is provided in input.
-   *
-   * @see #value
+   * [setPreferredIndex description]
+   * @param idx [description]
    */
-
-  @Override public void setValue(String value) {
-    this.value = value;
+  public void setPreferredIndex(int idx) {
+    preferred = idx;
   }
 
   /**
-   * Get words.
-   *
-   * @return the List of Word
-   * @see #words
+   * [tokenize description]
+   * @param  str [description]
+   * @return [description]
    */
-
-  @Override public List<IWord> getWords() {
-    return words;
+  public static List<Token> tokenize(String str) {
+    List<Token> tks = new ArrayList<>();
+    createTokens(str.split(" "), tks, 0, 4);
+    return tks;
   }
 
   /**
-   * Add to {@link #word} a new instance of Word.
-   *
-   * @see #words
+   * [createTokens description]
+   * @param words  [description]
+   * @param tokens [description]
+   * @param index  [description]
+   * @param aheah  [description]
    */
-
-  @Override public void addWord(IWord word) {
-    this.words.add(word);
-  }
-
-  /**
-   * Set to {@link #words} the list of Words.
-   *
-   * @see #words
-   */
-
-  @Override public void addAllWords(Collection<? extends IWord> words) {
-    this.words.addAll(words);
-  }
-
-  /**
-   * toString.
-   *
-   */
-
-  @Override public String toString() {
-
-    String out =  "Token - OValue = " + getOValue()
-        + " Value = " + getValue()
-        + " Corrected = " + isCorrected()
-        + " Known = " + isKnown();
-    if (!isKnown()) {
-      return out;
+  private static void createTokens(String[] words, List<Token> tokens, int index, int aheah) {
+    int len = words.length;
+    // Base Case
+    if (index >= len) {
+      return;
     }
-    out += "\n Main Word (with more occurrence):"
-        + "WordId = " + this.words.get(0).getWordId()
-        + " Lemma = " + this.words.get(0).getLemma()
-        + " POS = " + this.words.get(0).getPos()
-        + " LextT = " + this.words.get(0).getLexType()
-        + " Gloss = " + this.words.get(0).getGloss()
-        + " Occurrence = " + this.words.get(0).getNum()
-        + " \n All words:";
-    for (IWord w: this.words) {
-      out += "\n->" + w;
+
+    // Common case
+    int bound = Math.min(index + aheah + 1, len);
+    int size = bound - index;
+
+    StringBuffer buff = new StringBuffer();
+    for (int i = index; i < bound; i++) {
+      buff.append(words[i]);
+      if (i + 1 < bound) buff.append(' ');
     }
-    return out;
+    String word = buff.toString();
+
+    Token tk = new Token(word);
+    if (!tk.isKnown()) {
+      word = Spelling.getInstance().correct(word);
+      tk = new Token(word);
+    }
+    if (tk.isKnown()) {
+      tokens.add(tk);
+      createTokens(words, tokens, index + size, 4);
+      return;
+    }
+    if (aheah > 0) {
+      createTokens(words, tokens, index, aheah - 1);
+    } else {
+      tokens.add(tk); // Should we keep not known tokens?
+      createTokens(words, tokens, index + 1, 4);
+    }
+  }
+
+  /**
+   * [equals description]
+   * @param  object [description]
+   * @return [description]
+   */
+  @Override
+  public boolean equals(Object object) {
+    if(!(object instanceof Token)) {
+      return false;
+    }
+    Token t = (Token)object;
+    return t.text.equals(this.text);
+  }
+
+  /**
+   * [toString description]
+   * @return [description]
+   */
+  @Override
+  public String toString() {
+    return "{text:" + text + ", preferred:{text:" + getLemma() + ", pos:" + getPartOfSpeechType() + ", lex:" + getLexicalType() + "} words:" + words + "}";
   }
 }
