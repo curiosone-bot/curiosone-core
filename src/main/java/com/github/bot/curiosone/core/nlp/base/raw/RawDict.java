@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.nlp.tokenizer.raw;
+package com.github.bot.curiosone.core.nlp.base.raw;
 
 import edu.mit.jwi.Dictionary;
 import edu.mit.jwi.item.IIndexWord;
@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.PartOfSpeechType;
-import com.github.bot.curiosone.core.nlp.tokenizer.LexicalType;
+import com.github.bot.curiosone.core.nlp.base.PartOfSpeechType;
+import com.github.bot.curiosone.core.nlp.base.LexicalType;
 
 /**
  * RawDict for tokenizer using WordNet DB.
@@ -75,7 +75,7 @@ public class RawDict {
    * Method to create RawToken Structure that contains dict info.
    * @param item String to search in WordNet
    * @return RawToken Structure that contains RawDict info
-   * @see com.github.bot.curiosone.core.nlp.tokenizer.RawToken
+   * @see com.github.bot.curiosone.core.nlp.base.RawToken
    */
   public RawToken getRawToken(String item) {
     if (item.length() == 0 || item.equals(" ")) {

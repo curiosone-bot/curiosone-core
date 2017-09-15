@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.nlp.tokenizer.raw;
+package com.github.bot.curiosone.core.nlp.base.raw;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,8 +9,8 @@ import java.util.Objects;
 
 import edu.mit.jwi.item.IWordID;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.PartOfSpeechType;
-import com.github.bot.curiosone.core.nlp.tokenizer.LexicalType;
+import com.github.bot.curiosone.core.nlp.base.PartOfSpeechType;
+import com.github.bot.curiosone.core.nlp.base.LexicalType;
 
 /**
  * Syntax/Semantic information of a RawWord.

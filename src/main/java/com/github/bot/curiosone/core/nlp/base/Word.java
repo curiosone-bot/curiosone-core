@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.nlp.tokenizer;
+package com.github.bot.curiosone.core.nlp.base;
 
 public class Word {
   /** Description */

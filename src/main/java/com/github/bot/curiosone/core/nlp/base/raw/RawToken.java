@@ -1,11 +1,11 @@
-package com.github.bot.curiosone.core.nlp.tokenizer.raw;
+package com.github.bot.curiosone.core.nlp.base.raw;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.PartOfSpeechType;
-import com.github.bot.curiosone.core.nlp.tokenizer.LexicalType;
+import com.github.bot.curiosone.core.nlp.base.PartOfSpeechType;
+import com.github.bot.curiosone.core.nlp.base.LexicalType;
 
 /**
  * Class used to point to grammar and semantic word information.

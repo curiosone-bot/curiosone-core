@@ -1,11 +1,11 @@
-package com.github.bot.curiosone.core.nlp.tokenizer;
+package com.github.bot.curiosone.core.nlp.base;
 
 import java.util.List;
 import java.util.ArrayList;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.raw.RawDict;
-import com.github.bot.curiosone.core.nlp.tokenizer.raw.RawToken;
-// import com.github.bot.curiosone.core.nlp.tokenizer.raw.RawWord;
+import com.github.bot.curiosone.core.nlp.base.raw.RawDict;
+import com.github.bot.curiosone.core.nlp.base.raw.RawToken;
+// import com.github.bot.curiosone.core.nlp.base.raw.RawWord;
 
 public class Token {
 
