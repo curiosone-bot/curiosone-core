@@ -1,24 +1,36 @@
 package com.github.bot.curiosone.core.nlp.base;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
+/**
+* This class represents a phrase.
+* A phrase has a type (question, answer...) and two different representations:
+* as String ad as token list.
+*/
 public class Phrase {
 
-  /** Description */
+  /**
+  * Original string representation of the phrase, provided in input by the user.
+  */
   private String text;
 
-  /** Description */
+  /**
+  * Tokens extracted from the original phrase.
+  * @see Token
+  */
   private List<Token> tokens = new ArrayList<>();
 
-  /** Description */
+  /**
+  * Sentence typology.
+  * @see PhraseType
+  */
   private PhraseType type;
 
   /**
-   * [Phrase description]
-   * @param  str [description]
-   * @return [description]
-   */
+  * Class constructor.
+  * @param str The phrase to be represented.
+  */
   public Phrase(String str) {
     text = str;
     type = PhraseType.get(str);
@@ -26,34 +38,30 @@ public class Phrase {
   }
 
   /**
-   * [getText description]
-   * @return [description]
-   */
+  * Returns the original phrase, provided in input by the user.
+  */
   public String getText() {
     return text;
   }
 
   /**
-   * [getTokens description]
-   * @return [description]
-   */
+  * Returns the tokens of the original phrase.
+  */
   public List<Token> getTokens() {
     return new ArrayList<Token>(tokens);
   }
 
   /**
-   * [getType description]
-   * @return [description]
-   */
+  * Returns phrase type (answer, question...).
+  */
   public PhraseType getType() {
     return type;
   }
 
   /**
-   * [extract description]
-   * @param  input [description]
-   * @return [description]
-   */
+  * Returns a list containing all the phrases tokenized from the inout.
+  * @param input input text to be splitted in phrases.
+  */
   public static List<Phrase> extract(String input) {
     List<String> phr = LangUtils.splitByPuntaction(input);
     for (int i = 0; i < phr.size(); i++) {
@@ -70,13 +78,14 @@ public class Phrase {
   }
 
   /**
-   * [equals description]
-   * @param  object [description]
-   * @return [description]
-   */
+  * Compares this Phrase to the specified object. The result is true if and
+  * only if the argument is not null and is a Phrase object that has the same
+  * text.
+  * @param object The object to compare this Phrase against.
+  */
   @Override
   public boolean equals(Object object) {
-    if(!(object instanceof Phrase)) {
+    if (!(object instanceof Phrase) || object == null) {
       return false;
     }
     Phrase t = (Phrase)object;
@@ -84,9 +93,8 @@ public class Phrase {
   }
 
   /**
-   * [toString description]
-   * @return [description]
-   */
+  * Returns a String representation of this Phrase.
+  */
   @Override
   public String toString() {
     return "{text:" + text + ", type:" + type + ", tokens:" + tokens + "}";
