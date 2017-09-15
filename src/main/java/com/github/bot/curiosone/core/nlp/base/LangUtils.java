@@ -1,7 +1,7 @@
 package com.github.bot.curiosone.core.nlp.base;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LangUtils {
 
@@ -17,7 +17,7 @@ public class LangUtils {
     boolean email = false;
     boolean uri = false;
 
-    for(int i = 0; i < str.length(); i++) {
+    for (int i = 0; i < str.length(); i++) {
       char c = str.charAt(i);
 
       // Ignore puntaction and spacing at the begining of a phrase.
@@ -36,7 +36,6 @@ public class LangUtils {
       if (Character.isLetter(c)) {
         continue;
       }
-      char p = str.charAt(i - 1);
       char n = 0;
       if (i + 1 < str.length()) {
         n = str.charAt(i + 1);
@@ -44,7 +43,7 @@ public class LangUtils {
 
       // Look ahead for @
       int j = i;
-      while(++j < str.length()) {
+      while (++j < str.length()) {
         if (str.charAt(j) == ' ') {
           break;
         }
@@ -60,7 +59,7 @@ public class LangUtils {
       // Look behind for ://
       int len = 0;
       int k = i;
-      while(--k >= 0) {
+      while (--k >= 0) {
         if (str.charAt(k) == ' ') {
           break;
         }
@@ -81,9 +80,10 @@ public class LangUtils {
         continue;
       }
 
-      if (c == '?' ||
-          c == '!' ||
-          c == '.' && !Character.isDigit(p) && !Character.isDigit(n)) {
+      char p = str.charAt(i - 1);
+      if (c == '?'
+          || c == '!'
+          || c == '.' && !Character.isDigit(p) && !Character.isDigit(n)) {
         l.add(buff.toString());
         buff = new StringBuffer();
       }
@@ -95,6 +95,10 @@ public class LangUtils {
     return l;
   }
 
+  /**
+   * Returns the input string without duplicate spaces.
+   * @param str The string with duplicated spaces.
+   */
   public static String removeDuplicatedSpaces(String str) {
     StringBuffer buff = new StringBuffer();
 
@@ -106,10 +110,12 @@ public class LangUtils {
     while (last >= 0 && str.charAt(last) == ' ') {
       last--;
     }
-    for(int i = start; i < last; i++) {
+    for (int i = start; i < last; i++) {
       char c = str.charAt(i);
       char n = str.charAt(i + 1);
-      if (c == ' ' && n == ' ') continue;
+      if (c == ' ' && n == ' ') {
+        continue;
+      }
       buff.append(c);
     }
     if (last >= 0) {
@@ -118,13 +124,21 @@ public class LangUtils {
     return buff.toString();
   }
 
+  /**
+   * This method is used to expand all contracted verbs in a sentence.
+   * @param str The sentence with contracted form verbs.
+   * @return A String with all verbs expanded.
+   */
   public static String expandVerbs(String str) {
     StringBuffer buff = new StringBuffer();
     String[] subjs = {"i", "you", "he", "she", "it", "we", "you", "they"};
-    String[] shorts = {"m", "M", "s", "S", "re", "rE", "Re", "RE", "ve", "vE", "Ve", "VE", "ll", "lL", "Ll", "LL"};
-    String[] longs = {" am", " AM", " is", " IS", " are", " are", " are", " ARE", " have", " have", " have", " HAVE", " will", " will", " will", " WILL"};
+    String[] shorts = {"m", "M", "s", "S", "re", "rE", "Re", "RE", "ve", "vE",
+      "Ve", "VE", "ll", "lL", "Ll", "LL"};
+    String[] longs = {" am", " AM", " is", " IS", " are", " are", " are",
+      " ARE", " have", " have", " have", " HAVE", " will", " will", " will",
+      " WILL"};
 
-    for(int i = 0; i < str.length() - 1; i++) {
+    for (int i = 0; i < str.length() - 1; i++) {
       char c = str.charAt(i);
       if (c != '\'' || i == 0) {
         buff.append(c);

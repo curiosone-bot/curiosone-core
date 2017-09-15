@@ -1,21 +1,31 @@
 package com.github.bot.curiosone.core.nlp.base;
 
+/**
+* This class represents a word. It contains various grammar attributes of a
+* word.
+*/
 public class Word {
-  /** Description */
+
+  /**
+  * The word to be represented.
+  */
   String txt;
 
-  /** Description */
+  /**
+   * Part of speech type of the represented word.
+   */
   PartOfSpeechType pos;
 
-  /** Description */
+  /**
+   * Lexical type of the represented word.
+   */
   LexicalType lex;
 
   /**
-   * [Word description]
-   * @param  txt [description]
-   * @param  pos [description]
-   * @param  lex [description]
-   * @return [description]
+   * Class constructor.
+   * @param  txt The word.
+   * @param  pos Part of speech type of the new word.
+   * @param  lex Lexical type of the new word.
    */
   public Word(String txt, PartOfSpeechType pos, LexicalType lex) {
     this.txt = txt;
