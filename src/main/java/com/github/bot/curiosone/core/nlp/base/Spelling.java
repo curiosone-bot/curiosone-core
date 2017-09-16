@@ -17,22 +17,34 @@ import java.util.stream.Stream;
 public class Spelling {
 
   /**
-  * String representation of the path to the dictionary file.
-  */
+   * String representation of the path to the dictionary file.
+   */
   private static final String DICT_PATH
       = "src/main/res/spelling/dictionary.txt";
 
   /**
-  * The instance of this singleton class.
-  */
+   * String representation of the alphabet.
+   */
+  private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+
+  /**
+   * Regex to match all letters from 'a' to 'z' in a String.
+   */
+  private static final String REGEX_A_Z = "[^a-z ]";
+
+  /**
+   * The instance of this singleton class.
+   */
   private static Spelling instance;
 
   /**
-  * Path to the dictionary file.
-  */
+   * Path to the dictionary file.
+   */
   private static Path dictionaryFile = Paths.get(DICT_PATH);
 
-  /** Dictionary. */
+  /**
+   * Dictionary used in spelling and correction processes.
+   */
   private Map<String, Integer> dict = new HashMap<>();
 
   /**
@@ -42,7 +54,7 @@ public class Spelling {
     try {
       String dictStr = new String(Files.readAllBytes(dictionaryFile))
           .toLowerCase()
-          .replaceAll("[^a-z ]", "");
+          .replaceAll(REGEX_A_Z, "");
       Stream.of(dictStr.split(" ")).forEach(word -> {
         dict.compute(word, (k, v) -> v == null ? 1 : v + 1);
       });
@@ -92,13 +104,13 @@ public class Spelling {
         .mapToObj((i) -> word.substring(0, i) + word.substring(i + 1));
     Stream<String> replaces =
         IntStream.range(0, word.length()).mapToObj((i) -> i)
-        .flatMap((i) -> "abcdefghijklmnopqrstuvwxyz".chars()
+        .flatMap((i) -> ALPHABET.chars()
         .mapToObj((c) -> word.substring(0, i)
             + (char) c + word.substring(i + 1)));
     Stream<String> inserts =
         IntStream.range(0, word.length() + 1)
         .mapToObj((i) -> i)
-        .flatMap((i) -> "abcdefghijklmnopqrstuvwxyz".chars()
+        .flatMap((i) -> ALPHABET.chars()
         .mapToObj((c) -> word.substring(0, i) + (char) c + word.substring(i)));
     Stream<String> transposes
         = IntStream.range(0, word.length() - 1)
