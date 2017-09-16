@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
- * Spelling Corrector.
+ * Corrects spelling errors in sentences.
  */
 
 public class Spelling {
@@ -28,7 +28,7 @@ public class Spelling {
   private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
   /**
-   * Regex to match all letters from 'a' to 'z' in a String.
+   * String representation of a Regex to match all letters from 'a' to 'z'.
    */
   private static final String REGEX_A_Z = "[^a-z ]";
 
@@ -47,9 +47,7 @@ public class Spelling {
    */
   private Map<String, Integer> dict = new HashMap<>();
 
-  /**
-   * Spellig.
-   */
+  /** Constructs a Spelling instance. */
   private Spelling() {
     try {
       String dictStr = new String(Files.readAllBytes(dictionaryFile))
@@ -63,9 +61,7 @@ public class Spelling {
     }
   }
 
-  /**
-   * Returns a speller.
-   */
+  /** Returns the speller. */
   public static Spelling getInstance() {
     if  (instance != null) {
       return instance;
@@ -75,10 +71,9 @@ public class Spelling {
   }
 
   /**
-   * This method tries to correct a mispelled word. If no correction happens,
-   * then the original input value is returned.
-   * @param word the word to be corrected.
-   * @return the correct word.
+   * Tries to correct a mispelled word.
+   * @param word the word to be corrected
+   * @return the corrected word
    */
   String correct(String word) {
     if (dict.containsKey(word)) {
