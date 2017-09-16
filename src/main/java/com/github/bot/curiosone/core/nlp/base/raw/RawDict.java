@@ -1,5 +1,8 @@
 package com.github.bot.curiosone.core.nlp.base.raw;
 
+import com.github.bot.curiosone.core.nlp.base.LexicalType;
+import com.github.bot.curiosone.core.nlp.base.PartOfSpeechType;
+
 import edu.mit.jwi.Dictionary;
 import edu.mit.jwi.item.IIndexWord;
 import edu.mit.jwi.item.ISynset;
@@ -20,9 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
-
-import com.github.bot.curiosone.core.nlp.base.PartOfSpeechType;
-import com.github.bot.curiosone.core.nlp.base.LexicalType;
 
 /**
  * RawDict for tokenizer using WordNet DB.
@@ -59,10 +59,7 @@ public class RawDict {
     }
   }
 
-  /**
-   * [getInstance description]
-   * @return [description]
-   */
+  /** Returns the RawDict. */
   public static RawDict getInstance() {
     if  (instance != null) {
       return instance;
@@ -72,8 +69,8 @@ public class RawDict {
   }
 
   /**
-   * Method to create RawToken Structure that contains dict info.
-   * @param item String to search in WordNet
+   * Creates RawToken Structure that contains dict info.
+   * @param item String to be searched in WordNet
    * @return RawToken Structure that contains RawDict info
    * @see com.github.bot.curiosone.core.nlp.base.RawToken
    */
@@ -357,7 +354,7 @@ public class RawDict {
             retWord.setGloss(word.getSynset().getGloss());
             retWord.setWordId(id);
             retWord.setNum(
-              dictionary.getSenseEntry(word.getSenseKey()).getTagCount()
+                dictionary.getSenseEntry(word.getSenseKey()).getTagCount()
             );
 
             // Get semantic relations from synset.
@@ -411,9 +408,10 @@ public class RawDict {
   }
 
   /**
-   * [isValidEmailAddress description]
-   * @param email [description]
-   * @return [description]
+   * Checks if the given email address is valid.
+   * @param email the email address to be validated.
+   * @return <code>true</code> if the given email address is valid;
+             <code>false</code> otherwise
    * @see http://howtodoinjava.com/regex/java-regex-validate-email-address/
    * @see http://www.rfc-editor.org/rfc/rfc5322.txt
    */
@@ -425,9 +423,10 @@ public class RawDict {
   }
 
   /**
-   * [isNumeric description]
-   * @param str [description]
-   * @return [description]
+   * Checks whether the given String represents a numeric value.
+   * @param str the string to be checked.
+   * @return <code>true</code> if the given String is a numeric value;
+             <code>false</code> otherwise.
    */
   private static boolean isNumeric(String str) {
     try {
