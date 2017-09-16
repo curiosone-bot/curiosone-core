@@ -8,99 +8,99 @@ package com.github.bot.curiosone.core.nlp.base;
 */
 public enum PartOfSpeechType {
   /**
-  * Adjective Phrase.
-  */
+   * Adjective Phrase.
+   */
   AP,
 
   /**
-  * Adjective preposition phrase.
-  */
+   * Adjective preposition phrase.
+   */
   APP,
 
   /**
-  * Adjective.
-  */
+   * Adjective.
+   */
   ADJ,
 
   /**
-  * Adverb.
-  */
+   * Adverb.
+   */
   ADV,
 
   /**
-  * Conjunction.
-  */
+   * Conjunction.
+   */
   CONJ,
 
   /**
-  * Determiner.
-  */
+   * Determiner.
+   */
   DET,
 
   /**
-  * Interjections.
-  * (bye, goodbye, hello, farewell, hi, so long excuse me, thanks, thank you,
-  *  thanks a lot, sorry, pardon)
-  */
+   * Interjections.
+   * (bye, goodbye, hello, farewell, hi, so long excuse me, thanks, thank you,
+   *  thanks a lot, sorry, pardon)
+   */
   INTERJ,
 
   /**
-  * Noun.
-  */
+   * Noun.
+   */
   N,
 
   /**
-  * Negation.
-  */
+   * Negation.
+   */
   NEG,
 
   /**
-  * Nominal part.
-  */
+   * Nominal part.
+   */
   NP,
 
   /**
-  * Noun preposition phrase.
-  */
+   * Noun preposition phrase.
+   */
   NPP,
 
   /**
-  * Number.
-  */
+   * Number.
+   */
   NUMB,
 
   /**
-  * Preposition.
-  */
+   * Preposition.
+   */
   PREP,
 
   /**
-  * Pronoun.
-  */
+   * Pronoun.
+   */
   PRON,
 
   /**
-  * Sentence.
-  */
+   * Sentence.
+   */
   S,
 
   /**
-  * Unknown.
-  */
+   * Unknown.
+   */
   UNKN,
 
   /**
-  * Verb.
-  */
+   * Verb.
+   */
   V,
 
   /**
-  * Verbal part.
-  */
+   * Verbal part.
+   */
   VP,
 
   /**
-  * Verb preposition phrase.
-  */
+   * Verb preposition phrase.
+   */
   VPP
 }
