@@ -1,16 +1,16 @@
 package com.github.bot.curiosone.core.nlp.base.raw;
 
+import com.github.bot.curiosone.core.nlp.base.LexicalType;
+import com.github.bot.curiosone.core.nlp.base.PartOfSpeechType;
+
+import edu.mit.jwi.item.IWordID;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
-import edu.mit.jwi.item.IWordID;
-
-import com.github.bot.curiosone.core.nlp.base.PartOfSpeechType;
-import com.github.bot.curiosone.core.nlp.base.LexicalType;
 
 /**
  * Syntax/Semantic information of a RawWord.
@@ -209,11 +209,12 @@ public class RawWord {
    * @see #relations
    */
   public void addRelation(String p, String v) {
-    this.relations.merge(p,
-      new ArrayList<String>(Arrays.asList(v)), (v1,v2) -> {
-        v1.add(v);
-        return v1;
-      });
+    this.relations.merge(
+        p, new ArrayList<String>(
+            Arrays.asList(v)), (v1,v2) -> {
+            v1.add(v);
+            return v1;
+        });
   }
 
   /**
@@ -242,6 +243,14 @@ public class RawWord {
     out += "\n" + relations.entrySet().toString();
     return out;
   }
+
+  /**
+   * Compares this RawWord to the given object.
+   * @param obj the objects to be compared against
+   * @return <code>true</code> if the given object represents the same RawWord
+   *         of this instance;
+             <code>false</code> otherwise
+   */
   public boolean equals(Object obj) {
     if (obj == null || !(obj instanceof RawWord)) {
       return false;
@@ -252,6 +261,10 @@ public class RawWord {
     RawWord w = (RawWord) obj;
     return this.getWordId().equals(w.getWordId());
   }
+  
+  /**
+   * Returns the hashcode for this RawWord.
+   */
   public int hashCode() {
     return Objects.hash(getGloss());
   }
