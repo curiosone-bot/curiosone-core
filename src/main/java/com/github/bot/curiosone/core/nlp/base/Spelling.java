@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -15,24 +16,33 @@ import java.util.stream.Stream;
 
 public class Spelling {
 
-  /** Description */
+  /**
+  * String representation of the path to the dictionary file.
+  */
+  private static final String DICT_PATH
+      = "src/main/res/spelling/dictionary.txt";
+
+  /**
+  * The instance of this singleton class.
+  */
   private static Spelling instance;
 
-  /** Description */
-  private static Path dictionaryFile = Paths.get("src/main/res/spelling/dictionary.txt");
+  /**
+  * Path to the dictionary file.
+  */
+  private static Path dictionaryFile = Paths.get(DICT_PATH);
 
   /** Dictionary. */
   private Map<String, Integer> dict = new HashMap<>();
 
   /**
-   * [Spelling description]
-   * @return [description]
+   * Spellig.
    */
   private Spelling() {
     try {
       String dictStr = new String(Files.readAllBytes(dictionaryFile))
-        .toLowerCase()
-        .replaceAll("[^a-z ]", "");
+          .toLowerCase()
+          .replaceAll("[^a-z ]", "");
       Stream.of(dictStr.split(" ")).forEach(word -> {
         dict.compute(word, (k, v) -> v == null ? 1 : v + 1);
       });
@@ -42,8 +52,7 @@ public class Spelling {
   }
 
   /**
-   * [getInstance description]
-   * @return [description]
+   * Returns a speller.
    */
   public static Spelling getInstance() {
     if  (instance != null) {
@@ -54,16 +63,17 @@ public class Spelling {
   }
 
   /**
-   * [correct description]
-   * @param  word [description]
-   * @return [description]
+   * This method tries to correct a mispelled word. If no correction happens,
+   * then the original input value is returned.
+   * @param word the word to be corrected.
+   * @return the correct word.
    */
   String correct(String word) {
     if (dict.containsKey(word)) {
       return word;
     }
     Optional<String> e1 = known(edits1(word))
-      .max((a, b) -> dict.get(a) - dict.get(b));
+        .max((a, b) -> dict.get(a) - dict.get(b));
 
     if (e1.isPresent()) {
       return e1.get();
@@ -79,24 +89,21 @@ public class Spelling {
    */
   private Stream<String> edits1(final String word) {
     Stream<String> deletes = IntStream.range(0, word.length())
-      .mapToObj((i) -> word.substring(0, i) + word.substring(i + 1));
-    Stream<String> replaces = IntStream.range(0, word.length())
-      .mapToObj((i) -> i).flatMap(
-        (i) -> "abcdefghijklmnopqrstuvwxyz".chars().mapToObj(
-          (c) -> word.substring(0, i) + (char) c + word.substring(i + 1)
-        )
-      );
-    Stream<String> inserts = IntStream.range(0, word.length() + 1)
-      .mapToObj((i) -> i).flatMap(
-        (i) -> "abcdefghijklmnopqrstuvwxyz".chars().mapToObj(
-          (c) -> word.substring(0, i) + (char) c + word.substring(i)
-        )
-      );
-    Stream<String> transposes = IntStream.range(0, word.length() - 1)
-      .mapToObj(
-        (i) -> word.substring(0, i) + word.substring(i + 1, i + 2) + word.charAt(i) + word
-        .substring(i + 2)
-      );
+        .mapToObj((i) -> word.substring(0, i) + word.substring(i + 1));
+    Stream<String> replaces =
+        IntStream.range(0, word.length()).mapToObj((i) -> i)
+        .flatMap((i) -> "abcdefghijklmnopqrstuvwxyz".chars()
+        .mapToObj((c) -> word.substring(0, i)
+            + (char) c + word.substring(i + 1)));
+    Stream<String> inserts =
+        IntStream.range(0, word.length() + 1)
+        .mapToObj((i) -> i)
+        .flatMap((i) -> "abcdefghijklmnopqrstuvwxyz".chars()
+        .mapToObj((c) -> word.substring(0, i) + (char) c + word.substring(i)));
+    Stream<String> transposes
+        = IntStream.range(0, word.length() - 1)
+        .mapToObj((i) -> word.substring(0, i) + word.substring(i + 1, i + 2)
+            + word.charAt(i) + word.substring(i + 2));
     return Stream.of(deletes, replaces, inserts, transposes).flatMap((x) -> x);
   }
 
