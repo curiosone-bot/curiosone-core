@@ -34,16 +34,14 @@ public class Word {
   }
 
   /**
-   * [getPartOfSpeechType description]
-   * @return [description]
+   * Returns part of speech type for this Word.
    */
   public PartOfSpeechType getPartOfSpeechType() {
     return pos;
   }
 
   /**
-   * [getLexicalType description]
-   * @return [description]
+   * Returns LexicalType for this Word.
    */
   public LexicalType getLexicalType() {
     return lex;

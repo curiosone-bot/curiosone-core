@@ -1,30 +1,40 @@
 package com.github.bot.curiosone.core.nlp.base;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import com.github.bot.curiosone.core.nlp.base.raw.RawDict;
 import com.github.bot.curiosone.core.nlp.base.raw.RawToken;
+import java.util.ArrayList;
+import java.util.List;
 // import com.github.bot.curiosone.core.nlp.base.raw.RawWord;
 
+/**
+ * Stores Token information and provides utility methods to access its contents,
+ * create a new Token and tokenize a sentence.
+ */
 public class Token {
 
-  /** Description */
+  /**
+   * Original text.
+   */
   String text;
 
-  /** Description */
+  /**
+   * Whether this Token is already known.
+   */
   boolean known;
 
-  /** Description */
+  /**
+   * Is the numerical ID of the preferred word, when there is an ambiguity.
+   */
   int preferred;
 
-  /** Description */
+  /**
+   * Is the list of words taken from the original text.
+   */
   List<Word> words = new ArrayList<>();
 
   /**
-   * [Token description]
-   * @param  text [description]
-   * @return [description]
+   * Constructs a Token startinf from a text.
+   * @param text the original text to start from.
    */
   public Token(String text) {
     this.text = text;
@@ -38,32 +48,29 @@ public class Token {
   }
 
   /**
-   * [isKnown description]
-   * @return [description]
+   * Returns <code>true</code> if this Token is known;
+   *         <code>false</code> otherwise.
    */
   public boolean isKnown() {
     return known;
   }
 
   /**
-   * [getText description]
-   * @return [description]
+   * Returns the original text.
    */
   public String getText() {
     return text;
   }
 
   /**
-   * [getWords description]
-   * @return [description]
+   * Returns the words of the text.
    */
   public ArrayList<Word> getWords() {
     return new ArrayList<Word>(words);
   }
 
   /**
-   * [getLemma description]
-   * @return [description]
+   * Returns the lemma of the preferred word.
    */
   public String getLemma() {
     if (!isKnown()) {
@@ -73,8 +80,7 @@ public class Token {
   }
 
   /**
-   * [getPartOfSpeechType description]
-   * @return [description]
+   * Returns the part of speech type of the preferred word.
    */
   public PartOfSpeechType getPartOfSpeechType() {
     if (!isKnown()) {
@@ -84,8 +90,7 @@ public class Token {
   }
 
   /**
-   * [getLexicalType description]
-   * @return [description]
+   * Returns the Lexycal Type of the preferred word.
    */
   public LexicalType getLexicalType() {
     if (!isKnown()) {
@@ -95,25 +100,24 @@ public class Token {
   }
 
   /**
-   * [getPreferredIndex description]
-   * @return [description]
+   * Returns the preferred index.
    */
   public int getPreferredIndex() {
     return preferred;
   }
 
   /**
-   * [setPreferredIndex description]
-   * @param idx [description]
+   * Sets the preferred index.
+   * @param idx the preffered index to be set.
    */
   public void setPreferredIndex(int idx) {
     preferred = idx;
   }
 
   /**
-   * [tokenize description]
-   * @param  str [description]
-   * @return [description]
+   * Tokenizes the given sentence.
+   * @param str the sentence to be tokenized.
+   * @return the tokens of the sentence.
    */
   public static List<Token> tokenize(String str) {
     List<Token> tks = new ArrayList<>();
@@ -122,11 +126,12 @@ public class Token {
   }
 
   /**
-   * [createTokens description]
-   * @param words  [description]
-   * @param tokens [description]
-   * @param index  [description]
-   * @param aheah  [description]
+   * Creates Tokens for the given list of words, adding them to an already user
+   * defined Token list.
+   * @param words Array of words to tokenize.
+   * @param tokens List of already created tokens.
+   * @param index the index to start the tokenization from.
+   * @param aheah the index to.
    */
   private static void createTokens(String[] words, List<Token> tokens, int index, int aheah) {
     int len = words.length;
@@ -142,7 +147,9 @@ public class Token {
     StringBuffer buff = new StringBuffer();
     for (int i = index; i < bound; i++) {
       buff.append(words[i]);
-      if (i + 1 < bound) buff.append(' ');
+      if (i + 1 < bound) {
+        buff.append(' ');
+      }
     }
     String word = buff.toString();
 
@@ -165,13 +172,15 @@ public class Token {
   }
 
   /**
-   * [equals description]
-   * @param  object [description]
-   * @return [description]
+   * Compares this Token to the given object.
+   * @param object the object to be compared against.
+   * @return <code>true</code> if the given object represents the same Token of
+             this instance;
+             <code>false</code> otherwise.
    */
   @Override
   public boolean equals(Object object) {
-    if(!(object instanceof Token)) {
+    if (!(object instanceof Token)) {
       return false;
     }
     Token t = (Token)object;
@@ -179,11 +188,12 @@ public class Token {
   }
 
   /**
-   * [toString description]
-   * @return [description]
+   * Returns a String representation of this Token.
    */
   @Override
   public String toString() {
-    return "{text:" + text + ", preferred:{text:" + getLemma() + ", pos:" + getPartOfSpeechType() + ", lex:" + getLexicalType() + "} words:" + words + "}";
+    return "{text:" + text + ", preferred:{text:" + getLemma() + ", pos:"
+        + getPartOfSpeechType() + ", lex:" + getLexicalType() + "} words:"
+        + words + "}";
   }
 }
