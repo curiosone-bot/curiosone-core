@@ -1,7 +1,7 @@
 package com.github.bot.curiosone.core.nlp.base;
 
 /**
- * Enumeraton that contains all sub-tipology of elements in a generic grammar.
+ * Contains all sub-tipology of elements in a generic grammar.
  *
  * @author Andrea Rivitto && Eugenio Schintu
  * @see https://wordnet.princeton.edu/man/lexnames.5WN.html
@@ -10,8 +10,8 @@ package com.github.bot.curiosone.core.nlp.base;
 
 public enum LexicalType {
   /**
-  * All adjective/adverb.
-  */
+   * All adjective/adverb.
+   */
   ALL,
 
   /**
@@ -20,265 +20,266 @@ public enum LexicalType {
   PERT,
 
   /**
-  * Unique beginner for nouns.
-  */
+   * Unique beginner for nouns.
+   */
   TOPS,
 
   /**
-  * Nouns denoting acts or actions.
-  */
+   * Nouns denoting acts or actions.
+   */
   ACT,
 
   /**
-  * Nouns denoting animals.
-  */
+   * Nouns denoting animals.
+   */
   ANIMAL,
 
   /**
-  * Denoting man-made objects.
-  */
+   * Denoting man-made objects.
+   */
   ARTIFACT,
 
   /**
-  * Nouns denoting attributes of people and objects.
-  */
+   * Nouns denoting attributes of people and objects.
+   */
   ATTRIBUTE,
 
   /**
-  * As nuon: denoting body parts.
-  * As verb: verbs of grooming, dressing and bodily care.
-  */
+   * As nuon: denoting body parts.
+   * As verb: verbs of grooming, dressing and bodily care.
+   */
   BODY,
 
   /**
-  * As noun: denoting cognitive processes and contents.
-  * As verb: verbs of thinking, judging, analyzing, doubting.
-  */
+   * As noun: denoting cognitive processes and contents.
+   * As verb: verbs of thinking, judging, analyzing, doubting.
+   */
   COGNITION,
 
   /**
-  * As noun: denoting communicative processes and contents.
-  * As verb: verbs of telling, asking, ordering, singing.
-  */
+   * As noun: denoting communicative processes and contents.
+   * As verb: verbs of telling, asking, ordering, singing.
+   */
   COMMUNICATION,
 
   /**
-  * Nouns denoting natural events.
-  */
+   * Nouns denoting natural events.
+   */
   EVENT,
 
   /**
-  * Nouns denoting feelings and emotions.
-  */
+   * Nouns denoting feelings and emotions.
+   */
   FEELING,
 
   /**
-  * Nouns denoting foods and drinks.
-  */
+   * Nouns denoting foods and drinks.
+   */
   FOOD,
+
   /**
-  * Nouns denoting groupings of people or objects.
-  */
+   * Nouns denoting groupings of people or objects.
+   */
   GROUP,
 
   /**
-  * Nouns denoting spatial position.
-  */
+   * Nouns denoting spatial position.
+   */
   LOCATION,
 
   /**
-  * Nouns denoting goals.
-  */
+   * Nouns denoting goals.
+   */
   MOTIVE,
 
   /**
-  * Nouns denoting natural objects (not man-made).
-  */
+   * Nouns denoting natural objects (not man-made).
+   */
   OBJECT,
 
   /**
-  * Nouns denoting people.
-  */
+   * Nouns denoting people.
+   */
   PERSON,
 
   /**
-  * Nouns denoting natural phenomena.
-  */
+   * Nouns denoting natural phenomena.
+   */
   PHENOMENON,
 
   /**
-  * Nouns denoting plants.
-  */
+   * Nouns denoting plants.
+   */
   PLANT,
 
   /**
-  * As noun: nouns denoting possession and transfer of possession.
-  * As verb: verbs of buying, selling, owning.
-  */
+   * As noun: nouns denoting possession and transfer of possession.
+   * As verb: verbs of buying, selling, owning.
+   */
   POSSESSION,
 
   /**
-  * Nouns denoting natural processes.
-  */
+   * Nouns denoting natural processes.
+   */
   PROCESS,
 
   /**
-  * Nouns denoting quantities and units of measure determiners
-  * before a noun (all,both,many,each,every,several,few,enough,no).
-  */
+   * Nouns denoting quantities and units of measure determiners
+   * before a noun (all,both,many,each,every,several,few,enough,no).
+   */
   QUANTITY,
 
   /**
-  * Nouns denoting relations between people or things or ideas.
-  */
+   * Nouns denoting relations between people or things or ideas.
+   */
   RELATION,
 
   /**
-  * Nouns denoting two and three dimensional shapes.
-  */
+   * Nouns denoting two and three dimensional shapes.
+   */
   SHAPE,
 
   /**
-  * Nouns denoting stable states of affairs.
-  */
+   * Nouns denoting stable states of affairs.
+   */
   STATE,
 
   /**
-  * Nouns denoting substances.
-  */
+   * Nouns denoting substances.
+   */
   SUBSTANCE,
 
   /**
-  * Nouns denoting time and temporal relations.
-  */
+   * Nouns denoting time and temporal relations.
+   */
   TIME,
 
   /**
-  * Verbs of size, temperature change, intensifying, etc.
-  */
+   * Verbs of size, temperature change, intensifying, etc.
+   */
   CHANGE,
 
   /**
-  * Verbs of fighting, athletic activities.
-  */
+   * Verbs of fighting, athletic activities.
+   */
   COMPETITION,
 
   /**
-  * Verbs of eating and drinking.
-  */
+   * Verbs of eating and drinking.
+   */
   CONSUMPTION,
 
   /**
-  * Verbs of touching, hitting, tying, digging.
-  */
+   * Verbs of touching, hitting, tying, digging.
+   */
   CONTACT,
 
   /**
-  * Verbs of sewing, baking, painting, performing.
-  */
+   * Verbs of sewing, baking, painting, performing.
+   */
   CREATION,
 
   /**
-  * Verbs of feeling.
-  */
+   * Verbs of feeling.
+   */
   EMOTION,
 
   /**
-  * Verbs of walking, flying, swimming.
-  */
+   * Verbs of walking, flying, swimming.
+   */
   MOTION,
 
   /**
-  * Verbs of seeing, hearing, feeling.
-  */
+   * Verbs of seeing, hearing, feeling.
+   */
   PERCEPTION,
 
   /**
-  * Verbs of political and social activities and events.
-  */
+   * Verbs of political and social activities and events.
+   */
   SOCIAL,
 
   /**
-  * Verbs of being, having, spatial relations.
-  */
+   * Verbs of being, having, spatial relations.
+   */
   STATIVE,
 
   /**
-  * Verbs of raining, snowing, thawing, thundering.
-  */
+   * Verbs of raining, snowing, thawing, thundering.
+   */
   WEATHER,
 
   /**
-  * Participal adjectives.
-  */
+   * Participal adjectives.
+   */
   ADJ_PPL,
 
   /**
-  * Nouns: I, You, He, She, It, We, You, They.
-  */
+   * Nouns: I, You, He, She, It, We, You, They.
+   */
   PERSONAL_SUBJECTIVE,
 
   /**
-  * Pronouns: me, you, him, her, it, us, you, them.
-  */
+   * Pronouns: me, you, him, her, it, us, you, them.
+   */
   PERSONAL_OBJECTIVE,
 
   /**
-  * Pronouns: mine, yours, his, hers, ours, theirs.
-  */
+   * Pronouns: mine, yours, his, hers, ours, theirs.
+   */
   POSSESSIVE,
 
   /**
-  * Pronouns: myself, yourself, himself, herself, itself, oneself, ourselves,
-  * yourselves, themselves.
-  */
+   * Pronouns: myself, yourself, himself, herself, itself, oneself, ourselves,
+   * yourselves, themselves.
+   */
   REFLEXIVE,
 
   /**
-  * Pronouns: each other, one another.
-  */
+   * Pronouns: each other, one another.
+   */
   RECIPROCAL,
 
   /**
-  * Pronouns: that, which, who, whose, whom, where, when.
-  */
+   * Pronouns: that, which, who, whose, whom, where, when.
+   */
   RELATIVE,
 
   /**
-  * Pronouns: this, that, these, those.
-  */
+   * Pronouns: this, that, these, those.
+   */
   DEMONSTRATIVE,
 
   /**
-  * Pronouns: who, what, why, where, when, whatever.
-  */
+   * Pronouns: who, what, why, where, when, whatever.
+   */
   INTERROGATIVE,
 
   /**
-  * As pronouns: anything, anybody, anyone, something,
-  * somebody, someone, nothing, nobody, none, no one.
-  * As determiners: a, an.
-  */
+   * As pronouns: anything, anybody, anyone, something,
+   * somebody, someone, nothing, nobody, none, no one.
+   * As determiners: a, an.
+   */
   INDEFINITE_ARTICLE,
 
   /**
-  * The.
-  */
+   * The.
+   */
   DEFINITE_ARTICLE,
 
   /**
-   * Conjunctions: Coordinators (and, or, but).
-   */
+    * Conjunctions: Coordinators (and, or, but).
+    */
   COORDINATOR,
 
   /**
-  * Conjunctions: Subordinators (while, because, before, since, till, unless, whereas, wheter).
-  */
+   * Conjunctions: Subordinators (while, because, before, since, till, unless, whereas, wheter).
+   */
   SUBORDINATOR,
 
   /**
-  * Interjections.
-  */
+   * Interjections.
+   */
   GENERIC,
   REGARDS,
   APOLOGIZE,
@@ -288,7 +289,7 @@ public enum LexicalType {
   PAIN,
 
   /**
-  * Mail address.
-  */
+   * Mail address.
+   */
   MAIL;
 }
