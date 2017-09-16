@@ -1,49 +1,49 @@
 package com.github.bot.curiosone.core.nlp.base.raw;
 
+import com.github.bot.curiosone.core.nlp.base.LexicalType;
+import com.github.bot.curiosone.core.nlp.base.PartOfSpeechType;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.github.bot.curiosone.core.nlp.base.PartOfSpeechType;
-import com.github.bot.curiosone.core.nlp.base.LexicalType;
-
 /**
- * Class used to point to grammar and semantic word information.
+ * Grammar and semantic word information pointer class.
  * @author Andrea Rivitto && Eugenio Schintu
  * @see IToken
  */
 public class RawToken {
 
   /**
-   * Value of the original string unmodified.
+   * Value of the original string.
    */
   private String originalValue;
 
   /**
-   * Value of the string modified.
+   * Value of the modified string.
    */
   private String value;
 
   /**
-   * Verify if a word is correct or not.
+   * Wheter a word is correct or not.
    */
   private boolean corrected;
 
   /**
-   * Flag used to verify if we have found a corrispondence in dictonary.
+   * Wheter a corrispondence in the dictionary has been found or not.
    */
   private boolean known;
 
   /**
    * Various semantic informations' list.
-   *
    * @see Word
    * @see RawWord
    */
   private List<RawWord> words;
 
   /**
-   * Constructor.
+   * constructs a RawToken, using an original value.
+   * @param originalValue the original token value.
    */
   public RawToken(String originalValue) {
     this.originalValue = originalValue;
@@ -54,8 +54,7 @@ public class RawToken {
   }
 
   /**
-   * Get originalValue.
-   * @return originalValue
+   * Returns the original value.
    * @see #originalValue
    */
   public String getOValue() {
@@ -63,8 +62,8 @@ public class RawToken {
   }
 
   /**
-   * Set a new {@link #originalValue} value that is provided in input.
-   * @param originalValue the oValue to set
+   * Sets the original value.
+   * @param originalValue the value to set the original value to.
    * @see #originalValue
    */
   public void setOValue(String originalValue) {
@@ -72,8 +71,8 @@ public class RawToken {
   }
 
   /**
-   * Get corrected.
-   * @return the corrected
+   * Returns <code>true</code> if this Token is correct;
+   *         <code>false</code> otherwise.
    * @see #corrected
    */
   public boolean isCorrected() {
@@ -81,8 +80,8 @@ public class RawToken {
   }
 
   /**
-   * Set a new {@link #corrected} value that is provided in input.
-   * @param corrected the corrected to set
+   * Sets wheter this Token is correct or not.
+   * @param corrected wheter the token is correct or not.
    * @see #corrected
    */
   public void setCorrected(boolean corrected) {
@@ -90,9 +89,7 @@ public class RawToken {
   }
 
   /**
-   * Get value.
-   *
-   * @return the value
+   * Gets the modified String value.
    * @see #value
    */
   public String getValue() {
@@ -100,9 +97,8 @@ public class RawToken {
   }
 
   /**
-   * Get known.
-   *
-   * @return the known
+   * Returns <code>true</code> if this Token is known;
+   *         <code>false</code> otherwise.
    * @see #known
    */
   public boolean isKnown() {
@@ -110,9 +106,7 @@ public class RawToken {
   }
 
   /**
-   * Get lemma.
-   *
-   * @return the lemma
+   * Gets the lemma for this Token.
    * @see #lemma
    */
   public String getLemma() {
@@ -123,9 +117,7 @@ public class RawToken {
   }
 
   /**
-   * Get Part of Speech (POS).
-   *
-   * @return the PartOfSpeechType
+   * Gets the part of speech for this Token.
    * @see #PartOfSpeechType
    */
   public PartOfSpeechType getPos() {
@@ -136,9 +128,7 @@ public class RawToken {
   }
 
   /**
-   * Get LexicalType.
-   *
-   * @return the lexT
+   * Gets the lexical type for this Token.
    * @see #LexicalType
    */
   public LexicalType getLexT() {
@@ -149,8 +139,8 @@ public class RawToken {
   }
 
   /**
-   * Set a new {@link #known} value that is provided in input.
-   *
+   * Sets wheter this Token is known or not.
+   * @param known wheter this Token is known or not
    * @see #known
    */
   public void setKnown(boolean known) {
@@ -158,8 +148,8 @@ public class RawToken {
   }
 
   /**
-   * Set a new {@link #value} value that is provided in input.
-   *
+   * Sets the modified String value for this Token.
+   * @param value the modified String value to be used to set value.
    * @see #value
    */
   public void setValue(String value) {
@@ -167,9 +157,7 @@ public class RawToken {
   }
 
   /**
-   * Get words.
-   *
-   * @return the List of Word
+   * Gets all the words for this Token.
    * @see #words
    */
   public List<RawWord> getWords() {
@@ -177,8 +165,8 @@ public class RawToken {
   }
 
   /**
-   * Add to {@link #word} a new instance of Word.
-   *
+   * Adds a word to the already present words Collection.
+   * @param word the word to be added
    * @see #words
    */
   public void addWord(RawWord word) {
@@ -186,8 +174,8 @@ public class RawToken {
   }
 
   /**
-   * Set to {@link #words} the list of Words.
-   *
+   * Adds a Collection of word to the already present words Collection.
+   * @param words a Collection of words to be added
    * @see #words
    */
   public void addAllWords(Collection<RawWord> words) {
@@ -195,8 +183,7 @@ public class RawToken {
   }
 
   /**
-   * toString.
-   *
+   * Returns a String representation of this Token.
    */
   public String toString() {
 
