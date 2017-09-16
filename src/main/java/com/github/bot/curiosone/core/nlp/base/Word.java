@@ -23,9 +23,9 @@ public class Word {
 
   /**
    * Class constructor.
-   * @param  txt The word.
-   * @param  pos Part of speech type of the new word.
-   * @param  lex Lexical type of the new word.
+   * @param  txt The word
+   * @param  pos Part of speech type of the new word
+   * @param  lex Lexical type of the new word
    */
   public Word(String txt, PartOfSpeechType pos, LexicalType lex) {
     this.txt = txt;
@@ -56,10 +56,10 @@ public class Word {
 
   /**
    * Compares this Word with the given object.
-   * @param object the object to be compared against.
+   * @param object the object to be compared against
    * @return <code>true</code> if the given object represents the same Word of
              this instance;
-             <code>false</code> otherwise.
+             <code>false</code> otherwise
    */
   public boolean equals(Object object) {
     if (!(object instanceof Word)) {

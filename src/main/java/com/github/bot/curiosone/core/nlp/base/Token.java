@@ -34,7 +34,7 @@ public class Token {
 
   /**
    * Constructs a Token startinf from a text.
-   * @param text the original text to start from.
+   * @param text the original text to start from
    */
   public Token(String text) {
     this.text = text;
@@ -108,7 +108,7 @@ public class Token {
 
   /**
    * Sets the preferred index.
-   * @param idx the preffered index to be set.
+   * @param idx the preffered index to be set
    */
   public void setPreferredIndex(int idx) {
     preferred = idx;
@@ -116,8 +116,8 @@ public class Token {
 
   /**
    * Tokenizes the given sentence.
-   * @param str the sentence to be tokenized.
-   * @return the tokens of the sentence.
+   * @param str the sentence to be tokenized
+   * @return the tokens of the sentence
    */
   public static List<Token> tokenize(String str) {
     List<Token> tks = new ArrayList<>();
@@ -128,10 +128,10 @@ public class Token {
   /**
    * Creates Tokens for the given list of words, adding them to an already user
    * defined Token list.
-   * @param words Array of words to tokenize.
-   * @param tokens List of already created tokens.
-   * @param index the index to start the tokenization from.
-   * @param aheah the index to.
+   * @param words Array of words to tokenize
+   * @param tokens List of already created tokens
+   * @param index the index to start the tokenization from
+   * @param aheah the index to
    */
   private static void createTokens(String[] words, List<Token> tokens, int index, int aheah) {
     int len = words.length;
@@ -173,10 +173,10 @@ public class Token {
 
   /**
    * Compares this Token to the given object.
-   * @param object the object to be compared against.
+   * @param object the object to be compared against
    * @return <code>true</code> if the given object represents the same Token of
              this instance;
-             <code>false</code> otherwise.
+             <code>false</code> otherwise
    */
   @Override
   public boolean equals(Object object) {
