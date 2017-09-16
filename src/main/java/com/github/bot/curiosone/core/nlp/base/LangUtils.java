@@ -3,12 +3,15 @@ package com.github.bot.curiosone.core.nlp.base;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Provides utility methos to perform basic Natural Language Process tasks.
+ */
 public class LangUtils {
 
   /**
-   * Gets a string and split it into an array of phrases using puntaction.
-   * @param  str The string to split using puntaction.
-   * @return The list of phrases extracted.
+   * Splits a text in sentences by punctuation.
+   * @param str The original text to be splitted into sentences.
+   * @return a list of splitted sentences.
    */
   public static List<String> splitByPuntaction(String str) {
     StringBuffer buff = new StringBuffer();
@@ -96,8 +99,9 @@ public class LangUtils {
   }
 
   /**
-   * Returns the input string without duplicate spaces.
+   * Removes duplicated spaces from a String.
    * @param str The string with duplicated spaces.
+   * @return the original string without double spaces.
    */
   public static String removeDuplicatedSpaces(String str) {
     StringBuffer buff = new StringBuffer();
@@ -125,9 +129,9 @@ public class LangUtils {
   }
 
   /**
-   * This method is used to expand all contracted verbs in a sentence.
+   * Expands all contracted form verbs from a String.
    * @param str The sentence with contracted form verbs.
-   * @return A String with all verbs expanded.
+   * @return The content of the original String with all expanded form verbs.
    */
   public static String expandVerbs(String str) {
     StringBuffer buff = new StringBuffer();

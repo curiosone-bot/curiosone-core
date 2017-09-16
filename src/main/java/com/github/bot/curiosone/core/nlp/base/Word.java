@@ -48,20 +48,21 @@ public class Word {
   }
 
   /**
-   * [getLemma description]
-   * @return [description]
+   * Returns the lemma for this Word.
    */
   public String getLemma() {
     return txt;
   }
 
   /**
-   * [equals description]
-   * @param  object [description]
-   * @return [description]
+   * Compares this Word with the given object.
+   * @param object the object to be compared against.
+   * @return <code>true</code> if the given object represents the same Word of
+             this instance;
+             <code>false</code> otherwise.
    */
   public boolean equals(Object object) {
-    if(!(object instanceof Word)) {
+    if (!(object instanceof Word)) {
       return false;
     }
     Word w = (Word)object;
@@ -69,8 +70,7 @@ public class Word {
   }
 
   /**
-   * [toString description]
-   * @return [description]
+   * Returns a String representation of this Word.
    */
   @Override
   public String toString() {
