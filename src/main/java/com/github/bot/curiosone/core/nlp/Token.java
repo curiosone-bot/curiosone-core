@@ -25,7 +25,7 @@ public class Token {
    * Constructs a Token starting from a text.
    * @param text the original text to start from
    */
-  public Token(String text) {
+  private Token(String text) {
     this.text = text;
     RawToken rt = RawDict.getInstance().getRawToken(text);
     known = rt.isKnown();

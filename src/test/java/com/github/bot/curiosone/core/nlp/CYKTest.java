@@ -10,20 +10,13 @@ import java.util.Arrays;
 public class CYKTest {
   @Test
   public void testInstantiation() {
-    CYK classUnderTest = new CYK(Arrays.asList(
-      new Token("what"),
-      new Token("is"),
-      new Token("an"),
-      new Token("apple")
-    ));
+    CYK classUnderTest = new CYK(
+      Token.extract("what is an apple").getTokens()
+    );
     System.out.println(classUnderTest);
 
     classUnderTest = new CYK(Arrays.asList(
-      new Token("what"),
-      new Token("is"),
-      new Token("a"),
-      new Token("golden"),
-      new Token("apple")
+      Token.extract("what is a golden apple").getTokens()
     ));
     System.out.println(classUnderTest);
   }
