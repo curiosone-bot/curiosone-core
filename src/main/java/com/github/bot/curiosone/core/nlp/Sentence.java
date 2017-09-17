@@ -1,5 +1,7 @@
 package com.github.bot.curiosone.core.nlp;
 
+import com.github.bot.curiosone.core.util.Interval;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,45 +9,63 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.TreeSet;
-
-import com.github.bot.curiosone.core.util.Interval;
+import java.util.stream.Collectors;
 
 /**
  * Semantically complete sentence.
  */
 public class Sentence {
+  /** The list of words of the sentence. */
   private List<String> words;
+
+  /** The lookup table used to check the syntax. */
   private Map<POS, TreeSet<Interval>> lookup;
 
+  /**
+   * Constructor of a Sentence.
+   * @param phrase the original phrase from where the sentence was extracted
+   * @param lookup the lookup table to use to check syntax
+   */
   private Sentence(Phrase phrase, Map<POS, TreeSet<Interval>> lookup) {
     this.lookup = lookup;
     words = new ArrayList<>();
-    Interval S = lookup.get(POS.S).first();
+    Interval start = lookup.get(POS.S).first();
     words = phrase.getTokens()
-        .subList(S.min(), S.max() + 1)
+        .subList(start.min(), start.max() + 1)
         .stream()
         .map(Token::getText)
         .collect(Collectors.toList());
   }
 
+  /**
+   * Gets the list of words of the sentence.
+   * @return the list of words of the sentence
+   */
   public List<String> getWords() {
     return words;
   }
 
+  /**
+   * Checks whether the sentence respect the grammar structure provided.
+   * @param posl an array of POS to check against
+   * @return {@code true} if all POS can be found in the given order;
+   *         {@code false} otherwise
+   */
   public boolean respect(POS[] posl) {
     int done = 0;
     int idx = 0;
     for (POS pos : posl) {
       int oidx = idx;
-      for(Interval intr : lookup.get(pos)) {
-        if(intr.min() == idx) {
+      for (Interval intr : lookup.get(pos)) {
+        if (intr.min() == idx) {
           idx = intr.max() + 1;
           break;
         }
       }
-      if (oidx == idx) return false;
+      if (oidx == idx) {
+        return false;
+      }
     }
     return true;
   }

@@ -55,8 +55,9 @@ public class Interval implements Comparable<Interval> {
    *         {@code false} otherwise
    */
   public boolean intersects(Interval that) {
-    if (this.max < that.min) return false;
-    if (that.max < this.min) return false;
+    if (this.max < that.min || that.max < this.min) {
+      return false;
+    }
     return true;
   }
 
@@ -99,9 +100,12 @@ public class Interval implements Comparable<Interval> {
    */
   @Override
   public boolean equals(Object other) {
-    if (other == this) return true;
-    if (other == null) return false;
-    if (other.getClass() != this.getClass()) return false;
+    if (other == this) {
+      return true;
+    }
+    if (other == null || other.getClass() != this.getClass()) {
+      return false;
+    }
     Interval that = (Interval) other;
     return this.min == that.min && this.max == that.max;
   }
