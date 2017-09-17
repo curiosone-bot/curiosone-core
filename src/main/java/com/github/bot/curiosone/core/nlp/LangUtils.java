@@ -1,7 +1,9 @@
 package com.github.bot.curiosone.core.nlp;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Provides utility methos to perform basic Natural Language Process tasks.
@@ -131,12 +133,47 @@ public class LangUtils {
     return buff.toString();
   }
 
+  public static String expandVerbs(String toExpand) {
+
+    String exp = toExpand;
+    Map<String,String> expMap = new HashMap<>();
+    expMap.put("'m", " am");
+    expMap.put("'M", " AM");
+    expMap.put("'s", " is");
+    expMap.put("'S", " IS");
+    expMap.put("'re", " are");
+    expMap.put("'Re", " are");
+    expMap.put("'rE", " are");
+    expMap.put("'RE", " are");
+    expMap.put("'ve", " have");
+    expMap.put("'Ve", " have");
+    expMap.put("'vE", " have");
+    expMap.put("'VE", " HAVE");
+    expMap.put("'ll", " will");
+    expMap.put("'Ll", " will");
+    expMap.put("'lL", " will");
+    expMap.put("'LL", " WILL");
+    expMap.put("won't", "will not");
+    expMap.put("can't", "cannot");
+    expMap.put("wouldn't", "would not");
+    expMap.put("couldn't", "could not");
+    expMap.put("didn't", "did not");
+
+    for (String abbreviation : expMap.keySet()) {
+      if (toExpand.contains(abbreviation)) {
+        exp = toExpand.replace(abbreviation,expMap.get(abbreviation));
+        toExpand = exp;
+      }
+    }
+    return exp;
+  }
   /**
    * Expands all contracted form verbs from a String.
    * @param str The sentence with contracted form verbs.
    * @return The content of the original String with all expanded form verbs.
    */
-  public static String expandVerbs(String str) {
+
+  public static String expandVerbs2(String str) {
     StringBuffer buff = new StringBuffer();
     String[] subjs = {"i", "you", "he", "she", "it", "we", "you", "they"};
     String[] shorts = {"m", "M", "s", "S", "re", "rE", "Re", "RE", "ve", "vE",
@@ -151,6 +188,7 @@ public class LangUtils {
         buff.append(c);
         continue;
       }
+      System.out.println("i: " + i + "BUFF: " + buff);
       // Search for a subject before the apostrophe
       boolean found = false;
       String subject = str.substring(Math.max(i - 5, 0), i).toLowerCase();
