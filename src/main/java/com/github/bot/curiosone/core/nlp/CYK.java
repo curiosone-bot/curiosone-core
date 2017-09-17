@@ -1,12 +1,12 @@
 package com.github.bot.curiosone.core.nlp;
 
+import com.github.bot.curiosone.core.util.Pair;
+
 import java.util.HashSet;
-import java.util.Set;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
-
-import com.github.bot.curiosone.core.util.Pair;
 
 /**
  * The CYK parsing table which contains all possible parsing trees for the given
@@ -19,6 +19,10 @@ public class CYK {
   /** Size of the table. */
   private int size;
 
+  /**
+   * CYK Constructor.
+   * @param tokens list of tokens to parse
+   */
   public CYK(List<Token> tokens) {
     size = tokens.size();
 
@@ -35,8 +39,8 @@ public class CYK {
     // first cycle to fill base of the tab
     for (int x = 0; x < size; x++) {
       Set<Rule> rules = tokens.get(x).getMeanings().stream()
-        .map(m -> new Rule(m.getPOS(), Pair.create(POS.UNKN, POS.UNKN)))
-        .collect(Collectors.toSet());
+          .map(m -> new Rule(m.getPOS(), Pair.create(POS.UNKN, POS.UNKN)))
+          .collect(Collectors.toSet());
 
       table[size - 1][x].get().addAll(rules);
     }
@@ -117,7 +121,7 @@ public class CYK {
    */
   private class Cell {
     /** A set of rules that make us arrive to that cell. */
-    private Set<Rule> content = new HashSet<Rule>();;
+    private Set<Rule> content = new HashSet<Rule>();
 
     /**
      * Constructor of a Cell.

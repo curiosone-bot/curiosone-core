@@ -2,10 +2,10 @@ package com.github.bot.curiosone.core.nlp;
 
 // SUPPRESS CHECKSTYLE AvoidStarImport
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.util.Arrays;
 
-import org.junit.Test;
 
 public class CYKTest {
   @Test

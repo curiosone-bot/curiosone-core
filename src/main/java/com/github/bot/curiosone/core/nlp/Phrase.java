@@ -61,9 +61,12 @@ public class Phrase {
    */
   @Override
   public boolean equals(Object other) {
-    if (other == this) return true;
-    if (other == null) return false;
-    if (other.getClass() != this.getClass()) return false;
+    if (other == this) {
+      return true;
+    }
+    if (other == null || other.getClass() != this.getClass()) {
+      return false;
+    }
     Phrase that = (Phrase) other;
     return this.text.equals(that.text) && this.tokens.equals(that.tokens);
   }

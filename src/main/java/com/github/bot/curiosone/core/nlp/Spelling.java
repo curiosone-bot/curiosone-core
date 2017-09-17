@@ -92,21 +92,22 @@ public class Spelling {
    */
   private Stream<String> edits(String word) {
     Stream<String> deletes = IntStream.range(0, word.length())
-      .mapToObj(i -> word.substring(0, i) + word.substring(i + 1));
+        .mapToObj(i -> word.substring(0, i) + word.substring(i + 1));
 
     Stream<String> replaces = IntStream.range(0, word.length())
-      .mapToObj(i -> i)
-      .flatMap(i -> ALPHABET.chars()
-      .mapToObj(c -> word.substring(0, i) + (char) c + word.substring(i + 1)));
+        .mapToObj(i -> i)
+        .flatMap(i -> ALPHABET.chars()
+        .mapToObj(c -> word.substring(0, i) + (char) c + word.substring(i + 1)));
 
     Stream<String> inserts = IntStream.range(0, word.length() + 1)
-      .mapToObj(i -> i)
-      .flatMap(i -> ALPHABET.chars()
-      .mapToObj(c -> word.substring(0, i) + (char) c + word.substring(i)));
+        .mapToObj(i -> i)
+        .flatMap(i -> ALPHABET.chars()
+        .mapToObj(c -> word.substring(0, i) + (char) c + word.substring(i)));
     Stream<String> transposes = IntStream.range(0, word.length() - 1)
-      .mapToObj(i -> {
-        return word.substring(0, i) + word.substring(i + 1, i + 2) + word.charAt(i) + word.substring(i + 2);
-      });
+        .mapToObj(i -> {
+          return word.substring(0, i) +  word.substring(i + 1, i + 2)
+              + word.charAt(i) + word.substring(i + 2);
+        });
     return Stream.of(deletes, replaces, inserts, transposes).flatMap(x -> x);
   }
 

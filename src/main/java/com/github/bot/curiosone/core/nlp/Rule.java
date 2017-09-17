@@ -1,16 +1,16 @@
 package com.github.bot.curiosone.core.nlp;
 
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Objects;
+import com.github.bot.curiosone.core.util.Pair;
 
-import java.nio.file.Files;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Stream;
 
-import com.github.bot.curiosone.core.util.Pair;
 
 /**
  * A Rule in a context free grammar has a pair of POS values matching another
@@ -34,7 +34,6 @@ public class Rule {
    *
    * @param from resulting POS value of joining those in 'to'.
    * @param to pair of POS values that match with that in 'from'.
-   * @return [description]
    */
   public Rule(POS from, Pair<POS, POS> to) {
     this.from = from;
@@ -77,19 +76,22 @@ public class Rule {
   *         {@code false} otherwise
   */
   public boolean equals(Object other) {
-    if (other == this) return true;
-    if (other == null) return false;
-    if (other.getClass() != this.getClass()) return false;
+    if (other == this) {
+      return true;
+    }
+    if (other == null || other.getClass() != this.getClass()) {
+      return false;
+    }
     Rule that = (Rule) other;
     return this.from.equals(that.from) && this.to.equals(that.to);
   }
 
   /**
-   * Compute a hash code using the hash codes of the underlying objects
+   * Compute a hash code using the hash codes of the underlying objects.
    *
    * @return a hashcode of the Rule
    */
-   @Override
+  @Override
   public int hashCode() {
     return Objects.hash(from, to);
   }
@@ -142,10 +144,10 @@ public class Rule {
       stream.forEach(line -> {
         String[] values = line.split(" ");
         rules.add(
-          new Rule(
-            POS.valueOf(values[0]),
-            Pair.create(POS.valueOf(values[1]), POS.valueOf(values[2]))
-          )
+            new Rule(
+              POS.valueOf(values[0]),
+              Pair.create(POS.valueOf(values[1]), POS.valueOf(values[2]))
+            )
         );
       });
     } catch (IOException e) {

@@ -86,9 +86,12 @@ public class Meaning implements Comparable<Meaning> {
    */
   @Override
   public boolean equals(Object other) {
-    if (other == this) return true;
-    if (other == null) return false;
-    if (other.getClass() != this.getClass()) return false;
+    if (other == this) {
+      return true;
+    }
+    if (other == null || other.getClass() != this.getClass()) {
+      return false;
+    }
     Meaning that = (Meaning) other;
     return this.pos == that.pos && this.lex == that.lex;
   }

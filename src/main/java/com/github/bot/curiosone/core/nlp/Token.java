@@ -84,9 +84,12 @@ public class Token {
    */
   @Override
   public boolean equals(Object other) {
-    if (other == this) return true;
-    if (other == null) return false;
-    if (other.getClass() != this.getClass()) return false;
+    if (other == this) {
+      return true;
+    }
+    if (other == null || other.getClass() != this.getClass()) {
+      return false;
+    }
     Token that = (Token) other;
     return this.text.equals(that.text);
   }
@@ -102,7 +105,7 @@ public class Token {
   }
 
   /**
-   * Splits a string in a list of tokens checking groups of words
+   * Splits a string in a list of tokens checking groups of words.
    *
    * @param str the string to be tokenized
    * @return the list of tokens of the string

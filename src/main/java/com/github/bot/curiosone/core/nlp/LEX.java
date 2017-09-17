@@ -6,7 +6,6 @@ package com.github.bot.curiosone.core.nlp;
  * @see https://wordnet.princeton.edu/man/lexnames.5WN.html
  * @see http://www.ucl.ac.uk/internet-grammar/wordclas/open.htm
  */
-
 public enum LEX {
   /**
    * All adjective/adverb.
