@@ -42,5 +42,13 @@ public class TokenTest {
     assertEquals("I", tokens.get(0).getText());
     assertEquals("love", tokens.get(1).getText());
     assertEquals("united states of america", tokens.get(2).getText());
+
+    tokens = Token.tokenize("I am born in the united states of america");
+    assertEquals(5, tokens.size());
+    assertEquals("I", tokens.get(0).getText());
+    assertEquals("am born", tokens.get(1).getText());
+    assertEquals("in", tokens.get(2).getText());
+    assertEquals("the", tokens.get(3).getText());
+    assertEquals("united states of america", tokens.get(4).getText());
   }
 }
