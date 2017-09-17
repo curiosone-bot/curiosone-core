@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.nlp.base;
+package com.github.bot.curiosone.core.nlp;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -6,22 +6,13 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
  * Corrects spelling errors in sentences.
  */
-
 public class Spelling {
-
-  /**
-   * String representation of the path to the dictionary file.
-   */
-  private static final String DICT_PATH
-      = "src/main/res/spelling/dictionary.txt";
-
   /**
    * String representation of the alphabet.
    */
@@ -40,14 +31,14 @@ public class Spelling {
   /**
    * Path to the dictionary file.
    */
-  private static Path dictionaryFile = Paths.get(DICT_PATH);
+  private static Path dictionaryFile = Paths.get("src/main/res/spelling/dictionary.txt");
 
-  /**
-   * Dictionary used in spelling and correction processes.
-   */
+  /** Dictionary used in spelling and correction processes. */
   private Map<String, Integer> dict = new HashMap<>();
 
-  /** Constructs a Spelling instance. */
+  /**
+   * Constructor of a Spelling Dictionary.
+   */
   private Spelling() {
     try {
       String dictStr = new String(Files.readAllBytes(dictionaryFile))
@@ -61,7 +52,11 @@ public class Spelling {
     }
   }
 
-  /** Returns the speller. */
+  /**
+   * Gets an instance of the spelling dictionary.
+   *
+   * @return the instance of the spelling dictionary
+   */
   public static Spelling getInstance() {
     if  (instance != null) {
       return instance;
@@ -72,14 +67,15 @@ public class Spelling {
 
   /**
    * Tries to correct a mispelled word.
+   *
    * @param word the word to be corrected
-   * @return the corrected word
+   * @return the corrected word if the world can be corrected
    */
   String correct(String word) {
     if (dict.containsKey(word)) {
       return word;
     }
-    Optional<String> e1 = known(edits1(word))
+    Optional<String> e1 = known(edits(word))
         .max((a, b) -> dict.get(a) - dict.get(b));
 
     if (e1.isPresent()) {
@@ -89,29 +85,29 @@ public class Spelling {
   }
 
   /**
-   * Edit using streams.
+   * Applies all possible 1 character modifications to a string.
    *
-   * @param word as a final string
-   * @return a map
+   * @param word the word to modify
+   * @return a stream of all generated modified words
    */
-  private Stream<String> edits1(final String word) {
+  private Stream<String> edits(String word) {
     Stream<String> deletes = IntStream.range(0, word.length())
-        .mapToObj((i) -> word.substring(0, i) + word.substring(i + 1));
-    Stream<String> replaces =
-        IntStream.range(0, word.length()).mapToObj((i) -> i)
-        .flatMap((i) -> ALPHABET.chars()
-        .mapToObj((c) -> word.substring(0, i)
-            + (char) c + word.substring(i + 1)));
-    Stream<String> inserts =
-        IntStream.range(0, word.length() + 1)
-        .mapToObj((i) -> i)
-        .flatMap((i) -> ALPHABET.chars()
-        .mapToObj((c) -> word.substring(0, i) + (char) c + word.substring(i)));
-    Stream<String> transposes
-        = IntStream.range(0, word.length() - 1)
-        .mapToObj((i) -> word.substring(0, i) + word.substring(i + 1, i + 2)
-            + word.charAt(i) + word.substring(i + 2));
-    return Stream.of(deletes, replaces, inserts, transposes).flatMap((x) -> x);
+      .mapToObj(i -> word.substring(0, i) + word.substring(i + 1));
+
+    Stream<String> replaces = IntStream.range(0, word.length())
+      .mapToObj(i -> i)
+      .flatMap(i -> ALPHABET.chars()
+      .mapToObj(c -> word.substring(0, i) + (char) c + word.substring(i + 1)));
+
+    Stream<String> inserts = IntStream.range(0, word.length() + 1)
+      .mapToObj(i -> i)
+      .flatMap(i -> ALPHABET.chars()
+      .mapToObj(c -> word.substring(0, i) + (char) c + word.substring(i)));
+    Stream<String> transposes = IntStream.range(0, word.length() - 1)
+      .mapToObj(i -> {
+        return word.substring(0, i) + word.substring(i + 1, i + 2) + word.charAt(i) + word.substring(i + 2);
+      });
+    return Stream.of(deletes, replaces, inserts, transposes).flatMap(x -> x);
   }
 
   /**

@@ -1,7 +1,7 @@
-package com.github.bot.curiosone.core.nlp.base.raw;
+package com.github.bot.curiosone.core.nlp.raw;
 
-import com.github.bot.curiosone.core.nlp.base.LexicalType;
-import com.github.bot.curiosone.core.nlp.base.PartOfSpeechType;
+import com.github.bot.curiosone.core.nlp.LEX;
+import com.github.bot.curiosone.core.nlp.POS;
 
 import edu.mit.jwi.Dictionary;
 import edu.mit.jwi.item.IIndexWord;
@@ -9,7 +9,6 @@ import edu.mit.jwi.item.ISynset;
 import edu.mit.jwi.item.ISynsetID;
 import edu.mit.jwi.item.IWord;
 import edu.mit.jwi.item.IWordID;
-import edu.mit.jwi.item.POS;
 import edu.mit.jwi.item.Pointer;
 import edu.mit.jwi.morph.WordnetStemmer;
 
@@ -72,7 +71,7 @@ public class RawDict {
    * Creates RawToken Structure that contains dict info.
    * @param item String to be searched in WordNet
    * @return RawToken Structure that contains RawDict info
-   * @see com.github.bot.curiosone.core.nlp.base.RawToken
+   * @see com.github.bot.curiosone.core.nlp.raw.RawToken
    */
   public RawToken getRawToken(String item) {
     if (item.length() == 0 || item.equals(" ")) {
@@ -194,8 +193,8 @@ public class RawDict {
 
   /**
    * Get token outside of WordNet Database.
-   * @param  RawToken token         [description]
-   * @param  String   item          [description]
+   * @param token         [description]
+   * @param item          [description]
    * @return          [description]
    */
   private RawToken getRawTokenNotWn(RawToken token, String item) {
@@ -205,8 +204,8 @@ public class RawDict {
       token.setKnown(true);
       RawWord retWord = new RawWord();
       retWord.setLemma(item);
-      retWord.setPos(PartOfSpeechType.NUMB);
-      retWord.setLexType(LexicalType.QUANTITY);
+      retWord.setPos(POS.NUMB);
+      retWord.setLexType(LEX.QUANTITY);
       retWord.setGloss("Numeric outside WordNet");
       token.addWord(retWord);
       return token;
@@ -217,8 +216,8 @@ public class RawDict {
       token.setKnown(true);
       RawWord retWord = new RawWord();
       retWord.setLemma(item);
-      retWord.setPos(PartOfSpeechType.N);
-      retWord.setLexType(LexicalType.MAIL);
+      retWord.setPos(POS.N);
+      retWord.setLexType(LEX.MAIL);
       retWord.setGloss("Mail address outside WordNet");
       token.addWord(retWord);
       return token;
@@ -233,8 +232,8 @@ public class RawDict {
       token.setKnown(true);
       RawWord retWord = new RawWord();
       retWord.setLemma(item);
-      retWord.setPos(PartOfSpeechType.PRON);
-      retWord.setLexType(LexicalType.valueOf(n.toString()));
+      retWord.setPos(POS.PRON);
+      retWord.setLexType(LEX.valueOf(n.toString()));
       retWord.setGloss("Pronoun outside WordNet");
       token.addWord(retWord);
       return token;
@@ -249,8 +248,8 @@ public class RawDict {
       token.setKnown(true);
       RawWord retWord = new RawWord();
       retWord.setLemma(item);
-      retWord.setPos(PartOfSpeechType.DET);
-      retWord.setLexType(LexicalType.valueOf(n.toString()));
+      retWord.setPos(POS.DET);
+      retWord.setLexType(LEX.valueOf(n.toString()));
       retWord.setGloss("Determiners outside WordNet");
       token.addWord(retWord);
       return token;
@@ -265,8 +264,8 @@ public class RawDict {
       token.setKnown(true);
       RawWord retWord = new RawWord();
       retWord.setLemma(item);
-      retWord.setPos(PartOfSpeechType.CONJ);
-      retWord.setLexType(LexicalType.valueOf(n.toString()));
+      retWord.setPos(POS.CONJ);
+      retWord.setLexType(LEX.valueOf(n.toString()));
       retWord.setGloss("Conjunctions outside WordNet");
       token.addWord(retWord);
       return token;
@@ -281,8 +280,8 @@ public class RawDict {
       token.setKnown(true);
       RawWord retWord = new RawWord();
       retWord.setLemma(item);
-      retWord.setPos(PartOfSpeechType.INTERJ);
-      retWord.setLexType(LexicalType.valueOf(n.toString()));
+      retWord.setPos(POS.INTERJ);
+      retWord.setLexType(LEX.valueOf(n.toString()));
       retWord.setGloss("Interjections outside WordNet");
       token.addWord(retWord);
       return token;
@@ -297,8 +296,8 @@ public class RawDict {
       token.setKnown(true);
       RawWord retWord = new RawWord();
       retWord.setLemma(item);
-      retWord.setPos(PartOfSpeechType.ADV);
-      retWord.setLexType(LexicalType.valueOf(n.toString()));
+      retWord.setPos(POS.ADV);
+      retWord.setLexType(LEX.valueOf(n.toString()));
       retWord.setGloss("Adverbs outside WordNet");
       token.addWord(retWord);
       return token;
@@ -317,7 +316,7 @@ public class RawDict {
   private RawToken getRawTokenWn(RawToken token, String item) {
     Set<RawWord> retWords = new HashSet<RawWord>();
 
-    for (POS p : POS.values()) {
+    for (edu.mit.jwi.item.POS p : edu.mit.jwi.item.POS.values()) {
       List<String> stems = new WordnetStemmer(dictionary).findStems(item, p);
 
       for (String lemma : stems) {
@@ -331,20 +330,20 @@ public class RawDict {
             retWord.setLemma(lemma);
             switch (p) {
               case NOUN:
-                retWord.setPos(PartOfSpeechType.N);
+                retWord.setPos(POS.N);
                 break;
               case VERB:
-                retWord.setPos(PartOfSpeechType.V);
+                retWord.setPos(POS.V);
                 break;
               case ADJECTIVE:
-                retWord.setPos(PartOfSpeechType.ADJ);
+                retWord.setPos(POS.ADJ);
                 break;
               case ADVERB:
-                retWord.setPos(PartOfSpeechType.ADV);
+                retWord.setPos(POS.ADV);
                 break;
-              default: retWord.setPos(PartOfSpeechType.UNKN);
+              default: retWord.setPos(POS.UNKN);
             };
-            retWord.setLexType(LexicalType.valueOf(
+            retWord.setLexType(LEX.valueOf(
                 word.getSynset()
                   .getLexicalFile()
                   .getName()

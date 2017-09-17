@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.nlp.base;
+package com.github.bot.curiosone.core.nlp;
 
 // SUPPRESS CHECKSTYLE AvoidStarImport
 import static org.junit.Assert.*;
@@ -16,9 +16,7 @@ public class TokenTest {
     Token classUnderTest = new Token("color");
     assertTrue(classUnderTest instanceof Token);
 
-    assertEquals("color", classUnderTest.getLemma());
-    assertEquals(PartOfSpeechType.N, classUnderTest.getPartOfSpeechType());
-    assertEquals(LexicalType.ATTRIBUTE, classUnderTest.getLexicalType());
+    assertEquals("color", classUnderTest.getText());
   }
 
   @Test
@@ -26,19 +24,6 @@ public class TokenTest {
     Token classUnderTest = new Token("color");
     Token classUnderTestClone = new Token("color");
     assertEquals(classUnderTest, classUnderTestClone);
-
-    List<Word> lw = classUnderTest.getWords();
-    Set<Word> hw = new HashSet<>(lw);
-    assertEquals(lw.size(), hw.size());
-  }
-
-  @Test
-  public void testWordsUniquness() {
-    Token classUnderTest = new Token("color");
-
-    List<Word> lw = classUnderTest.getWords();
-    Set<Word> hw = new HashSet<>(lw);
-    assertEquals(lw.size(), hw.size());
   }
 
   @Test

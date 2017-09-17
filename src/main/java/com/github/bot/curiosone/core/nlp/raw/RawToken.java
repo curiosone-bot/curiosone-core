@@ -1,7 +1,7 @@
-package com.github.bot.curiosone.core.nlp.base.raw;
+package com.github.bot.curiosone.core.nlp.raw;
 
-import com.github.bot.curiosone.core.nlp.base.LexicalType;
-import com.github.bot.curiosone.core.nlp.base.PartOfSpeechType;
+import com.github.bot.curiosone.core.nlp.LEX;
+import com.github.bot.curiosone.core.nlp.POS;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -118,9 +118,9 @@ public class RawToken {
 
   /**
    * Gets the part of speech for this Token.
-   * @see #PartOfSpeechType
+   * @see #POS
    */
-  public PartOfSpeechType getPos() {
+  public POS getPos() {
     if (!isKnown()) {
       return null;
     }
@@ -129,9 +129,9 @@ public class RawToken {
 
   /**
    * Gets the lexical type for this Token.
-   * @see #LexicalType
+   * @see #LEX
    */
-  public LexicalType getLexT() {
+  public LEX getLexT() {
     if (!isKnown()) {
       return null;
     }

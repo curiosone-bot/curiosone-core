@@ -1,7 +1,7 @@
-package com.github.bot.curiosone.core.nlp.base.raw;
+package com.github.bot.curiosone.core.nlp.raw;
 
-import com.github.bot.curiosone.core.nlp.base.LexicalType;
-import com.github.bot.curiosone.core.nlp.base.PartOfSpeechType;
+import com.github.bot.curiosone.core.nlp.LEX;
+import com.github.bot.curiosone.core.nlp.POS;
 
 import edu.mit.jwi.item.IWordID;
 
@@ -24,14 +24,14 @@ public class RawWord {
    *
    * @see POST
    */
-  private PartOfSpeechType pos;
+  private POS pos;
 
   /**
    * Lexicographic file name.
    *
-   * @see LexicalType
+   * @see LEX
    */
-  private LexicalType lexType;
+  private LEX lexType;
 
   /**
    * Lemma of word.
@@ -98,7 +98,7 @@ public class RawWord {
    * @return the pos
    * @see #pos
    */
-  public PartOfSpeechType getPos() {
+  public POS getPos() {
     return pos;
   }
 
@@ -107,7 +107,7 @@ public class RawWord {
    *
    * @see #pos
    */
-  public void setPos(PartOfSpeechType pos) {
+  public void setPos(POS pos) {
     this.pos = pos;
   }
 
@@ -117,7 +117,7 @@ public class RawWord {
    * @return lexType
    * @see #lexType
    */
-  public LexicalType getLexType() {
+  public LEX getLexType() {
     return lexType;
   }
 
@@ -126,7 +126,7 @@ public class RawWord {
    *
    * @see #lexType
    */
-  public void setLexType(LexicalType lexType) {
+  public void setLexType(LEX lexType) {
     this.lexType = lexType;
   }
 

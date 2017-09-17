@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.nlp.base;
+package com.github.bot.curiosone.core.nlp;
 
 // SUPPRESS CHECKSTYLE AvoidStarImport
 import static org.junit.Assert.*;
@@ -12,8 +12,6 @@ public class PhraseTest {
   public void testInstantiation() {
     Phrase classUnderTest = new Phrase("The cat is on the table!");
     assertTrue(classUnderTest instanceof Phrase);
-
-    assertEquals(PhraseType.EXCLAMATION, classUnderTest.getType());
   }
 
   @Test

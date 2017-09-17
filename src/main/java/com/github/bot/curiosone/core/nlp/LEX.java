@@ -1,14 +1,13 @@
-package com.github.bot.curiosone.core.nlp.base;
+package com.github.bot.curiosone.core.nlp;
 
 /**
  * Contains all sub-tipology of elements in a generic grammar.
  *
- * @author Andrea Rivitto && Eugenio Schintu
  * @see https://wordnet.princeton.edu/man/lexnames.5WN.html
  * @see http://www.ucl.ac.uk/internet-grammar/wordclas/open.htm
  */
 
-public enum LexicalType {
+public enum LEX {
   /**
    * All adjective/adverb.
    */

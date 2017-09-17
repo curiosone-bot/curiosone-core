@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.nlp.base;
+package com.github.bot.curiosone.core.nlp;
 
 import java.util.ArrayList;
 import java.util.List;

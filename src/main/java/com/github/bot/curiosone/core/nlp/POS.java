@@ -1,12 +1,11 @@
-package com.github.bot.curiosone.core.nlp.base;
+package com.github.bot.curiosone.core.nlp;
 
 /**
-* Part Of Speech (POS) type.
+* Part Of Speech (PoS) type.
 *
-* @author Andrea Rivitto && Eugenio Schintu
 * @see https://en.oxforddictionaries.com/grammar/word-classes-or-parts-of-speech
 */
-public enum PartOfSpeechType {
+public enum POS {
   /**
    * Adjective Phrase.
    */
