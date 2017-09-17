@@ -134,9 +134,11 @@ public class Token {
         tokens.add(0, token);
         pos -= len;
         len = 4;
+        continue;
       }
       if (len == 1) {
         tokens.add(0, token);
+        pos -= len;
         len = 4;
       } else {
         len--;
