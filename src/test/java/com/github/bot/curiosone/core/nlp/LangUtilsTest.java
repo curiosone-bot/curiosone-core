@@ -86,7 +86,7 @@ public class LangUtilsTest {
   @Test
   public void testExpandVerbs() {
     String s;
-
+    /*
     s = LangUtils.expandVerbs("I'm in!");
     assertEquals("I am in!", s);
 
@@ -104,5 +104,17 @@ public class LangUtilsTest {
 
     s = LangUtils.expandVerbs("I'll kill you");
     assertEquals("I will kill you", s);
+
+    s = LangUtils.expandVerbs("You're high!");
+    assertEquals("You are high!", s);
+
+    s = LangUtils.expandVerbs("That's it!");
+    assertEquals("That is it!", s);
+    */
+    s = LangUtils.expandVerbs("I won't kill you!");
+    assertEquals("I will not kill you!", s);
+
+    s = LangUtils.expandVerbs("And you won't kill me!");
+    assertEquals("And you will not kill me!", s);
   }
 }
