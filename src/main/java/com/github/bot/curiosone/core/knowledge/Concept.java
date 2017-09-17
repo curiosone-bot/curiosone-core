@@ -62,7 +62,7 @@ public class Concept implements Vertex {
    */
   @Override
   public boolean equals(Object o) {
-    return this.id.equals(((Concept)o).getId());
+    return this.ID.equals(((Concept)o).getId());
   }
 
   /**
@@ -71,8 +71,8 @@ public class Concept implements Vertex {
   @Override
   public int hashCode() {
     int conta = 0;
-    for (int x = 0; x < id.length(); x++) {
-      conta += id.charAt(x) * 31;
+    for (int x = 0; x < ID.length(); x++) {
+      conta += ID.charAt(x) * 31;
     }
     return conta;
   }

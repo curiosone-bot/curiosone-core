@@ -29,8 +29,6 @@ import it.uniroma1.lcl.jlt.util.Language;
  */
 public class BasicSemanticNetworkExporter {
   public static void export() throws IOException, InvalidBabelSynsetIDException{
-	long start = System.currentTimeMillis();
-	int k=0;
 	BabelNet bn = BabelNet.getInstance();
 	StringBuffer exporter = new StringBuffer();
 	Path wn_synsets_txt = new File("resources/wn_synsets.txt").toPath();
@@ -39,28 +37,24 @@ public class BasicSemanticNetworkExporter {
 											  .map(SemanticRelationType::toString)
 											  .collect(toSet());
 	for (String synset_id : wn_synsets) {
-	  if (k==2)
-		break;
-	  k++;
 	  Set<String> mainSenses = new HashSet<>();
 	  BabelSynset bs = bn.getSynset(new BabelSynsetID(synset_id));
 	  BabelSense source = bs.getMainSense(Language.EN);
 	  String sourceLemma = source.getSimpleLemma();
 	  Set<BabelSynsetIDRelation> edges = bs.getEdges().stream()
-		  											  .filter(x -> semanticRelationTypes
-		  											  .contains(x.getPointer().toString().toUpperCase()))
-		  											  .collect(Collectors.toSet());
+      .filter(x -> semanticRelationTypes.contains(x.getPointer().toString().toUpperCase()))
+      .collect(Collectors.toSet());
 	  for (BabelSynsetIDRelation relation : edges) {
 		BabelSense target = bn.getSynset(relation.getBabelSynsetIDTarget())
-											 .getMainSense(Language.EN);
+			.getMainSense(Language.EN);
 		String targetLemma = target.getSimpleLemma();
 		if (!mainSenses.contains(targetLemma)) {
 		  mainSenses.add(targetLemma);
 		  if (target.getSource() == BabelSenseSource.WN) {
 			String pointer = relation.getPointer().toString().toUpperCase();
-			exporter.append(sourceLemma+","+"0"+",");
-			exporter.append(pointer+",");
-			exporter.append(targetLemma+","+"0");
+			exporter.append(sourceLemma + "," + "0" + ",");
+			exporter.append(pointer + ",");
+			exporter.append(targetLemma + "," + "0");
 			exporter.append("\n");
 		  }
 		}
@@ -74,7 +68,6 @@ public class BasicSemanticNetworkExporter {
     	new PrintWriter("resources/CuriosoneSemanticNetwork.txt", "UTF-8");
     writer.println(exporter.toString());
     writer.close();
-	System.out.println((System.currentTimeMillis() - start)/1000);
     System.out.println("Rete Semantica di WordNet creata con successo");
   }
 }
