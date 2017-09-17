@@ -68,7 +68,7 @@ public class Spelling {
   /**
    * Tries to correct a mispelled word.
    *
-   * @param word the word to be corrected
+   * @param word the word to be corrected. It should be lowercased.
    * @return the corrected word if the world can be corrected
    */
   String correct(String word) {

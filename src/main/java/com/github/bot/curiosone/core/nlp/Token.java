@@ -109,7 +109,7 @@ public class Token {
    */
   public static List<Token> tokenize(String str) {
     List<Token> tokens = new ArrayList<>();
-    String[] splitted = str.split(" ");
+    String[] splitted = str.toLowerCase().split(" ");
     int pos = splitted.length;
     int len = 4;
     while (pos > 0) {
