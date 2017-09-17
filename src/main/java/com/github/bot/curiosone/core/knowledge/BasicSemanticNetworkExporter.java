@@ -1,19 +1,26 @@
 package com.github.bot.curiosone.core.knowledge;
 
-import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
-import it.uniroma1.lcl.babelnet.BabelNet;
-import it.uniroma1.lcl.babelnet.BabelSense;
-import it.uniroma1.lcl.babelnet.BabelSynset;
-import it.uniroma1.lcl.babelnet.BabelSynsetIDRelation;
-import it.uniroma1.lcl.babelnet.BabelSynsetSource;
-import it.uniroma1.lcl.babelnet.iterators.BabelSynsetIterator;
-import it.uniroma1.lcl.jlt.util.Language;
+import static java.util.stream.Collectors.toSet;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import it.uniroma1.lcl.babelnet.BabelNet;
+import it.uniroma1.lcl.babelnet.BabelSense;
+import it.uniroma1.lcl.babelnet.BabelSynset;
+import it.uniroma1.lcl.babelnet.BabelSynsetID;
+import it.uniroma1.lcl.babelnet.BabelSynsetIDRelation;
+import it.uniroma1.lcl.babelnet.InvalidBabelSynsetIDException;
+import it.uniroma1.lcl.babelnet.data.BabelSenseSource;
+import it.uniroma1.lcl.jlt.util.Language;
 
 /**
  * This class is used to create first basic semantic network
@@ -21,81 +28,53 @@ import java.util.stream.Collectors;
  * @author Christian Sordi
  */
 public class BasicSemanticNetworkExporter {
-  private static void export() throws IOException {
-    /* FIRST VERSION
-    BabelSynsetIterator bni = BabelNet.getInstance().getSynsetIterator();
-    while(bni.hasNext())
-    {
-      BabelSynset synset = bni.next();
-      BabelSense source = synset.getMainSense((Language.EN));
-      if(source.getSource()==BabelSenseSource.WN)
-      {
-        List<BabelSynsetIDRelation> edges = synset.getEdges();
-        for ( BabelSynsetIDRelation relazione : edges)
-        {
-          if (relazione.getLanguage()==Language.EN)
-          {
-            BabelSense target = BabelNet.getInstance()
-              .getSynset(relazione.getBabelSynsetIDTarget())
-              .getMainSense(Language.EN);
-            if (target.getSource()== BabelSenseSource.WN)
-            {
-              SemanticRelationType relation = null;
-              BabelPointer pointer = relazione.getPointer();
-              Set<String> relazioni = Arrays.stream(SemanticRelationType
-                .values())
-                .map(SemanticRelationType::toString)
-                .collect(Collectors.toSet());
-              if (relazioni.contains(pointer.toString().toUpperCase()))
-              {
-                Vertex v1 = new Concept(source.getLemma());
-                Vertex v2 = new Concept(target.getLemma());
-                this.addEdge(v1, v2, SemanticRelationType.valueOf(pointer
-                  .toString().toUpperCase()));
-              }
-            }
-          }
-        }
-      }
-    }
-    */
-    /*   SECOND VERSION   */
-    BabelNet bn = BabelNet.getInstance();
-    StringBuffer exporter = new StringBuffer();
-    Set<String> ourSemanticRType = Arrays.stream(SemanticRelationType.values())
-          .map(SemanticRelationType::toString)
-          .collect(Collectors.toSet());
-    BabelSynsetIterator bsi = bn.getSynsetIterator();
-    while (bsi.hasNext()) {
-      BabelSynset bs = bsi.next();
-      if (bs.getSynsetSource() == BabelSynsetSource.WN) {
-        BabelSense source = bs.getMainSense(Language.EN);
-        List<BabelSynsetIDRelation> edges = bs.getEdges();
-        for (BabelSynsetIDRelation edge : edges) {
-          BabelSynset bst = bn.getSynset(edge.getBabelSynsetIDTarget());
-          if (edge.getLanguage() == Language.EN && bst.getSynsetSource() == BabelSynsetSource.WN) {
-            BabelSense target = bst.getMainSense(Language.EN);
-            String pointer = edge.getPointer().toString().toUpperCase();
-            if (ourSemanticRType.contains(pointer.toString().toUpperCase())) {
-              Vertex v1 = new Concept(source.getLemma());
-              Vertex v2 = new Concept(target.getLemma());
-              SemanticRelationType relation;
-              relation = SemanticRelationType.valueOf(pointer.toString().toUpperCase());
-              exporter.append(v1 + "," + relation + "," + v2);
-              exporter.append(System.getProperty("line.separator")); 
-            }
-          }
-        }
-      }
-    }
-    int lastnewline = exporter.lastIndexOf("\n");
-    if (lastnewline >= 0) {
-      exporter.delete(lastnewline, exporter.length());
+  public static void export() throws IOException, InvalidBabelSynsetIDException{
+	long start = System.currentTimeMillis();
+	int k=0;
+	BabelNet bn = BabelNet.getInstance();
+	StringBuffer exporter = new StringBuffer();
+	Path wn_synsets_txt = new File("resources/wn_synsets.txt").toPath();
+	List<String> wn_synsets = Files.readAllLines(wn_synsets_txt);
+	Set<String> semanticRelationTypes = Arrays.stream(SemanticRelationType.values())
+											  .map(SemanticRelationType::toString)
+											  .collect(toSet());
+	for (String synset_id : wn_synsets) {
+	  if (k==2)
+		break;
+	  k++;
+	  Set<String> mainSenses = new HashSet<>();
+	  BabelSynset bs = bn.getSynset(new BabelSynsetID(synset_id));
+	  BabelSense source = bs.getMainSense(Language.EN);
+	  String sourceLemma = source.getSimpleLemma();
+	  Set<BabelSynsetIDRelation> edges = bs.getEdges().stream()
+		  											  .filter(x -> semanticRelationTypes
+		  											  .contains(x.getPointer().toString().toUpperCase()))
+		  											  .collect(Collectors.toSet());
+	  for (BabelSynsetIDRelation relation : edges) {
+		BabelSense target = bn.getSynset(relation.getBabelSynsetIDTarget())
+											 .getMainSense(Language.EN);
+		String targetLemma = target.getSimpleLemma();
+		if (!mainSenses.contains(targetLemma)) {
+		  mainSenses.add(targetLemma);
+		  if (target.getSource() == BabelSenseSource.WN) {
+			String pointer = relation.getPointer().toString().toUpperCase();
+			exporter.append(sourceLemma+","+"0"+",");
+			exporter.append(pointer+",");
+			exporter.append(targetLemma+","+"0");
+			exporter.append("\n");
+		  }
+		}
+	  }
+	}
+    int LastNewLine = exporter.lastIndexOf("\n");
+    if (LastNewLine >= 0) {
+  	  exporter.delete(LastNewLine,exporter.length());
     }
     PrintWriter writer = 
-        new PrintWriter("BasicSemanticNetwork/CuriosoneSemanticNetwork.txt", "UTF-8");
+    	new PrintWriter("resources/CuriosoneSemanticNetwork.txt", "UTF-8");
     writer.println(exporter.toString());
     writer.close();
+	System.out.println((System.currentTimeMillis() - start)/1000);
     System.out.println("Rete Semantica di WordNet creata con successo");
   }
 }
