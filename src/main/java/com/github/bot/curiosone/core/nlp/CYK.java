@@ -21,6 +21,7 @@ public class CYK {
 
   /**
    * CYK Constructor.
+   * 
    * @param tokens list of tokens to parse
    */
   public CYK(List<Token> tokens) {
