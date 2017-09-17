@@ -133,8 +133,15 @@ public class LangUtils {
     return buff.toString();
   }
 
-  public static String expandVerbs(String toExpand) {
-    String exp = toExpand;
+  /**
+   * Expands contracted form verbs in the given sentence.
+   * Please note that "'s" (Saxon Genitive) could be interpreted as contraction
+   * for "is" verb.
+   * @param contracted the phrase to work with
+   * @return the given phrase with all verbs in extended form.
+   */
+  public static String expandVerbs(String contracted) {
+    String expanded = contracted;
     String[] from = {"'m", "'M", "'s", "'S", "'re", "'RE", "'Re", "'rE",
         "'ve", "'VE", "'vE", "'Ve", "'ll", "'LL", "'lL", "'Ll", "won't",
         "can't", "wouldn't", "couldn't", "didn't"};
@@ -143,15 +150,15 @@ public class LangUtils {
         "will not", "cannot", "would not", "could not", "did not"};
 
     for (int i = 0; i < from.length; i++) {
-      exp = toExpand.replace(from[i], to[i]);
-      toExpand = exp;
+      expanded = contracted.replace(from[i], to[i]);
+      contracted = expanded;
     }
-    return exp;
+    return expanded;
   }
 
   /**
    * Expands all contracted form verbs from a String.
-   * @param str The sentence with contracted form verbs.
+   * @param str The contracted with contracted form verbs.
    * @return The content of the original String with all expanded form verbs.
    */
 
