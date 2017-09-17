@@ -39,10 +39,6 @@ public class LangUtils {
       if (Character.isLetter(c)) {
         continue;
       }
-      char n = 0;
-      if (i + 1 < str.length()) {
-        n = str.charAt(i + 1);
-      }
 
       // Look ahead for @
       int j = i;
@@ -83,7 +79,14 @@ public class LangUtils {
         continue;
       }
 
-      char p = str.charAt(i - 1);
+      char p = 0;
+      char n = 0;
+      if (i + 1 < str.length()) {
+        n = str.charAt(i + 1);
+      }
+      if (i - 1 >= 0) {
+        p = str.charAt(i - 1);
+      }
       if (c == '?'
           || c == '!'
           || c == '.' && !Character.isDigit(p) && !Character.isDigit(n)) {

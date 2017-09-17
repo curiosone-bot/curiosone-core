@@ -46,6 +46,22 @@ public class LangUtilsTest {
 
     l = LangUtils.splitByPuntaction("");
     assertEquals(0, l.size());
+
+    l = LangUtils.splitByPuntaction("$plit me");
+    assertEquals(1, l.size());
+    assertEquals("$plit me.", l.get(0));
+
+    l = LangUtils.splitByPuntaction("42 is a number");
+    assertEquals(1, l.size());
+    assertEquals("42 is a number.", l.get(0));
+
+    l = LangUtils.splitByPuntaction("42.0 is a double");
+    assertEquals(1, l.size());
+    assertEquals("42.0 is a double.", l.get(0));
+
+    l = LangUtils.splitByPuntaction("This ://cel@.com is an invalid uri");
+    assertEquals(1, l.size());
+    assertEquals("This ://cel@.com is an invalid uri.", l.get(0));
   }
 
   @Test
