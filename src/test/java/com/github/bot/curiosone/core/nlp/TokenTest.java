@@ -13,15 +13,15 @@ import java.util.Set;
 public class TokenTest {
   @Test
   public void testInstantiation() {
-    Token classUnderTest = new Token("color");
+    Token classUnderTest = Token.tokenize("color").get(0);
     Set<Meaning> means = classUnderTest.getMeanings();
     assertTrue(means.size() > 0);
   }
 
   @Test
   public void testEquals() {
-    Token classUnderTest = new Token("color");
-    Token classUnderTestClone = new Token("color");
+    Token classUnderTest = Token.tokenize("color").get(0);
+    Token classUnderTestClone = Token.tokenize("color").get(0);
     assertEquals(classUnderTest, classUnderTestClone);
   }
 
