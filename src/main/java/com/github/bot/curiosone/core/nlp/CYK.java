@@ -31,9 +31,9 @@ public class CYK {
     for (int x = 0; x < size; x++) {
       table[x] = new Cell[x + 1];
     }
-    for (int x = 0; x < size; x++) {
-      for (int y = 0; y < x + 1; y++) {
-        table[x][y] = new Cell();
+    for (int y = 0; y < size; y++) {
+      for (int x = 0; x < y + 1; x++) {
+        table[y][x] = new Cell();
       }
     }
 
