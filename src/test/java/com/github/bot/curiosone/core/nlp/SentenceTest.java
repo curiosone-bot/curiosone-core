@@ -27,5 +27,11 @@ public class SentenceTest {
     assertTrue(sentence.respect(new POS[] {POS.PRON, POS.V, POS.DET, POS.N}));
     assertFalse(sentence.respect(new POS[] {POS.PRON, POS.VP, POS.N}));
     assertFalse(sentence.respect(new POS[] {POS.PRON, POS.N}));
+
+    List<String>[] parameters = sentence.get(new POS[] {POS.PRON, POS.V, POS.NP});
+    assertTrue(parameters.length == 3);
+    System.out.println(parameters[0]);
+    System.out.println(parameters[1]);
+    System.out.println(parameters[2]);
   }
 }

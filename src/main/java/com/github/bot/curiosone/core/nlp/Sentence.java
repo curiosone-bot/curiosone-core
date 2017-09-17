@@ -70,25 +70,35 @@ public class Sentence {
     return true;
   }
 
-  /*public List<Word> extract(POS[] posl) {
+  /**
+   * Gets parameters from the sentence
+   * @param posl an array of POS to extract against
+   * @return an array of list of strings, one per each POS in posl
+   */
+  public List<String>[] get(POS[] posl) {
     int idx = 0;
-    List<Word>[] l = new List<Word>[posl.length];
+    List<String>[] l = (ArrayList<String>[])new ArrayList[posl.length];
+    for (int i = 0; i < posl.length; i++) {
+      l[i] = new ArrayList<String>();
+    }
 
     for (int i = 0; i < posl.length; i++) {
       int oidx = idx;
-      for(Interval intr : lookup.get(posl[i])) {
-        if(intr.min() == idx) {
-          for (int j = idx; j < intr.max()) {
+      for (Interval intr : lookup.get(posl[i])) {
+        if (intr.min() == idx) {
+          for (int j = idx; j <= intr.max(); j++) {
             l[i].add(words.get(j));
           }
-          idx = intr.max();
+          idx = intr.max() + 1;
           break;
         }
       }
-      if (oidx == idx) return null;
+      if (oidx == idx) {
+        return l;
+      }
     }
     return l;
-  }*/
+  }
 
   /**
    * Returns a string representation of this sentence.
