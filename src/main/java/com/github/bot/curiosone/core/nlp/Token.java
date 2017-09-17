@@ -15,9 +15,6 @@ public class Token {
   /** The text rappresentation of this token. */
   String text;
 
-  /** List of words that forms token. */
-  List<Word> words;
-
   /** Meanings of the token. */
   Set<Meaning> means;
 
@@ -60,12 +57,12 @@ public class Token {
   }
 
   /**
-   * Returns the list of the words of this token.
+   * Returns the list of the meanings of this token.
    *
-   * @return the list of the words of this token.
+   * @return the list of the meanings of this token.
    */
-  public List<Word> getWords() {
-    return words;
+  public Set<Meaning> getMeanings() {
+    return means;
   }
 
   /**
@@ -75,7 +72,7 @@ public class Token {
    */
   @Override
   public String toString() {
-    return "[" + text + ", " + words + ", " + means + "]";
+    return "[" + text + ", " + means + "]";
   }
 
   /**

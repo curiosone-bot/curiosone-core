@@ -14,9 +14,8 @@ public class TokenTest {
   @Test
   public void testInstantiation() {
     Token classUnderTest = new Token("color");
-    assertTrue(classUnderTest instanceof Token);
-
-    assertEquals("color", classUnderTest.getText());
+    Set<Meaning> means = classUnderTest.getMeanings();
+    assertTrue(means.size() > 0);
   }
 
   @Test
