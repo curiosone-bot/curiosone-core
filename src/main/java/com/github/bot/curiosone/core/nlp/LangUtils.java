@@ -134,39 +134,21 @@ public class LangUtils {
   }
 
   public static String expandVerbs(String toExpand) {
-
     String exp = toExpand;
-    Map<String,String> expMap = new HashMap<>();
-    expMap.put("'m", " am");
-    expMap.put("'M", " AM");
-    expMap.put("'s", " is");
-    expMap.put("'S", " IS");
-    expMap.put("'re", " are");
-    expMap.put("'Re", " are");
-    expMap.put("'rE", " are");
-    expMap.put("'RE", " are");
-    expMap.put("'ve", " have");
-    expMap.put("'Ve", " have");
-    expMap.put("'vE", " have");
-    expMap.put("'VE", " HAVE");
-    expMap.put("'ll", " will");
-    expMap.put("'Ll", " will");
-    expMap.put("'lL", " will");
-    expMap.put("'LL", " WILL");
-    expMap.put("won't", "will not");
-    expMap.put("can't", "cannot");
-    expMap.put("wouldn't", "would not");
-    expMap.put("couldn't", "could not");
-    expMap.put("didn't", "did not");
+    String[] from = {"'m", "'M", "'s", "'S", "'re", "'RE", "'Re", "'rE",
+        "'ve", "'VE", "'vE", "'Ve", "'ll", "'LL", "'lL", "'Ll", "won't",
+        "can't", "wouldn't", "couldn't", "didn't"};
+    String[] to = {" am", " AM", " is", " IS", " are", " ARE", " are", " are",
+        " have", " HAVE", " have", " have", " will", " WILL", " will", " will",
+        "will not", "cannot", "would not", "could not", "did not"};
 
-    for (String abbreviation : expMap.keySet()) {
-      if (toExpand.contains(abbreviation)) {
-        exp = toExpand.replace(abbreviation,expMap.get(abbreviation));
-        toExpand = exp;
-      }
+    for (int i = 0; i < from.length; i++) {
+      exp = toExpand.replace(from[i], to[i]);
+      toExpand = exp;
     }
     return exp;
   }
+
   /**
    * Expands all contracted form verbs from a String.
    * @param str The sentence with contracted form verbs.
@@ -188,7 +170,6 @@ public class LangUtils {
         buff.append(c);
         continue;
       }
-      System.out.println("i: " + i + "BUFF: " + buff);
       // Search for a subject before the apostrophe
       boolean found = false;
       String subject = str.substring(Math.max(i - 5, 0), i).toLowerCase();
