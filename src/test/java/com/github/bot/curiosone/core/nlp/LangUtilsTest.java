@@ -105,5 +105,23 @@ public class LangUtilsTest {
 
     s = LangUtils.expandVerbs("I'll kill you");
     assertEquals("I will kill you", s);
+
+    s = LangUtils.expandVerbs("You're high!");
+    assertEquals("You are high!", s);
+
+    s = LangUtils.expandVerbs("That's it!");
+    assertEquals("That is it!", s);
+
+    s = LangUtils.expandVerbs("I won't kill you!");
+    assertEquals("I will not kill you!", s);
+
+    s = LangUtils.expandVerbs("I'm gonna put some other verbs in here! You're ok with it? I'll check if you'll!");
+    assertEquals("I am gonna put some other verbs in here! You are ok with it? I will check if you will!", s);
+
+    s = LangUtils.expandVerbs("That's it!");
+    assertEquals("That is it!", s);
+
+    s = LangUtils.expandVerbs("Mike'll leave at 10 PM.");
+    assertEquals("Mike will leave at 10 PM.", s);
   }
 }
