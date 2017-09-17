@@ -1,6 +1,8 @@
 package com.github.bot.curiosone.core.nlp;
 
-import java.util.*;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Objects;
 
 import java.nio.file.Files;
 import java.io.IOException;
