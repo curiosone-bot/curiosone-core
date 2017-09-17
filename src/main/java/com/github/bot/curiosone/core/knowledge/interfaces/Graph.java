@@ -88,10 +88,12 @@ public interface Graph {
   Boolean isPresent(SemanticRelationType tipo, String token);
   
   /**
-   * Returns a Set of Edge related to Concept token, if present.
+   * Returns the Edge related to Concept token, if present.
    * @param tipo del collegamento dell'arco da cercare
    * @param token vertice del quale cercare il significato collegato
    * @return Optional of Set of Edge
    */
-  Optional<Set<Edge>> getAnswer(SemanticRelationType tipo, String token);
+  Optional<Edge> getAnswer(String source,SemanticRelationType tipo);
+  Optional<Edge> getAnswer(String source,SemanticRelationType tipo,String target);
+  Optional<Edge> getAnswer(String token,String target);
 }

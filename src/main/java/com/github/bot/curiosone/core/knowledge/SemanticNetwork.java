@@ -177,12 +177,6 @@ public class SemanticNetwork implements Graph {
   }
 
   @Override
-  public Optional<Set<Edge>> getAnswer(SemanticRelationType tipo, String token) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
   public String toString() {
     return grafo.toString(); // metodo toString utilizzato per prove di debug
   }
@@ -201,5 +195,23 @@ public class SemanticNetwork implements Graph {
     result = 31 * result + edgeSet().hashCode();
     result = 31 * result + vertexSet().hashCode();
     return result;
+  }
+
+  @Override
+  public Optional<Edge> getAnswer(String source, SemanticRelationType tipo) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Optional<Edge> getAnswer(String source, SemanticRelationType tipo, String target) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Optional<Edge> getAnswer(String token, String target) {
+    // TODO Auto-generated method stub
+    return null;
   }
 }

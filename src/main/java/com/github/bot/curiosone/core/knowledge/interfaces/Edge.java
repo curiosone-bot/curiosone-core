@@ -3,26 +3,26 @@ package com.github.bot.curiosone.core.knowledge.interfaces;
 import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
 
 /**
- * Arco del grafo.
- * @author navigli
+ * Graph Edge
+ * @author Sordi
  */
 public interface Edge {
 
   /**
-  * Restituisce il vertice di partenza.
-  * @return vertice di partenza
-  */
+   * Returns Source Vertex
+   * @return Source Vertex
+   */
   Vertex getSource();
 
   /**
-   * Restituisce il vertice di arrivo.
-   * @return vertice di arrivo
+   * Returns Target Vertex
+   * @return Target Vertex
    */
   Vertex getTarget();
 
   /**
-   * Restituisce il tipo dell'arco.
-   * @return tipo dell'arco
+   * Return Edge type
+   * @return Edge type
    */
   SemanticRelationType getType();
 }

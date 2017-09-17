@@ -10,22 +10,42 @@ public class Concept implements Vertex {
   /**
    * Name of the represented Concept.
    */
-  private final String id;
+  private final String ID;
+  private Integer weight;
 
   /**
    * Default class constructor.
    * @param id Concept name.
    */
   public Concept(String id) {
-    this.id = id;
+    this.ID = id;
   }
-
+  
+  public Concept(String id, Integer weight) {
+	this.ID = id;
+	this.weight=weight;
+  }
+  
+  /**
+   * Set Concept Weight
+   */
+  public void setWeight(Integer weight) {
+	  this.weight=weight;
+  }
+  
+  /**
+   * Return Concept Weight
+   */
+  public Integer getWeight() {
+	return this.weight;
+  }
+  
   /**
    * Returns Concept name.
    */
   @Override
   public String getId() {
-    return id;
+    return ID;
   }
 
   /**
