@@ -39,16 +39,38 @@ public class TokenTest {
 
     tokens = Token.tokenize("I love united states of america");
     assertEquals(3, tokens.size());
-    assertEquals("I", tokens.get(0).getText());
+    assertEquals("i", tokens.get(0).getText());
     assertEquals("love", tokens.get(1).getText());
     assertEquals("united states of america", tokens.get(2).getText());
 
     tokens = Token.tokenize("I am born in the united states of america");
     assertEquals(5, tokens.size());
-    assertEquals("I", tokens.get(0).getText());
+    assertEquals("i", tokens.get(0).getText());
     assertEquals("am born", tokens.get(1).getText());
     assertEquals("in", tokens.get(2).getText());
     assertEquals("the", tokens.get(3).getText());
     assertEquals("united states of america", tokens.get(4).getText());
+
+    tokens = Token.tokenize("what is an apple?");
+    assertEquals(4, tokens.size());
+    assertEquals("what", tokens.get(0).getText());
+    assertEquals("is", tokens.get(1).getText());
+    assertEquals("an", tokens.get(2).getText());
+    assertEquals("apple", tokens.get(3).getText());
+
+    tokens = Token.tokenize("Where is the cat?");
+    assertEquals(4, tokens.size());
+    assertEquals("where", tokens.get(0).getText());
+    assertEquals("is", tokens.get(1).getText());
+    assertEquals("the", tokens.get(2).getText());
+    assertEquals("cat", tokens.get(3).getText());
+
+    tokens = Token.tokenize("When the cat was created?");
+    assertEquals(5, tokens.size());
+    assertEquals("when", tokens.get(0).getText());
+    assertEquals("the", tokens.get(1).getText());
+    assertEquals("cat", tokens.get(2).getText());
+    assertEquals("was", tokens.get(3).getText());
+    assertEquals("created", tokens.get(4).getText());
   }
 }
