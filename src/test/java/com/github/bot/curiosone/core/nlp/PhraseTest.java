@@ -30,14 +30,23 @@ public class PhraseTest {
 
   @Test
   public void testExtract() {
-    List<Phrase> phrases = Phrase.extract("The cat is on the table! But I love dogs.");
-    assertEquals(2, phrases.size());
+    List<Phrase> phrase = Phrase.extract("All by myself");
+    assertEquals(1, phrase.size());
+
+    phrase = Phrase.extract("The cat is on the table! But I love dogs.");
+    assertEquals(2, phrase.size());
+
+    phrase = Phrase.extract(
+        "This the first sentence. Time for the second sentence! What about the third?");
+    assertEquals(3,phrase.size());
   }
 
   @Test
   public void testGetText() {
     Phrase p = new Phrase("Why is the cat always on the table?");
     assertEquals("Why is the cat always on the table?", p.getText());
-    assertNotEquals("Why is the dragon always on the table?", p.getText());
+
+    p = new Phrase("I l0v3 numb3rs111");
+    assertEquals("I l0v3 numb3rs111", p.getText());
   }
 }
