@@ -24,13 +24,16 @@ public class BasicSemanticNetworkExporter {
     StringBuffer exporter = new StringBuffer();
     Path wnSynsetsTxt = new File("resources/wn_synsets.txt").toPath();
     List<String> wn_synsets = Files.readAllLines(wnSynsetsTxt);
-    Set<String> semanticRelationTypes = Arrays.stream(SemanticRelationType.values()).map(SemanticRelationType::toString).collect(toSet());
+    Set<String> semanticRelationTypes = Arrays.stream(SemanticRelationType.values())
+        .map(SemanticRelationType::toString).collect(toSet());
     for (String synsetID : wn_synsets) {
       Set<String> mainSenses = new HashSet<>();
       BabelSynset bs = bn.getSynset(new BabelSynsetID(synsetID));
       BabelSense source = bs.getMainSense(Language.EN);
       String sourceLemma = source.getSimpleLemma();
-      Set<BabelSynsetIDRelation> edges = bs.getEdges().stream().filter(x -> semanticRelationTypes.contains(x.getPointer().toString().toUpperCase())).collect(Collectors.toSet());
+      Set<BabelSynsetIDRelation> edges = bs.getEdges().stream()
+          .filter(x -> semanticRelationTypes.contains(x.getPointer().toString().toUpperCase()))
+          .collect(Collectors.toSet());
       for (BabelSynsetIDRelation relation : edges) {
         BabelSense target = bn.getSynset(relation.getBabelSynsetIDTarget()).getMainSense(Language.EN);
         String targetLemma = target.getSimpleLemma();
