@@ -24,7 +24,8 @@ public class TokenTest {
     Token classUnderTestClone = Token.tokenize("color").get(0);
     assertEquals(classUnderTest, classUnderTestClone);
     assertEquals(classUnderTest, classUnderTest);
-    assertNotEquals(classUnderTest,null);
+    assertNotEquals(classUnderTest, null);
+    assertNotEquals(classUnderTest, "Bla bla bla");
   }
 
   @Test
@@ -65,8 +66,6 @@ public class TokenTest {
     assertEquals("in", tokens.get(2).getText());
     assertEquals("the", tokens.get(3).getText());
     assertEquals("united states of america", tokens.get(4).getText());
-
-    tokens =
 
     tokens = Token.tokenize("what is an apple?");
     assertEquals(4, tokens.size());
