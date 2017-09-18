@@ -126,10 +126,9 @@ public class LangUtils {
   }
 
   /**
-   * Expands all the contracted form verbs in a sentence. Works only with
-   * lowercased Strings.
-   * Please note: Saxon Genitive abbreviations could wrongly be treated as "is"
-   * contractios.
+   * Expands all the contracted form verbs in a sentence.
+   * Note: Works only with lowercased Strings.
+   * Note: Saxon Genitive abbreviations could wrongly be treated as "is".
    * @param contracted the phrase to work with
    * @return a new String, containing the old phrase with all verbs expanded
    */
