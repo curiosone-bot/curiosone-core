@@ -94,14 +94,8 @@ public class LangUtilsTest {
     s = LangUtils.expandVerbs("i'm done");
     assertEquals("i am done", s);
 
-    s = LangUtils.expandVerbs("I'M DONE");
-    assertEquals("I AM DONE", s);
-
     s = LangUtils.expandVerbs("i've done it");
     assertEquals("i have done it", s);
-
-    s = LangUtils.expandVerbs("I'VE DONE IT");
-    assertEquals("I HAVE DONE IT", s);
 
     s = LangUtils.expandVerbs("I'll kill you");
     assertEquals("I will kill you", s);
@@ -109,17 +103,8 @@ public class LangUtilsTest {
     s = LangUtils.expandVerbs("I won't kill you!");
     assertEquals("I will not kill you!", s);
 
-    s = LangUtils.expandVerbs("I WON'T KILL YOU!");
-    assertEquals("I WILL NOT KILL YOU!", s);
-
     s = LangUtils.expandVerbs("i'm done! i'm here!");
     assertEquals("i am done! i am here!", s);
-
-    s = LangUtils.expandVerbs(
-        "I'M HERE, YOU'RE HERE, HE'S HERE, SHE'S HERE... WE'RE ALL HERE!");
-    assertEquals(
-        "I AM HERE, YOU ARE HERE, HE IS HERE, SHE IS HERE... WE ARE ALL HERE!",
-            s);
 
     s = LangUtils.expandVerbs("I couldn't resist...");
     assertEquals("I could not resist...", s);
@@ -130,10 +115,13 @@ public class LangUtilsTest {
     s = LangUtils.expandVerbs("I shouldn't be here!");
     assertEquals("I should not be here!", s);
 
-    s = LangUtils.expandVerbs("YOU SHOULDN'T BE THERE!");
-    assertEquals("YOU SHOULD NOT BE THERE!", s);
+    s = LangUtils.expandVerbs("Mike's a good boy, just as you're!");
+    assertEquals("Mike is a good boy, just as you are!", s);
 
-    s = LangUtils.expandVerbs("YOU COULDN'T RESIST! YOU'RE SUCH A CURIOSONE!!");
-    assertEquals("YOU COULD NOT RESIST! YOU ARE SUCH A CURIOSONE!!", s);
+    s = LangUtils.expandVerbs(
+        "I didn't touch your phone! You're a liar! I didn't do anything!!!");
+    assertEquals(
+        "I did not touch your phone! You are a liar! I did not do anything!!!",
+            s);
   }
 }

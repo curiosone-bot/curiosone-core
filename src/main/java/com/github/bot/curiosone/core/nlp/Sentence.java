@@ -71,7 +71,7 @@ public class Sentence {
   }
 
   /**
-   * Gets parameters from the sentence
+   * Gets parameters from the sentence.
    * @param posl an array of POS to extract against
    * @return an array of list of strings, one per each POS in posl
    */

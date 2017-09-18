@@ -36,7 +36,7 @@ public class PhraseTest {
 
   @Test
   public void testGetText() {
-    Phrase p = new Phrase ("Why is the cat always on the table?");
+    Phrase p = new Phrase("Why is the cat always on the table?");
     assertEquals("Why is the cat always on the table?", p.getText());
     assertNotEquals("Why is the dragon always on the table?", p.getText());
   }

@@ -10,14 +10,19 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class LangUtils {
 
-  private static final String[] SHORTS = {"'m", "'M", "'s", "'S", "'re", "'rE",
-      "'Re", "'RE", "'ve", "'vE", "'Ve", "'VE", "'ll", "'lL", "'Ll", "'LL",
-      "won't", "WON'T", "couldn't", "COULDN'T", "shouldn't", "SHOULDN'T"};
+  /**
+   * Stores all supported verbs abbreviations in the expandVerbs method.
+   */
+  private static final String[] SHORTS = {"'m", "'s", "'re", "'ve", "'ll",
+      "won't", "n't"};
 
-  private static final String[] LONGS = {" am", " AM", " is", " IS", " are",
-      " are", " are", " ARE", " have", " have", " have", " HAVE", " will",
-      " will", " will", " WILL", "will not", "WILL NOT", "could not",
-      "COULD NOT", "should not", "SHOULD NOT"};
+  /**
+   * Stores all the expanded forms for the supported contracted verbs by
+   * expandVerbs method.
+   */
+  private static final String[] LONGS = {" am", " is", " are", " have", " will",
+      "will not", " not"};
+
   /**
    * Splits a text in sentences by punctuation.
    * @param str The original text to be splitted into sentences.
@@ -117,32 +122,12 @@ public class LangUtils {
    * @return the original string without double spaces.
    */
   public static String removeDuplicatedSpaces(String str) {
-    StringBuffer buff = new StringBuffer();
-
-    int start = 0;
-    int last = str.length() - 1;
-    while (start < str.length() && str.charAt(start) == ' ') {
-      start++;
-    }
-    while (last >= 0 && str.charAt(last) == ' ') {
-      last--;
-    }
-    for (int i = start; i < last; i++) {
-      char c = str.charAt(i);
-      char n = str.charAt(i + 1);
-      if (c == ' ' && n == ' ') {
-        continue;
-      }
-      buff.append(c);
-    }
-    if (last >= 0) {
-      buff.append(str.charAt(last));
-    }
-    return buff.toString();
+    return StringUtils.normalizeSpace(str);
   }
 
   /**
-   * Expands all the contracted form verbs in a sentence.
+   * Expands all the contracted form verbs in a sentence. Works only with
+   * lowercased Strings.
    * Please note: Saxon Genitive abbreviations could wrongly be treated as "is"
    * contractios.
    * @param contracted the phrase to work with
