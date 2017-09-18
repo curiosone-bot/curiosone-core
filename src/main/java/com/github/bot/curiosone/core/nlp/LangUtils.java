@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+//import java.lang.StringBuffer;
 
 /**
  * Provides utility methos to perform basic Natural Language Process tasks.
@@ -149,95 +150,12 @@ public class LangUtils {
    * @return the given phrase with all verbs in extended form.
    */
   public static String expandVerbs(String contracted) {
+    //StringBuffer sb = new StringBuffer(contracted);
     String expanded = contracted;
-    /*
-    String[] from = {"'m", "'M", "'s", "'S", "'re", "'RE", "'Re", "'rE",
-        "'ve", "'VE", "'vE", "'Ve", "'ll", "'LL", "'lL", "'Ll", "won't",
-        "can't", "wouldn't", "couldn't", "didn't"};
-    String[] to = {" am", " AM", " is", " IS", " are", " ARE", " are", " are",
-        " have", " HAVE", " have", " have", " will", " WILL", " will", " will",
-        "will not", "cannot", "would not", "could not", "did not"};
-    */
     for (int i = 0; i < CONTRACTED_VERBS.length; i++) {
       expanded = contracted.replace(CONTRACTED_VERBS[i], EXPANDED_VERBS[i]);
       contracted = expanded;
     }
     return expanded;
-  }
-
-  /**
-   * Expands all contracted form verbs from a String.
-   * @param str The contracted with contracted form verbs.
-   * @return The content of the original String with all expanded form verbs.
-   */
-
-  public static String expandVerbs2(String str) {
-    StringBuffer buff = new StringBuffer();
-    String[] subjs = {"i", "you", "he", "she", "it", "we", "you", "they"};
-    String[] shorts = {"m", "M", "s", "S", "re", "rE", "Re", "RE", "ve", "vE",
-      "Ve", "VE", "ll", "lL", "Ll", "LL", "won't"};
-    String[] longs = {" am", " AM", " is", " IS", " are", " are", " are",
-      " ARE", " have", " have", " have", " HAVE", " will", " will", " will",
-      " WILL", " will not"};
-
-    for (int i = 0; i < str.length() - 1; i++) {
-      char c = str.charAt(i);
-      if ((c != '\'' || i == 0) && c != ' ') {
-        buff.append(c);
-        continue;
-      }
-      // Search for a subject before the apostrophe
-      boolean found = false;
-      String subject = str.substring(Math.max(i - 5, 0), i).toLowerCase();
-      for (String sub : subjs) {
-        if (subject.length() < sub.length()) {
-          continue;
-        }
-        int j = 0;
-        boolean fail = false;
-        for (; j < sub.length(); j++) {
-          if (subject.charAt(subject.length() - 1 - j) != subject.charAt(sub.length() - 1 - j)) {
-            fail = true;
-            break;
-          }
-        }
-        if (!fail) {
-          // If there isn't a space before the found subject
-          if (i - 1 - j > 0 && str.charAt(i - 1 - j) != ' ') {
-            continue;
-          }
-          found = true;
-          break;
-        }
-      }
-      if (!found) {
-        buff.append(c);
-        continue;
-      }
-      // Search if we know this abbreviation
-      boolean match = false;
-      String verb = str.substring(i + 1, Math.min(i + 5 + 1, str.length()));
-      for (int j = 0; j < shorts.length; j++) {
-        String sub = verb.substring(0, Math.min(shorts[j].length(), verb.length()));
-        //System.out.print("sub: " + sub + " ");
-        if (!shorts[j].equals(sub)) {
-          continue;
-        }
-        // If there isn't a space after the found match
-        if (i + 1 + sub.length() < str.length() && str.charAt(i + 1 + shorts[j].length()) != ' ') {
-          continue;
-        }
-        match = true;
-        buff.append(longs[j]);
-        i += sub.length();
-        break;
-      }
-      if (!match) {
-        buff.append(c);
-        continue;
-      }
-    }
-    buff.append(str.charAt(str.length() - 1));
-    return buff.toString();
   }
 }

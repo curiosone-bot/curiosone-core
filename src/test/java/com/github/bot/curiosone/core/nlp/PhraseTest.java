@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.List;
 
 public class PhraseTest {
+
   @Test
   public void testInstantiation() {
     Phrase classUnderTest = new Phrase("The cat is on the table!");
@@ -41,6 +42,25 @@ public class PhraseTest {
     classUnderTest = new Phrase("I think it's enough");
     assertNotEquals("I think it's NOT enough!", classUnderTest.getText());
   }
+
+  @Test
+  public void testGetTokens() {
+    Phrase classUnderTest = new Phrase("This is easy");
+    assertEquals(3, classUnderTest.getTokens().size());
+    assertEquals("this", classUnderTest.getTokens().get(0).getText());
+    assertEquals("is", classUnderTest.getTokens().get(1).getText());
+    assertEquals("easy", classUnderTest.getTokens().get(2).getText());
+
+    classUnderTest = new Phrase("Ok, time for more punctuation!");
+    assertEquals(5, classUnderTest.getTokens().size());
+    assertEquals("ok", classUnderTest.getTokens().get(0).getText());
+    assertEquals("time", classUnderTest.getTokens().get(1).getText());
+    assertEquals("for", classUnderTest.getTokens().get(2).getText());
+    assertEquals("more", classUnderTest.getTokens().get(3).getText());
+    assertEquals("punctuation", classUnderTest.getTokens().get(4).getText());
+  }
+
+
 
   @Test
   public void testEquals() {
