@@ -105,5 +105,35 @@ public class LangUtilsTest {
 
     s = LangUtils.expandVerbs("I'll kill you");
     assertEquals("I will kill you", s);
+
+    s = LangUtils.expandVerbs("I won't kill you!");
+    assertEquals("I will not kill you!", s);
+
+    s = LangUtils.expandVerbs("I WON'T KILL YOU!");
+    assertEquals("I WILL NOT KILL YOU!", s);
+
+    s = LangUtils.expandVerbs("i'm done! i'm here!");
+    assertEquals("i am done! i am here!", s);
+
+    s = LangUtils.expandVerbs(
+        "I'M HERE, YOU'RE HERE, HE'S HERE, SHE'S HERE... WE'RE ALL HERE!");
+    assertEquals(
+        "I AM HERE, YOU ARE HERE, HE IS HERE, SHE IS HERE... WE ARE ALL HERE!",
+            s);
+
+    s = LangUtils.expandVerbs("I couldn't resist...");
+    assertEquals("I could not resist...", s);
+
+    s = LangUtils.expandVerbs("I could've gotten more!");
+    assertEquals("I could have gotten more!", s);
+
+    s = LangUtils.expandVerbs("I shouldn't be here!");
+    assertEquals("I should not be here!", s);
+
+    s = LangUtils.expandVerbs("YOU SHOULDN'T BE THERE!");
+    assertEquals("YOU SHOULD NOT BE THERE!", s);
+
+    s = LangUtils.expandVerbs("YOU COULDN'T RESIST! YOU'RE SUCH A CURIOSONE!!");
+    assertEquals("YOU COULD NOT RESIST! YOU ARE SUCH A CURIOSONE!!", s);
   }
 }
