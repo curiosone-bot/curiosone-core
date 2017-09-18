@@ -7,10 +7,10 @@ import java.util.Objects;
  */
 public class Pair<F, S> {
   /** The first element of the pair. */
-  public final F first;
+  private final F first;
 
   /** The second element of the pair. */
-  public final S second;
+  private final S second;
 
   /**
    * Constructor for a Pair.
@@ -21,6 +21,24 @@ public class Pair<F, S> {
   public Pair(F first, S second) {
     this.first = first;
     this.second = second;
+  }
+
+  /**
+   * Gets the first element of the pair.
+   *
+   * @return the first element of the pair.
+   */
+  public F getFirst() {
+    return first;
+  }
+
+  /**
+   * Gets the second element of the pair.
+   *
+   * @return the second element of the pair.
+   */
+  public S getSecond() {
+    return second;
   }
 
   /**

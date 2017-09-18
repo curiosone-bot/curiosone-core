@@ -1,11 +1,14 @@
 package com.github.bot.curiosone.core.nlp;
 
+import com.github.bot.curiosone.core.util.Interval;
 import com.github.bot.curiosone.core.util.Pair;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
@@ -21,7 +24,7 @@ public class CYK {
 
   /**
    * CYK Constructor.
-   * 
+   *
    * @param tokens list of tokens to parse
    */
   public CYK(List<Token> tokens) {
@@ -31,9 +34,9 @@ public class CYK {
     for (int x = 0; x < size; x++) {
       table[x] = new Cell[x + 1];
     }
-    for (int x = 0; x < size; x++) {
-      for (int y = 0; y < x + 1; y++) {
-        table[x][y] = new Cell();
+    for (int y = 0; y < size; y++) {
+      for (int x = 0; x < y + 1; x++) {
+        table[y][x] = new Cell();
       }
     }
 
@@ -98,6 +101,55 @@ public class CYK {
    */
   public int getWidthAt(int y) {
     return y + 1;
+  }
+
+  /**
+   * Visits the table and extracts intervals.
+   *
+   * @param lookup the map where the intervals are stored
+   * @param x the x position of the table
+   * @param y the y position of the table
+   * @param current the role to use at this position
+   */
+  public void intervals(Map<POS, TreeSet<Interval>> lookup, int x, int y, Rule current) {
+    TreeSet<Interval> list = lookup.getOrDefault(current.getFrom(), new TreeSet<Interval>());
+    if (y == size - 1) {
+      list.add(new Interval(x, x));
+      lookup.put(current.getFrom(), list);
+      return;
+    }
+    list.add(new Interval(x, x - 1 + size - y));
+    lookup.put(current.getFrom(), list);
+
+    // Search down
+    POS left = current.getTo().getFirst();
+    for (int by = y + 1; by < size; by++) {
+      boolean found = false;
+      for (Rule r : table[by][x].get()) {
+        if (r.getFrom().equals(left)) {
+          found = true;
+          intervals(lookup, x, by, r);
+        }
+      }
+      if (found) {
+        break;
+      }
+    }
+
+    // Search diagonally right
+    POS right = current.getTo().getSecond();
+    for (int by = y + 1; by < size; by++) {
+      boolean found = false;
+      for (Rule r : table[by][by].get()) {
+        if (r.getFrom().equals(right)) {
+          found = true;
+          intervals(lookup, by, by, r);
+        }
+      }
+      if (found) {
+        break;
+      }
+    }
   }
 
   /**

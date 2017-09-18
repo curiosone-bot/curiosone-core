@@ -2,27 +2,43 @@ package com.github.bot.curiosone.core.nlp;
 
 // SUPPRESS CHECKSTYLE AvoidStarImport
 import static org.junit.Assert.*;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Test;
 
 public class TokenTest {
   @Test
   public void testInstantiation() {
-    Token classUnderTest = new Token("color");
+    Token classUnderTest = Token.tokenize("color").get(0);
     Set<Meaning> means = classUnderTest.getMeanings();
     assertTrue(means.size() > 0);
   }
 
   @Test
   public void testEquals() {
-    Token classUnderTest = new Token("color");
-    Token classUnderTestClone = new Token("color");
+    Token classUnderTest = Token.tokenize("color").get(0);
+    Token classUnderTestClone = Token.tokenize("color").get(0);
     assertEquals(classUnderTest, classUnderTestClone);
+    assertEquals(classUnderTest, classUnderTest);
+    assertNotEquals(classUnderTest, null);
+    assertNotEquals(classUnderTest, "Bla bla bla");
+  }
+
+  @Test
+  public void testHashCode() {
+    List<Token> classUnderTest =
+        Token.tokenize("Testing out the hashCode function!");
+    List<Token> classUnderTestClone =
+        Token.tokenize("Testing out the hashCode function!");
+    assertEquals(classUnderTestClone.hashCode(), classUnderTest.hashCode());
+
+    classUnderTest = Token.tokenize("I will have a hashCode!");
+    classUnderTestClone = Token.tokenize("And I will have another hashCode!!");
+    assertNotEquals(classUnderTestClone.hashCode(), classUnderTest.hashCode());
   }
 
   @Test
