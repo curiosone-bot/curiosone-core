@@ -18,6 +18,13 @@ public class PhraseTest {
   public void testEquals() {
     Phrase classUnderTest = new Phrase("The cat is on the table!");
     Phrase classUnderTestClone = new Phrase("The cat is on the table!");
+    assertEquals(classUnderTest, classUnderTest);
+    assertEquals(classUnderTest, classUnderTestClone);
+    assertNotEquals(null, classUnderTest);
+    assertNotEquals(new StringBuffer("something different"), classUnderTest);
+
+    classUnderTest = new Phrase("This happens with the 42 number");
+    classUnderTestClone = new Phrase("This happens with the 42 number");
     assertEquals(classUnderTest, classUnderTestClone);
   }
 
@@ -25,5 +32,12 @@ public class PhraseTest {
   public void testExtract() {
     List<Phrase> phrases = Phrase.extract("The cat is on the table! But I love dogs.");
     assertEquals(2, phrases.size());
+  }
+
+  @Test
+  public void testGetText() {
+    Phrase p = new Phrase ("Why is the cat always on the table?");
+    assertEquals("Why is the cat always on the table?", p.getText());
+    assertNotEquals("Why is the dragon always on the table?", p.getText());
   }
 }

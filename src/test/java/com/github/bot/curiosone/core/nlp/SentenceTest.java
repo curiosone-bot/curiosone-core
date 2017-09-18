@@ -38,9 +38,12 @@ public class SentenceTest {
   @Test
   public void testEquals() {
     List<Sentence> ls = Sentence.extract(new Phrase("What is an apple?"));
-    assertEquals(ls.get(0),ls.get(0));
+    List<Sentence> ls2 = Sentence.extract(new Phrase("What is an apple?"));
+    assertEquals(ls.get(0), ls.get(0));
+    assertEquals(ls.get(0), ls2.get(0));
     assertNotEquals(ls.get(0),null);
     assertNotEquals(ls.get(0), "Bla bla bla");
+    assertNotEquals(ls.get(0), new StringBuffer("bla bla bla"));
   }
 
   @Test
