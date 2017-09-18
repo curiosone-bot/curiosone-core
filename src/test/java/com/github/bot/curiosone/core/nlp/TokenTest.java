@@ -72,5 +72,26 @@ public class TokenTest {
     assertEquals("cat", tokens.get(2).getText());
     assertEquals("was", tokens.get(3).getText());
     assertEquals("created", tokens.get(4).getText());
+
+    tokens = Token.tokenize("UNITED KINGDOM IS NOT THAT FAR");
+    assertEquals(5, tokens.size());
+    assertEquals("united kingdom", tokens.get(0).getText());
+    assertEquals("is", tokens.get(1).getText());
+    assertEquals("not", tokens.get(2).getText());
+    assertEquals("that", tokens.get(3).getText());
+    assertEquals("far", tokens.get(4).getText());
+
+    tokens = Token.tokenize("Ok, what about puntaction? I think it is easy!");
+    assertEquals(9, tokens.size());
+    assertEquals("ok", tokens.get(0).getText());
+    assertEquals("what", tokens.get(1).getText());
+    assertEquals("about", tokens.get(2).getText());
+    assertEquals("puntaction?", tokens.get(3).getText());
+    assertEquals("i", tokens.get(4).getText());
+    assertEquals("think", tokens.get(5).getText());
+    assertEquals("it", tokens.get(6).getText());
+    assertEquals("is", tokens.get(7).getText());
+    assertEquals("easy", tokens.get(8).getText());
+
   }
 }

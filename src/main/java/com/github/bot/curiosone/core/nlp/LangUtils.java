@@ -10,6 +10,14 @@ import java.util.Map;
  */
 public class LangUtils {
 
+  private static final String[] CONTRACTED_VERBS = {"'m", "'M", "'s", "'S",
+      "'re", "'RE", "'Re", "'rE", "'ve", "'VE", "'vE", "'Ve", "'ll", "'LL",
+      "'lL", "'Ll", "won't", "can't", "wouldn't", "couldn't", "didn't"};
+
+  private static final String[] EXPANDED_VERBS = {" am", " AM", " is", " IS",
+      " are", " ARE", " are", " are", " have", " HAVE", " have", " have",
+      " will", " WILL", " will", " will", "will not", "cannot", "would not",
+      "could not", "did not"};
   /**
    * Splits a text in sentences by punctuation.
    * @param str The original text to be splitted into sentences.
@@ -142,15 +150,16 @@ public class LangUtils {
    */
   public static String expandVerbs(String contracted) {
     String expanded = contracted;
+    /*
     String[] from = {"'m", "'M", "'s", "'S", "'re", "'RE", "'Re", "'rE",
         "'ve", "'VE", "'vE", "'Ve", "'ll", "'LL", "'lL", "'Ll", "won't",
         "can't", "wouldn't", "couldn't", "didn't"};
     String[] to = {" am", " AM", " is", " IS", " are", " ARE", " are", " are",
         " have", " HAVE", " have", " have", " will", " WILL", " will", " will",
         "will not", "cannot", "would not", "could not", "did not"};
-
-    for (int i = 0; i < from.length; i++) {
-      expanded = contracted.replace(from[i], to[i]);
+    */
+    for (int i = 0; i < CONTRACTED_VERBS.length; i++) {
+      expanded = contracted.replace(CONTRACTED_VERBS[i], EXPANDED_VERBS[i]);
       contracted = expanded;
     }
     return expanded;
