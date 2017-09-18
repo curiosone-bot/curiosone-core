@@ -23,6 +23,21 @@ public class TokenTest {
     Token classUnderTest = Token.tokenize("color").get(0);
     Token classUnderTestClone = Token.tokenize("color").get(0);
     assertEquals(classUnderTest, classUnderTestClone);
+    assertEquals(classUnderTest, classUnderTest);
+    assertNotEquals(classUnderTest,null);
+  }
+
+  @Test
+  public void testHashCode() {
+    List<Token> classUnderTest =
+        Token.tokenize("Testing out the hashCode function!");
+    List<Token> classUnderTestClone =
+        Token.tokenize("Testing out the hashCode function!");
+    assertEquals(classUnderTestClone.hashCode(), classUnderTest.hashCode());
+
+    classUnderTest = Token.tokenize("I will have a hashCode!");
+    classUnderTestClone = Token.tokenize("And I will have another hashCode!!");
+    assertNotEquals(classUnderTestClone.hashCode(), classUnderTest.hashCode());
   }
 
   @Test
@@ -50,6 +65,8 @@ public class TokenTest {
     assertEquals("in", tokens.get(2).getText());
     assertEquals("the", tokens.get(3).getText());
     assertEquals("united states of america", tokens.get(4).getText());
+
+    tokens =
 
     tokens = Token.tokenize("what is an apple?");
     assertEquals(4, tokens.size());
