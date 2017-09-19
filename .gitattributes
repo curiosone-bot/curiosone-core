@@ -10,4 +10,4 @@
 *.gif binary
 *.svg binary
 *.ico binary
-*.ico binary
+src/main/res/* text eol=lf

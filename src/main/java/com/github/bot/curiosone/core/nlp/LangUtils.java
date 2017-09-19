@@ -3,10 +3,25 @@ package com.github.bot.curiosone.core.nlp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Provides utility methos to perform basic Natural Language Process tasks.
  */
 public class LangUtils {
+
+  /**
+   * Stores all supported verbs abbreviations in the expandVerbs method.
+   */
+  private static final String[] SHORTS = {"'m", "'s", "'re", "'ve", "'ll",
+      "won't", "n't"};
+
+  /**
+   * Stores all the expanded forms for the supported contracted verbs by
+   * expandVerbs method.
+   */
+  private static final String[] LONGS = {" am", " is", " are", " have", " will",
+      "will not", " not"};
 
   /**
    * Splits a text in sentences by punctuation.
@@ -107,103 +122,17 @@ public class LangUtils {
    * @return the original string without double spaces.
    */
   public static String removeDuplicatedSpaces(String str) {
-    StringBuffer buff = new StringBuffer();
-
-    int start = 0;
-    int last = str.length() - 1;
-    while (start < str.length() && str.charAt(start) == ' ') {
-      start++;
-    }
-    while (last >= 0 && str.charAt(last) == ' ') {
-      last--;
-    }
-    for (int i = start; i < last; i++) {
-      char c = str.charAt(i);
-      char n = str.charAt(i + 1);
-      if (c == ' ' && n == ' ') {
-        continue;
-      }
-      buff.append(c);
-    }
-    if (last >= 0) {
-      buff.append(str.charAt(last));
-    }
-    return buff.toString();
+    return StringUtils.normalizeSpace(str);
   }
 
   /**
-   * Expands all contracted form verbs from a String.
-   * @param str The sentence with contracted form verbs.
-   * @return The content of the original String with all expanded form verbs.
+   * Expands all the contracted form verbs in a sentence.
+   * Note: Works only with lowercased Strings.
+   * Note: Saxon Genitive abbreviations could wrongly be treated as "is".
+   * @param contracted the phrase to work with
+   * @return a new String, containing the old phrase with all verbs expanded
    */
-  public static String expandVerbs(String str) {
-    StringBuffer buff = new StringBuffer();
-    String[] subjs = {"i", "you", "he", "she", "it", "we", "you", "they"};
-    String[] shorts = {"m", "M", "s", "S", "re", "rE", "Re", "RE", "ve", "vE",
-      "Ve", "VE", "ll", "lL", "Ll", "LL"};
-    String[] longs = {" am", " AM", " is", " IS", " are", " are", " are",
-      " ARE", " have", " have", " have", " HAVE", " will", " will", " will",
-      " WILL"};
-
-    for (int i = 0; i < str.length() - 1; i++) {
-      char c = str.charAt(i);
-      if (c != '\'' || i == 0) {
-        buff.append(c);
-        continue;
-      }
-
-      // Search for a subject before the apostrophe
-      boolean found = false;
-      String subject = str.substring(Math.max(i - 5, 0), i).toLowerCase();
-      for (String sub : subjs) {
-        if (subject.length() < sub.length()) {
-          continue;
-        }
-        int j = 0;
-        boolean fail = false;
-        for (; j < sub.length(); j++) {
-          if (subject.charAt(subject.length() - 1 - j) != subject.charAt(sub.length() - 1 - j)) {
-            fail = true;
-            break;
-          }
-        }
-        if (!fail) {
-          // If there isn't a space before the found subject
-          if (i - 1 - j > 0 && str.charAt(i - 1 - j) != ' ') {
-            continue;
-          }
-          found = true;
-          break;
-        }
-      }
-      if (!found) {
-        buff.append(c);
-        continue;
-      }
-
-      // Search if we know this abbreviation
-      boolean match = false;
-      String verb = str.substring(i + 1, Math.min(i + 5 + 1, str.length()));
-      for (int j = 0; j < shorts.length; j++) {
-        String sub = verb.substring(0, Math.min(shorts[j].length(), verb.length()));
-        if (!shorts[j].equals(sub)) {
-          continue;
-        }
-        // If there isn't a space after the found match
-        if (i + 1 + sub.length() < str.length() && str.charAt(i + 1 + shorts[j].length()) != ' ') {
-          continue;
-        }
-        match = true;
-        buff.append(longs[j]);
-        i += sub.length();
-        break;
-      }
-      if (!match) {
-        buff.append(c);
-        continue;
-      }
-    }
-    buff.append(str.charAt(str.length() - 1));
-    return buff.toString();
+  public static String expandVerbs(String contracted) {
+    return StringUtils.replaceEachRepeatedly(contracted, SHORTS, LONGS);
   }
 }

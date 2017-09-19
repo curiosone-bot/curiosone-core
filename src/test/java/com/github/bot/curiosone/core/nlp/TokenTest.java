@@ -19,10 +19,49 @@ public class TokenTest {
   }
 
   @Test
+  public void testGetLemma() {
+    Token token;
+
+    token = Token.tokenize("color").get(0);
+    assertEquals("color", token.getLemma());
+
+    token = Token.tokenize("colors").get(0);
+    assertEquals("color", token.getLemma());
+
+    token = Token.tokenize("you").get(0);
+    assertEquals("you", token.getLemma());
+
+    token = Token.tokenize("doing").get(0);
+    assertEquals("do", token.getLemma());
+
+    token = Token.tokenize("is").get(0);
+    assertEquals("be", token.getLemma());
+
+    token = Token.tokenize("held").get(0);
+    assertEquals("hold", token.getLemma());
+  }
+
+  @Test
   public void testEquals() {
     Token classUnderTest = Token.tokenize("color").get(0);
     Token classUnderTestClone = Token.tokenize("color").get(0);
     assertEquals(classUnderTest, classUnderTestClone);
+    assertEquals(classUnderTest, classUnderTest);
+    assertNotEquals(classUnderTest, null);
+    assertNotEquals(classUnderTest, "Bla bla bla");
+  }
+
+  @Test
+  public void testHashCode() {
+    List<Token> classUnderTest =
+        Token.tokenize("Testing out the hashCode function!");
+    List<Token> classUnderTestClone =
+        Token.tokenize("Testing out the hashCode function!");
+    assertEquals(classUnderTestClone.hashCode(), classUnderTest.hashCode());
+
+    classUnderTest = Token.tokenize("I will have a hashCode!");
+    classUnderTestClone = Token.tokenize("And I will have another hashCode!!");
+    assertNotEquals(classUnderTestClone.hashCode(), classUnderTest.hashCode());
   }
 
   @Test

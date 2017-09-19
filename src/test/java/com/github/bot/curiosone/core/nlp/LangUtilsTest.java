@@ -26,6 +26,16 @@ public class LangUtilsTest {
     assertEquals("asd!", l.get(0));
     assertEquals(" dasda.", l.get(1));
 
+    l = LangUtils.splitByPuntaction("?!!!!!asd!!!!! dasda.!!!!???!");
+    assertEquals(2, l.size());
+    assertEquals("asd!", l.get(0));
+    assertEquals(" dasda.", l.get(1));
+
+    l = LangUtils.splitByPuntaction(".!!!!!asd!!!!! dasda.!!!!???!");
+    assertEquals(2, l.size());
+    assertEquals("asd!", l.get(0));
+    assertEquals(" dasda.", l.get(1));
+
     l = LangUtils.splitByPuntaction("!!!!!!");
     assertEquals(0, l.size());
 
@@ -38,10 +48,54 @@ public class LangUtilsTest {
     assertEquals("Hello!", l.get(0));
     assertEquals(" Visit my website: http://evil.com/pwn.you pls.", l.get(1));
 
+    l = LangUtils.splitByPuntaction("Hello! Visit my website: http://evil?.com/pwn.you pls");
+    assertEquals(2, l.size());
+    assertEquals("Hello!", l.get(0));
+    assertEquals(" Visit my website: http://evil?.com/pwn.you pls.", l.get(1));
+
+    l = LangUtils.splitByPuntaction("Hello! Visit my website: http://evil!.com/pwn.you pls");
+    assertEquals(2, l.size());
+    assertEquals("Hello!", l.get(0));
+    assertEquals(" Visit my website: http://evil!.com/pwn.you pls.", l.get(1));
+
     l = LangUtils.splitByPuntaction("Hello!! Contact me at spam@bot.com to get more spam! ;)");
     assertEquals(3, l.size());
     assertEquals("Hello!", l.get(0));
     assertEquals(" Contact me at spam@bot.com to get more spam!", l.get(1));
+    assertEquals(" ;).", l.get(2));
+
+    l = LangUtils.splitByPuntaction("Fortytwo.is.the.answer");
+    assertEquals(4, l.size());
+    assertEquals("Fortytwo.", l.get(0));
+    assertEquals("is.", l.get(1));
+    assertEquals("the.", l.get(2));
+    assertEquals("answer.", l.get(3));
+
+    l = LangUtils.splitByPuntaction("Fortytwo!is!the!answer");
+    assertEquals(4, l.size());
+    assertEquals("Fortytwo!", l.get(0));
+    assertEquals("is!", l.get(1));
+    assertEquals("the!", l.get(2));
+    assertEquals("answer.", l.get(3));
+
+    l = LangUtils.splitByPuntaction("Fortytwo?is?the?answer");
+    assertEquals(4, l.size());
+    assertEquals("Fortytwo?", l.get(0));
+    assertEquals("is?", l.get(1));
+    assertEquals("the?", l.get(2));
+    assertEquals("answer.", l.get(3));
+
+
+    l = LangUtils.splitByPuntaction("Hello!! Contact me at spam?@bot.com to get more spam! ;)");
+    assertEquals(3, l.size());
+    assertEquals("Hello!", l.get(0));
+    assertEquals(" Contact me at spam?@bot.com to get more spam!", l.get(1));
+    assertEquals(" ;).", l.get(2));
+
+    l = LangUtils.splitByPuntaction("Hello!! Contact me at spam!@bot.com to get more spam! ;)");
+    assertEquals(3, l.size());
+    assertEquals("Hello!", l.get(0));
+    assertEquals(" Contact me at spam!@bot.com to get more spam!", l.get(1));
     assertEquals(" ;).", l.get(2));
 
     l = LangUtils.splitByPuntaction("");
@@ -94,16 +148,34 @@ public class LangUtilsTest {
     s = LangUtils.expandVerbs("i'm done");
     assertEquals("i am done", s);
 
-    s = LangUtils.expandVerbs("I'M DONE");
-    assertEquals("I AM DONE", s);
-
     s = LangUtils.expandVerbs("i've done it");
     assertEquals("i have done it", s);
 
-    s = LangUtils.expandVerbs("I'VE DONE IT");
-    assertEquals("I HAVE DONE IT", s);
-
     s = LangUtils.expandVerbs("I'll kill you");
     assertEquals("I will kill you", s);
+
+    s = LangUtils.expandVerbs("I won't kill you!");
+    assertEquals("I will not kill you!", s);
+
+    s = LangUtils.expandVerbs("i'm done! i'm here!");
+    assertEquals("i am done! i am here!", s);
+
+    s = LangUtils.expandVerbs("I couldn't resist...");
+    assertEquals("I could not resist...", s);
+
+    s = LangUtils.expandVerbs("I could've gotten more!");
+    assertEquals("I could have gotten more!", s);
+
+    s = LangUtils.expandVerbs("I shouldn't be here!");
+    assertEquals("I should not be here!", s);
+
+    s = LangUtils.expandVerbs("Mike's a good boy, just as you're!");
+    assertEquals("Mike is a good boy, just as you are!", s);
+
+    s = LangUtils.expandVerbs(
+        "I didn't touch your phone! You're a liar! I didn't do anything!!!");
+    assertEquals(
+        "I did not touch your phone! You are a liar! I did not do anything!!!",
+            s);
   }
 }

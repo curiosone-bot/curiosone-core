@@ -15,6 +15,9 @@ public class Token {
   /** The text rappresentation of this token. */
   String text;
 
+  /** Base form of the world. */
+  String lemma;
+
   /** Meanings of the token. */
   Set<Meaning> means;
 
@@ -30,6 +33,7 @@ public class Token {
     RawToken rt = RawDict.getInstance().getRawToken(text);
     known = rt.isKnown();
     means = new HashSet<>();
+    lemma = rt.getLemma();
     rt.getWords().forEach(rw -> {
       Meaning meaning = new Meaning(rw.getPos(), rw.getLexType());
       meaning.setFrequency(rw.getNum());
@@ -54,6 +58,15 @@ public class Token {
    */
   public String getText() {
     return text;
+  }
+
+  /**
+   * Returns the normalized concatenation of the words of this token.
+   *
+   * @return the normalized concatenation of the words of this token.
+   */
+  public String getLemma() {
+    return lemma;
   }
 
   /**
@@ -112,7 +125,11 @@ public class Token {
    */
   public static List<Token> tokenize(String str) {
     List<Token> tokens = new ArrayList<>();
-    String[] splitted = str.toLowerCase().split(" ");
+    str = str.toLowerCase();
+    str = LangUtils.removeDuplicatedSpaces(str);
+    str = LangUtils.expandVerbs(str);
+
+    String[] splitted = str.split(" ");
     int pos = splitted.length;
     int len = 4;
     while (pos > 0) {

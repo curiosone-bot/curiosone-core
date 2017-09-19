@@ -40,4 +40,33 @@ public class SentenceTest {
     assertTrue(words.size() > 0);
     System.out.println(words);
   }
+
+  @Test
+  public void testEquals() {
+    List<Sentence> ls = Sentence.extract(new Phrase("What is an apple?"));
+    List<Sentence> ls2 = Sentence.extract(new Phrase("What is an apple?"));
+    assertEquals(ls.get(0), ls.get(0));
+    assertEquals(ls.get(0), ls2.get(0));
+    assertNotEquals(ls.get(0),null);
+    assertNotEquals(ls.get(0), "Bla bla bla");
+    assertNotEquals(ls.get(0), new StringBuffer("bla bla bla"));
+  }
+
+  @Test
+  public void testHashCode() {
+    List<Sentence> ls = Sentence.extract(new Phrase("What is an apple?"));
+    List<Sentence> ls2 = Sentence.extract(new Phrase("What is an apple?"));
+    assertTrue(Integer.class.isInstance(ls.get(0).hashCode()));
+    assertEquals(ls.get(0).hashCode(), ls2.get(0).hashCode());
+  }
+
+  @Test
+  public void testGetWord() {
+    List<String> lw = Sentence.extract(
+        new Phrase("What is an apple?")).get(0).getWords();
+    assertEquals("what", lw.get(0));
+    assertEquals("is", lw.get(1));
+    assertEquals("an", lw.get(2));
+    assertEquals("apple", lw.get(3));
+  }
 }
