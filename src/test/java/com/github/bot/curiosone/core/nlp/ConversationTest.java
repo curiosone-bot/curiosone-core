@@ -14,7 +14,6 @@ public class ConversationTest {
     assertTrue(s.equals("I will set aside this information")
         || s.equals("I am glad to know it")
         || s.equals("This information is not new to me.."));
-    System.out.println(s);
 
     s = Conversation.getAnswer(new Phrase("where do you live?"));
     assertTrue(s.equals("Right in front of you")
@@ -38,7 +37,7 @@ public class ConversationTest {
         || s.equals("I really want a friend"));
 
     s = Conversation.getAnswer(new Phrase("i want to play a game"));
-    assertTrue(s.equals("I have different games in my brain, if you want to play,"
+    assertTrue(s.equals("I have different games in my brain, if you want to play, "
         + "just click on the top-left side button on the screen"));
 
     s = Conversation.getAnswer(new Phrase("can you dance?"));
