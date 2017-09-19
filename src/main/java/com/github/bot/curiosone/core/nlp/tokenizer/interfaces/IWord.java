@@ -1,6 +1,7 @@
 package com.github.bot.curiosone.core.nlp.tokenizer.interfaces;
 
 import com.github.bot.curiosone.core.nlp.tokenizer.LexT;
+import com.github.bot.curiosone.core.nlp.tokenizer.PointerT;
 import com.github.bot.curiosone.core.nlp.tokenizer.PosT;
 import com.github.bot.curiosone.core.nlp.tokenizer.Word;
 
@@ -70,14 +71,14 @@ public interface IWord {
    * @see Word#getRelations()
    */
 
-  Map<String, List<String>> getRelations();
+  Map<PointerT, List<String>> getRelations();
 
   /**
    * Get relations by PointerT.
    *
    * @see Word#getRelationsByPointerT()
    */
-  List<String> getRelationsByPointer(String pointer);
+  List<String> getRelationsByPointerT(PointerT pointer);
 
   /**
    * Set a new {@link #wordId} value that is provided in input.
@@ -131,7 +132,7 @@ public interface IWord {
    * @see #relations
    */
 
-  public void addRelation(String p, String value);
+  public void addRelation(PointerT p, String value);
 
   /**
    * Set the map of relations.
@@ -139,6 +140,6 @@ public interface IWord {
    * @see #relations
    */
 
-  public void setRelations(Map<String, List<String>> relations);
+  public void setRelations(Map<PointerT, List<String>> relations);
 
 }

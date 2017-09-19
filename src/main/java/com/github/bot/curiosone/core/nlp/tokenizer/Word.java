@@ -71,23 +71,11 @@ public class Word implements IWord {
 
   /**
    * Semantic relation with other word.
-   * List:
-   * [also_see, antonym, attribute, cause,
-   *  derivationally_related_form, derived_from_adjective, domain_of_synset_(undifferentiated),
-   *  entailment, hypernym, instance_hypernym, hyponym, instance_hyponym,
-   *  member_holonym, substance_holonym, part_holonym,
-   *  member_of_this_domain_(undifferentiated),
-   *  member_meronym, substance_meronym, part_meronym,
-   *  participle, pertainym_(pertains_to_nouns),
-   *  domain_of_synset_-_region, member_of_this_domain_-_region,
-   *  similar_to, domain_of_synset_-_topic,
-   *  member_of_this_domain_-_topic, domain_of_synset_-_usage,
-   *  member_of_this_domain_-_usage, verb_group]
    *
-   * @see edu.mit.jwi.item.Pointer.values()
+   * @see PointerT
    */
 
-  private Map<String, List<String>> relations;
+  private Map<PointerT, List<String>> relations;
 
   /**
    * Get WordID.
@@ -105,7 +93,7 @@ public class Word implements IWord {
    */
 
   public Word() {
-    relations = new HashMap<String, List<String>>();
+    relations = new HashMap<PointerT, List<String>>();
   }
 
 
@@ -225,7 +213,7 @@ public class Word implements IWord {
    * @return the relations
    * @see #relations
    */
-  @Override public Map<String, List<String>> getRelations() {
+  @Override public Map<PointerT, List<String>> getRelations() {
     return relations;
   }
 
@@ -236,7 +224,7 @@ public class Word implements IWord {
    */
 
   @Override
-  public List<String> getRelationsByPointer(String pointer) {
+  public List<String> getRelationsByPointerT(PointerT pointer) {
     return new ArrayList<String>(relations.getOrDefault(pointer, null));
   }
 
@@ -246,7 +234,7 @@ public class Word implements IWord {
    * @see #relations
    */
 
-  @Override public void addRelation(String p, String v) {
+  @Override public void addRelation(PointerT p, String v) {
     this.relations.merge(p,
         new ArrayList<String>(Arrays.asList(v)),(v1,v2) -> {
             v1.add(v);
@@ -260,7 +248,7 @@ public class Word implements IWord {
    * @see #relations
    */
 
-  @Override public void setRelations(Map<String, List<String>> relations) {
+  @Override public void setRelations(Map<PointerT, List<String>> relations) {
     this.relations.clear();
     this.relations.putAll(relations);
   }
@@ -279,7 +267,7 @@ public class Word implements IWord {
         + " Gloss = " + this.gloss
         + " Occurrence = " + this.number;
 
-    out += "\n    " + relations.entrySet().toString();
+    out += "\n" + relations.entrySet().toString();
     return out;
   }
 

@@ -234,9 +234,9 @@ public class Token implements IToken {
         + " LextT = " + this.words.get(0).getLexType()
         + " Gloss = " + this.words.get(0).getGloss()
         + " Occurrence = " + this.words.get(0).getNum()
-        + " \n  All words:";
+        + " \n All words:";
     for (IWord w: this.words) {
-      out += "\n  ->" + w;
+      out += "\n->" + w;
     }
     return out;
   }

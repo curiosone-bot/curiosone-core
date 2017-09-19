@@ -81,8 +81,8 @@ public class DictWn {
       return null;
     }
     Token token = new Token(item);
-    token = getTokenNotWn(token, item); // token outside WordNet
-    token = getTokenWn(token, item);    // token inside WordNet
+    token = getTokenNotWn(token, item);
+    token = getTokenWn(token, item);
     return token;
   }
 
@@ -421,7 +421,8 @@ public class DictWn {
               for (ISynsetID sid: synList) {
                 words = dictionary.getSynset(sid).getWords();
                 for (Iterator<IWord> i = words.iterator(); i.hasNext();) {
-                    retWord.addRelation(pt.toString(), i.next().getLemma());
+                  retWord.addRelation(PointerT.valueOf(pt.toString().toUpperCase()),
+                      i.next().getLemma());
                 }
               }
             }
@@ -432,7 +433,8 @@ public class DictWn {
 
             for (Pointer pt: Pointer.values()) {
               for (IWordID wid: word.getRelatedWords(pt)) {
-                retWord.addRelation(pt.toString(), dictionary.getWord(wid).getLemma());
+                retWord.addRelation(PointerT.valueOf(pt.toString().toUpperCase()),
+                    dictionary.getWord(wid).getLemma());
               }
             }
 
@@ -472,8 +474,7 @@ public class DictWn {
     //System.out.println("\n" + DictWn.getToken("crawler"));
     //System.out.println("\n" + DictWn.getToken("dog"));
     //System.out.println("\n" + DictWn.getToken("come back"));
-    //System.out.println(Pointer.values()); //List possible Pointer values
-    System.out.println("\n" + DictWn.getToken("cats"));
+    //System.out.println("\n" + DictWn.getToken("like"));
   }
-  */
+*/
 }
