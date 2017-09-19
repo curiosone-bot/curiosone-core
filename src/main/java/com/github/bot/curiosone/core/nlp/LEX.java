@@ -287,6 +287,11 @@ public enum LEX {
   PAIN,
 
   /**
+   * Participial adjectives.
+   */
+  PPL,
+
+  /**
    * Mail address.
    */
   MAIL;
