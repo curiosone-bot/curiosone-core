@@ -22,7 +22,8 @@ public class ConversationTest {
 
     s = Conversation.getAnswer(new Phrase("tell me a joke"));
     assertTrue(
-        s.equals("Can a kangaroo jump higher than a house? Of course, a house does not jump at all.")
+        s.equals("Can a kangaroo jump higher than a house? Of course, "
+        + "a house does not jump at all.")
         || s.equals("What do skeletons say before eating?Bone Appetit!"));
 
     s = Conversation.getAnswer(new Phrase("are you stupid?"));
@@ -34,10 +35,11 @@ public class ConversationTest {
 
     s = Conversation.getAnswer(new Phrase("are we friends?"));
     assertTrue(s.equals("Facebook teached me what a friend is")
-        ||s.equals("I really want a friend"));
+        || s.equals("I really want a friend"));
 
     s = Conversation.getAnswer(new Phrase("i want to play a game"));
-    assertTrue(s.equals("I have different games in my brain, if you want to play, just click on the top-left side button on the screen"));
+    assertTrue(s.equals("I have different games in my brain, if you want to play,"
+        + "just click on the top-left side button on the screen"));
 
     s = Conversation.getAnswer(new Phrase("can you dance?"));
     assertTrue(s.equals("I never learned before, it is very hard for robots")

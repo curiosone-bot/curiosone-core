@@ -9,8 +9,8 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Precomuted answers to some common conversational phrases.
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class Conversation {
   /** Path of the database containing known answers. */
   private static final Path KNOWN_QUESTIONS =
-    Paths.get("src/main/res/conversation/conversation.txt");
+      Paths.get("src/main/res/conversation/conversation.txt");
 
   /** Map from recognized tokens to possible phrases given in output. */
   private static Map<String[], String[]> knownQuestions;

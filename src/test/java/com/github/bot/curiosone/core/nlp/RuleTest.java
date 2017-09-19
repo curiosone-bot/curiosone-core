@@ -2,14 +2,15 @@ package com.github.bot.curiosone.core.nlp;
 
 import static com.github.bot.curiosone.core.nlp.Rule.allFrom;
 import static com.github.bot.curiosone.core.nlp.Rule.allTo;
+
 // SUPPRESS CHECKSTYLE AvoidStarImport
 import static org.junit.Assert.*;
 
 import com.github.bot.curiosone.core.util.Pair;
 
-import org.junit.Test;
-
 import java.util.Set;
+
+import org.junit.Test;
 
 public class RuleTest {
 
