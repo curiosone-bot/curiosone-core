@@ -71,7 +71,7 @@ public class Spelling {
    * @param word the word to be corrected. It should be lowercased.
    * @return the corrected word if the world can be corrected
    */
-  String correct(String word) {
+  public String correct(String word) {
     if (dict.containsKey(word)) {
       return word;
     }

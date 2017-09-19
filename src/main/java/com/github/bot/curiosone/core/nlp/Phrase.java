@@ -89,11 +89,6 @@ public class Phrase {
    */
   public static List<Phrase> extract(String input) {
     List<String> splitted = LangUtils.splitByPuntaction(input);
-    for (int i = 0; i < splitted.size(); i++) {
-      splitted.set(i, LangUtils.removeDuplicatedSpaces(splitted.get(i)));
-      splitted.set(i, LangUtils.expandVerbs(splitted.get(i)));
-    }
-
     List<Phrase> phrases = new ArrayList<>(splitted.size());
     splitted.forEach(s -> phrases.add(new Phrase(s)));
     return phrases;
