@@ -64,6 +64,28 @@ public class LangUtilsTest {
     assertEquals(" Contact me at spam@bot.com to get more spam!", l.get(1));
     assertEquals(" ;).", l.get(2));
 
+    l = LangUtils.splitByPuntaction("Fortytwo.is.the.answer");
+    assertEquals(4, l.size());
+    assertEquals("Fortytwo.", l.get(0));
+    assertEquals("is.", l.get(1));
+    assertEquals("the.", l.get(2));
+    assertEquals("answer.", l.get(3));
+
+    l = LangUtils.splitByPuntaction("Fortytwo!is!the!answer");
+    assertEquals(4, l.size());
+    assertEquals("Fortytwo!", l.get(0));
+    assertEquals("is!", l.get(1));
+    assertEquals("the!", l.get(2));
+    assertEquals("answer.", l.get(3));
+
+    l = LangUtils.splitByPuntaction("Fortytwo?is?the?answer");
+    assertEquals(4, l.size());
+    assertEquals("Fortytwo?", l.get(0));
+    assertEquals("is?", l.get(1));
+    assertEquals("the?", l.get(2));
+    assertEquals("answer.", l.get(3));
+
+
     l = LangUtils.splitByPuntaction("Hello!! Contact me at spam?@bot.com to get more spam! ;)");
     assertEquals(3, l.size());
     assertEquals("Hello!", l.get(0));
