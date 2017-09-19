@@ -112,7 +112,11 @@ public class Token {
    */
   public static List<Token> tokenize(String str) {
     List<Token> tokens = new ArrayList<>();
-    String[] splitted = str.toLowerCase().split(" ");
+    str = str.toLowerCase();
+    str = LangUtils.removeDuplicatedSpaces(str);
+    str = LangUtils.expandVerbs(str);
+    
+    String[] splitted = str.split(" ");
     int pos = splitted.length;
     int len = 4;
     while (pos > 0) {
