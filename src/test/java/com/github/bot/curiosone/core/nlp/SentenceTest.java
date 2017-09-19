@@ -29,10 +29,15 @@ public class SentenceTest {
     assertFalse(sentence.respect(POS.PRON, POS.VP, POS.N));
     assertFalse(sentence.respect(POS.PRON, POS.N));
 
-    /*Map<String,List<POS>>[] parameters = sentence.get(POS.PRON, POS.V, POS.NP);
+    List<Word>[] parameters = sentence.parse(POS.PRON, POS.V, POS.NP);
     assertTrue(parameters.length == 3);
     System.out.println(parameters[0]);
     System.out.println(parameters[1]);
-    System.out.println(parameters[2]);*/
+    System.out.println(parameters[2]);
+
+
+    List<Word> words = sentence.get(POS.V);
+    assertTrue(words.size() > 0);
+    System.out.println(words);
   }
 }

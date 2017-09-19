@@ -19,6 +19,9 @@ public class ParseTable {
   /** CYK table. */
   private Cell[][] table;
 
+  /** Tokens from witch the table was generated. */
+  private List<Token> tokens;
+
   /** Size of the table. */
   private int size;
 
@@ -28,6 +31,7 @@ public class ParseTable {
    * @param tokens list of tokens to parse
    */
   public ParseTable(List<Token> tokens) {
+    this.tokens = tokens;
     size = tokens.size();
 
     table = new Cell[size][];
@@ -106,16 +110,26 @@ public class ParseTable {
   /**
    * Visits the table and extracts intervals.
    *
+   * @param meanings the list of meanings extracted for each token
    * @param lookup the map where the intervals are stored
    * @param x the x position of the table
    * @param y the y position of the table
    * @param current the role to use at this position
    */
-  public void intervals(Map<POS, TreeSet<Interval>> lookup, int x, int y, Rule current) {
+  public void traverse(List<Set<Meaning>> meanings, Map<POS, TreeSet<Interval>> lookup, int x, int y, Rule current) {
     TreeSet<Interval> list = lookup.getOrDefault(current.getFrom(), new TreeSet<Interval>());
     if (y == size - 1) {
       list.add(new Interval(x, x));
       lookup.put(current.getFrom(), list);
+      Token token = tokens.get(x);
+      Set<Meaning> means = token.getMeanings().stream()
+          .filter(m -> m.getPOS() == current.getFrom())
+          .collect(Collectors.toSet());
+      if (meanings.get(x) == null) {
+        meanings.set(x, new HashSet<>(means));
+      } else {
+        meanings.get(x).addAll(means);
+      }
       return;
     }
     list.add(new Interval(x, x - 1 + size - y));
@@ -128,7 +142,7 @@ public class ParseTable {
       for (Rule r : table[by][x].get()) {
         if (r.getFrom().equals(left)) {
           found = true;
-          intervals(lookup, x, by, r);
+          traverse(meanings, lookup, x, by, r);
         }
       }
       if (found) {
@@ -143,7 +157,7 @@ public class ParseTable {
       for (Rule r : table[by][by].get()) {
         if (r.getFrom().equals(right)) {
           found = true;
-          intervals(lookup, by, by, r);
+          traverse(meanings, lookup, by, by, r);
         }
       }
       if (found) {
