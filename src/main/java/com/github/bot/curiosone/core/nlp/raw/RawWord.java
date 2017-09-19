@@ -261,7 +261,7 @@ public class RawWord {
     RawWord w = (RawWord) obj;
     return this.getWordId().equals(w.getWordId());
   }
-  
+
   /**
    * Returns the hashcode for this RawWord.
    */

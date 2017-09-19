@@ -3,8 +3,8 @@ package com.github.bot.curiosone.core.nlp;
 import com.github.bot.curiosone.core.util.Interval;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -17,33 +17,42 @@ import java.util.stream.Collectors;
  */
 public class Sentence {
   /** The list of words of the sentence. */
-  private List<String> words;
+  private List<Word> words;
 
   /** The lookup table used to check the syntax. */
   private Map<POS, TreeSet<Interval>> lookup;
 
   /**
    * Constructor of a Sentence.
-   * @param phrase the original phrase from where the sentence was extracted
+   * @param words a list of words that forms that particular sentence
    * @param lookup the lookup table to use to check syntax
    */
-  private Sentence(Phrase phrase, Map<POS, TreeSet<Interval>> lookup) {
+  private Sentence(List<Word> words, Map<POS, TreeSet<Interval>> lookup) {
+    this.words = words;
     this.lookup = lookup;
-    words = new ArrayList<>();
-    Interval start = lookup.get(POS.S).first();
-    words = phrase.getTokens()
-        .subList(start.min(), start.max() + 1)
-        .stream()
-        .map(Token::getText)
-        .collect(Collectors.toList());
   }
 
   /**
    * Gets the list of words of the sentence.
    * @return the list of words of the sentence
    */
-  public List<String> getWords() {
+  public List<Word> getWords() {
     return words;
+  }
+
+  /**
+   * Gets a list of words of a certains POS type.
+   * @param pos the pos type to extract
+   * @return the list of words
+   */
+  public List<Word> get(POS pos) {
+    List<Word> l = new ArrayList<>();
+    for (Interval intr : lookup.get(pos)) {
+      for (int j = intr.min(); j <= intr.max(); j++) {
+        l.add(words.get(j));
+      }
+    }
+    return l;
   }
 
   /**
@@ -52,8 +61,7 @@ public class Sentence {
    * @return {@code true} if all POS can be found in the given order;
    *         {@code false} otherwise
    */
-  public boolean respect(POS[] posl) {
-    int done = 0;
+  public boolean respect(POS... posl) {
     int idx = 0;
     for (POS pos : posl) {
       int oidx = idx;
@@ -71,15 +79,15 @@ public class Sentence {
   }
 
   /**
-   * Gets parameters from the sentence.
+   * Gets parameters from the sentence respecting the structure provided.
    * @param posl an array of POS to extract against
    * @return an array of list of strings, one per each POS in posl
    */
-  public List<String>[] get(POS[] posl) {
+  public List<Word>[] parse(POS... posl) {
     int idx = 0;
-    List<String>[] l = (ArrayList<String>[])new ArrayList[posl.length];
+    List<Word>[] l = (ArrayList<Word>[])new ArrayList[posl.length];
     for (int i = 0; i < posl.length; i++) {
-      l[i] = new ArrayList<String>();
+      l[i] = new ArrayList<Word>();
     }
 
     for (int i = 0; i < posl.length; i++) {
@@ -94,6 +102,8 @@ public class Sentence {
         }
       }
       if (oidx == idx) {
+        // The whole structure is not respected. Returns the initial part that
+        // matchs, if available.
         return l;
       }
     }
@@ -146,7 +156,8 @@ public class Sentence {
    * @return the sentences of the given phrase
    */
   public static List<Sentence> extract(Phrase phrase) {
-    CYK table = new CYK(phrase.getTokens());
+    List<Token> tokens = phrase.getTokens();
+    ParseTable table = new ParseTable(tokens);
     // System.out.println(table);
     List<Sentence> l = new ArrayList<>();
 
@@ -155,9 +166,19 @@ public class Sentence {
         Set<Rule> rules = table.get(x, y);
         for (Rule r : rules) {
           if (r.getFrom().equals(POS.S)) {
-            Map<POS, TreeSet<Interval>> kpt = new HashMap<>();
-            table.intervals(kpt, x, y, r);
-            l.add(new Sentence(phrase, kpt));
+            Map<POS, TreeSet<Interval>> lookt = new HashMap<>();
+            List<Set<Meaning>> means = new ArrayList<>(table.getHeight());
+            for (int i = 0; i < table.getHeight(); i++) {
+              means.add(null);
+            }
+
+            table.traverse(means, lookt, x, y, r);
+
+            List<Word> words = new ArrayList<>(tokens.size());
+            for (int i = 0; i < tokens.size(); i++) {
+              words.add(new Word(tokens.get(i).getText(), tokens.get(i).getText(), means.get(i)));
+            }
+            l.add(new Sentence(words, lookt));
           }
         }
       }

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -23,16 +24,21 @@ public class SentenceTest {
     assertTrue(sentences.size() > 0);
     Sentence sentence = sentences.get(0);
 
-    assertTrue(sentence.respect(new POS[] {POS.PRON, POS.VP}));
-    assertTrue(sentence.respect(new POS[] {POS.PRON, POS.V, POS.DET, POS.N}));
-    assertFalse(sentence.respect(new POS[] {POS.PRON, POS.VP, POS.N}));
-    assertFalse(sentence.respect(new POS[] {POS.PRON, POS.N}));
+    assertTrue(sentence.respect(POS.PRON, POS.VP));
+    assertTrue(sentence.respect(POS.PRON, POS.V, POS.DET, POS.N));
+    assertFalse(sentence.respect(POS.PRON, POS.VP, POS.N));
+    assertFalse(sentence.respect(POS.PRON, POS.N));
 
-    List<String>[] parameters = sentence.get(new POS[] {POS.PRON, POS.V, POS.NP});
+    List<Word>[] parameters = sentence.parse(POS.PRON, POS.V, POS.NP);
     assertTrue(parameters.length == 3);
     System.out.println(parameters[0]);
     System.out.println(parameters[1]);
     System.out.println(parameters[2]);
+
+
+    List<Word> words = sentence.get(POS.V);
+    assertTrue(words.size() > 0);
+    System.out.println(words);
   }
 
   @Test

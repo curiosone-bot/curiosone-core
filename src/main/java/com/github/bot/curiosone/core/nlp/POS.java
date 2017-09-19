@@ -3,7 +3,7 @@ package com.github.bot.curiosone.core.nlp;
 /**
 * Part Of Speech (PoS) type.
 *
-* @see https://en.oxforddictionaries.com/grammar/word-classes-or-parts-of-speech
+* @see href="https://en.oxforddictionaries.com/grammar/word-classes-or-parts-of-speech"
 */
 public enum POS {
   /**

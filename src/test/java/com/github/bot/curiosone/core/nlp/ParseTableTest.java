@@ -7,15 +7,15 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-public class CYKTest {
+public class ParseTableTest {
   @Test
   public void testInstantiation() {
-    CYK classUnderTest = new CYK(
+    ParseTable classUnderTest = new ParseTable(
         Token.tokenize("what is an apple")
     );
     System.out.println(classUnderTest);
 
-    classUnderTest = new CYK(
+    classUnderTest = new ParseTable(
         Token.tokenize("what is a golden apple")
     );
     System.out.println(classUnderTest);
