@@ -3,10 +3,9 @@ package com.github.bot.curiosone.core.refinement;
  * @author Claudio Venanzi
  */
 
-import java.util.Optional;
-
 import edu.mit.jwi.item.POS;
 import it.uniroma1.lcl.babelnet.data.BabelPOS;
+import java.util.Optional;
 
 public class Verb extends Word {
     
