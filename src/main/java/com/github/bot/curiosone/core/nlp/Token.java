@@ -15,7 +15,7 @@ public class Token {
   /** The text rappresentation of this token. */
   String text;
 
-  /** Base form of the world */
+  /** Base form of the world. */
   String lemma;
 
   /** Meanings of the token. */

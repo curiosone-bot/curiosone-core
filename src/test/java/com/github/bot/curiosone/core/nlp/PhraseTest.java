@@ -61,7 +61,9 @@ public class PhraseTest {
     StringBuffer sb = new StringBuffer("Objects have states and behaviors");
     assertFalse(p.equals(sb));
 
-    p = new Phrase("An array is a container object that holds a fixed number of values of a single type");
+    p = new Phrase(
+      "An array is a container object that holds a fixed number of values of a single type"
+    );
     String[] as = {"This", "is", "an", "array"};
     assertFalse(p.equals(as));
   }

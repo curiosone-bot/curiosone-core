@@ -17,7 +17,8 @@ import java.util.stream.Collectors;
  */
 public class Conversation {
   /** Path of the database containing known answers. */
-  private static final Path KNOWN_QUESTIONS = Paths.get("src/main/res/conversation/conversation.txt");
+  private static final Path KNOWN_QUESTIONS =
+    Paths.get("src/main/res/conversation/conversation.txt");
 
   /** Map from recognized tokens to possible phrases given in output. */
   private static Map<String[], String[]> knownQuestions;
