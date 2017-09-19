@@ -8,6 +8,7 @@ import edu.mit.jwi.morph.SimpleStemmer;
 import edu.mit.jwi.morph.WordnetStemmer;
 
 import java.net.URL;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,11 +27,9 @@ public class WnWrapper {
   //-----------------------------------------------------------------------------------------------
 
   private void load() {
-
     try {
       dictionary = Optional.of(new edu.mit.jwi.Dictionary(new URL("file", null, WND_PATH)));
       dictionary.get().open();
-      
     } catch (Exception e) {
       dictionary = Optional.empty();
     }
@@ -39,7 +38,6 @@ public class WnWrapper {
   //-----------------------------------------------------------------------------------------------
 
   private void lift() {
-    
     if (dictionary.isPresent()) {
       if (dictionary.get().isOpen()) {
         dictionary.get().close();
@@ -61,21 +59,25 @@ public class WnWrapper {
   //-----------------------------------------------------------------------------------------------
   
   /**
-   * Returns the root of a word.
-   * @param w surface form
-   * @param p POS, can be null
-   * @return root form
+   * Find the stem of a word.
+   * @param w word
+   * @param p pos
+   * @return list of stems
    */
-  public static final Optional<String> toStem(String w, POS p) {
+  public static final String getStem(String w, POS p) {
     
-    List<String> stems;
+    Comparator<String> byLength = (a, b) -> a.length() > b.length() ? 1 : -1;
     
-    stems = INSTANCE.dictionary.isPresent()
-          ? new WordnetStemmer(INSTANCE.dictionary.get()).findStems(w, p)
-          : new SimpleStemmer().findStems(w, p);
- 
-    return stems.stream().min((a, b) -> a.length() > b.length() ? 1 : -1);
+    List<String> stems = INSTANCE.dictionary.isPresent()
+        ? new WordnetStemmer(INSTANCE.dictionary.get()).findStems(w, p)
+        : new SimpleStemmer().findStems(w, p);
+
+    Optional<String> stem = stems.stream()
+        .filter(x -> w.contains(x))
+        .min(byLength);
+    
+    return stem.isPresent() ? stem.get() : w;
   }
-  
+
   //-----------------------------------------------------------------------------------------------
 }
