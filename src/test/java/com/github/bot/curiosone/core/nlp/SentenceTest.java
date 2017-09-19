@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
+import com.github.bot.curiosone.core.nlp.cyk.POS;
+import com.github.bot.curiosone.core.nlp.cyk.Sentence;
 
 public class SentenceTest {
   @Test

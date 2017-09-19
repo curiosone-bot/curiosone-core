@@ -1,10 +1,14 @@
-package com.github.bot.curiosone.core.nlp;
+package com.github.bot.curiosone.core.nlp.cyk;
 
+import com.github.bot.curiosone.core.nlp.Meaning;
+import com.github.bot.curiosone.core.nlp.Phrase;
+import com.github.bot.curiosone.core.nlp.Token;
 import com.github.bot.curiosone.core.util.Interval;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -17,7 +21,7 @@ import java.util.stream.Collectors;
  */
 public class Sentence {
   /** The list of words of the sentence. */
-  private List<String> words;
+  private Map<String,Set<Meaning>> words;
 
   /** The lookup table used to check the syntax. */
   private Map<POS, TreeSet<Interval>> lookup;
@@ -29,20 +33,19 @@ public class Sentence {
    */
   private Sentence(Phrase phrase, Map<POS, TreeSet<Interval>> lookup) {
     this.lookup = lookup;
-    words = new ArrayList<>();
+    words = new LinkedHashMap<>();
     Interval start = lookup.get(POS.S).first();
     words = phrase.getTokens()
         .subList(start.min(), start.max() + 1)
         .stream()
-        .map(Token::getText)
-        .collect(Collectors.toList());
+        .collect(Collectors.toMap(Token::getText, Token::getMeanings) );
   }
 
   /**
    * Gets the list of words of the sentence.
    * @return the list of words of the sentence
    */
-  public List<String> getWords() {
+  public Map<String, Set<Meaning>> getWords() {
     return words;
   }
 
@@ -53,7 +56,6 @@ public class Sentence {
    *         {@code false} otherwise
    */
   public boolean respect(POS[] posl) {
-    int done = 0;
     int idx = 0;
     for (POS pos : posl) {
       int oidx = idx;
@@ -75,11 +77,11 @@ public class Sentence {
    * @param posl an array of POS to extract against
    * @return an array of list of strings, one per each POS in posl
    */
-  public List<String>[] get(POS[] posl) {
+  public Map<String, List<POS>>[] get(POS... posl) {
     int idx = 0;
-    List<String>[] l = (ArrayList<String>[])new ArrayList[posl.length];
+    Map<String,List<POS>>[] l = (Map<String,List<POS>>[]) new Map[posl.length];
     for (int i = 0; i < posl.length; i++) {
-      l[i] = new ArrayList<String>();
+      l[i] = new LinkedHashMap<String,List<POS>>();
     }
 
     for (int i = 0; i < posl.length; i++) {
@@ -87,7 +89,14 @@ public class Sentence {
       for (Interval intr : lookup.get(posl[i])) {
         if (intr.min() == idx) {
           for (int j = idx; j <= intr.max(); j++) {
-            l[i].add(words.get(j));
+            
+            String word = new ArrayList<String>(words.keySet()).get(j);
+            
+            List<POS> pos = new ArrayList<>();
+            words.get(word).forEach(m -> pos.add(m.getPOS()));
+            
+            l[i].putIfAbsent( word , pos );
+            
           }
           idx = intr.max() + 1;
           break;
@@ -146,7 +155,7 @@ public class Sentence {
    * @return the sentences of the given phrase
    */
   public static List<Sentence> extract(Phrase phrase) {
-    CYK table = new CYK(phrase.getTokens());
+    ParseTable table = new ParseTable(phrase.getTokens());
     // System.out.println(table);
     List<Sentence> l = new ArrayList<>();
 

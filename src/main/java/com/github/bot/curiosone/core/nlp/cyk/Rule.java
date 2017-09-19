@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.nlp;
+package com.github.bot.curiosone.core.nlp.cyk;
 
 import com.github.bot.curiosone.core.util.Pair;
 

@@ -1,5 +1,6 @@
-package com.github.bot.curiosone.core.nlp;
+package com.github.bot.curiosone.core.nlp.cyk;
 
+import com.github.bot.curiosone.core.nlp.Token;
 import com.github.bot.curiosone.core.util.Interval;
 import com.github.bot.curiosone.core.util.Pair;
 
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
  * The CYK parsing table which contains all possible parsing trees for the given
  * sentence.
  */
-public class CYK {
+public class ParseTable {
   /** CYK table. */
   private Cell[][] table;
 
@@ -27,7 +28,7 @@ public class CYK {
    *
    * @param tokens list of tokens to parse
    */
-  public CYK(List<Token> tokens) {
+  public ParseTable(List<Token> tokens) {
     size = tokens.size();
 
     table = new Cell[size][];

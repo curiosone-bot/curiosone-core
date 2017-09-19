@@ -1,9 +1,9 @@
-package com.github.bot.curiosone.core.nlp;
+package com.github.bot.curiosone.core.nlp.cyk;
 
 /**
 * Part Of Speech (PoS) type.
 *
-* @see https://en.oxforddictionaries.com/grammar/word-classes-or-parts-of-speech
+* @see {@link <a href="https://en.oxforddictionaries.com/grammar/word-classes-or-parts-of-speech">Oxford Dictionary</a>}
 */
 public enum POS {
   /**
