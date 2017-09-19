@@ -19,6 +19,29 @@ public class TokenTest {
   }
 
   @Test
+  public void testGetLemma() {
+    Token token;
+
+    token = Token.tokenize("color").get(0);
+    assertEquals("color", token.getLemma());
+
+    token = Token.tokenize("colors").get(0);
+    assertEquals("color", token.getLemma());
+
+    token = Token.tokenize("you").get(0);
+    assertEquals("you", token.getLemma());
+
+    token = Token.tokenize("doing").get(0);
+    assertEquals("do", token.getLemma());
+
+    token = Token.tokenize("is").get(0);
+    assertEquals("be", token.getLemma());
+
+    token = Token.tokenize("held").get(0);
+    assertEquals("hold", token.getLemma());
+  }
+
+  @Test
   public void testEquals() {
     Token classUnderTest = Token.tokenize("color").get(0);
     Token classUnderTestClone = Token.tokenize("color").get(0);
