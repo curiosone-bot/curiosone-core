@@ -2,9 +2,9 @@ package com.github.bot.curiosone.core.refinement;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
-
 import edu.mit.jwi.item.POS;
+
+import org.junit.Test;
 
 public class TestWnWrapper {
   
