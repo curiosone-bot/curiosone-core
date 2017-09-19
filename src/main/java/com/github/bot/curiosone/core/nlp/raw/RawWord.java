@@ -59,9 +59,27 @@ public class RawWord {
 
   /**
    * Semantic relation with other word.
+   * List:
+   * [also_see, antonym, attribute, cause,
+   *  derivationally_related_form, derived_from_adjective, domain_of_synset_(undifferentiated),
+   *  entailment, hypernym, instance_hypernym, hyponym, instance_hyponym,
+   *  member_holonym, substance_holonym, part_holonym,
+   *  member_of_this_domain_(undifferentiated),
+   *  member_meronym, substance_meronym, part_meronym,
+   *  participle, pertainym_(pertains_to_nouns),
+   *  domain_of_synset_-_region, member_of_this_domain_-_region,
+   *  similar_to, domain_of_synset_-_topic,
+   *  member_of_this_domain_-_topic, domain_of_synset_-_usage,
+   *  member_of_this_domain_-_usage, verb_group]
    *
+<<<<<<< HEAD:src/main/java/com/github/bot/curiosone/core/nlp/raw/RawWord.java
    * @see String
    */
+=======
+   * @see edu.mit.jwi.item.Pointer.values()
+   */
+
+>>>>>>> master:src/main/java/com/github/bot/curiosone/core/nlp/tokenizer/Word.java
   private Map<String, List<String>> relations;
 
   /**
@@ -77,7 +95,12 @@ public class RawWord {
   /**
    * Constructor.
    */
+<<<<<<< HEAD:src/main/java/com/github/bot/curiosone/core/nlp/raw/RawWord.java
   public RawWord() {
+=======
+
+  public Word() {
+>>>>>>> master:src/main/java/com/github/bot/curiosone/core/nlp/tokenizer/Word.java
     relations = new HashMap<String, List<String>>();
   }
 
@@ -189,7 +212,11 @@ public class RawWord {
    * @return the relations
    * @see #relations
    */
+<<<<<<< HEAD:src/main/java/com/github/bot/curiosone/core/nlp/raw/RawWord.java
   public Map<String, List<String>> getRelations() {
+=======
+  @Override public Map<String, List<String>> getRelations() {
+>>>>>>> master:src/main/java/com/github/bot/curiosone/core/nlp/tokenizer/Word.java
     return relations;
   }
 
@@ -198,7 +225,13 @@ public class RawWord {
    *
    * @see RawWord#getRelationsByString()
    */
+<<<<<<< HEAD:src/main/java/com/github/bot/curiosone/core/nlp/raw/RawWord.java
   public List<String> getRelationsByString(String pointer) {
+=======
+
+  @Override
+  public List<String> getRelationsByPointer(String pointer) {
+>>>>>>> master:src/main/java/com/github/bot/curiosone/core/nlp/tokenizer/Word.java
     return new ArrayList<String>(relations.getOrDefault(pointer, null));
   }
 
@@ -207,10 +240,17 @@ public class RawWord {
    *
    * @see #relations
    */
+<<<<<<< HEAD:src/main/java/com/github/bot/curiosone/core/nlp/raw/RawWord.java
   public void addRelation(String p, String v) {
     this.relations.merge(
         p, new ArrayList<String>(
             Arrays.asList(v)), (v1,v2) -> {
+=======
+
+  @Override public void addRelation(String p, String v) {
+    this.relations.merge(p,
+        new ArrayList<String>(Arrays.asList(v)),(v1,v2) -> {
+>>>>>>> master:src/main/java/com/github/bot/curiosone/core/nlp/tokenizer/Word.java
             v1.add(v);
             return v1;
         });
@@ -221,7 +261,12 @@ public class RawWord {
    *
    * @see #relations
    */
+<<<<<<< HEAD:src/main/java/com/github/bot/curiosone/core/nlp/raw/RawWord.java
   public void setRelations(Map<String, List<String>> relations) {
+=======
+
+  @Override public void setRelations(Map<String, List<String>> relations) {
+>>>>>>> master:src/main/java/com/github/bot/curiosone/core/nlp/tokenizer/Word.java
     this.relations.clear();
     this.relations.putAll(relations);
   }
@@ -239,7 +284,7 @@ public class RawWord {
         + " Gloss = " + this.gloss
         + " Occurrence = " + this.number;
 
-    out += "\n" + relations.entrySet().toString();
+    out += "\n    " + relations.entrySet().toString();
     return out;
   }
 
