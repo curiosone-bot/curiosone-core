@@ -176,7 +176,7 @@ public class Sentence {
 
             List<Word> words = new ArrayList<>(tokens.size());
             for (int i = 0; i < tokens.size(); i++) {
-              words.add(new Word(tokens.get(i).getText(), tokens.get(i).getText(), means.get(i)));
+              words.add(new Word(tokens.get(i).getText(), tokens.get(i).getLemma(), means.get(i)));
             }
             l.add(new Sentence(words, lookt));
           }
