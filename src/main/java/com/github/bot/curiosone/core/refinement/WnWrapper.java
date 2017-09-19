@@ -62,7 +62,8 @@ public class WnWrapper {
   
   /**
    * Returns the root of a word.
-   * @param word surface form
+   * @param w surface form
+   * @param p POS, can be null
    * @return root form
    */
   public static final Optional<String> toStem(String w, POS p) {
@@ -72,9 +73,9 @@ public class WnWrapper {
     stems = INSTANCE.dictionary.isPresent()
           ? new WordnetStemmer(INSTANCE.dictionary.get()).findStems(w, p)
           : new SimpleStemmer().findStems(w, p);
-    
-    stems.forEach(System.out::println);
-          
+ 
     return stems.stream().min((a, b) -> a.length() > b.length() ? 1 : -1);
-  }  
-}
+  }
+  
+  //-----------------------------------------------------------------------------------------------
+ }
