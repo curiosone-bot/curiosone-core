@@ -26,6 +26,16 @@ public class LangUtilsTest {
     assertEquals("asd!", l.get(0));
     assertEquals(" dasda.", l.get(1));
 
+    l = LangUtils.splitByPuntaction("?!!!!!asd!!!!! dasda.!!!!???!");
+    assertEquals(2, l.size());
+    assertEquals("asd!", l.get(0));
+    assertEquals(" dasda.", l.get(1));
+
+    l = LangUtils.splitByPuntaction(".!!!!!asd!!!!! dasda.!!!!???!");
+    assertEquals(2, l.size());
+    assertEquals("asd!", l.get(0));
+    assertEquals(" dasda.", l.get(1));
+
     l = LangUtils.splitByPuntaction("!!!!!!");
     assertEquals(0, l.size());
 
@@ -38,10 +48,32 @@ public class LangUtilsTest {
     assertEquals("Hello!", l.get(0));
     assertEquals(" Visit my website: http://evil.com/pwn.you pls.", l.get(1));
 
+    l = LangUtils.splitByPuntaction("Hello! Visit my website: http://evil?.com/pwn.you pls");
+    assertEquals(2, l.size());
+    assertEquals("Hello!", l.get(0));
+    assertEquals(" Visit my website: http://evil?.com/pwn.you pls.", l.get(1));
+
+    l = LangUtils.splitByPuntaction("Hello! Visit my website: http://evil!.com/pwn.you pls");
+    assertEquals(2, l.size());
+    assertEquals("Hello!", l.get(0));
+    assertEquals(" Visit my website: http://evil!.com/pwn.you pls.", l.get(1));
+
     l = LangUtils.splitByPuntaction("Hello!! Contact me at spam@bot.com to get more spam! ;)");
     assertEquals(3, l.size());
     assertEquals("Hello!", l.get(0));
     assertEquals(" Contact me at spam@bot.com to get more spam!", l.get(1));
+    assertEquals(" ;).", l.get(2));
+
+    l = LangUtils.splitByPuntaction("Hello!! Contact me at spam?@bot.com to get more spam! ;)");
+    assertEquals(3, l.size());
+    assertEquals("Hello!", l.get(0));
+    assertEquals(" Contact me at spam?@bot.com to get more spam!", l.get(1));
+    assertEquals(" ;).", l.get(2));
+
+    l = LangUtils.splitByPuntaction("Hello!! Contact me at spam!@bot.com to get more spam! ;)");
+    assertEquals(3, l.size());
+    assertEquals("Hello!", l.get(0));
+    assertEquals(" Contact me at spam!@bot.com to get more spam!", l.get(1));
     assertEquals(" ;).", l.get(2));
 
     l = LangUtils.splitByPuntaction("");
