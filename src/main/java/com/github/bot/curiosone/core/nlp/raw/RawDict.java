@@ -76,15 +76,9 @@ public class RawDict {
     if (item.length() == 0 || item.equals(" ")) {
       return null;
     }
-<<<<<<< HEAD:src/main/java/com/github/bot/curiosone/core/nlp/raw/RawDict.java
     RawToken token = new RawToken(item);
     token = getRawTokenNotWn(token, item);
     token = getRawTokenWn(token, item);
-=======
-    Token token = new Token(item);
-    token = getTokenNotWn(token, item); // token outside WordNet
-    token = getTokenWn(token, item);    // token inside WordNet
->>>>>>> master:src/main/java/com/github/bot/curiosone/core/nlp/tokenizer/DictWn.java
     return token;
   }
 
@@ -370,11 +364,7 @@ public class RawDict {
               for (ISynsetID sid: synList) {
                 words = dictionary.getSynset(sid).getWords();
                 for (Iterator<IWord> i = words.iterator(); i.hasNext();) {
-<<<<<<< HEAD:src/main/java/com/github/bot/curiosone/core/nlp/raw/RawDict.java
                   retWord.addRelation(pt.toString(), i.next().getLemma());
-=======
-                    retWord.addRelation(pt.toString(), i.next().getLemma());
->>>>>>> master:src/main/java/com/github/bot/curiosone/core/nlp/tokenizer/DictWn.java
                 }
               }
             }
@@ -416,7 +406,6 @@ public class RawDict {
   }
 
   /**
-<<<<<<< HEAD:src/main/java/com/github/bot/curiosone/core/nlp/raw/RawDict.java
    * Checks if the given email address is valid.
    * @param email the email address to be validated.
    * @return <code>true</code> if the given email address is valid;
@@ -445,23 +434,4 @@ public class RawDict {
     }
     return true;
   }
-=======
-   * For test only.
-   * @param args input args
-
-  public static void main(String[] args) {
-
-    //System.out.println(DictWn.getToken("arivitto@gmail.com"));
-    //System.out.println("\n" + DictWn.getToken("rivitto.662503@studenti.uniroma1.it"));
-    //System.out.println("\n" + DictWn.getToken("13410"));
-    //System.out.println("\n" + DictWn.getToken("12.34"));
-    //System.out.println("\n" + DictWn.getToken("dog"));
-    //System.out.println("\n" + DictWn.getToken("crawler"));
-    //System.out.println("\n" + DictWn.getToken("dog"));
-    //System.out.println("\n" + DictWn.getToken("come back"));
-    //System.out.println(Pointer.values()); //List possible Pointer values
-    System.out.println("\n" + DictWn.getToken("cats"));
-  }
-  */
->>>>>>> master:src/main/java/com/github/bot/curiosone/core/nlp/tokenizer/DictWn.java
 }
