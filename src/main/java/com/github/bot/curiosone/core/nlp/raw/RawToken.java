@@ -2,6 +2,7 @@ package com.github.bot.curiosone.core.nlp.raw;
 
 import com.github.bot.curiosone.core.nlp.LEX;
 import com.github.bot.curiosone.core.nlp.POS;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
