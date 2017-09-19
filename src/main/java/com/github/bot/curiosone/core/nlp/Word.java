@@ -60,7 +60,7 @@ public class Word {
    */
   @Override
   public String toString() {
-    return "[" + text + " (" + lemma + ")"+ ", " + means + "]";
+    return "[" + text + " (" + lemma + ")" + ", " + means + "]";
   }
 
   /**

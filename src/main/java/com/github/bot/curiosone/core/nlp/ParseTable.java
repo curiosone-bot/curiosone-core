@@ -116,7 +116,8 @@ public class ParseTable {
    * @param y the y position of the table
    * @param current the role to use at this position
    */
-  public void traverse(List<Set<Meaning>> meanings, Map<POS, TreeSet<Interval>> lookup, int x, int y, Rule current) {
+  public void traverse(List<Set<Meaning>> meanings, Map<POS, TreeSet<Interval>> lookup,
+                       int x, int y, Rule current) {
     TreeSet<Interval> list = lookup.getOrDefault(current.getFrom(), new TreeSet<Interval>());
     if (y == size - 1) {
       list.add(new Interval(x, x));
