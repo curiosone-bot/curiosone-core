@@ -62,11 +62,10 @@ public class SentenceTest {
 
   @Test
   public void testGetWord() {
-    List<String> lw = Sentence.extract(
-        new Phrase("What is an apple?")).get(0).getWords();
-    assertEquals("what", lw.get(0));
-    assertEquals("is", lw.get(1));
-    assertEquals("an", lw.get(2));
-    assertEquals("apple", lw.get(3));
+    List<Word> lw = Sentence.extract(new Phrase("What is an apple?")).get(0).getWords();
+    assertEquals("what", lw.get(0).getText());
+    assertEquals("is", lw.get(1).getText());
+    assertEquals("an", lw.get(2).getText());
+    assertEquals("apple", lw.get(3).getText());
   }
 }
