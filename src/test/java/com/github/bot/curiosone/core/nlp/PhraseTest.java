@@ -67,6 +67,18 @@ public class PhraseTest {
   }
 
   @Test
+  public void testEqualsContract() {
+    Phrase p = new Phrase("Sign here.");
+    Phrase pp = new Phrase("Sign here.");
+    assertTrue(p.equals(pp));
+    assertEquals(p.hashCode(), pp.hashCode());
+
+    pp = new Phrase("Do not sign here!");
+    assertFalse(p.equals(pp));
+    assertNotEquals(p.hashCode(), pp.hashCode());
+  }
+
+  @Test
   public void testExtract() {
     List<Phrase> phrase = Phrase.extract("All by myself");
     assertEquals(1, phrase.size());
