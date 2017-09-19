@@ -6,9 +6,8 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 
 import org.junit.Test;
-import com.github.bot.curiosone.core.nlp.cyk.ParseTable;
 
-public class CYKTest {
+public class ParseTableTest {
   @Test
   public void testInstantiation() {
     ParseTable classUnderTest = new ParseTable(

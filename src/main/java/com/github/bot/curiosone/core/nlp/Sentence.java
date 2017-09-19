@@ -1,8 +1,5 @@
-package com.github.bot.curiosone.core.nlp.cyk;
+package com.github.bot.curiosone.core.nlp;
 
-import com.github.bot.curiosone.core.nlp.Meaning;
-import com.github.bot.curiosone.core.nlp.Phrase;
-import com.github.bot.curiosone.core.nlp.Token;
 import com.github.bot.curiosone.core.util.Interval;
 
 import java.util.ArrayList;
@@ -55,7 +52,7 @@ public class Sentence {
    * @return {@code true} if all POS can be found in the given order;
    *         {@code false} otherwise
    */
-  public boolean respect(POS[] posl) {
+  public boolean respect(POS... posl) {
     int idx = 0;
     for (POS pos : posl) {
       int oidx = idx;
@@ -89,14 +86,14 @@ public class Sentence {
       for (Interval intr : lookup.get(posl[i])) {
         if (intr.min() == idx) {
           for (int j = idx; j <= intr.max(); j++) {
-            
+
             String word = new ArrayList<String>(words.keySet()).get(j);
-            
+
             List<POS> pos = new ArrayList<>();
             words.get(word).forEach(m -> pos.add(m.getPOS()));
-            
+
             l[i].putIfAbsent( word , pos );
-            
+
           }
           idx = intr.max() + 1;
           break;

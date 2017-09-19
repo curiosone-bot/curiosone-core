@@ -1,7 +1,7 @@
 package com.github.bot.curiosone.core.nlp.raw;
 
 import com.github.bot.curiosone.core.nlp.LEX;
-import com.github.bot.curiosone.core.nlp.cyk.POS;
+import com.github.bot.curiosone.core.nlp.POS;
 import edu.mit.jwi.Dictionary;
 import edu.mit.jwi.item.IIndexWord;
 import edu.mit.jwi.item.ISynset;

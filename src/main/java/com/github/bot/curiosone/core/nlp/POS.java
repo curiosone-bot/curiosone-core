@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.nlp.cyk;
+package com.github.bot.curiosone.core.nlp;
 
 /**
 * Part Of Speech (PoS) type.

@@ -1,7 +1,7 @@
 package com.github.bot.curiosone.core.nlp.raw;
 
 import com.github.bot.curiosone.core.nlp.LEX;
-import com.github.bot.curiosone.core.nlp.cyk.POS;
+import com.github.bot.curiosone.core.nlp.POS;
 import edu.mit.jwi.item.IWordID;
 
 import java.util.ArrayList;

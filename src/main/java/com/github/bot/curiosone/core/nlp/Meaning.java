@@ -1,7 +1,6 @@
 package com.github.bot.curiosone.core.nlp;
 
 import java.util.Objects;
-import com.github.bot.curiosone.core.nlp.cyk.POS;
 
 /**
  * A grammatical Meaning of a group of words.
