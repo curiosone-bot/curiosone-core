@@ -19,6 +19,9 @@ public class Sentence {
   /** The list of words of the sentence. */
   private List<Word> words;
 
+  /** Control if this sentence is a question or not. */
+  private boolean question;
+
   /** The lookup table used to check the syntax. */
   private Map<POS, TreeSet<Interval>> lookup;
 
@@ -27,9 +30,21 @@ public class Sentence {
    * @param words a list of words that forms that particular sentence
    * @param lookup the lookup table to use to check syntax
    */
-  private Sentence(List<Word> words, Map<POS, TreeSet<Interval>> lookup) {
+  private Sentence(List<Word> words, Map<POS, TreeSet<Interval>> lookup, boolean question) {
     this.words = words;
     this.lookup = lookup;
+    this.question = question;
+  }
+
+  /**
+   * Checks if this sentence is a question.
+   *
+   * @return {@code true} if the original phrase from where the sentence was
+   *         extracted ends with a question mark.
+   *         {@code false} otherwise
+   */
+  public boolean isQuestion() {
+    return question;
   }
 
   /**
@@ -176,9 +191,10 @@ public class Sentence {
 
             List<Word> words = new ArrayList<>(tokens.size());
             for (int i = 0; i < tokens.size(); i++) {
-              words.add(new Word(tokens.get(i).getText(), tokens.get(i).getLemma(), means.get(i)));
+              Token token = tokens.get(i);
+              words.add(new Word(token.getText(), token.getLemma(), means.get(i)));
             }
-            l.add(new Sentence(words, lookt));
+            l.add(new Sentence(words, lookt, phrase.isQuestion()));
           }
         }
       }

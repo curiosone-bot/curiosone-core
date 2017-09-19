@@ -11,6 +11,9 @@ public class Phrase {
   /** The string representation of the phrase. */
   private String text;
 
+  /** True if the phrase ends with a question mark. */
+  private boolean question;
+
   /** The list of tokens extracted from the phrase. */
   private List<Token> tokens = new ArrayList<>();
 
@@ -22,6 +25,18 @@ public class Phrase {
   public Phrase(String str) {
     text = str;
     tokens = Token.tokenize(str);
+    question = str.charAt(str.length() - 1) == '?';
+  }
+
+  /**
+   * Checks if this phrase is a question.
+   *
+   * @return {@code true} if this original string contains a question mark at
+   *         the end.
+   *         {@code false} otherwise
+   */
+  public boolean isQuestion() {
+    return question;
   }
 
   /**

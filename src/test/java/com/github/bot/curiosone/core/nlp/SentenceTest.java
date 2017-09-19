@@ -68,4 +68,12 @@ public class SentenceTest {
     assertEquals("an", lw.get(2).getText());
     assertEquals("apple", lw.get(3).getText());
   }
+
+  @Test
+  public void testIsQuestion() {
+    List<Sentence> sentences = Sentence.extract(new Phrase("What is an apple?"));
+    assertTrue(sentences.size() > 0);
+    Sentence sentence = sentences.get(0);
+    assertTrue(sentence.isQuestion());
+  }
 }
