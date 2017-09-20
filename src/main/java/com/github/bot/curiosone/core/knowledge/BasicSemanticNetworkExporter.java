@@ -2,7 +2,6 @@ package com.github.bot.curiosone.core.knowledge;
 
 import static java.util.stream.Collectors.toSet;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +13,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
+import it.uniroma1.lcl.babelnet.BabelNet;
+import it.uniroma1.lcl.babelnet.BabelSense;
+import it.uniroma1.lcl.babelnet.BabelSynset;
+import it.uniroma1.lcl.babelnet.BabelSynsetID;
+import it.uniroma1.lcl.babelnet.BabelSynsetIDRelation;
+import it.uniroma1.lcl.babelnet.InvalidBabelSynsetIDException;
+import it.uniroma1.lcl.babelnet.data.BabelSenseSource;
+import it.uniroma1.lcl.jlt.util.Language;
 
 /**
  * This class is used to create first basic semantic network for curiosone based
