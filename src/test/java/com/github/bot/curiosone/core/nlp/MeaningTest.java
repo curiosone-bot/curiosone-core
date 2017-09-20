@@ -1,6 +1,9 @@
 package com.github.bot.curiosone.core.nlp;
 
 // SUPPRESS CHECKSTYLE AvoidStarImport
+import static org.assertj.core.api.Assertions.*;
+
+// SUPPRESS CHECKSTYLE AvoidStarImport
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -37,16 +40,18 @@ public class MeaningTest {
     assertEquals(LEX.QUANTITY, m.getLEX());
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testSetFrequencyException() {
     Meaning m = new Meaning(POS.AP, LEX.PHENOMENON);
-    m.setFrequency(-1);
 
-    m = new Meaning(POS.VPP, LEX.OBJECT);
-    m.setFrequency(-2);
+    assertThatExceptionOfType(IllegalArgumentException.class)
+        .isThrownBy(() -> m.setFrequency(-1));
 
-    m = new Meaning(POS.VP, LEX.QUANTITY);
-    m.setFrequency(-42);
+    assertThatExceptionOfType(IllegalArgumentException.class)
+        .isThrownBy(() -> m.setFrequency(-2));
+
+    assertThatExceptionOfType(IllegalArgumentException.class)
+        .isThrownBy(() -> m.setFrequency(-42));
   }
 
   @Test
