@@ -8,15 +8,21 @@ import org.junit.Test;
 public class SpellingTest {
   @Test
   public void testGetInstance() {
-    Spelling classUnderTest = Spelling.getInstance();
-    assertTrue(classUnderTest instanceof Spelling);
+    Spelling s = Spelling.getInstance();
+    assertTrue(s instanceof Spelling);
   }
 
   @Test
   public void testCorrect() {
-    Spelling classUnderTest = Spelling.getInstance();
-    assertEquals("hello", classUnderTest.correct("hello"));
-    assertEquals("hello", classUnderTest.correct("helllo"));
-    assertEquals("can", classUnderTest.correct("cann"));
+    Spelling s = Spelling.getInstance();
+    assertEquals("hello", s.correct("hello"));
+    assertEquals("hello", s.correct("helllo"));
+    assertEquals("can", s.correct("cann"));
+    assertEquals("helping", s.correct("heelping"));
+    assertEquals("grow", s.correct("trow"));
+    assertEquals("engineer", s.correct("enginer"));
+    assertEquals("february", s.correct("febraury"));
+    assertEquals("CORRECTME!", s.correct("CORRECTME!"));
+    assertEquals("42", s.correct("42"));
   }
 }
