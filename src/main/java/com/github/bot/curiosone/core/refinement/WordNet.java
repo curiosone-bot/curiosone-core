@@ -12,15 +12,15 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-public class WnWrapper { 
+public class WordNet { 
 
-  private static final WnWrapper INSTANCE = new WnWrapper();
+  private static final WordNet INSTANCE = new WordNet();
   private static final String  WND_PATH = "src/main/res/dict";  
   private Optional<edu.mit.jwi.IDictionary> dictionary;
 
   //-----------------------------------------------------------------------------------------------
 
-  private WnWrapper() {
+  private WordNet() {
     load();
   }
 
