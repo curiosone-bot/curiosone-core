@@ -2,6 +2,7 @@ package com.github.bot.curiosone.core.knowledge;
 
 import static java.util.stream.Collectors.toSet;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
+
 /**
  * This class is used to create first basic semantic network for curiosone based
  * on WordNet Concept from BabelNet.
@@ -22,7 +25,7 @@ public class BasicSemanticNetworkExporter {
   public static void export() throws IOException, InvalidBabelSynsetIDException {
     BabelNet bn = BabelNet.getInstance();
     StringBuffer exporter = new StringBuffer();
-    Path wnSynsetsTxt = new File("resources/wn_synsets.txt").toPath();
+    Path wnSynsetsTxt = new File("BasicSemanticNetwork/wn_synsets.txt").toPath();
     List<String> wn_synsets = Files.readAllLines(wnSynsetsTxt);
     Set<String> semanticRelationTypes = Arrays.stream(SemanticRelationType.values())
         .map(SemanticRelationType::toString).collect(toSet());

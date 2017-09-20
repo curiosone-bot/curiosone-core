@@ -1,8 +1,5 @@
 package com.github.bot.curiosone.core.knowledge;
 
-import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
-import com.github.bot.curiosone.core.knowledge.interfaces.Graph;
-import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +12,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+
+import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
+import com.github.bot.curiosone.core.knowledge.interfaces.Graph;
+import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
 
 /**
@@ -45,9 +46,9 @@ public class SemanticNetwork implements Graph {
     lineefile.remove(lineefile.size() - 1);
     for (String linea : lineefile) {
       String[] linee = linea.split(",");
-      Concept source = new Concept(linee[0]);
-      Concept target = new Concept(linee[2]);
-      SemanticRelationType type = SemanticRelationType.valueOf(linee[1].trim());
+      Vertex source = new Concept(linee[0],Integer.parseInt(linee[1])); 
+      Vertex target = new Concept(linee[3],Integer.parseInt(linee[4]));
+      SemanticRelationType type = SemanticRelationType.valueOf(linee[2].trim());
       SemanticRelation arco = new SemanticRelation(source,target,type);
       this.add(arco);
     }
@@ -198,15 +199,15 @@ public class SemanticNetwork implements Graph {
   }
 
   @Override
-  public Optional<Edge> getAnswer(String source, SemanticRelationType tipo) {
+  public Optional<Edge> getAnswer(String source, Object daDefinire) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public Optional<Edge> getAnswer(String source, SemanticRelationType tipo, String target) {
+  public boolean getAnswer(String source, Object daDefinire, String target) {
     // TODO Auto-generated method stub
-    return null;
+    return false;
   }
 
   @Override

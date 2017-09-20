@@ -93,7 +93,7 @@ public interface Graph {
    * @param token vertice del quale cercare il significato collegato
    * @return Optional of Set of Edge
    */
-  Optional<Edge> getAnswer(String source,SemanticRelationType tipo);
-  Optional<Edge> getAnswer(String source,SemanticRelationType tipo,String target);
+  Optional<Edge> getAnswer(String source,Object daDefinire);
+  boolean getAnswer(String source,Object daDefinire,String target);
   Optional<Edge> getAnswer(String token,String target);
 }

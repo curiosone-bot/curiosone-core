@@ -82,6 +82,11 @@ public enum SemanticRelationType {
    */
 
   HOLONYM_PART,
+  
+  /*
+   * who
+   */
+  IS_PERSON,
 
   /**
    * Meronym member.
@@ -112,6 +117,11 @@ public enum SemanticRelationType {
    */
 
   PERTAINYM,
+  
+  /*
+   *  where
+   */
+  PLACE,
 
   /**
    * Region.
@@ -134,6 +144,11 @@ public enum SemanticRelationType {
    */
 
   SIMILAR_TO,
+  
+  /*
+   *  Date
+   */
+  TIME,
 
   /**
    * Topic.
