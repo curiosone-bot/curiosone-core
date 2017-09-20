@@ -16,6 +16,18 @@ public class WordTest {
   public void testInstantiation() {
     Word w = new Word("colors", "color", new HashSet<>());
     assertTrue(w instanceof Word);
+    assertEquals("colors", w.getText());
+    assertEquals("color", w.getLemma());
+    assertEquals(0, w.getMeanings().size());
+  }
+
+  @Test
+  public void testToString() {
+    Word w = new Word("colors", "color", new HashSet<>());
+    assertEquals("[colors (color), []]", w.toString());
+
+    w = new Word("YEARS!", "year", new HashSet<>(Arrays.asList(new Meaning(POS.N, LEX.TIME))));
+    assertEquals("[YEARS! (year), [[N, TIME, 0]]]", w.toString());
   }
 
   @Test
@@ -160,16 +172,16 @@ public class WordTest {
   @Test
   public void testEqualsNullComparison() {
     Word w = new Word("null value", "null", new HashSet<>());
-    assertNotEquals(null, w);
+    assertNotEquals(w, null);
 
     w = new Word("test", "test", new HashSet<>(Arrays.asList(
         new Meaning(POS.N, LEX.PROCESS))));
-    assertNotEquals(null, w);
+    assertNotEquals(w, null);
 
     w = new Word("BOTH", "both", new HashSet<>(Arrays.asList(
         new Meaning(POS.N, LEX.PROCESS),
         new Meaning(POS.N, LEX.QUANTITY))));
-    assertNotEquals(null, w);
+    assertNotEquals(w, null);
   }
 
   @Test
