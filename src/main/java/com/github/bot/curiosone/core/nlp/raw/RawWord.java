@@ -231,6 +231,7 @@ public class RawWord {
    * toString.
    *
    */
+  @Override
   public String toString() {
 
     String out = "WordId = " + this.wordId
@@ -251,6 +252,7 @@ public class RawWord {
    *         of this instance;
              <code>false</code> otherwise
    */
+  @Override
   public boolean equals(Object obj) {
     if (obj == null || !(obj instanceof RawWord)) {
       return false;
@@ -265,6 +267,7 @@ public class RawWord {
   /**
    * Returns the hashcode for this RawWord.
    */
+  @Override
   public int hashCode() {
     return Objects.hash(getGloss());
   }

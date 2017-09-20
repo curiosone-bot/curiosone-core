@@ -75,6 +75,7 @@ public class Rule {
   * @return {@code true} if this rule equals the other rule;
   *         {@code false} otherwise
   */
+  @Override
   public boolean equals(Object other) {
     if (other == this) {
       return true;
