@@ -47,12 +47,18 @@ public class WordNet {
 
   //===============================================================================================
 
+  public static final WordNet getInstance() {
+    return INSTANCE;
+  }
+  
+  //-----------------------------------------------------------------------------------------------
+  
   /**
    * Update the dictionary.
    */
-  public static final void update() {
-    INSTANCE.lift();
-    INSTANCE.load();
+  public final void update() {
+    lift();
+    load();
   }
 
   //-----------------------------------------------------------------------------------------------
@@ -63,14 +69,14 @@ public class WordNet {
    * @param p part
    * @return list of stems
    */
-  public static final String getStem(String w, Part p) {
+  public final String getStem(String w, Part p) {
     
     Comparator<String> byLength = (a, b) -> a.length() > b.length() ? 1 : -1;
     
-    List<String> stems = INSTANCE.dictionary.isPresent()
-        ? new WordnetStemmer(INSTANCE.dictionary.get()).findStems(w, p.forWordNet())
+    List<String> stems = dictionary.isPresent()
+        ? new WordnetStemmer(dictionary.get()).findStems(w, p.forWordNet())
         : new SimpleStemmer().findStems(w, p.forWordNet());
-
+    
     Optional<String> stem = stems.stream()
         .filter(x -> w.contains(x))
         .min(byLength);

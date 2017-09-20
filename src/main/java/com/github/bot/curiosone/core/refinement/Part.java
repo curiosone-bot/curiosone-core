@@ -78,7 +78,7 @@ public enum Part {
    * @param pos source pos
    * @return part
    */
-  public Part from(it.uniroma1.lcl.babelnet.data.BabelPOS pos) {
+  public static Part from(it.uniroma1.lcl.babelnet.data.BabelPOS pos) {
     for (Part p : Part.values()) {
       if (pos.equals(p.forBabelNet())) return p;
     }
@@ -92,7 +92,7 @@ public enum Part {
    * @param pos source pos
    * @return part
    */
-  public Part from(it.uniroma1.lcl.babelmorph.POS pos) {
+  public static Part from(it.uniroma1.lcl.babelmorph.POS pos) {
     for (Part p : Part.values()) {
       if (pos.equals(p.forBabelMorph())) return p;
     }
@@ -106,7 +106,7 @@ public enum Part {
    * @param pos source pos
    * @return part
    */
-  public Part from(edu.mit.jwi.item.POS pos) {
+  public static Part from(edu.mit.jwi.item.POS pos) {
     for (Part p : Part.values()) {
       if (pos.equals(p.forWordNet())) return p;
     }
