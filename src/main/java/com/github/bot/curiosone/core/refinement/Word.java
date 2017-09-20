@@ -7,50 +7,55 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import it.uniroma1.lcl.babelmorph.Lexeme;
-import it.uniroma1.lcl.babelmorph.POS;
 import it.uniroma1.lcl.babelmorph.en.EnglishMorpher;
 
 public class Word {
   
   private String form;
-  private POS pos;
+  private Part   part;
   
   //===============================================================================================
   
-  public Word(String form, POS pos) {
+  /**
+   * Word constructor.
+   * @param form superficial word
+   * @param part part of sentence
+   */
+  public Word(String form, Part part) {
     this.form = form;
-    this.pos = pos;
+    this.part = part;
   }
   
   //-----------------------------------------------------------------------------------------------
   
+  /**
+   * Returns the superficial form of the word.
+   * @return word
+   */
   public String getForm() {
     return form;
   }
 
   //-----------------------------------------------------------------------------------------------
-    
-  public POS getPOS() {
-    return pos;
+  
+  /**
+   * Returns the part of sentence.
+   * @return pos
+   */
+  public Part getPart() {
+    return part;
   }
   
   //-----------------------------------------------------------------------------------------------
   
+  /**
+   * Returns the lemma of the word.
+   * @return lemma
+   */
   public Set<String> getLemma() {
-    return new EnglishMorpher().getLexemes(form, pos).stream()
+    return new EnglishMorpher().getLexemes(form, part.forBabelMorph()).stream()
     .map(Lexeme::getLemma).collect(Collectors.toSet());
   }
+  
+  //-----------------------------------------------------------------------------------------------
 }
-/*
-
-do (VERB): 
-[PRESENT]:[do];
-[PRESENT, THIRD_PERSON, SINGULAR]:[does]; 
-[PARTICIPLE, PAST]:[done]; 
-[SIMPLE_PAST]:[did]; 
-[PARTICIPLE, PRESENT]:[doing]
-
-getLexemes
-getInflections
-
-*/    

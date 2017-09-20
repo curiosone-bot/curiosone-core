@@ -1,4 +1,7 @@
 package com.github.bot.curiosone.core.refinement;
+/**
+ * @author Claudio Venanzi
+ */
 
 public enum Part {
 
@@ -40,6 +43,41 @@ public enum Part {
 
   //===============================================================================================
 
+  /**
+   * Returns the corresponding BabelNet POS.
+   * @return pos
+   */
+  public it.uniroma1.lcl.babelnet.data.BabelPOS forBabelNet() {
+    return bn;
+  }
+  
+  //-----------------------------------------------------------------------------------------------
+
+  /**
+   * Returns the corresponding BabelMorph POS.
+   * @return pos
+   */
+  public it.uniroma1.lcl.babelmorph.POS forBabelMorph() {
+    return bm;
+  }
+  
+  //-----------------------------------------------------------------------------------------------
+
+  /**
+   * Returns the corresponding WordNet POS.
+   * @return pos
+   */
+  public edu.mit.jwi.item.POS forWordNet() {
+    return wn;
+  }
+
+  //-----------------------------------------------------------------------------------------------
+
+  /**
+   * Returns Part from BabelNet POS.
+   * @param pos source pos
+   * @return part
+   */
   public Part from(it.uniroma1.lcl.babelnet.data.BabelPOS pos) {
     for (Part p : Part.values()) {
       if (pos.equals(p.forBabelNet())) return p;
@@ -49,6 +87,11 @@ public enum Part {
 
   //-----------------------------------------------------------------------------------------------
 
+  /**
+   * Returns Part from BabelMorph POS.
+   * @param pos source pos
+   * @return part
+   */
   public Part from(it.uniroma1.lcl.babelmorph.POS pos) {
     for (Part p : Part.values()) {
       if (pos.equals(p.forBabelMorph())) return p;
@@ -58,29 +101,16 @@ public enum Part {
 
   //-----------------------------------------------------------------------------------------------
   
+  /**
+   * Returns Part from WordNet POS.
+   * @param pos source pos
+   * @return part
+   */
   public Part from(edu.mit.jwi.item.POS pos) {
     for (Part p : Part.values()) {
       if (pos.equals(p.forWordNet())) return p;
     }
     return Part.NONE;
-  }
-
-  //-----------------------------------------------------------------------------------------------
-  
-  public it.uniroma1.lcl.babelnet.data.BabelPOS forBabelNet() {
-    return bn;
-  }
-  
-  //-----------------------------------------------------------------------------------------------
-  
-  public it.uniroma1.lcl.babelmorph.POS forBabelMorph() {
-    return bm;
-  }
-  
-  //-----------------------------------------------------------------------------------------------
-  
-  public edu.mit.jwi.item.POS forWordNet() {
-    return wn;
   }
   
   //-----------------------------------------------------------------------------------------------

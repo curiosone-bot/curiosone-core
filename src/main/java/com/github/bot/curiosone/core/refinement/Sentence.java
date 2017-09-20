@@ -3,17 +3,26 @@ package com.github.bot.curiosone.core.refinement;
  * @author Claudio Venanzi
  */
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Sentence {
   
-  private List<Word> words;
+  private List<Word> words = new LinkedList<>();
+
+  private void add(Word w, int i) {
+    words.add(i, w);
+  }
   
   //===============================================================================================
   
-  public Sentence(List<Word> words) {
-    words.forEach(this.words::add);
-  }
+  /**
+   * Append a word.
+   * @param w word
+   */
+  public void add(Word w) {
+    words.add(w);
+  }    
     
   //-----------------------------------------------------------------------------------------------
 }

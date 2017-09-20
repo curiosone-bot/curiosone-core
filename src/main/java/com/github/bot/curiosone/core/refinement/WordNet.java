@@ -3,7 +3,6 @@ package com.github.bot.curiosone.core.refinement;
  * @author Claudio Venanzi
  */
 
-import edu.mit.jwi.item.POS;
 import edu.mit.jwi.morph.SimpleStemmer;
 import edu.mit.jwi.morph.WordnetStemmer;
 
@@ -61,16 +60,16 @@ public class WordNet {
   /**
    * Find the stem of a word.
    * @param w word
-   * @param p pos
+   * @param p part
    * @return list of stems
    */
-  public static final String getStem(String w, POS p) {
+  public static final String getStem(String w, Part p) {
     
     Comparator<String> byLength = (a, b) -> a.length() > b.length() ? 1 : -1;
     
     List<String> stems = INSTANCE.dictionary.isPresent()
-        ? new WordnetStemmer(INSTANCE.dictionary.get()).findStems(w, p)
-        : new SimpleStemmer().findStems(w, p);
+        ? new WordnetStemmer(INSTANCE.dictionary.get()).findStems(w, p.forWordNet())
+        : new SimpleStemmer().findStems(w, p.forWordNet());
 
     Optional<String> stem = stems.stream()
         .filter(x -> w.contains(x))
