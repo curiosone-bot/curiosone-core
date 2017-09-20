@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -38,7 +39,7 @@ public class BasicSemanticNetworkExporter {
   public static void export() throws IOException, InvalidBabelSynsetIDException {
     BabelNet bn = BabelNet.getInstance();
     StringBuffer exporter = new StringBuffer();
-    Path wnSynsetsTxt = new File("BasicSemanticNetwork/wn_synsets.txt").toPath();
+    Path wnSynsetsTxt = Paths.get("src/main/res/knowledge/wn_synsets.txt");
     List<String> wnSynsets = Files.readAllLines(wnSynsetsTxt);
     Set<String> semanticRelationTypes = Arrays.stream(SemanticRelationType.values())
         .map(SemanticRelationType::toString).collect(toSet());

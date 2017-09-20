@@ -24,7 +24,7 @@ import java.util.Set;
 public class SemanticNetwork implements Graph {
 
   private Map<Vertex,Set<Edge>> grafo;
-  private Path percorso = Paths.get("BasicSemanticNetwork/CuriosoneSemanticNetwork.txt");
+  private Path percorso = Paths.get("src/main/res/knowledge/CuriosoneSemanticNetwork.txt");
   private static SemanticNetwork curiosoneSemanticNetwork;
 
   /**
