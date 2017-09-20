@@ -5,7 +5,6 @@ package com.github.bot.curiosone.core.knowledge;
  * @author Christian Sordi
  */
 public enum SemanticRelationType {
-
   /**
    * Also See.
    */
@@ -34,13 +33,7 @@ public enum SemanticRelationType {
    * Derivationally related.
    */
 
-  DERIVATIONALLY_RELATED_FORM,
-
-  /**
-   * Derived from adjective.
-   */
-
-  DERIVED_FROM_ADJ,
+  DERIVATIONALLY_RELATED,
 
   /**
    * Entailment.
@@ -58,7 +51,7 @@ public enum SemanticRelationType {
    * Hyperonym instance.
    */
 
-  INSTANCE_HYPERNYM,
+  HYPERNYM_INSTANCE,
 
   /**
    * Hyponym.
@@ -70,43 +63,48 @@ public enum SemanticRelationType {
    * Hyponym instance.
    */
 
-  INSTANCE_HYPONYM,
+  HYPONYM_INSTANCE,
 
   /**
    * Member holonym.
    */
 
-  MEMBER_HOLONYM,
+  HOLONYM_MEMBER,
 
   /**
    * Holonym substance.
    */
 
-  SUBSTANCE_HOLONYM,
+  HOLONYM_SUBSTANCE,
 
   /**
    * Part holonym.
    */
 
-  PART_HOLONYM,
+  HOLONYM_PART,
+  
+  /*
+   * who
+   */
+  IS_PERSON,
 
   /**
    * Meronym member.
    */
 
-  MEMBER_MERONYM,
+  MERONYM_MEMBER,
 
   /**
    * Meronym substance.
    */
-
-  SUBSTANCE_MERONYM,
+  
+  MERONYM_SUBSTANCE,
 
   /**
    * Meronym part.
    */
 
-  PART_MERONYM,
+  MERONYM_PART,
 
   /**
    * Participle.
@@ -119,6 +117,11 @@ public enum SemanticRelationType {
    */
 
   PERTAINYM,
+  
+  /*
+   *  where
+   */
+  PLACE,
 
   /**
    * Region.
@@ -133,10 +136,19 @@ public enum SemanticRelationType {
   REGION_MEMBER,
 
   /**
+   * is a.
+   */
+  SEMANTICALLY_RELATED,
+  /**
    * Similar.
    */
 
   SIMILAR_TO,
+  
+  /*
+   *  Date
+   */
+  TIME,
 
   /**
    * Topic.

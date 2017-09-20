@@ -3,26 +3,27 @@ package com.github.bot.curiosone.core.knowledge.interfaces;
 import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
 
 /**
- * Arco del grafo.
- * @author navigli
+ * Interface for SemanticRelation.
+ * @author Christian
+ *
  */
 public interface Edge {
 
   /**
-  * Restituisce il vertice di partenza.
-  * @return vertice di partenza
-  */
+   *  Method that returns SemanticRelation source Vertex.
+   * @return Object Vertex
+   */
   Vertex getSource();
 
   /**
-   * Restituisce il vertice di arrivo.
-   * @return vertice di arrivo
+   *  Method that returns SemanticRelation target Vertex.
+   * @return Object Vertex
    */
   Vertex getTarget();
 
   /**
-   * Restituisce il tipo dell'arco.
-   * @return tipo dell'arco
+   *  Method that returns SemanticRelation Type.
+   * @return Enum SemanticRelationType
    */
   SemanticRelationType getType();
 }

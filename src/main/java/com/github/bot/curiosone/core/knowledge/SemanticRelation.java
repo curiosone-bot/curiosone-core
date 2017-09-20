@@ -39,9 +39,6 @@ public class SemanticRelation implements Edge {
     return collegamento;
   }
 
-  /**
-   * Metodo toString utilizzato per varie prove di debug.
-   */
   @Override
   public String toString() {
     return sorgente.getId() + " - > " + collegamento + " - > "
@@ -53,10 +50,6 @@ public class SemanticRelation implements Edge {
     return this.hashCode() == ((SemanticRelation)o).hashCode();
   }
 
-  /**
-   * HashCode basato sull'hashCode del vertice di destinazione e vertice
-   * sorgente.
-   */
   @Override
   public int hashCode() {
     int result = 42;
