@@ -4,7 +4,11 @@ import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
 import com.github.bot.curiosone.core.knowledge.interfaces.Graph;
 import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -83,6 +87,22 @@ public class SemanticNetwork implements Graph {
     grafo.get(v2).remove(arco);
     grafo.get(v1).add(arco);
     grafo.get(v2).add(arco);
+  }
+  
+  @Override
+  public void learn(String vSource, String relation, String vTarget) throws IOException {
+    Vertex source = new Concept(vSource.replace(" ", "_"),0); 
+    Vertex target = new Concept(vTarget.replace(" ", "_"),0);
+    SemanticRelationType type = SemanticRelationType.valueOf(relation);
+    addEdge(source,target,type);
+    Writer output;
+    File sn = new File("src/main/res/knowledge/CuriosoneSemanticNetwork.txt");
+    output = new BufferedWriter(new FileWriter(sn,true));
+    output.append(source + "," + "0" + ",");
+    output.append(SemanticRelationType.valueOf(relation) + ",");
+    output.append(target + "," + "0");
+    output.append("\n");
+    output.close();
   }
 
   @Override
@@ -164,8 +184,8 @@ public class SemanticNetwork implements Graph {
   }
   
   @Override
-  public Boolean isPresent(SemanticRelationType type, String token) {
-    Vertex vtoken = new Concept(token);
+  public Boolean isPresent(String source, SemanticRelationType type) {
+    Vertex vtoken = new Concept(source);
     if (this.containsVertex(vtoken)) {
       for (Edge e : grafo.get(vtoken)) {
         if (e.getType().equals(type)) {

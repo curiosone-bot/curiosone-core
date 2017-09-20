@@ -3,6 +3,7 @@ package com.github.bot.curiosone.core.knowledge.interfaces;
 import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
 import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
@@ -85,7 +86,7 @@ public interface Graph {
    * @param token vertice del quale cercare il significato collegato.
    * @return a Boolean that Checks if a SemanticRelation is present.
    */
-  Boolean isPresent(SemanticRelationType tipo, String token);
+  Boolean isPresent(String source, SemanticRelationType tipo);
   
   /**
    * Returns the Edge related to Concept token, if present.
@@ -111,6 +112,7 @@ public interface Graph {
    */
   boolean getAnswer(String source,Object daDefinire,String target);
   
-  
   Optional<Edge> getAnswer(String token,String target);
+
+  void learn(String vSource, String relation, String vTarget) throws IOException;
 }
