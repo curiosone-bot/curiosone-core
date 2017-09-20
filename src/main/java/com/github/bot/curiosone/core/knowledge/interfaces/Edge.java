@@ -3,26 +3,27 @@ package com.github.bot.curiosone.core.knowledge.interfaces;
 import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
 
 /**
- * Graph Edge
- * @author Sordi
+ * Interface for SemanticRelation.
+ * @author Christian
+ *
  */
 public interface Edge {
 
   /**
-   * Returns Source Vertex
-   * @return Source Vertex
+   *  Method that returns SemanticRelation source Vertex.
+   * @return Object Vertex
    */
   Vertex getSource();
 
   /**
-   * Returns Target Vertex
-   * @return Target Vertex
+   *  Method that returns SemanticRelation target Vertex.
+   * @return Object Vertex
    */
   Vertex getTarget();
 
   /**
-   * Return Edge type
-   * @return Edge type
+   *  Method that returns SemanticRelation Type.
+   * @return Enum SemanticRelationType
    */
   SemanticRelationType getType();
 }

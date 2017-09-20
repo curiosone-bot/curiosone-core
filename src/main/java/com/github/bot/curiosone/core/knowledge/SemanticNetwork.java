@@ -1,5 +1,9 @@
 package com.github.bot.curiosone.core.knowledge;
 
+import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
+import com.github.bot.curiosone.core.knowledge.interfaces.Graph;
+import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,11 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
-import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
-import com.github.bot.curiosone.core.knowledge.interfaces.Graph;
-import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
-
 
 /**
  * This class is used to implement a Semantic Network.

@@ -81,19 +81,36 @@ public interface Graph {
 
   /**
    * Checks if a SemanticRelation is present.
-   * @param tipo del collegamento dell'arco da cercare
-   * @param token vertice del quale cercare il significato collegato
+   * @param tipo del collegamento dell'arco da cercare.
+   * @param token vertice del quale cercare il significato collegato.
    * @return a Boolean that Checks if a SemanticRelation is present.
    */
   Boolean isPresent(SemanticRelationType tipo, String token);
   
   /**
    * Returns the Edge related to Concept token, if present.
-   * @param tipo del collegamento dell'arco da cercare
-   * @param token vertice del quale cercare il significato collegato
-   * @return Optional of Set of Edge
+   * @param tipo del collegamento dell'arco da cercare.
+   * @param token vertice del quale cercare il significato collegato.
+   * @return Optional of Set of Edge.
+   */
+  
+  /**
+   * Returns the Edge related to Concept token, if present.
+   * @param source Vertex ID's.
+   * @param daDefinire SemanticRelationType.
+   * @return Object Edge.
    */
   Optional<Edge> getAnswer(String source,Object daDefinire);
+  
+  /**
+   * Returns true of false if this SemanticRelation is present.
+   * @param source Vertex ID's.
+   * @param daDefinire SemanticRelationType.
+   * @param target Vertex ID's.
+   * @return Object Edge.
+   */
   boolean getAnswer(String source,Object daDefinire,String target);
+  
+  
   Optional<Edge> getAnswer(String token,String target);
 }

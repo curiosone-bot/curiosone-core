@@ -10,7 +10,7 @@ public class Concept implements Vertex {
   /**
    * Name of the represented Concept.
    */
-  private final String ID;
+  private final String id;
   private Integer weight;
 
   /**
@@ -18,26 +18,26 @@ public class Concept implements Vertex {
    * @param id Concept name.
    */
   public Concept(String id) {
-    this.ID = id;
+    this.id = id;
   }
   
   public Concept(String id, Integer weight) {
-	this.ID = id;
-	this.weight=weight;
+    this.id = id;
+    this.weight = weight;
   }
   
   /**
-   * Set Concept Weight
+   * Void method that sets Weight.
    */
   public void setWeight(Integer weight) {
-	  this.weight=weight;
+    this.weight = weight;
   }
   
   /**
-   * Return Concept Weight
+   * Getter method that returns weight.
    */
   public Integer getWeight() {
-	return this.weight;
+    return this.weight;
   }
   
   /**
@@ -45,7 +45,7 @@ public class Concept implements Vertex {
    */
   @Override
   public String getId() {
-    return ID;
+    return id;
   }
 
   /**
@@ -62,7 +62,7 @@ public class Concept implements Vertex {
    */
   @Override
   public boolean equals(Object o) {
-    return this.ID.equals(((Concept)o).getId());
+    return this.id.equals(((Concept)o).getId());
   }
 
   /**
@@ -71,8 +71,8 @@ public class Concept implements Vertex {
   @Override
   public int hashCode() {
     int conta = 0;
-    for (int x = 0; x < ID.length(); x++) {
-      conta += ID.charAt(x) * 31;
+    for (int x = 0; x < id.length(); x++) {
+      conta += id.charAt(x) * 31;
     }
     return conta;
   }

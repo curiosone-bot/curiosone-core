@@ -1,25 +1,25 @@
 package com.github.bot.curiosone.core.knowledge.interfaces;
 
 /**
- * Graph vertex
+ * Intherface for SemanticNetwork Concept.
  * @author Sordi
  */
 public interface Vertex {
   /**
-   * Vertex ID Getter
-   * @return Vertex ID
+   * Method that returns Vertex ID's.
+   * @return Vertex ID.
    */
   String getId();
   
   /**
-   * Weight Getter
-   * @return Weight
+   * Method that returns Vertex weight.
+   * @return Weight.
    */
   Integer getWeight();
   
   /**
-   * Weight Setter
-   * @param weight
+   * Method that sets Vertex weight.
+   * @param weight Integer set.
    */
   void setWeight(Integer weight);
 }
