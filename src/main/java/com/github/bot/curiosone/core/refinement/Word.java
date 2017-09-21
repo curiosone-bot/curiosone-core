@@ -3,11 +3,11 @@ package com.github.bot.curiosone.core.refinement;
  * @author Claudio Venanzi
  */
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import it.uniroma1.lcl.babelmorph.Lexeme;
 import it.uniroma1.lcl.babelmorph.en.EnglishMorpher;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Word {
   

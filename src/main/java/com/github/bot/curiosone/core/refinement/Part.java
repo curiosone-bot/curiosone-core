@@ -1,31 +1,32 @@
 package com.github.bot.curiosone.core.refinement;
 /**
+ * POS wrapper used ad a common interoperability structure.
  * @author Claudio Venanzi
  */
 
 public enum Part {
 
-  ADJECTIVE (
+  ADJECTIVE(
       it.uniroma1.lcl.babelnet.data.BabelPOS.ADJECTIVE,
       it.uniroma1.lcl.babelmorph.POS.ADJECTIVE,
       edu.mit.jwi.item.POS.ADJECTIVE),
 
-  ADVERB (
+  ADVERB(
       it.uniroma1.lcl.babelnet.data.BabelPOS.ADVERB,
       it.uniroma1.lcl.babelmorph.POS.ADVERB,
       edu.mit.jwi.item.POS.ADVERB),
 
-  NOUN (
+  NOUN(
       it.uniroma1.lcl.babelnet.data.BabelPOS.NOUN,
       it.uniroma1.lcl.babelmorph.POS.NOUN,
       edu.mit.jwi.item.POS.NOUN),
   
-  VERB (
+  VERB(
       it.uniroma1.lcl.babelnet.data.BabelPOS.VERB,
       it.uniroma1.lcl.babelmorph.POS.VERB,
       edu.mit.jwi.item.POS.VERB),
   
-  NONE (null, null, null);
+  NONE(null, null, null);
   
   private final it.uniroma1.lcl.babelnet.data.BabelPOS bn;
   private final it.uniroma1.lcl.babelmorph.POS bm;
@@ -80,7 +81,9 @@ public enum Part {
    */
   public static Part from(it.uniroma1.lcl.babelnet.data.BabelPOS pos) {
     for (Part p : Part.values()) {
-      if (pos.equals(p.forBabelNet())) return p;
+      if (pos.equals(p.forBabelNet())) {
+        return p;
+      }
     }
     return Part.NONE;
   }
@@ -94,7 +97,9 @@ public enum Part {
    */
   public static Part from(it.uniroma1.lcl.babelmorph.POS pos) {
     for (Part p : Part.values()) {
-      if (pos.equals(p.forBabelMorph())) return p;
+      if (pos.equals(p.forBabelMorph())) {
+        return p;
+      }
     }
     return Part.NONE;
   }
@@ -108,7 +113,9 @@ public enum Part {
    */
   public static Part from(edu.mit.jwi.item.POS pos) {
     for (Part p : Part.values()) {
-      if (pos.equals(p.forWordNet())) return p;
+      if (pos.equals(p.forWordNet())) {
+        return p;
+      }
     }
     return Part.NONE;
   }
