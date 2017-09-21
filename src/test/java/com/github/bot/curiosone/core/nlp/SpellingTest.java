@@ -24,5 +24,7 @@ public class SpellingTest {
     assertEquals("february", s.correct("febraury"));
     assertEquals("CORRECTME!", s.correct("CORRECTME!"));
     assertEquals("42", s.correct("42"));
+    assertEquals("accommodate", s.correct("accomodate"));
+    assertEquals("forty", s.correct("fourty"));
   }
 }
