@@ -59,6 +59,7 @@ dependencies {
   compile name: 'log4j-core-2.1'
   compile name: 'lucene-core-4.9.0'
   compile name: 'lucene-queryparser-4.9.0'
+  compile name: 'babelmorph_english'
 }
 
 jar {
