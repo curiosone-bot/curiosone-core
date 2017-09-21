@@ -11,6 +11,7 @@ public class SemanticRelation implements Edge {
   private Vertex sorgente;
   private Vertex destinazione;
   private SemanticRelationType collegamento;
+  private Integer weight;
 
   /**
    * Default class constructor.
@@ -18,10 +19,11 @@ public class SemanticRelation implements Edge {
    * @param v2 Vertice Destinazione
    * @param type Tipo dell'arco
    */
-  public SemanticRelation(Vertex v1,Vertex v2, SemanticRelationType type) {
+  public SemanticRelation(Vertex v1,Vertex v2, SemanticRelationType type, Integer weight) {
     this.sorgente = v1;
     this.destinazione = v2;
     this.collegamento = type;
+    this.weight = weight;
   }
 
   @Override
@@ -38,11 +40,21 @@ public class SemanticRelation implements Edge {
   public SemanticRelationType getType() {
     return collegamento;
   }
+  
+  @Override
+  public Integer getWeight() {
+    return weight;
+  }
+  
+  @Override
+  public void setWeight(Integer i) {
+    this.weight = i;
+  }
 
   @Override
   public String toString() {
     return sorgente.getId() + " - > " + collegamento + " - > "
-        + destinazione.getId();
+        + destinazione.getId() + "(" + weight + ")";
   }
 
   @Override

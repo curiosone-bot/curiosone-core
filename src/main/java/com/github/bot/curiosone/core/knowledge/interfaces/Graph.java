@@ -1,12 +1,11 @@
 package com.github.bot.curiosone.core.knowledge.interfaces;
-
-import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
-import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
-
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+
+import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
 
 /**
  * Interfaccia che rappresenta un grafo.
@@ -31,8 +30,9 @@ public interface Graph {
    * @param v1 sorgente
    * @param v2 destinazione
    * @param type tipo dell'arco
+   * @param weight
    */
-  void addEdge(Vertex v1, Vertex v2, SemanticRelationType type);
+  void addEdge(Vertex v1, Vertex v2, SemanticRelationType type, Integer weight);
 
   /**
    * Restituisce true se l'arco e' contenuto nel grafo.
@@ -79,40 +79,38 @@ public interface Graph {
    * @param edgeSet gli archi da aggiungere
    */
   void addEdges(Collection<? extends Edge> edgeSet);
-
-  /**
-   * Checks if a SemanticRelation is present.
-   * @param tipo del collegamento dell'arco da cercare.
-   * @param token vertice del quale cercare il significato collegato.
-   * @return a Boolean that Checks if a SemanticRelation is present.
-   */
-  Boolean isPresent(String source, SemanticRelationType tipo);
   
   /**
-   * Returns the Edge related to Concept token, if present.
-   * @param tipo del collegamento dell'arco da cercare.
-   * @param token vertice del quale cercare il significato collegato.
-   * @return Optional of Set of Edge.
+   * Method that seeks a response if a question is asked to Curiosone.
+   * @param source Concept
+   * @param type SemanticRelationType
+   * @return Optional of Edge if exists between source and relation.
+   * @throws IOException
    */
+  Optional<Edge> getAnswer(String source,SemanticRelationType type);
   
   /**
-   * Returns the Edge related to Concept token, if present.
-   * @param source Vertex ID's.
-   * @param daDefinire SemanticRelationType.
-   * @return Object Edge.
+   * Method that seeks a response if a question is asked to Curiosone
+   * and there are multiple possible response.
+   * @param edges List 
+   * @return Optional of best Edge.
    */
-  Optional<Edge> getAnswer(String source,Object daDefinire);
+  Optional<Edge> getAnswer(List<Edge> edges);
   
   /**
-   * Returns true of false if this SemanticRelation is present.
-   * @param source Vertex ID's.
-   * @param daDefinire SemanticRelationType.
-   * @param target Vertex ID's.
-   * @return Object Edge.
+   * Method called if a question is asked to curiosone and
+   * doesn't know response so, learn.
+   * @param vSource Concept
+   * @param relation SemanticRelationType
+   * @param vTarget Concept
    */
-  boolean getAnswer(String source,Object daDefinire,String target);
+  void learn(String vSource, String relation, String vTarget);
   
-  Optional<Edge> getAnswer(String token,String target);
-
-  void learn(String vSource, String relation, String vTarget) throws IOException;
+  /**
+   * Method called when curiosone know the answer for add
+   * score to all edges connected to concept asked.
+   * @param v
+   * @throws IOException
+   */
+  void update(Vertex v) throws IOException;
 }

@@ -6,82 +6,19 @@ package com.github.bot.curiosone.core.knowledge;
  */
 public enum SemanticRelationType {
   /**
-   * Also See.
-   */
-
-  ALSO_SEE,
-
-  /**
-   * Antonym.
-   */
-
-  ANTONYM,
-
-  /**
-   * Attribute.
-   */
-
-  ATTRIBUTE,
-
-  /**
-   * Cause.
-   */
-
-  CAUSE,
-
-  /**
-   * Derivationally related.
-   */
-
-  DERIVATIONALLY_RELATED,
-
-  /**
    * Entailment.
    */
-
   ENTAILMENT,
 
   /**
    * Hyperonym.
    */
-
   HYPERNYM,
-
+ 
   /**
-   * Hyperonym instance.
+   *  What is.
    */
-
-  HYPERNYM_INSTANCE,
-
-  /**
-   * Hyponym.
-   */
-
-  HYPONYM,
-
-  /**
-   * Hyponym instance.
-   */
-
-  HYPONYM_INSTANCE,
-
-  /**
-   * Member holonym.
-   */
-
-  HOLONYM_MEMBER,
-
-  /**
-   * Holonym substance.
-   */
-
-  HOLONYM_SUBSTANCE,
-
-  /**
-   * Part holonym.
-   */
-
-  HOLONYM_PART,
+  IS_A,
   
   /*
    * who
@@ -89,94 +26,22 @@ public enum SemanticRelationType {
   IS_PERSON,
 
   /**
-   * Meronym member.
+   * Where.
    */
-
-  MERONYM_MEMBER,
-
-  /**
-   * Meronym substance.
-   */
-  
-  MERONYM_SUBSTANCE,
-
-  /**
-   * Meronym part.
-   */
-
-  MERONYM_PART,
-
-  /**
-   * Participle.
-   */
-
-  PARTICIPLE,
-
-  /**
-   * Pertainym.
-   */
-
-  PERTAINYM,
-  
-  /*
-   *  where
-   */
-  PLACE,
-
-  /**
-   * Region.
-   */
-
   REGION,
 
   /**
-   * Region member.
-   */
-
-  REGION_MEMBER,
-
-  /**
-   * is a.
-   */
-  SEMANTICALLY_RELATED,
-  /**
    * Similar.
    */
-
   SIMILAR_TO,
   
   /*
    *  Date
    */
-  TIME,
-
-  /**
-   * Topic.
-   */
-
-  TOPIC,
-
-  /**
-   * Topic member.
-   */
-
-  TOPIC_MEMBER,
-
-  /**
-   * Usage.
-   */
-
-  USAGE,
-
-  /**
-   * Usage member.
-   */
-
-  USAGE_MEMBER,
-
-  /**
-   * Verb group.
-   */
-
-  VERB_GROUP
+  TIME;
+  
+  @Override
+  public String toString() {
+    return this.name();
+  }
 }

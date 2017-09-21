@@ -58,9 +58,9 @@ public class BasicSemanticNetworkExporter {
           mainSenses.add(targetLemma);
           if (target.getSource() == BabelSenseSource.WN) {
             String pointer = relation.getPointer().toString().toUpperCase();
-            exporter.append(sourceLemma + "," + "0" + ",");
+            exporter.append(sourceLemma + ",");
             exporter.append(pointer + ",");
-            exporter.append(targetLemma + "," + "0");
+            exporter.append(targetLemma);
             exporter.append("\n");
           }
         }
