@@ -3,6 +3,7 @@ package com.github.bot.curiosone.core.knowledge;
 import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
 import com.github.bot.curiosone.core.knowledge.interfaces.Graph;
 import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
 
 /**
  * This class is used to implement a Semantic Network.
@@ -45,9 +45,9 @@ public class SemanticNetwork implements Graph {
     lineefile.remove(lineefile.size() - 1);
     for (String linea : lineefile) {
       String[] linee = linea.split(",");
-      Concept source = new Concept(linee[0]);
-      Concept target = new Concept(linee[2]);
-      SemanticRelationType type = SemanticRelationType.valueOf(linee[1].trim());
+      Vertex source = new Concept(linee[0],Integer.parseInt(linee[1])); 
+      Vertex target = new Concept(linee[3],Integer.parseInt(linee[4]));
+      SemanticRelationType type = SemanticRelationType.valueOf(linee[2].trim());
       SemanticRelation arco = new SemanticRelation(source,target,type);
       this.add(arco);
     }
@@ -177,12 +177,6 @@ public class SemanticNetwork implements Graph {
   }
 
   @Override
-  public Optional<Set<Edge>> getAnswer(SemanticRelationType tipo, String token) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
   public String toString() {
     return grafo.toString(); // metodo toString utilizzato per prove di debug
   }
@@ -201,5 +195,23 @@ public class SemanticNetwork implements Graph {
     result = 31 * result + edgeSet().hashCode();
     result = 31 * result + vertexSet().hashCode();
     return result;
+  }
+
+  @Override
+  public Optional<Edge> getAnswer(String source, Object daDefinire) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public boolean getAnswer(String source, Object daDefinire, String target) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
+  public Optional<Edge> getAnswer(String token, String target) {
+    // TODO Auto-generated method stub
+    return null;
   }
 }
