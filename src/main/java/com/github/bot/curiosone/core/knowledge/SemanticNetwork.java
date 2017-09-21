@@ -258,7 +258,7 @@ public class SemanticNetwork implements Graph {
   
   @Override
   public void update(Vertex v) throws IOException {
-    for ( Edge e : incomingEdges(v)) {
+    for ( Edge e : outgoingEdges(v)) {
       e.setWeight(e.getWeight()+50);
     }
     StringBuffer exporter = new StringBuffer();
@@ -266,8 +266,8 @@ public class SemanticNetwork implements Graph {
     linee_file = Files.readAllLines(this.percorso);
     for(String linea : linee_file) {
       String[] linee = linea.split(",");
-      if ( linee[2].equals(v.getId())) {
-        int weight = Integer.parseInt(linee[3]) + 50;
+      if ( linee[0].equals(v.getId())) {
+        int weight = Integer.parseInt(linee[3]) + 20;
         exporter.append(linee[0]+"," + linee[1] + "," + linee[2] + "," + weight);
         exporter.append("\n");
       }
