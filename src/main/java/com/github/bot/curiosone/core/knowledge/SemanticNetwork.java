@@ -8,9 +8,11 @@ import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -63,28 +65,7 @@ public class SemanticNetwork implements Graph {
     }
   }
   
-  public void addWeights() throws IOException {
-    List<String> linee_file = new ArrayList<>();
-    StringBuffer exporterSn = new StringBuffer();
-    linee_file = Files.readAllLines(this.percorso);
-    for(String linea : linee_file) {
-      String[] linee = linea.split(",");
-      Vertex target = new Concept(linee[2]);
-      Integer xx = grafo.get(target).size();
-      exporterSn.append(linea);
-      exporterSn.append("," + xx + "\n");
-    }
-    
-    int lastNewLine = exporterSn.lastIndexOf("\n");
-    if (lastNewLine >= 0) {
-      exporterSn.delete(lastNewLine, exporterSn.length());
-    }
-    PrintWriter writer = new PrintWriter("src/main/res/knowledge/CuriosoneSemanticNetwork.txt", "UTF-8");
-    writer.print(exporterSn.toString());
-    writer.close();
-    System.out.println("Rete Semantica di WordNet creata con successo");
-  }
-
+  @Override
   public Map<Vertex,Set<Edge>> getGrafo() {
     return grafo;
   }
@@ -210,6 +191,7 @@ public class SemanticNetwork implements Graph {
     catch (IOException e) {
       e.printStackTrace();
     }
+    increase(target,1);
   }
   
   @Override
@@ -217,7 +199,7 @@ public class SemanticNetwork implements Graph {
     Vertex vSource = new Concept(source.replaceAll(" ", "_"));
     if ( containsVertex(vSource)) {
       try {
-        update(vSource);
+        increase(vSource,30);
       } 
       catch (Exception e) {
         e.printStackTrace();
@@ -257,17 +239,26 @@ public class SemanticNetwork implements Graph {
   }
   
   @Override
-  public void update(Vertex v) throws IOException {
-    for ( Edge e : outgoingEdges(v)) {
-      e.setWeight(e.getWeight()+50);
+  public void increase(Vertex v, Integer score) {
+    int nodo = 2;
+    if (score != 1) {
+      for ( Edge e : outgoingEdges(v)) {
+        e.setWeight(e.getWeight()+score);
+      }
+      nodo = 0;
     }
     StringBuffer exporter = new StringBuffer();
     List<String> linee_file = new ArrayList<>();
-    linee_file = Files.readAllLines(this.percorso);
+    try {
+      linee_file = Files.readAllLines(this.percorso);
+    }
+    catch (IOException e1) {
+      e1.printStackTrace();
+    }
     for(String linea : linee_file) {
       String[] linee = linea.split(",");
-      if ( linee[0].equals(v.getId())) {
-        int weight = Integer.parseInt(linee[3]) + 20;
+      if ( linee[nodo].equals(v.getId())) {
+        int weight = Integer.parseInt(linee[3]) + score;
         exporter.append(linee[0]+"," + linee[1] + "," + linee[2] + "," + weight);
         exporter.append("\n");
       }
@@ -281,7 +272,13 @@ public class SemanticNetwork implements Graph {
     if (lastNewLine >= 0) {
       exporter.delete(lastNewLine, exporter.length());
     }
-    PrintWriter writer = new PrintWriter("src/main/res/knowledge/CuriosoneSemanticNetwork.txt", "UTF-8");
+    PrintWriter writer = null;
+    try {
+      writer = new PrintWriter("src/main/res/knowledge/CuriosoneSemanticNetwork.txt", "UTF-8");
+    } 
+    catch (FileNotFoundException | UnsupportedEncodingException e1) {
+      e1.printStackTrace();
+    }
     writer.print(exporter.toString());
     writer.close();
   }

@@ -2,6 +2,7 @@ package com.github.bot.curiosone.core.knowledge.interfaces;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -81,6 +82,12 @@ public interface Graph {
   void addEdges(Collection<? extends Edge> edgeSet);
   
   /**
+   * Method that returns semantic network graph.
+   * @return graph
+   */
+  Map<Vertex, Set<Edge>> getGrafo();
+  
+  /**
    * Method that seeks a response if a question is asked to Curiosone.
    * @param source Concept
    * @param type SemanticRelationType
@@ -107,10 +114,10 @@ public interface Graph {
   void learn(String vSource, String relation, String vTarget);
   
   /**
-   * Method called when curiosone know the answer for add
-   * score to all edges connected to concept asked.
+   * Method called when curiosone need to increase an
+   * edge score after have learned or asked for a concept.
    * @param v
    * @throws IOException
    */
-  void update(Vertex v) throws IOException;
+  void increase(Vertex v, Integer score);
 }
