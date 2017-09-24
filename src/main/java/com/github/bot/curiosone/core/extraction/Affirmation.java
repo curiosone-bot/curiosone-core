@@ -1,6 +1,10 @@
 package com.github.bot.curiosone.core.extraction;
 
-import com.github.bot.curiosone.core.nlp.*;
+import com.github.bot.curiosone.core.nlp.LEX;
+import com.github.bot.curiosone.core.nlp.Meaning;
+import com.github.bot.curiosone.core.nlp.POS;
+import com.github.bot.curiosone.core.nlp.Sentence;
+import com.github.bot.curiosone.core.nlp.Word;
 
 import java.util.ArrayList;
 import java.util.List;
