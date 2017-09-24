@@ -2,6 +2,8 @@ package com.github.bot.curiosone.core.knowledge;
 
 import static java.util.stream.Collectors.toSet;
 
+import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
+
 import it.uniroma1.lcl.babelnet.BabelNet;
 import it.uniroma1.lcl.babelnet.BabelSense;
 import it.uniroma1.lcl.babelnet.BabelSynset;
@@ -10,8 +12,6 @@ import it.uniroma1.lcl.babelnet.BabelSynsetIDRelation;
 import it.uniroma1.lcl.babelnet.InvalidBabelSynsetIDException;
 import it.uniroma1.lcl.babelnet.data.BabelSenseSource;
 import it.uniroma1.lcl.jlt.util.Language;
-
-import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
  */
 public class BasicSemanticNetworkExporter {
   private static String path = "src/main/res/knowledge/CuriosoneSemanticNetwork.txt";
+
   /**
    * Static Method for export BasicSemanticNetworkExport from BabelNet
    * filtering for wordnet.
@@ -79,13 +80,17 @@ public class BasicSemanticNetworkExporter {
     writer.close();
     System.out.println("Rete Semantica di WordNet creata con successo");
   }
-  
+
+  /**
+   * addWeights description.
+   * @throws IOException [description]
+   */
   public static void addWeights() throws IOException {
     SemanticNetwork sn = SemanticNetwork.getInstance();
-    List<String> linee_file = new ArrayList<>();
+    List<String> lines = new ArrayList<>();
     StringBuffer exporterSn = new StringBuffer();
-    linee_file = Files.readAllLines(Paths.get(path));
-    for(String linea : linee_file) {
+    lines = Files.readAllLines(Paths.get(path));
+    for (String linea : lines) {
       String[] linee = linea.split(",");
       Vertex target = new Concept(linee[2]);
       Integer weight = sn.getGrafo().get(target).size();
@@ -94,7 +99,7 @@ public class BasicSemanticNetworkExporter {
       exporterSn.append(linee[2] + ",");
       exporterSn.append(weight + "\n");
     }
-    
+
     int lastNewLine = exporterSn.lastIndexOf("\n");
     if (lastNewLine >= 0) {
       exporterSn.delete(lastNewLine, exporterSn.length());

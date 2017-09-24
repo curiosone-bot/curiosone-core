@@ -32,9 +32,14 @@ import java.util.Set;
  * @author Christian Sordi
  */
 public class SemanticNetwork implements Graph {
-  
-  private static final Set<SemanticRelationType> nsr = new HashSet<>(Arrays.asList
-      (SemanticRelationType.TIME,SemanticRelationType.REGION,SemanticRelationType.IS_PERSON));
+
+  private static final Set<SemanticRelationType> nsr = new HashSet<>(
+      Arrays.asList(
+          SemanticRelationType.TIME,
+          SemanticRelationType.REGION,
+          SemanticRelationType.IS_PERSON
+      )
+  );
   private Map<Vertex,Set<Edge>> grafo;
   private Path percorso = Paths.get("src/main/res/knowledge/CuriosoneSemanticNetwork.txt");
   private static SemanticNetwork curiosoneSemanticNetwork;
@@ -52,19 +57,19 @@ public class SemanticNetwork implements Graph {
 
   private SemanticNetwork() throws IOException {
     this.grafo = new HashMap<>();
-    List<String> linee_file = new ArrayList<>();
-    linee_file = Files.readAllLines(this.percorso);
-    for(String linea : linee_file) {
+    List<String> lines = new ArrayList<>();
+    lines = Files.readAllLines(this.percorso);
+    for (String linea : lines) {
       String[] linee = linea.split(",");
-      Vertex source = new Concept(linee[0]); 
+      Vertex source = new Concept(linee[0]);
       Vertex target = new Concept(linee[2]);
       SemanticRelationType type = SemanticRelationType.valueOf(linee[1].trim());
-      SemanticRelation Arco = 
+      SemanticRelation arco =
           new SemanticRelation(source,target,type,Integer.parseInt(linee[3]));
-      this.add(Arco);
+      this.add(arco);
     }
   }
-  
+
   @Override
   public Map<Vertex,Set<Edge>> getGrafo() {
     return grafo;
@@ -159,7 +164,7 @@ public class SemanticNetwork implements Graph {
       for (Edge arco : grafo.get(v)) {
         if (arco.getTarget().equals(v)) {
           incomingEdges.add(arco);
-        }  
+        }
       }
     }
     return incomingEdges;
@@ -171,13 +176,13 @@ public class SemanticNetwork implements Graph {
       add(arco);
     }
   }
-  
+
   @Override
-  public void learn(String vSource, String relation, String vTarget) {
-    Vertex source = new Concept(vSource.replace(" ", "_")); 
-    Vertex target = new Concept(vTarget.replace(" ", "_"));
+  public void learn(String v1, String relation, String v2) {
+    Vertex source = new Concept(v1.replace(" ", "_"));
+    Vertex target = new Concept(v2.replace(" ", "_"));
     SemanticRelationType type = SemanticRelationType.valueOf(relation);
-    addEdge(source,target,type,1);
+    addEdge(source, target, type, 1);
     Writer output;
     File sn = new File("src/main/res/knowledge/CuriosoneSemanticNetwork.txt");
     try {
@@ -187,43 +192,41 @@ public class SemanticNetwork implements Graph {
       output.append(target + "," + 1);
       output.append("\n");
       output.close();
-    } 
-    catch (IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
-    increase(target,1);
+    increase(target, 1);
   }
-  
+
   @Override
-  public Optional<Edge> getAnswer(String source,SemanticRelationType type) {
-    Vertex vSource = new Concept(source.replaceAll(" ", "_"));
-    if ( containsVertex(vSource)) {
+  public Optional<Edge> getAnswer(String v1, SemanticRelationType type) {
+    Vertex source = new Concept(v1.replaceAll(" ", "_"));
+    if (containsVertex(source)) {
       try {
-        increase(vSource,30);
-      } 
-      catch (Exception e) {
+        increase(source,30);
+      } catch (Exception e) {
         e.printStackTrace();
       }
       if (type.equals(SemanticRelationType.IS_A)) {
-        List<Edge> edges = outgoingEdges(vSource).stream()
+        List<Edge> edges = outgoingEdges(source).stream()
             .filter(x -> !nsr.contains(x.getType())).collect(toList());
-        switch(edges.size()) {
-        case 0 : return Optional.empty();
-        case 1 : return Optional.of(edges.get(0));
-        default : return getAnswer(edges);
+        switch (edges.size()) {
+          case 0: return Optional.empty();
+          case 1: return Optional.of(edges.get(0));
+          default: return getAnswer(edges);
         }
       }
-      
+
       if (type.equals(SemanticRelationType.REGION)) {
-        List<Edge> edges = outgoingEdges(vSource).stream()
+        List<Edge> edges = outgoingEdges(source).stream()
             .filter(x -> x.getType().equals(SemanticRelationType.REGION)).collect(toList());
-        switch(edges.size()) {
-        case 0 : return Optional.empty();
-        case 1 : return Optional.of(edges.get(0));
-        default : return getAnswer(edges);
+        switch (edges.size()) {
+          case 0: return Optional.empty();
+          case 1: return Optional.of(edges.get(0));
+          default: return getAnswer(edges);
         }
       }
-      for (Edge e : outgoingEdges(vSource)) {
+      for (Edge e : outgoingEdges(source)) {
         if (e.getType().equals(type)) {
           return Optional.of(e);
         }
@@ -231,43 +234,41 @@ public class SemanticNetwork implements Graph {
     }
     return Optional.empty();
   }
-  
+
   @Override
   public Optional<Edge> getAnswer(List<Edge> edges) {
     edges.sort((a,b) -> b.getWeight() - a.getWeight());
     return Optional.of(edges.get(0));
   }
-  
+
   @Override
   public void increase(Vertex v, Integer score) {
     int nodo = 2;
     if (score != 1) {
-      for ( Edge e : outgoingEdges(v)) {
-        e.setWeight(e.getWeight()+score);
+      for (Edge e : outgoingEdges(v)) {
+        e.setWeight(e.getWeight() + score);
       }
       nodo = 0;
     }
     StringBuffer exporter = new StringBuffer();
-    List<String> linee_file = new ArrayList<>();
+    List<String> lines = new ArrayList<>();
     try {
-      linee_file = Files.readAllLines(this.percorso);
-    }
-    catch (IOException e1) {
+      lines = Files.readAllLines(this.percorso);
+    } catch (IOException e1) {
       e1.printStackTrace();
     }
-    for(String linea : linee_file) {
+    for (String linea : lines) {
       String[] linee = linea.split(",");
-      if ( linee[nodo].equals(v.getId())) {
+      if (linee[nodo].equals(v.getId())) {
         int weight = Integer.parseInt(linee[3]) + score;
-        exporter.append(linee[0]+"," + linee[1] + "," + linee[2] + "," + weight);
+        exporter.append(linee[0] + "," + linee[1] + "," + linee[2] + "," + weight);
         exporter.append("\n");
-      }
-      else {
+      } else {
         exporter.append(linea);
         exporter.append("\n");
       }
     }
-    
+
     int lastNewLine = exporter.lastIndexOf("\n");
     if (lastNewLine >= 0) {
       exporter.delete(lastNewLine, exporter.length());
@@ -275,8 +276,7 @@ public class SemanticNetwork implements Graph {
     PrintWriter writer = null;
     try {
       writer = new PrintWriter("src/main/res/knowledge/CuriosoneSemanticNetwork.txt", "UTF-8");
-    } 
-    catch (FileNotFoundException | UnsupportedEncodingException e1) {
+    } catch (FileNotFoundException | UnsupportedEncodingException e1) {
       e1.printStackTrace();
     }
     writer.print(exporter.toString());
@@ -298,7 +298,7 @@ public class SemanticNetwork implements Graph {
     result = 31 * result + vertexSet().hashCode();
     return result;
   }
-  
+
   @Override
   public String toString() {
     return grafo.toString(); // metodo toString utilizzato per prove di debug

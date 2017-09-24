@@ -1,12 +1,13 @@
 package com.github.bot.curiosone.core.knowledge.interfaces;
+
+import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
-import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
 
 /**
  * Interfaccia che rappresenta un grafo.
@@ -31,7 +32,7 @@ public interface Graph {
    * @param v1 sorgente
    * @param v2 destinazione
    * @param type tipo dell'arco
-   * @param weight
+   * @param weight peso
    */
   void addEdge(Vertex v1, Vertex v2, SemanticRelationType type, Integer weight);
 
@@ -67,7 +68,7 @@ public interface Graph {
    * @return insieme degli archi uscenti
    */
   Set<Edge> outgoingEdges(Vertex v);
-  
+
   /**
    * Restituisce l'insieme di archi entranti.
    * @param v vertice su cui calcolare l'insieme di archi
@@ -80,44 +81,44 @@ public interface Graph {
    * @param edgeSet gli archi da aggiungere
    */
   void addEdges(Collection<? extends Edge> edgeSet);
-  
+
   /**
    * Method that returns semantic network graph.
    * @return graph
    */
   Map<Vertex, Set<Edge>> getGrafo();
-  
+
   /**
    * Method that seeks a response if a question is asked to Curiosone.
    * @param source Concept
    * @param type SemanticRelationType
    * @return Optional of Edge if exists between source and relation.
-   * @throws IOException
+   * @throws IOException exception
    */
   Optional<Edge> getAnswer(String source,SemanticRelationType type);
-  
+
   /**
    * Method that seeks a response if a question is asked to Curiosone
    * and there are multiple possible response.
-   * @param edges List 
+   * @param edges List
    * @return Optional of best Edge.
    */
   Optional<Edge> getAnswer(List<Edge> edges);
-  
+
   /**
    * Method called if a question is asked to curiosone and
    * doesn't know response so, learn.
-   * @param vSource Concept
+   * @param v1 Concept
    * @param relation SemanticRelationType
-   * @param vTarget Concept
+   * @param v2 Concept
    */
-  void learn(String vSource, String relation, String vTarget);
-  
+  void learn(String v1, String relation, String v2);
+
   /**
    * Method called when curiosone need to increase an
    * edge score after have learned or asked for a concept.
-   * @param v
-   * @throws IOException
+   * @param v vertex
+   * @throws IOException exception
    */
   void increase(Vertex v, Integer score);
 }
