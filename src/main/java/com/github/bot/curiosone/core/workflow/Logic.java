@@ -5,6 +5,7 @@ import com.github.bot.curiosone.core.extraction.BrainResponse;
 import com.github.bot.curiosone.core.nlp.Phrase;
 import com.github.bot.curiosone.core.nlp.Sentence;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -19,7 +20,11 @@ public class Logic {
   public static Message talk(Message msg) {
 
     // We just use the first now.
-    Phrase phrase = Phrase.extract(msg.getMessage()).get(0);
+    List<Phrase> phrases = Phrase.extract(msg.getMessage());
+    if (phrases.size() == 0) {
+      return new Message("Sorry my head hurts, what were we talking about?", "");
+    }
+    Phrase phrase = phrases.get(0);
 
     // If it's a conversational text answer directly.
     Optional<String> opt = Brain.conversate(phrase);
@@ -28,7 +33,11 @@ public class Logic {
     }
 
     // We just use the first now.
-    Sentence sentence = Sentence.extract(phrase).get(0);
+    List<Sentence> sentences = Sentence.extract(phrase);
+    if (sentences.size() == 0) {
+      return new Message("Sorry my head hurts, what were we talking about?", "");
+    }
+    Sentence sentence = sentences.get(0);
 
     Optional<BrainResponse> opta = Brain.compute(sentence, msg.getScope());
     if (opta.isPresent()) {
