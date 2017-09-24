@@ -41,8 +41,8 @@ public class Question {
 
           List<Word> words = new ArrayList<>();
           words.add(object);
-          words.add(new Word("is", "be", new Meaning(POS.V, LEX.UNKN)));
-          words.add(new Word("a", "a", new Meaning(POS.CONJ, LEX.UNKN)));
+          words.add(new Word("is", "be", new Meaning(POS.V, LEX.STATIVE)));
+          words.add(new Word("a", "a", new Meaning(POS.DET, LEX.INDEFINITE_ARTICLE)));
           words.add(answer);
 
           return Optional.of(new BrainResponse(words, object.getText()));
