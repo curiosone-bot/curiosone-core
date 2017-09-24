@@ -22,7 +22,9 @@ public class Question {
    * @return [description]
    */
   public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) {
-    if (sentence.respect(POS.PRON, POS.VP, POS.NP)) {
+    // System.out.println(sentence + " (" + scope + ")");
+    if (sentence.respect(POS.PRON, POS.V, POS.NP)) {
+      // System.out.println("RESPECTED");
       List<Word>[] extracted = sentence.parse(POS.PRON, POS.V, POS.NP);
       Word pron = extracted[0].stream().filter(w -> w.itMeans(POS.PRON)).findFirst().get();
       Word verb = extracted[1].stream().filter(w -> w.itMeans(POS.V)).findFirst().get();

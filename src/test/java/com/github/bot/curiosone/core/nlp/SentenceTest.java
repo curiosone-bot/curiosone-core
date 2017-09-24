@@ -26,6 +26,7 @@ public class SentenceTest {
     System.out.println(sentence);
 
     assertTrue(sentence.respect(POS.VP));
+    assertTrue(sentence.respect(POS.PRON, POS.V, POS.NP));
     assertTrue(sentence.respect(POS.PRON, POS.V, POS.DET, POS.N));
     assertFalse(sentence.respect(POS.PRON, POS.VP));
     assertFalse(sentence.respect(POS.PRON, POS.N));
