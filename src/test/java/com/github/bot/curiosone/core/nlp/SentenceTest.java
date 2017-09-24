@@ -23,11 +23,13 @@ public class SentenceTest {
 
     assertTrue(sentences.size() > 0);
     Sentence sentence = sentences.get(0);
+    System.out.println(sentence);
 
-    assertTrue(sentence.respect(POS.PRON, POS.VP));
+    assertTrue(sentence.respect(POS.VP));
     assertTrue(sentence.respect(POS.PRON, POS.V, POS.DET, POS.N));
-    assertFalse(sentence.respect(POS.PRON, POS.VP, POS.N));
+    assertFalse(sentence.respect(POS.PRON, POS.VP));
     assertFalse(sentence.respect(POS.PRON, POS.N));
+    assertFalse(sentence.respect(POS.ADJ));
 
     List<Word>[] parameters = sentence.parse(POS.PRON, POS.V, POS.NP);
     assertTrue(parameters.length == 3);
