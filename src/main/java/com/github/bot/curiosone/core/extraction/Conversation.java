@@ -1,6 +1,7 @@
-package com.github.bot.curiosone.core.nlp;
+package com.github.bot.curiosone.core.extraction;
 
-import java.io.BufferedReader;
+import com.github.bot.curiosone.core.nlp.Phrase;
+import com.github.bot.curiosone.core.nlp.Token;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -47,7 +48,8 @@ public class Conversation {
 
   /**
    * Checks if the given input is present in our known answers.
-   * @param phrase phrase given by user's input
+   *
+   * @param  phrase phrase given by user's input
    * @return answer if the input is known, an empty string otherwise
    */
   public static String getAnswer(Phrase phrase) {

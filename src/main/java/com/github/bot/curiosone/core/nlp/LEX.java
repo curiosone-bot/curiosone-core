@@ -294,5 +294,10 @@ public enum LEX {
   /**
    * Mail address.
    */
-  MAIL;
+  MAIL,
+
+  /**
+   * Unknown.
+   */
+  UNKN;
 }
