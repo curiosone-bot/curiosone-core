@@ -1,4 +1,6 @@
 hi:Hi there!	Hi.	Hello!
+hello:Hi there!	Hi.	Hello!
+my	name	is:Wow! Your name is beautiful.
 i	be:I will set aside this information.	I am glad to know it.	This information is not new to me..
 we	friend:Facebook teached me what a friend is	I really want a friend.
 how	old	be	you:I do not know how old I am, i was succesfully built in 09/17/2017.
