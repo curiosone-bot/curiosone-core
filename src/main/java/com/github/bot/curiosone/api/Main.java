@@ -3,11 +3,12 @@ package com.github.bot.curiosone.api;
 import com.github.bot.curiosone.core.workflow.Logic;
 import com.github.bot.curiosone.core.workflow.Message;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Spark;
