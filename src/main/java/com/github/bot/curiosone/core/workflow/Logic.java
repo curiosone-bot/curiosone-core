@@ -18,6 +18,9 @@ public class Logic {
    * @return [description]
    */
   public static Message talk(Message msg) {
+    if (msg == null) {
+      return new Message("Sorry my head hurts, what were we talking about?", "");
+    }
     Optional<BrainResponse> br;
 
     // We just use the first now.

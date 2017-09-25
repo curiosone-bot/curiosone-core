@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Message {
   /** The message. */
-  String msg;
+  String message;
 
   /** The scope. */
   String scope;
@@ -15,7 +15,13 @@ public class Message {
    * @param scope the scope
    */
   public Message(String msg, String scope) {
-    this.msg = msg;
+    if (msg == null) {
+      msg = "";
+    }
+    if (scope == null) {
+      scope = "";
+    }
+    this.message = msg;
     this.scope = scope;
   }
 
@@ -24,7 +30,7 @@ public class Message {
    * @return the message.
    */
   public String getMessage() {
-    return msg;
+    return message;
   }
 
   /**
@@ -42,7 +48,7 @@ public class Message {
    */
   @Override
   public String toString() {
-    return msg + " (" + scope + ")";
+    return message + " (" + scope + ")";
   }
 
   /**
@@ -61,7 +67,7 @@ public class Message {
       return false;
     }
     Message that = (Message) other;
-    return this.msg.equals(that.msg) && this.scope.equals(that.scope);
+    return this.message.equals(that.message) && this.scope.equals(that.scope);
   }
 
   /**
@@ -71,6 +77,6 @@ public class Message {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(msg, scope);
+    return Objects.hash(message, scope);
   }
 }
