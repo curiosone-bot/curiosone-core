@@ -21,13 +21,6 @@ public class RuleTest {
   }
 
   @Test
-  public void testEqualsTransitive() {
-    Rule r = new Rule(POS.VPP, new Pair(POS.UNKN, POS.NEG));
-    Rule rr = new Rule(POS.VPP, new Pair(POS.UNKN, POS.NEG));
-    assertTrue(r.equals(rr) && rr.equals(rr));
-  }
-
-  @Test
   public void testEqualsSymmetric() {
     Rule r = new Rule(POS.AP, new Pair(POS.NEG, POS.ADJ));
     Rule rr = new Rule(POS.AP, new Pair(POS.NEG, POS.ADJ));
@@ -56,6 +49,13 @@ public class RuleTest {
   public void testHashCodeReflexive() {
     Rule r = new Rule(POS.PREP, new Pair(POS.VPP, POS.UNKN));
     assertEquals(r.hashCode(), r.hashCode());
+  }
+
+  @Test
+  public void testHashCodeSymmetric() {
+    Rule r = new Rule(POS.AP, new Pair(POS.NEG, POS.ADJ));
+    Rule rr = new Rule(POS.AP, new Pair(POS.NEG, POS.ADJ));
+    assertEquals(r.hashCode(), rr.hashCode());
   }
 
   @Test
