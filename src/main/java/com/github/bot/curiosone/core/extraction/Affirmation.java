@@ -9,6 +9,7 @@ import com.github.bot.curiosone.core.nlp.Word;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Description.
@@ -25,57 +26,47 @@ public class Affirmation {
     if (scope.length() > 0 && scope.charAt(scope.length() - 1) == '?') {
       answer = true;
     }
+
     if (answer) {
+      Word verb, object;
       scope = scope.substring(0, scope.length() - 1);
+
       if (sentence.respect(POS.V, POS.NP)) {
-        // System.out.println("RESPECTED");
+        // System.out.println("V, NP");
         List<Word>[] extracted = sentence.parse(POS.V, POS.NP);
-        Word verb = extracted[0].stream().filter(w -> w.itMeans(POS.V)).findFirst().get();
-        Word object = extracted[1].stream().filter(w -> w.itMeans(POS.N)).findFirst().get();
-
-        //TODO: Get a real response from the semantic network.
-        boolean present = Math.random() >= 0.5;
-
-        if (present) {
-          List<Word> words = new ArrayList<>();
-          words.add(new Word("I", "I", new Meaning(POS.UNKN, LEX.UNKN)));
-          words.add(new Word("already", "already", new Meaning(POS.UNKN, LEX.UNKN)));
-          words.add(new Word("knew", "know", new Meaning(POS.UNKN, LEX.UNKN)));
-          words.add(new Word("that", "that", new Meaning(POS.UNKN, LEX.UNKN)));
-          words.add(new Word(scope, scope, new Meaning(POS.UNKN, LEX.UNKN)));
-          words.add(new Word("is", "is", new Meaning(POS.UNKN, LEX.UNKN)));
-          words.add(new Word("a", "a", new Meaning(POS.UNKN, LEX.UNKN)));
-          words.add(object);
-
-          return Optional.of(new BrainResponse(words, object.getText()));
-        } else {
-          List<Word> words = new ArrayList<>();
-          words.add(new Word("now", "now", new Meaning(POS.UNKN, LEX.UNKN)));
-          words.add(new Word("I", "I", new Meaning(POS.UNKN, LEX.UNKN)));
-          words.add(new Word("know", "know", new Meaning(POS.UNKN, LEX.UNKN)));
-          words.add(new Word("that", "that", new Meaning(POS.UNKN, LEX.UNKN)));
-          words.add(new Word(scope, scope, new Meaning(POS.UNKN, LEX.UNKN)));
-          words.add(new Word("is", "is", new Meaning(POS.UNKN, LEX.UNKN)));
-          words.add(new Word("a", "a", new Meaning(POS.UNKN, LEX.UNKN)));
-          words.add(object);
-
-          return Optional.of(new BrainResponse(words, object.getText()));
-        }
+        verb = extracted[0].stream().filter(w -> w.itMeans(POS.V)).findFirst().get();
+        List<Word> nouns = extracted[1].stream().filter(w -> w.itMeans(POS.N)).collect(Collectors.toList());
+        object = nouns.get(nouns.size() - 1);
+      } else {
+        return Optional.empty();
       }
-    }
-    List<Word> objects = sentence.get(POS.N);
-    if (objects.size() > 0) {
-      Word object = objects.get(0);
-      List<Word> words = new ArrayList<>();
-      words.add(new Word("what", "what", new Meaning(POS.UNKN, LEX.UNKN)));
-      words.add(new Word("is", "is", new Meaning(POS.UNKN, LEX.UNKN)));
-      words.add(new Word("a", "a", new Meaning(POS.UNKN, LEX.UNKN)));
-      words.add(object);
 
-      return Optional.of(new BrainResponse(words, object.getText() + "?"));
+      //TODO: Get a real response from the semantic network.
+      boolean present = Math.random() >= 0.5;
+
+      String newMessage, newScope;
+      if (present) {
+        newMessage = "I already knew that " + scope + " is a " + object.getText() + ".";
+        newScope = object.getText();
+      } else {
+        newMessage = "Wow really interesting! Now I know that a " + scope + " is a " + object.getText() + ".";
+        newScope = object.getText();
+      }
+
+      return Optional.of(new BrainResponse(newMessage, newScope));
     }
 
-    //TODO: Add real implementation.
+    if (sentence.has(POS.N)) {
+      List<Word> nouns = sentence.get(POS.N);
+      Word object = nouns.get(nouns.size() - 1);
+      String newMessage, newScope;
+
+      newMessage = "Mhh! What is a " + object.getText() + "?";
+      newScope = object.getText() + "?";
+      return Optional.of(new BrainResponse(newMessage, newScope));
+    }
+
+    //TODO: Add a random non sense response.
     return Optional.empty();
   }
 }

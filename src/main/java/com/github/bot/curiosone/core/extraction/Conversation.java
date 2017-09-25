@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -50,9 +51,9 @@ public class Conversation {
    * Checks if the given input is present in our known answers.
    *
    * @param  phrase phrase given by user's input
-   * @return answer if the input is known, an empty string otherwise
+   * @return answer if the input is known
    */
-  public static String getAnswer(Phrase phrase) {
+  public static Optional<BrainResponse> getAnswer(Phrase phrase) {
     if (knownQuestions == null) {
       loadSentences();
     }
@@ -72,9 +73,9 @@ public class Conversation {
       }
       if (isKnown) {
         int randpos = (int)(Math.random() * entry.getValue().length);
-        return entry.getValue()[randpos];
+        return Optional.of(new BrainResponse(entry.getValue()[randpos], ""));
       }
     }
-    return "";
+    return Optional.empty();
   }
 }

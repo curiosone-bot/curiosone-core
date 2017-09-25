@@ -135,4 +135,13 @@ public class LangUtils {
   public static String expandVerbs(String contracted) {
     return StringUtils.replaceEachRepeatedly(contracted, SHORTS, LONGS);
   }
+
+  /**
+   * removeNonAlphaNumeric description.
+   * @param str [description]
+   * @return [description]
+   */
+  public static String removeNonAlphaNumeric(String str) {
+    return str.replaceAll("[^A-Za-z0-9 ]", "");
+  }
 }

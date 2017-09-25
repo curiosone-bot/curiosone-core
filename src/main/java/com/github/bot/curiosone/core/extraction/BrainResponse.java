@@ -17,19 +17,15 @@ public class BrainResponse {
   /** Description. */
   private String scope;
 
-  /** Description. */
-  private List<Word> words;
-
   /**
    * Constructor of a BrainResponse.
    *
    * @param words [description]
    * @param scope [description]
    */
-  public BrainResponse(List<Word> words, String scope) {
-    this.text = words.stream().map(Word::getText).collect(Collectors.joining(" "));
+  public BrainResponse(String text, String scope) {
+    this.text = text;
     this.scope = scope;
-    this.words = words;
   }
 
   /**
@@ -39,15 +35,6 @@ public class BrainResponse {
    */
   public String getMessage() {
     return text;
-  }
-
-  /**
-   * getWords description.
-   *
-   * @return [description]
-   */
-  public List<Word> getWords() {
-    return words;
   }
 
   /**

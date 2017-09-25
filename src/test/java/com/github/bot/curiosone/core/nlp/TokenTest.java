@@ -69,12 +69,11 @@ public class TokenTest {
     List<Token> tokens;
 
     tokens = Token.tokenize("The cat is on the table!");
-    assertEquals(5, tokens.size());
+    assertEquals(4, tokens.size());
     assertEquals("the", tokens.get(0).getText());
     assertEquals("cat", tokens.get(1).getText());
-    assertEquals("is on", tokens.get(2).getText());
-    assertEquals("the", tokens.get(3).getText());
-    assertEquals("table", tokens.get(4).getText());
+    assertEquals("is", tokens.get(2).getText());
+    assertEquals("on the table", tokens.get(3).getText());
 
     tokens = Token.tokenize("I love united states of america");
     assertEquals(3, tokens.size());

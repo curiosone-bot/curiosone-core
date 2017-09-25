@@ -13,17 +13,17 @@ public class SentenceTest {
   @Test
   public void testInstantiation() {
     List<Phrase> phrases = Phrase.extract("What is an apple?");
-    System.out.println(phrases);
+    // System.out.println(phrases);
 
     assertTrue(phrases.size() == 1);
     Phrase phrase = phrases.get(0);
 
     List<Sentence> sentences = Sentence.extract(phrase);
-    System.out.println(sentences);
+    // System.out.println(sentences);
 
     assertTrue(sentences.size() > 0);
     Sentence sentence = sentences.get(0);
-    System.out.println(sentence);
+    // System.out.println(sentence);
 
     assertTrue(sentence.respect(POS.VP));
     assertTrue(sentence.respect(POS.PRON, POS.V, POS.NP));
@@ -34,14 +34,14 @@ public class SentenceTest {
 
     List<Word>[] parameters = sentence.parse(POS.PRON, POS.V, POS.NP);
     assertTrue(parameters.length == 3);
-    System.out.println(parameters[0]);
-    System.out.println(parameters[1]);
-    System.out.println(parameters[2]);
+    // System.out.println(parameters[0]);
+    // System.out.println(parameters[1]);
+    // System.out.println(parameters[2]);
 
 
     List<Word> words = sentence.get(POS.V);
     assertTrue(words.size() > 0);
-    System.out.println(words);
+    // System.out.println(words);
   }
 
   @Test

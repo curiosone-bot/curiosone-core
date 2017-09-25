@@ -57,6 +57,15 @@ public class Sentence {
   }
 
   /**
+   * Checks if a sentence contains a certain POS type.
+   * @param pos the pos type to check
+   * @return true if contained.
+   */
+  public boolean has(POS pos) {
+    return lookup.getOrDefault(pos, new TreeSet<>()).size() > 0;
+  }
+
+  /**
    * Gets a list of words of a certains POS type.
    * @param pos the pos type to extract
    * @return the list of words

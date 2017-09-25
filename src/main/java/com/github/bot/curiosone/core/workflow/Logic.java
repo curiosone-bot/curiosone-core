@@ -18,6 +18,7 @@ public class Logic {
    * @return [description]
    */
   public static Message talk(Message msg) {
+    Optional<BrainResponse> br;
 
     // We just use the first now.
     List<Phrase> phrases = Phrase.extract(msg.getMessage());
@@ -26,10 +27,13 @@ public class Logic {
     }
     Phrase phrase = phrases.get(0);
 
+    //TODO: add analysis.
+
     // If it's a conversational text answer directly.
-    Optional<String> opt = Brain.conversate(phrase);
-    if (opt.isPresent()) {
-      return new Message(opt.get(), "");
+    br = Brain.conversate(phrase);
+    if (br.isPresent()) {
+      BrainResponse answer = br.get();
+      return new Message(answer.getMessage(), answer.getScope());
     }
 
     // We just use the first now.
@@ -39,13 +43,13 @@ public class Logic {
     }
     Sentence sentence = sentences.get(0);
 
-    Optional<BrainResponse> opta = Brain.compute(sentence, msg.getScope());
-    if (opta.isPresent()) {
-      BrainResponse answer = opta.get();
-      //TODO: add analysis.
+    br = Brain.compute(sentence, msg.getScope());
+    if (br.isPresent()) {
+      BrainResponse answer = br.get();
       //TODO: add refinement.
       return new Message(answer.getMessage(), answer.getScope());
     }
+
     return new Message("Sorry my head hurts, what were we talking about?", "");
   }
 }
