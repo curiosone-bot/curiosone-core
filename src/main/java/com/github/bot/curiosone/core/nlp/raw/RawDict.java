@@ -11,14 +11,12 @@ import edu.mit.jwi.item.IWord;
 import edu.mit.jwi.item.IWordID;
 import edu.mit.jwi.item.Pointer;
 import edu.mit.jwi.morph.WordnetStemmer;
-import org.apache.commons.io.IOUtils;
 
-import java.io.*;
-import java.net.URI;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -398,7 +396,7 @@ public class RawDict {
     }
 
     Comparator<RawWord> cmp = Comparator.comparing(RawWord::getNum).reversed();
-    List<RawWord> retOrderedWords = new ArrayList<RawWord>();
+    List<RawWord> retOrderedWords = new ArrayList<>();
     retOrderedWords.addAll(retWords);
     Collections.sort(retOrderedWords, cmp);
     if (retOrderedWords.size() > 0) {
