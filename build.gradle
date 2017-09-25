@@ -67,6 +67,15 @@ test {
 
 task stage(dependsOn: ['build'])
 
+// This task copies dependencies that are pulled down from Maven
+// and copies into a directory specified in Procfile
+task copyToLib(type: Copy) {
+    into "build/libs"
+    from(configurations.compile)
+}
+
+stage.dependsOn(copyToLib)
+
 jar.enabled = false
 check.dependsOn -= tasks['verifyGoogleJavaFormat']
 check.dependsOn jacocoTestReport
