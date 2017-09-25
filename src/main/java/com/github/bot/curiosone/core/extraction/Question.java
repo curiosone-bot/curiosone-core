@@ -24,21 +24,35 @@ public class Question {
    */
   public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) {
     // System.out.println(sentence + " (" + scope + ")");
-    Word kind, verb, object;
+    Word kind;
+    Word verb;
+    Word object;
 
     if (sentence.respect(POS.PRON, POS.V, POS.NP)) {
       // System.out.println("PRON, VP, NP");
       List<Word>[] extracted = sentence.parse(POS.PRON, POS.V, POS.NP);
-      kind = extracted[0].stream().filter(w -> w.itMeans(POS.PRON)).findFirst().get();
-      verb = extracted[1].stream().filter(w -> w.itMeans(POS.V)).findFirst().get();
-      List<Word> nouns = extracted[2].stream().filter(w -> w.itMeans(POS.N)).collect(Collectors.toList());
+      kind = extracted[0].stream()
+          .filter(w -> w.itMeans(POS.PRON))
+          .findFirst().get();
+      verb = extracted[1].stream()
+          .filter(w -> w.itMeans(POS.V))
+          .findFirst().get();
+      List<Word> nouns = extracted[2].stream()
+          .filter(w -> w.itMeans(POS.N))
+          .collect(Collectors.toList());
       object = nouns.get(nouns.size() - 1);
     } else if (sentence.respect(POS.ADV, POS.V, POS.NP, POS.NP)) {
       // System.out.println("ADV, VP, NP");
       List<Word>[] extracted = sentence.parse(POS.ADV, POS.V, POS.NP);
-      kind = extracted[0].stream().filter(w -> w.itMeans(POS.ADV)).findFirst().get();
-      verb = extracted[1].stream().filter(w -> w.itMeans(POS.V)).findFirst().get();
-      List<Word> nouns = extracted[2].stream().filter(w -> w.itMeans(POS.N)).collect(Collectors.toList());
+      kind = extracted[0].stream()
+          .filter(w -> w.itMeans(POS.ADV))
+          .findFirst().get();
+      verb = extracted[1].stream()
+          .filter(w -> w.itMeans(POS.V))
+          .findFirst().get();
+      List<Word> nouns = extracted[2].stream()
+          .filter(w -> w.itMeans(POS.N))
+          .collect(Collectors.toList());
       object = nouns.get(nouns.size() - 1);
     } else if (sentence.has(POS.PRON) && sentence.has(POS.V) && sentence.has(POS.N)) {
       // System.out.println("PRON, V, N");
@@ -61,7 +75,8 @@ public class Question {
         //TODO: Get a real response from the semantic network.
         Optional<String> opt = Math.random() > 0.5 ? Optional.of("fruit") : Optional.empty();
 
-        String newMessage, newScope;
+        String newMessage;
+        String newScope;
         if (!opt.isPresent()) {
           newMessage = "I do not know what is a " + object.getText() + "! Do you?";
           newScope = object.getText() + '?';
@@ -77,7 +92,8 @@ public class Question {
         //TODO: Get a real response from the semantic network.
         Optional<String> opt = Math.random() > 0.5 ? Optional.of("professor") : Optional.empty();
 
-        String newMessage, newScope;
+        String newMessage;
+        String newScope;
         if (!opt.isPresent()) {
           newMessage = "I do not know who is " + object.getText() + "! Do you?";
           newScope = object.getText() + '?';
@@ -93,7 +109,8 @@ public class Question {
         //TODO: Get a real response from the semantic network.
         Optional<String> opt = Math.random() > 0.5 ? Optional.of("earth") : Optional.empty();
 
-        String newMessage, newScope;
+        String newMessage;
+        String newScope;
         if (!opt.isPresent()) {
           newMessage = "I do not know where is " + object.getText() + "! Do you?";
           newScope = object.getText() + '?';

@@ -20,7 +20,7 @@ public class BrainResponse {
   /**
    * Constructor of a BrainResponse.
    *
-   * @param words [description]
+   * @param text [description]
    * @param scope [description]
    */
   public BrainResponse(String text, String scope) {

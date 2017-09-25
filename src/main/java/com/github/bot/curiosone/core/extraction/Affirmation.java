@@ -28,14 +28,19 @@ public class Affirmation {
     }
 
     if (answer) {
-      Word verb, object;
+      Word verb;
+      Word object;
       scope = scope.substring(0, scope.length() - 1);
 
       if (sentence.respect(POS.V, POS.NP)) {
         // System.out.println("V, NP");
         List<Word>[] extracted = sentence.parse(POS.V, POS.NP);
-        verb = extracted[0].stream().filter(w -> w.itMeans(POS.V)).findFirst().get();
-        List<Word> nouns = extracted[1].stream().filter(w -> w.itMeans(POS.N)).collect(Collectors.toList());
+        verb = extracted[0].stream()
+            .filter(w -> w.itMeans(POS.V))
+            .findFirst().get();
+        List<Word> nouns = extracted[1].stream()
+            .filter(w -> w.itMeans(POS.N))
+            .collect(Collectors.toList());
         object = nouns.get(nouns.size() - 1);
       } else {
         return Optional.empty();
@@ -44,12 +49,14 @@ public class Affirmation {
       //TODO: Get a real response from the semantic network.
       boolean present = Math.random() >= 0.5;
 
-      String newMessage, newScope;
+      String newMessage;
+      String newScope;
       if (present) {
         newMessage = "I already knew that " + scope + " is a " + object.getText() + ".";
         newScope = object.getText();
       } else {
-        newMessage = "Wow really interesting! Now I know that a " + scope + " is a " + object.getText() + ".";
+        newMessage = "Wow really interesting! Now I know that a " + scope
+            + " is a " + object.getText() + ".";
         newScope = object.getText();
       }
 
@@ -59,7 +66,8 @@ public class Affirmation {
     if (sentence.has(POS.N)) {
       List<Word> nouns = sentence.get(POS.N);
       Word object = nouns.get(nouns.size() - 1);
-      String newMessage, newScope;
+      String newMessage;
+      String newScope;
 
       newMessage = "Mhh! What is a " + object.getText() + "?";
       newScope = object.getText() + "?";
