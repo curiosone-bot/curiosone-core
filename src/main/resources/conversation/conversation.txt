@@ -4,7 +4,7 @@ my	name	is:Wow! Your name is beautiful.
 i	be:I will set aside this information.	I am glad to know it.	This information is not new to me..
 we	friend:Facebook teached me what a friend is	I really want a friend.
 how	old	be	you:I do not know how old I am, i was succesfully built in 09/17/2017.
-how	be	you:I do not know, do robots have sentiments? What about you?	Once upon a time I heard a human saying "I'm fine, thanks", so i will say:\nI am fine, thanks. What about you?
+how	be	you:I do not know, do robots have sentiments? What about you?	Once upon a time I heard a human saying "I'm fine, thanks", so i will say: I am fine, thanks. What about you?
 how	be	go:Ow.. I do not know.	Not so bad, what about you?
 how	break	you:You can not.	I am unbreakable!(or maybe not ;-)).	Find where my server is and kill it.	Search it in Javadoc.
 what	be	you	do:I am trying to become a human.	Nothing special..
