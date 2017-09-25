@@ -43,7 +43,7 @@ public class LogicTest {
 
     msg = Logic.talk(new Message("Who is Navigli?", ""));
     System.out.println(msg);
-    
+
     msg = Logic.talk(new Message("Where is Europe?", ""));
     System.out.println(msg);
 
