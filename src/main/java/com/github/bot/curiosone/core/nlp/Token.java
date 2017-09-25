@@ -128,6 +128,7 @@ public class Token {
     str = str.toLowerCase();
     str = LangUtils.removeDuplicatedSpaces(str);
     str = LangUtils.expandVerbs(str);
+    str = LangUtils.removeNonAlphaNumeric(str);
 
     String[] splitted = str.split(" ");
     int pos = splitted.length;
@@ -157,6 +158,9 @@ public class Token {
         continue;
       }
       if (len == 1) {
+        // If we don't know this token we treat it as a Noun.
+        token.means = new HashSet<>();
+        token.means.add(new Meaning(POS.N, LEX.OBJECT));
         tokens.add(0, token);
         pos -= len;
         len = 4;

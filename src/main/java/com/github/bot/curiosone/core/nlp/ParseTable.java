@@ -126,11 +126,7 @@ public class ParseTable {
       Set<Meaning> means = token.getMeanings().stream()
           .filter(m -> m.getPOS() == current.getFrom())
           .collect(Collectors.toSet());
-      if (meanings.get(x) == null) {
-        meanings.set(x, new HashSet<>(means));
-      } else {
-        meanings.get(x).addAll(means);
-      }
+      meanings.get(x).addAll(means);
       return;
     }
     list.add(new Interval(x, x - 1 + size - y));
@@ -150,15 +146,14 @@ public class ParseTable {
         break;
       }
     }
-
     // Search diagonally right
     POS right = current.getTo().getSecond();
-    for (int by = y + 1; by < size; by++) {
+    for (int by = y + 1, bx = x + 1; by < size && bx < size; by++, bx++) {
       boolean found = false;
-      for (Rule r : table[by][by].get()) {
+      for (Rule r : table[by][bx].get()) {
         if (r.getFrom().equals(right)) {
           found = true;
-          traverse(meanings, lookup, by, by, r);
+          traverse(meanings, lookup, bx, by, r);
         }
       }
       if (found) {

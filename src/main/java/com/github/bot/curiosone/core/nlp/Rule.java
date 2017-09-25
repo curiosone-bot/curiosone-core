@@ -3,6 +3,8 @@ package com.github.bot.curiosone.core.nlp;
 import com.github.bot.curiosone.core.util.Pair;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,7 +23,7 @@ public class Rule {
   private static Set<Rule> rules;
 
   /** Grammar file path. */
-  private static final Path source = Paths.get("src/main/res/cyk/grammar.txt");
+  private static String rulesPath = "/cyk/grammar.txt";
 
   /** The resulting POS value of joining those in 'to'. */
   private POS from;
@@ -140,8 +142,16 @@ public class Rule {
     if (rules != null) {
       return;
     }
+    Path path = null;
+    try {
+      URL resource = Rule.class.getResource(rulesPath);
+      path = Paths.get(resource.toURI());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+
     rules = new HashSet<Rule>();
-    try (Stream<String> stream = Files.lines(source)) {
+    try (Stream<String> stream = Files.lines(path)) {
       stream.forEach(line -> {
         String[] values = line.split(" ");
         rules.add(

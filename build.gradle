@@ -13,7 +13,6 @@ plugins {
 }
 
 apply plugin: 'java'
-apply plugin: 'java-library'
 apply plugin: 'jacoco'
 apply plugin: 'checkstyle'
 apply plugin: 'application'
@@ -38,37 +37,14 @@ dependencies {
   // Use JUnit test framework
   testImplementation 'junit:junit:4.12'
 
+  compile 'com.sparkjava:spark-core:2.3'
+  compile 'com.google.code.gson:gson:2.7'
+  compile 'org.slf4j:slf4j-simple:1.7.21'
+
   compile 'org.apache.commons:commons-lang3:3.5'
+  compile 'org.apache.commons:commons-io:1.3.2'
+
   compile name: 'edu.mit.jwi_2.4.0'
-  compile name: 'babelnet-api-3.7'
-  compile name: 'commons-beanutils-1.7.0'
-  compile name: 'commons-beanutils-core-1.7.0'
-  compile name: 'commons-codec-1.8'
-  compile name: 'commons-collections-3.2'
-  compile name: 'commons-configuration-1.5'
-  compile name: 'commons-digester-1.8'
-  compile name: 'commons-lang-2.3'
-  compile name: 'commons-logging-1.2'
-  compile name: 'gson-2.2.4'
-  compile name: 'guava-18.0'
-  compile name: 'httpclient-4.3.6'
-  compile name: 'httpcore-4.3.3'
-  compile name: 'icu4j-56.1'
-  compile name: 'jltutils-2.2'
-  compile name: 'log4j-api-2.1'
-  compile name: 'log4j-core-2.1'
-  compile name: 'lucene-core-4.9.0'
-  compile name: 'lucene-queryparser-4.9.0'
-}
-
-jar {
-  manifest {
-    attributes ('Main-Class': 'com.github.bot.curiosone.core.Main')
-  }
-
-  from {
-    configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-  }
 }
 
 jacocoTestReport {
@@ -91,9 +67,10 @@ test {
 
 task stage(dependsOn: ['build'])
 
+jar.enabled = false
 check.dependsOn -= tasks['verifyGoogleJavaFormat']
 check.dependsOn jacocoTestReport
 
 task fixcs(dependsOn: [verifyGoogleJavaFormat])
 
-mainClassName = "com.github.bot.curiosone.core.Main"
+mainClassName = "com.github.bot.curiosone.api.Main"

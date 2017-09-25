@@ -13,11 +13,11 @@ public class ParseTableTest {
     ParseTable classUnderTest = new ParseTable(
         Token.tokenize("what is an apple")
     );
-    System.out.println(classUnderTest);
+    // System.out.println(classUnderTest);
 
     classUnderTest = new ParseTable(
         Token.tokenize("what is a golden apple")
     );
-    System.out.println(classUnderTest);
+    // System.out.println(classUnderTest);
   }
 }

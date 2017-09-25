@@ -5,6 +5,7 @@ import com.github.bot.curiosone.core.util.Interval;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -56,13 +57,22 @@ public class Sentence {
   }
 
   /**
+   * Checks if a sentence contains a certain POS type.
+   * @param pos the pos type to check
+   * @return true if contained.
+   */
+  public boolean has(POS pos) {
+    return lookup.getOrDefault(pos, new TreeSet<>()).size() > 0;
+  }
+
+  /**
    * Gets a list of words of a certains POS type.
    * @param pos the pos type to extract
    * @return the list of words
    */
   public List<Word> get(POS pos) {
     List<Word> l = new ArrayList<>();
-    for (Interval intr : lookup.get(pos)) {
+    for (Interval intr : lookup.getOrDefault(pos, new TreeSet<>())) {
       for (int j = intr.min(); j <= intr.max(); j++) {
         l.add(words.get(j));
       }
@@ -80,7 +90,7 @@ public class Sentence {
     int idx = 0;
     for (POS pos : posl) {
       int oidx = idx;
-      for (Interval intr : lookup.get(pos)) {
+      for (Interval intr : lookup.getOrDefault(pos, new TreeSet<>())) {
         if (intr.min() == idx) {
           idx = intr.max() + 1;
           break;
@@ -107,7 +117,7 @@ public class Sentence {
 
     for (int i = 0; i < posl.length; i++) {
       int oidx = idx;
-      for (Interval intr : lookup.get(posl[i])) {
+      for (Interval intr : lookup.getOrDefault(posl[i], new TreeSet<>())) {
         if (intr.min() == idx) {
           for (int j = idx; j <= intr.max(); j++) {
             l[i].add(words.get(j));
@@ -184,9 +194,9 @@ public class Sentence {
             Map<POS, TreeSet<Interval>> lookt = new HashMap<>();
             List<Set<Meaning>> means = new ArrayList<>(table.getHeight());
             for (int i = 0; i < table.getHeight(); i++) {
-              means.add(null);
+              means.add(new HashSet<>());
             }
-
+            // System.out.println(table);
             table.traverse(means, lookt, x, y, r);
 
             List<Word> words = new ArrayList<>(tokens.size());

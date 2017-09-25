@@ -1,7 +1,8 @@
 package com.github.bot.curiosone.core.nlp;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A Word is like a Token but with a restricted set of meanings.
@@ -18,12 +19,29 @@ public class Word {
 
   /**
    * Constructs a Word starting from a text.
-   * @param text the original text to start from
+   *
+   * @param text [description]
+   * @param lemma [description]
+   * @param means [description]
    */
   public Word(String text, String lemma, Set<Meaning> means) {
     this.text = text;
     this.lemma = lemma;
     this.means = means;
+  }
+
+  /**
+   * Constructs a Word starting from a text.
+   *
+   * @param text [description]
+   * @param lemma [description]
+   * @param mean [description]
+   */
+  public Word(String text, String lemma, Meaning mean) {
+    this.text = text;
+    this.lemma = lemma;
+    this.means = new HashSet<>();
+    means.add(mean);
   }
 
   /**
@@ -51,6 +69,39 @@ public class Word {
    */
   public Set<Meaning> getMeanings() {
     return means;
+  }
+
+  /**
+   * itMeans description.
+   * @param  mean [description]
+   * @return [description]
+   */
+  public boolean itMeans(Meaning mean) {
+    return means.contains(mean);
+  }
+
+  /**
+   * itMeans description.
+   * @param  pos [description]
+   * @return [description]
+   */
+  public boolean itMeans(POS pos) {
+    return means.stream()
+        .map(Meaning::getPOS)
+        .collect(Collectors.toList())
+        .contains(pos);
+  }
+
+  /**
+   * itMeans description.
+   * @param  lex [description]
+   * @return [description]
+   */
+  public boolean itMeans(LEX lex) {
+    return means.stream()
+        .map(Meaning::getLEX)
+        .collect(Collectors.toList())
+        .contains(lex);
   }
 
   /**

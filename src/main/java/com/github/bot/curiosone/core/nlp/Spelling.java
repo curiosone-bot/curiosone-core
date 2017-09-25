@@ -1,5 +1,7 @@
 package com.github.bot.curiosone.core.nlp;
 
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,7 +33,7 @@ public class Spelling {
   /**
    * Path to the dictionary file.
    */
-  private static Path dictionaryFile = Paths.get("src/main/res/spelling/dictionary.txt");
+  private static String dictionaryPath = "/spelling/dictionary.txt";
 
   /** Dictionary used in spelling and correction processes. */
   private Map<String, Integer> dict = new HashMap<>();
@@ -40,8 +42,16 @@ public class Spelling {
    * Constructor of a Spelling Dictionary.
    */
   private Spelling() {
+    Path path = null;
     try {
-      String dictStr = new String(Files.readAllBytes(dictionaryFile))
+      URL resource = Rule.class.getResource(dictionaryPath);
+      path = Paths.get(resource.toURI());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+
+    try {
+      String dictStr = new String(Files.readAllBytes(path))
           .toLowerCase()
           .replaceAll(REGEX_A_Z, "");
       Stream.of(dictStr.split(" ")).forEach(word -> {
