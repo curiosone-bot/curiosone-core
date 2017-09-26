@@ -1,6 +1,6 @@
 package com.github.bot.curiosone.api;
 
-import static org.hamcrest.CoreMatchers.containsString;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import com.google.gson.Gson;
 
@@ -90,9 +90,9 @@ public class MainTest {
   */
   @Test
   public void testStatusPostRequest() {
-    thrown.expect(AssertionError.class);
-    thrown.expectMessage(containsString(EXPECTED_ERR_REQ_MSG));
-    TestResponse res = request("POST", "/status").get();
+    assertThatExceptionOfType(AssertionError.class)
+      .isThrownBy(() -> request("POST", "/status").get())
+      .withMessageContaining(EXPECTED_ERR_REQ_MSG);
   }
 
   /**
@@ -101,9 +101,9 @@ public class MainTest {
   */
   @Test
   public void testTalkGetRequest() {
-    thrown.expect(AssertionError.class);
-    thrown.expectMessage(containsString(EXPECTED_ERR_REQ_MSG));
-    TestResponse res = request("GET", "/talk").get();
+    assertThatExceptionOfType(AssertionError.class)
+       .isThrownBy(() -> request("GET", "/talk").get())
+       .withMessageContaining(EXPECTED_ERR_REQ_MSG);
   }
 
   /**
