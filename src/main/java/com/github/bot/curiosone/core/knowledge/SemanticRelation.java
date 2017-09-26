@@ -26,7 +26,13 @@ public class SemanticRelation implements Edge {
     this.weight = weight;
   }
   
-  public SemanticRelation(Vertex v1,Vertex v2, SemanticRelationType type) {
+  /**
+   * Class costructor witouth specified weight.
+   * @param v1 Source vertex
+   * @param v2 Target vertex
+   * @param type SemanticRelationtype
+   */
+  public SemanticRelation(Vertex v1, Vertex v2, SemanticRelationType type) {
     this.sorgente = v1;
     this.destinazione = v2;
     this.collegamento = type;

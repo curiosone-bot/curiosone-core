@@ -1,8 +1,11 @@
 package com.github.bot.curiosone.core.knowledge;
 
+import com.ibm.icu.impl.Relation;
 
 import java.util.List;
+
 import java.util.Objects;
+
 
 /**
  * Resumes a semantic query parameters.
@@ -10,42 +13,28 @@ import java.util.Objects;
  */
 public class SemanticQuery {
 
-  /**
-   * @see Relation
-   */
+
   private SemanticRelationType relation;
   
-  /**
-   * Affirmation subject.
-   */
   private String subject;
   
-  /**
-   * Question/affirmation object.
-   */
   private String object;
   
-  
-  /**
-   * Object adjectives;
-   */
   private List<String> objAdjectives;
   
-  /**
-   * Sentence verb.
-   */
   private String verb;
   
 
   /**
-   * Constructor
+   * Constructor.
    * @param relation {@link Relation}
    * @param subject Affirmation subject.
    * @param object Question/affirmation object
    * @param adjectives Object adjectives
    * @param verb Sentence verb.
    */
-  public SemanticQuery(SemanticRelationType relation, String subject, String object, List<String> adjectives, String verb) {
+  public SemanticQuery(SemanticRelationType relation, String subject,String object,
+      List<String> adjectives, String verb) {
     
     this.relation = relation;
     this.subject = subject;
@@ -54,25 +43,17 @@ public class SemanticQuery {
     this.verb = verb;
   }
   
-  /**
-   * @see SemanticQuery
-   */
   public SemanticQuery(SemanticRelationType relation,String subject, String object, String verb) {
 
     this(relation, subject, object, null, verb);
   }
   
-  /**
-   * @see SemanticQuery
-   */
-  public SemanticQuery(SemanticRelationType relation, String object, List<String> adjectives, String verb) {
+  public SemanticQuery(SemanticRelationType relation, String object,
+      List<String> adjectives, String verb) {
 
     this(relation, null, object, adjectives, verb);
   }
   
-  /**
-   * @see SemanticQuery
-   */
   public SemanticQuery(SemanticRelationType relation, String object, String verb) {
 
     this(relation, null, object, null, verb);
