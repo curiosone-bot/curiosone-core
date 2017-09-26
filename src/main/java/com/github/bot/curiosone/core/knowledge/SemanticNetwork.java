@@ -320,6 +320,12 @@ public class SemanticNetwork implements Graph {
 
   @Override
   public boolean equals(Object o) {
+    if (other == this) {
+      return true;
+    }
+    if (other == null || other.getClass() != this.getClass()) {
+      return false;
+    }
     return this.hashCode() == ((SemanticNetwork)o).hashCode();
   }
 

@@ -19,7 +19,7 @@ public class Concept implements Vertex {
   public Concept(String id) {
     this.id = id;
   }
-  
+
   /**
    * Returns Concept name.
    */
@@ -42,6 +42,12 @@ public class Concept implements Vertex {
    */
   @Override
   public boolean equals(Object o) {
+    if (other == this) {
+      return true;
+    }
+    if (other == null || other.getClass() != this.getClass()) {
+      return false;
+    }
     return this.id.equals(((Concept)o).getId());
   }
 

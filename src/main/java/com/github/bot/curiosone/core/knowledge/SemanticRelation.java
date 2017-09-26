@@ -25,7 +25,7 @@ public class SemanticRelation implements Edge {
     this.collegamento = type;
     this.weight = weight;
   }
-  
+
   /**
    * Class costructor witouth specified weight.
    * @param v1 Source vertex
@@ -53,12 +53,12 @@ public class SemanticRelation implements Edge {
   public SemanticRelationType getType() {
     return collegamento;
   }
-  
+
   @Override
   public Integer getWeight() {
     return weight;
   }
-  
+
   @Override
   public void setWeight(Integer i) {
     this.weight = i;
@@ -72,6 +72,12 @@ public class SemanticRelation implements Edge {
 
   @Override
   public boolean equals(Object o) {
+    if (other == this) {
+      return true;
+    }
+    if (other == null || other.getClass() != this.getClass()) {
+      return false;
+    }
     return this.hashCode() == ((SemanticRelation)o).hashCode();
   }
 
