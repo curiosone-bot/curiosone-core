@@ -3,12 +3,14 @@ package com.github.bot.curiosone.core.workflow;
 // SUPPRESS CHECKSTYLE AvoidStarImport
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 public class LogicTest {
 
   @Test
-  public void testAnswer() {
+  public void testAnswer() throws IOException {
     Message msg;
 
     msg = Logic.talk(new Message("", ""));
