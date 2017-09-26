@@ -91,7 +91,7 @@ public interface Graph {
   
   /**
    * Method that returns best Edge of the Concept asked.
-   * @param v1
+   * @param v1 vertex source
    * @return Optional of Egde
    */
   Optional<Edge> getAnswer(String v1);
@@ -132,7 +132,7 @@ public interface Graph {
   
   /**
    * Method called when something is asked to curiosone.
-   * @param sq
+   * @param sq SemanticQuery
    * @return Optional of edge
    */
   Optional<Edge> query(SemanticQuery sq);

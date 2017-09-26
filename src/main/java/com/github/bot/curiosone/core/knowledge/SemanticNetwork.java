@@ -311,13 +311,11 @@ public class SemanticNetwork implements Graph {
     if (sq.getSubject() == null && sq.getRelation() == null) {
       return getAnswer(sq.getObject());
     }
-    else if (sq.getSubject() == null) {
+    if (sq.getSubject() == null) {
       return getAnswer(sq.getObject(), sq.getRelation());
     }
-    else {
-      learn(sq.getObject(), sq.getRelation(), sq.getSubject());
-      return Optional.empty();
-    }
+    learn(sq.getObject(), sq.getRelation(), sq.getSubject());
+    return Optional.empty();
   }
 
   @Override
