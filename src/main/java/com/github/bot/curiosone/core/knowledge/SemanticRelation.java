@@ -72,10 +72,10 @@ public class SemanticRelation implements Edge {
 
   @Override
   public boolean equals(Object o) {
-    if (other == this) {
+    if (o == this) {
       return true;
     }
-    if (other == null || other.getClass() != this.getClass()) {
+    if (o == null || o.getClass() != this.getClass()) {
       return false;
     }
     return this.hashCode() == ((SemanticRelation)o).hashCode();
