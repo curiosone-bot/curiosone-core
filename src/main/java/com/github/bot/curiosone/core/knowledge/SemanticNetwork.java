@@ -282,6 +282,18 @@ public class SemanticNetwork implements Graph {
     writer.print(exporter.toString());
     writer.close();
   }
+  
+  @Override
+  public Optional<Edge> query(SemanticQuery sq) {
+    String relationType = SemanticRelationType.valueOf(sq.getRelation().toString());
+    if (sq.getSubject() == null) {
+      return getAnswer(sq.getObject(), relationType);
+    }
+    else {
+      learn(sq.getObject(), relationType, sq.getSubject());
+      return Optional.empty();
+    }
+  }
 
   @Override
   public boolean equals(Object o) {

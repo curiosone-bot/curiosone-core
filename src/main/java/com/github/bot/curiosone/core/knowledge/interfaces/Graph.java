@@ -121,4 +121,11 @@ public interface Graph {
    * @throws IOException exception
    */
   void increase(Vertex v, Integer score);
+  
+  /**
+   * Method called when something is asked to curiosone.
+   * @param sq
+   * @return Optional of edge
+   */
+  Optional<Edge> query(SemanticQuery sq);
 }
