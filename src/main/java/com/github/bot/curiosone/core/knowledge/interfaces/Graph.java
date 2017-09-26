@@ -88,6 +88,13 @@ public interface Graph {
    * @return graph
    */
   Map<Vertex, Set<Edge>> getGrafo();
+  
+  /**
+   * Method that returns best Edge of the Concept asked.
+   * @param v1
+   * @return Optional of Egde
+   */
+  Optional<Edge> getAnswer(String v1);
 
   /**
    * Method that seeks a response if a question is asked to Curiosone.
@@ -129,4 +136,13 @@ public interface Graph {
    * @return Optional of edge
    */
   Optional<Edge> query(SemanticQuery sq);
+  
+  /**
+   * Method that check if Relation exists in the SemanticNetwork.
+   * @param v1 Concept source
+   * @param relation SemanticRelationType
+   * @param v2 Concept target
+   * @return true or false
+   */
+  boolean exist(String v1, SemanticRelationType relation, String v2);
 }

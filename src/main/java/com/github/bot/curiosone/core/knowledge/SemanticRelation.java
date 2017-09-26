@@ -25,6 +25,13 @@ public class SemanticRelation implements Edge {
     this.collegamento = type;
     this.weight = weight;
   }
+  
+  public SemanticRelation(Vertex v1,Vertex v2, SemanticRelationType type) {
+    this.sorgente = v1;
+    this.destinazione = v2;
+    this.collegamento = type;
+    this.weight = 0;
+  }
 
   @Override
   public Vertex getSource() {
@@ -66,6 +73,7 @@ public class SemanticRelation implements Edge {
   public int hashCode() {
     int result = 42;
     result = 31 * result + sorgente.hashCode();
+    result = 31 * result + collegamento.hashCode();
     result = 31 * result + destinazione.hashCode();
     return result;
   }

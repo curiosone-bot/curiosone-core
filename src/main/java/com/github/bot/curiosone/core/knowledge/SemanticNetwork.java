@@ -176,6 +176,21 @@ public class SemanticNetwork implements Graph {
       add(arco);
     }
   }
+  
+  @Override
+  public boolean exist(String v1, SemanticRelationType relation, String v2) {
+    Vertex source = new Concept(v1.replaceAll(" ", "_"));
+    Vertex target = new Concept(v2.replaceAll(" ", "_"));
+    SemanticRelation sr = new SemanticRelation(source, target, relation);
+    if (containsVertex(source)) {
+      for (Edge e : outgoingEdges(source)) {
+        if (e.equals(sr)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
   @Override
   public void learn(String v1, SemanticRelationType relation, String v2) {
@@ -186,6 +201,7 @@ public class SemanticNetwork implements Graph {
     File sn = new File("src/main/res/knowledge/CuriosoneSemanticNetwork.txt");
     try {
       output = new BufferedWriter(new FileWriter(sn,true));
+      output.append("\n");
       output.append(source + ",");
       output.append(relation + ",");
       output.append(target + "," + 1);
@@ -194,6 +210,7 @@ public class SemanticNetwork implements Graph {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    System.out.println("learned");
     increase(target, 1);
   }
 
@@ -230,6 +247,16 @@ public class SemanticNetwork implements Graph {
           return Optional.of(e);
         }
       }
+    }
+    return Optional.empty();
+  }
+  
+  @Override
+  public Optional<Edge> getAnswer(String v1) {
+    Vertex source = new Concept(v1.replaceAll(" ", "_"));
+    if (containsVertex(source)) {
+      List<Edge> edges = new ArrayList<>(outgoingEdges(source));
+      return getAnswer(edges);
     }
     return Optional.empty();
   }
@@ -281,7 +308,10 @@ public class SemanticNetwork implements Graph {
   
   @Override
   public Optional<Edge> query(SemanticQuery sq) {
-    if (sq.getSubject() == null) {
+    if (sq.getSubject() == null && sq.getRelation() == null) {
+      return getAnswer(sq.getObject());
+    }
+    else if (sq.getSubject() == null) {
       return getAnswer(sq.getObject(), sq.getRelation());
     }
     else {
@@ -313,7 +343,23 @@ public class SemanticNetwork implements Graph {
   
   public static void main(String[] args) throws IOException {
     SemanticNetwork sn = SemanticNetwork.getInstance();
+    //FIND NODO RELAZIONE -> DAMMI UN ALTRO NODO ( RESTITUISCE OPTIONAL VUOTO SE NON è PRESENTE ALCUNA RELAZIONE DI QUEL TIPO)
     SemanticQuery sq = new SemanticQuery(SemanticRelationType.IS_A,"setter",new ArrayList<>(),"BE");
     System.out.println(sn.query(sq).get());
+    
+    //FIND NODO -> DAMMI RELAZIONE E ALTRO NODO ( NON ESISTE UN COSTRUTTORE SENZA SEMANTICRELATION, CREADO ANDREA MARINO ANCORA LO DEVE FARE)
+    SemanticQuery sq1 = new SemanticQuery(null,"beer",new ArrayList<>(),"BE");
+    System.out.println(sn.query(sq1));
+    
+    //EXIST NODO RELAZIONE NODO ( NON SONO PAZZO ANDREA MARINO HA INTESO SOGGETTO COME TARGET E OGGETTO COME SOURCE)
+    SemanticQuery sq2 = new SemanticQuery(SemanticRelationType.IS_A,"person","christian",new ArrayList<>(),"BE");
+    System.out.println(sn.exist(sq2.getObject(), SemanticRelationType.IS_A, sq2.getSubject()));
+    
+    //INSERT NODO RELAZIONE NODO ( DATO CHE NON HO L'INFORMAZIONE DELLA SEMANTIC QUERY SQ2 LA IMPARO E RICONTROLLO SE ESISTE)
+    sn.query(sq2);
+    
+    //RICONTROLLO
+    System.out.println(sn.exist(sq2.getObject(), SemanticRelationType.IS_A, sq2.getSubject()));
+    
   }
 }
