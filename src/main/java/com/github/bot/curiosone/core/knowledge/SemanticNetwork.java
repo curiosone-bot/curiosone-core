@@ -183,11 +183,7 @@ public class SemanticNetwork implements Graph {
     Vertex target = new Concept(v2.replaceAll(" ", "_"));
     SemanticRelation sr = new SemanticRelation(source, target, relation);
     if (containsVertex(source)) {
-      for (Edge e : outgoingEdges(source)) {
-        if (e.equals(sr)) {
-          return true;
-        }
-      }
+      return outgoingEdges(source).contains(sr);
     }
     return false;
   }
