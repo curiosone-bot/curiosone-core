@@ -41,7 +41,7 @@ public class Question {
           .filter(w -> w.itMeans(POS.N))
           .collect(Collectors.toList());
       object = nouns.get(nouns.size() - 1);
-    } else if (sentence.respect(POS.ADV, POS.V, POS.NP, POS.NP)) {
+    } else if (sentence.respect(POS.ADV, POS.V, POS.NP)) {
       // System.out.println("ADV, VP, NP");
       List<Word>[] extracted = sentence.parse(POS.ADV, POS.V, POS.NP);
       kind = extracted[0].stream()
