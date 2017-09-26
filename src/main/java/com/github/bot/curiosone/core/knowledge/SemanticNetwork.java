@@ -243,11 +243,8 @@ public class SemanticNetwork implements Graph {
   @Override
   public void increase(Vertex v, Integer score) {
     int nodo = 2;
-    if (score != 1) {
-      for (Edge e : outgoingEdges(v)) {
-        e.setWeight(e.getWeight() + score);
-      }
-      nodo = 0;
+    for (Edge e : incomingEdges(v)) {
+      e.setWeight(e.getWeight() + score);
     }
     StringBuffer exporter = new StringBuffer();
     List<String> lines = new ArrayList<>();
@@ -312,5 +309,11 @@ public class SemanticNetwork implements Graph {
   @Override
   public String toString() {
     return grafo.toString(); // metodo toString utilizzato per prove di debug
+  }
+  
+  public static void main(String[] args) throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+    SemanticQuery sq = new SemanticQuery(SemanticRelationType.IS_A,"setter",new ArrayList<>(),"BE");
+    System.out.println(sn.query(sq).get());
   }
 }
