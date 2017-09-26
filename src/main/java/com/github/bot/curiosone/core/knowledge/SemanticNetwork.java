@@ -41,7 +41,7 @@ public class SemanticNetwork implements Graph {
       )
   );
   private Map<Vertex,Set<Edge>> grafo;
-  private Path percorso = Paths.get("src/main/res/knowledge/CuriosoneSemanticNetwork.txt");
+  private Path percorso = Paths.get("src/main/resources/knowledge/CuriosoneSemanticNetwork.txt");
   private static SemanticNetwork curiosoneSemanticNetwork;
 
   /**
@@ -194,7 +194,7 @@ public class SemanticNetwork implements Graph {
     Vertex target = new Concept(v2.replace(" ", "_"));
     addEdge(source, target, relation, 1);
     Writer output;
-    File sn = new File("src/main/res/knowledge/CuriosoneSemanticNetwork.txt");
+    File sn = this.percorso.toFile();
     try {
       output = new BufferedWriter(new FileWriter(sn,true));
       output.append("\n");
@@ -294,7 +294,7 @@ public class SemanticNetwork implements Graph {
     }
     PrintWriter writer = null;
     try {
-      writer = new PrintWriter("src/main/res/knowledge/CuriosoneSemanticNetwork.txt", "UTF-8");
+      writer = new PrintWriter(this.percorso.toString(), "UTF-8");
     } catch (FileNotFoundException | UnsupportedEncodingException e1) {
       e1.printStackTrace();
     }
