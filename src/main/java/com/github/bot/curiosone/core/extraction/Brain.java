@@ -3,6 +3,7 @@ package com.github.bot.curiosone.core.extraction;
 import com.github.bot.curiosone.core.nlp.Phrase;
 import com.github.bot.curiosone.core.nlp.Sentence;
 
+import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -27,8 +28,9 @@ public class Brain {
    * Response to something.
    * @param  sentence the sentence to generate the response to
    * @param  scope the scope of the conversation
+   * @throws IOException 
    */
-  public static Optional<BrainResponse> compute(Sentence sentence, String scope) {
+  public static Optional<BrainResponse> compute(Sentence sentence, String scope) throws IOException {
     if (sentence.isQuestion()) {
       return Question.getAnswer(sentence, scope);
     }

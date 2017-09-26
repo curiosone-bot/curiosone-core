@@ -1,11 +1,16 @@
 package com.github.bot.curiosone.core.extraction;
 
+import com.github.bot.curiosone.core.knowledge.SemanticNetwork;
+import com.github.bot.curiosone.core.knowledge.SemanticQuery;
+import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
+import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
 import com.github.bot.curiosone.core.nlp.LEX;
 import com.github.bot.curiosone.core.nlp.Meaning;
 import com.github.bot.curiosone.core.nlp.POS;
 import com.github.bot.curiosone.core.nlp.Sentence;
 import com.github.bot.curiosone.core.nlp.Word;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +26,9 @@ public class Question {
    * @param  sentence [description]
    * @param  scope [description]
    * @return [description]
+   * @throws IOException 
    */
-  public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) {
+  public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) throws IOException {
     // System.out.println(sentence + " (" + scope + ")");
     Word kind;
     Word verb;
@@ -41,7 +47,7 @@ public class Question {
           .filter(w -> w.itMeans(POS.N))
           .collect(Collectors.toList());
       object = nouns.get(nouns.size() - 1);
-    } else if (sentence.respect(POS.ADV, POS.V, POS.NP, POS.NP)) {
+    } else if (sentence.respect(POS.ADV, POS.V, POS.NP)) {
       // System.out.println("ADV, VP, NP");
       List<Word>[] extracted = sentence.parse(POS.ADV, POS.V, POS.NP);
       kind = extracted[0].stream()
@@ -70,10 +76,11 @@ public class Question {
       return Optional.empty();
     }
 
+    SemanticNetwork semanticNetwork = SemanticNetwork.getInstance();
     switch (kind.getText()) {
       case "what": {
-        //TODO: Get a real response from the semantic network.
-        Optional<String> opt = Math.random() > 0.5 ? Optional.of("fruit") : Optional.empty();
+        SemanticQuery sq = new SemanticQuery(SemanticRelationType.IS_A, object.getText(), verb.getLemma());
+        Optional<Edge> opt = semanticNetwork.query(sq);
 
         String newMessage;
         String newScope;
@@ -81,7 +88,7 @@ public class Question {
           newMessage = "I do not know what is a " + object.getText() + "! Do you?";
           newScope = object.getText() + '?';
         } else {
-          String answer = opt.get();
+          String answer = opt.get().getTarget().toString();
           newMessage = "For what I know, " + object.getText() + " is a " + answer + "!";
           newScope = object.getText();
         }
@@ -89,16 +96,16 @@ public class Question {
         return Optional.of(new BrainResponse(newMessage, newScope));
       }
       case "who": {
-        //TODO: Get a real response from the semantic network.
-        Optional<String> opt = Math.random() > 0.5 ? Optional.of("professor") : Optional.empty();
-
+        SemanticQuery sq = new SemanticQuery(SemanticRelationType.IS_A, object.getText(), verb.getLemma());
+        Optional<Edge> opt = semanticNetwork.query(sq);
+        
         String newMessage;
         String newScope;
         if (!opt.isPresent()) {
           newMessage = "I do not know who is " + object.getText() + "! Do you?";
           newScope = object.getText() + '?';
         } else {
-          String answer = opt.get();
+          String answer = opt.get().getTarget().toString();
           newMessage = "For what I know, " + object.getText() + " is a " + answer + "!";
           newScope = object.getText();
         }
@@ -106,8 +113,8 @@ public class Question {
         return Optional.of(new BrainResponse(newMessage, newScope));
       }
       case "where": {
-        //TODO: Get a real response from the semantic network.
-        Optional<String> opt = Math.random() > 0.5 ? Optional.of("earth") : Optional.empty();
+        SemanticQuery sq = new SemanticQuery(SemanticRelationType.IS_A, object.getText(), verb.getLemma());
+        Optional<Edge> opt = semanticNetwork.query(sq);
 
         String newMessage;
         String newScope;
@@ -115,7 +122,7 @@ public class Question {
           newMessage = "I do not know where is " + object.getText() + "! Do you?";
           newScope = object.getText() + '?';
         } else {
-          String answer = opt.get();
+          String answer = opt.get().getTarget().toString();
           newMessage = "For what I know, " + object.getText() + " is in " + answer + "!";
           newScope = object.getText();
         }

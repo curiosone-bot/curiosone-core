@@ -5,6 +5,7 @@ import com.github.bot.curiosone.core.extraction.BrainResponse;
 import com.github.bot.curiosone.core.nlp.Phrase;
 import com.github.bot.curiosone.core.nlp.Sentence;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +17,9 @@ public class Logic {
    * talk description.
    * @param  msg [description]
    * @return [description]
+   * @throws IOException 
    */
-  public static Message talk(Message msg) {
+  public static Message talk(Message msg) throws IOException {
     if (msg == null) {
       return new Message("Sorry my head hurts, what were we talking about?", "");
     }
