@@ -90,7 +90,7 @@ public class MainTest {
   */
   @Test
   public void testStatusPostRequest() {
-   assertThatExceptionOfType(AssertionError.class)
+    assertThatExceptionOfType(AssertionError.class)
       .isThrownBy(() -> request("POST", "/status").get())
       .withMessageContaining(EXPECTED_ERR_REQ_MSG);
   }
