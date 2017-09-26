@@ -178,17 +178,16 @@ public class SemanticNetwork implements Graph {
   }
 
   @Override
-  public void learn(String v1, String relation, String v2) {
+  public void learn(String v1, SemanticRelationType relation, String v2) {
     Vertex source = new Concept(v1.replace(" ", "_"));
     Vertex target = new Concept(v2.replace(" ", "_"));
-    SemanticRelationType type = SemanticRelationType.valueOf(relation);
-    addEdge(source, target, type, 1);
+    addEdge(source, target, relation, 1);
     Writer output;
     File sn = new File("src/main/res/knowledge/CuriosoneSemanticNetwork.txt");
     try {
       output = new BufferedWriter(new FileWriter(sn,true));
       output.append(source + ",");
-      output.append(type + ",");
+      output.append(relation + ",");
       output.append(target + "," + 1);
       output.append("\n");
       output.close();
@@ -285,12 +284,11 @@ public class SemanticNetwork implements Graph {
   
   @Override
   public Optional<Edge> query(SemanticQuery sq) {
-    String relationType = SemanticRelationType.valueOf(sq.getRelation().toString());
     if (sq.getSubject() == null) {
-      return getAnswer(sq.getObject(), relationType);
+      return getAnswer(sq.getObject(), sq.getRelation());
     }
     else {
-      learn(sq.getObject(), relationType, sq.getSubject());
+      learn(sq.getObject(), sq.getRelation(), sq.getSubject());
       return Optional.empty();
     }
   }

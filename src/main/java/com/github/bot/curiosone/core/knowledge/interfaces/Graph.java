@@ -1,5 +1,6 @@
 package com.github.bot.curiosone.core.knowledge.interfaces;
 
+import com.github.bot.curiosone.core.knowledge.SemanticQuery;
 import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
 
 import java.io.IOException;
@@ -112,7 +113,7 @@ public interface Graph {
    * @param relation SemanticRelationType
    * @param v2 Concept
    */
-  void learn(String v1, String relation, String v2);
+  void learn(String v1, SemanticRelationType relation, String v2);
 
   /**
    * Method called when curiosone need to increase an
