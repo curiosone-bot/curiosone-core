@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Precomuted answers to some common conversational phrases.
+ * Precomputed answers to some common conversational phrases.
  */
 public class Conversation {
   private static String conversationsPath = "/conversation/conversation.txt";
