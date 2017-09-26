@@ -51,7 +51,7 @@ public class Affirmation {
         return Optional.empty();
       }
 
-      SemanticQuery sq = new SemanticQuery(SemanticRelationType.IS_A, object.getText(), verb.getLemma());
+      SemanticQuery sq = new SemanticQuery(SemanticRelationType.IS_A, scope, verb.getLemma());
       Optional<Edge> opt = semanticNetwork.query(sq);
 
       String newMessage;
@@ -60,8 +60,7 @@ public class Affirmation {
         newMessage = "I already knew that " + scope + " is a " + object.getText() + ".";
         newScope = object.getText();
       } else {
-
-        // TODO: learn
+        semanticNetwork.learn(scope, SemanticRelationType.IS_A, object.getText());
         newMessage = "Wow really interesting! Now I know that a " + scope + " is a "
             + object.getText() + ".";
         newScope = object.getText();
