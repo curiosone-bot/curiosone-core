@@ -91,8 +91,8 @@ public class MainTest {
   @Test
   public void testStatusPostRequest() {
     assertThatExceptionOfType(AssertionError.class)
-      .isThrownBy(() -> request("POST", "/status").get())
-      .withMessageContaining(EXPECTED_ERR_REQ_MSG);
+       .isThrownBy(() -> request("POST", "/status").get())
+       .withMessageContaining(EXPECTED_ERR_REQ_MSG);
   }
 
   /**
@@ -102,8 +102,8 @@ public class MainTest {
   @Test
   public void testTalkGetRequest() {
     assertThatExceptionOfType(AssertionError.class)
-       .isThrownBy(() -> request("GET", "/talk").get())
-       .withMessageContaining(EXPECTED_ERR_REQ_MSG);
+        .isThrownBy(() -> request("GET", "/talk").get())
+        .withMessageContaining(EXPECTED_ERR_REQ_MSG);
   }
 
   /**
