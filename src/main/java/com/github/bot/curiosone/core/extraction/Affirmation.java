@@ -17,15 +17,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Description.
+ * Contains utility method to get an answer from a given sentence and a given scope.
  */
 public class Affirmation {
   /**
-   * getAnswer description.
-   *
-   * @param sentence [description]
-   * @param scope [description]
-   * @return [description]
+   * Gets a coherent answer from an input sentence and scope as Optional instance.
+   * @param sentence The quesiton to be answered
+   * @param scope The subject of the given quesiton
+   * @return an Optional instance.
+   *         If the answer has not been found, an empty Optional will be returned.
+   *         Otherwise, the Optional instance will contain the answer.
    */
   public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) {
     boolean answer = false;
