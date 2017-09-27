@@ -25,7 +25,7 @@ public class TextConstants {
   public static final String CLOSE_SQ_BRACKET = "]";
 
   /**
-   * Stores the String representation for the value separator used in toString methods.
+   * Stores the String representation for the comma separator used in toString methods.
    */
   public static final String COMMA_SEP = ", ";
 
@@ -33,4 +33,9 @@ public class TextConstants {
    * Stores new line character.
    */
   public static final char NEWLINE = '\n';
+
+  /**
+   * Stores the String representation for the two dots separator used in toString methods.
+   */
+  public static final String TWO_DOTS_SEP = ": ";
 }
