@@ -7,21 +7,32 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * A response from the Curiosone yet to be refined.
+ * Stores a response from Curiosone's Brain.
  */
 public class BrainResponse {
 
-  /** Description. */
+  /**
+   * Stores the open soft bracket symbol.
+   */
+  private static final String OPEN_SOFT_BRACKET = "(";
+
+  /**
+   * Stores the close soft bracket symbol.
+   */
+  private static final String CLOSE_SOFT_BRACKET = ")";
+
+  /**
+   * Stores the content of the computed answer.
+   */
   private String text;
 
-  /** Description. */
+  /** Stores the scope of the computed answer. */
   private String scope;
 
   /**
-   * Constructor of a BrainResponse.
-   *
-   * @param text [description]
-   * @param scope [description]
+   * Constructs a BrainResponse instance, containing a text and a scope.
+   * @param text The content of the computed answer
+   * @param scope The scope of the computed answer
    */
   public BrainResponse(String text, String scope) {
     this.text = text;
@@ -29,18 +40,14 @@ public class BrainResponse {
   }
 
   /**
-   * getMessage description.
-   *
-   * @return [description]
+   * Returns the content of the computed answer.
    */
   public String getMessage() {
     return text;
   }
 
   /**
-   * getScope description.
-   *
-   * @return [description]
+   * Returns the scope of the computed answer.
    */
   public String getScope() {
     return scope;
@@ -48,18 +55,15 @@ public class BrainResponse {
 
   /**
    * Returns a string representation of this response.
-   *
-   * @return a string representation of this response.
    */
   @Override
   public String toString() {
-    return text + "(" + scope + ")";
+    return text + OPEN_SOFT_BRACKET + scope + CLOSE_SOFT_BRACKET;
   }
 
   /**
    * Compares this response to the specified object.
-   *
-   * @param  other the other response
+   * @param  other the other response to be compared against
    * @return {@code true} if this response equals the other response;
    *         {@code false} otherwise
    */
@@ -76,9 +80,7 @@ public class BrainResponse {
   }
 
   /**
-   * Returns an integer hash code for this response.
-   *
-   * @return an integer hash code for this response
+   * Returns the hashCode for this BrainResponse.
    */
   @Override
   public int hashCode() {
