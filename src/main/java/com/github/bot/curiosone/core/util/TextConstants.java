@@ -28,4 +28,9 @@ public class TextConstants {
    * Stores the String representation for the value separator used in toString methods.
    */
   public static final String COMMA_SEP = ", ";
+
+  /**
+   * Stores new line character.
+   */
+  public static final char NEWLINE = '\n';
 }

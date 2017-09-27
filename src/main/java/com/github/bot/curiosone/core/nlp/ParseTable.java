@@ -1,5 +1,11 @@
 package com.github.bot.curiosone.core.nlp;
 
+import static com.github.bot.curiosone.core.util.TextConstants.POS_OUTSIDE_ERR;
+import static com.github.bot.curiosone.core.util.TextConstants.OPEN_SQ_BRACKET;
+import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_SQ_BRACKET;
+import static com.github.bot.curiosone.core.util.TextConstants.COMMA_SEP;
+import static com.github.bot.curiosone.core.util.TextConstants.NEWLINE;
+
 import com.github.bot.curiosone.core.util.Interval;
 import com.github.bot.curiosone.core.util.Pair;
 
@@ -12,23 +18,29 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
- * The CYK parsing table which contains all possible parsing trees for the given
- * sentence.
+ * Handles the CYK parsing table, which contains all possible parsing trees for the given sentence.
+ * Provides all the useful methods to create and manage the parsed CYK table.
  */
 public class ParseTable {
-  /** CYK table. */
+  /**
+   * Stores the CYK table.
+   * @see Cell
+   */
   private Cell[][] table;
 
-  /** Tokens from witch the table was generated. */
+  /**
+   * Lists all the tokens from witch the table was generated.
+   */
   private List<Token> tokens;
 
-  /** Size of the table. */
+  /**
+   * Stores the size of the CYK table.
+   */
   private int size;
 
   /**
-   * CYK Constructor.
-   *
-   * @param tokens list of tokens to parse
+   * Constructs a CYK table for the given tokens list.
+   * @param tokens list of tokens to be parsed
    */
   public ParseTable(List<Token> tokens) {
     this.tokens = tokens;
@@ -76,32 +88,29 @@ public class ParseTable {
   }
 
   /**
-   * Get the content of a specific cell of the CYK.
-   *
-   * @param x the x coordinate of the table
-   * @param y the y coordinate of the table
-   * @return the set of all rules that makes us arrive to that cell.
+   * Gets the content of a specific cell of the CYK.
+   * @param x x coordinate of the table
+   * @param y y coordinate of the table
+   * @return a set of all rules that makes us arrive to that cell
+   * @throws IndexOutOfBoundsException if at least one coordinate is outside of the parsed table.
    */
   public Set<Rule> get(int x, int y) {
     if (y < 0 || y > size || x < 0 || x > y) {
-      throw new IndexOutOfBoundsException("Position outside the table [" + x + ", " + y + "]");
+      throw new IndexOutOfBoundsException(POS_OUTSIDE_ERR + OPEN_SQ_BRACKET + x + COMMA_SEP + y
+          + CLOSE_SQ_BRACKET);
     }
     return table[y][x].get();
   }
 
   /**
-   * Get the height of the table.
-   *
-   * @return the height of the table.
+   * Gets the height of the table.
    */
   public int getHeight() {
     return size;
   }
 
   /**
-   * Get the width at a specific distance from the top of the table.
-   *
-   * @return the width at a specific height.
+   * Gets the width at a specific distance from the top of the table.
    */
   public int getWidthAt(int y) {
     return y + 1;
@@ -109,7 +118,6 @@ public class ParseTable {
 
   /**
    * Visits the table and extracts intervals.
-   *
    * @param meanings the list of meanings extracted for each token
    * @param lookup the map where the intervals are stored
    * @param x the x position of the table
@@ -163,9 +171,7 @@ public class ParseTable {
   }
 
   /**
-   * Returns a string representation of this CYK table.
-   *
-   * @return a string representation of this CYK table.
+   * Returns a string representation for this CYK table.
    */
   @Override
   public String toString() {
@@ -174,35 +180,34 @@ public class ParseTable {
       for (int y = 0; y < x + 1; y++) {
         sb.append(table[x][y]);
       }
-      sb.append('\n');
+      sb.append(NEWLINE);
     }
     return sb.toString();
   }
 
   /**
-   * A single Cell of the CYK table.
+   * Represents a single Cell of the CYK table.
    */
   private class Cell {
-    /** A set of rules that make us arrive to that cell. */
+    /**
+     * A set of rules that makes us arrive to that cell.
+     */
     private Set<Rule> content = new HashSet<Rule>();
 
     /**
-     * Constructor of a Cell.
+     * Constructs an empty Cell.
      */
     public Cell() {}
 
     /**
      * Gets the set of rules inside the cell.
-     * @return the set of rules inside the cell.
      */
     public Set<Rule> get() {
       return content;
     }
 
     /**
-     * Returns a string representation of this cell.
-     *
-     * @return a string representation of this cell.
+     * Returns a String representation of this cell.
      */
     @Override
     public String toString() {
