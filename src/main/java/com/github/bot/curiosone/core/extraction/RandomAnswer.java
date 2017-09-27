@@ -7,62 +7,67 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Precomuted answers to sentences not understood by chatbot.
+ * Handles precomputed answers to sentences not understood by the chatbot.
  */
 public class RandomAnswer {
+
+  /**
+   * Contains constants added to the answer when the input is made by a single word.
+   */
+  private static final String[] CONSTANTS = {
+      "?",
+      "? I do not understand",
+      ".. that is cool"
+  };
+
+  /**
+   * Contains answers to a not-english sentence.
+   */
+  private static final String[] ENGLISH_ANSWERS = {
+      "I think you should speak english",
+      "PLEASE, speak english!",
+      "Are you a robot too?"
+  };
+
+  /**
+   * Contains answers made for too much general/not understood sentence.
+   */
+  private static final String[] GENERAL_ANSWERS = {
+      "What a nice day to talk to a chatbot!",
+      "Can you reformulate your sentence please?",
+      "Tell me something interesting please."
+  };
+
+  /**
+   * Stores an empty String representation.
+   */
+  private static final String EMPTY_STRING = "";
 
   /**
    * Private constructor.
    */
   private RandomAnswer() { }
 
-  /** This array contains costants added to the answer when the input is made by a single word. */
-  private static String[] costants;
-
-  /** This array contains answers to a not-english sentence. */
-  private static String[] englishAnswers;
-
-  /** This array contains answers made for too much general/not understood sentence. */
-  private static String[] generalAnswers;
-
   /**
    * Gives a general answer to a general user input.
    * @param phrase given in input
-   * @return general answer
+   * @return a BrainResponse instance, containing a general answer
    */
   public static BrainResponse getAnswer(Phrase phrase) {
-    if (costants == null) {
-      costants = new String[] {
-          "?",
-          "? I do not understand",
-          ".. that is cool"
-      };
-      englishAnswers = new String[] {
-          "I think you should speak english",
-          "PLEASE, speak english!",
-          "Are you a robot too?"
-      };
-      generalAnswers = new String[] {
-          "What a nice day to talk to a chatbot!",
-          "Can you reformulate your sentence please?",
-          "Tell me something interesting please."
-      };
-    }
-
     List<Token> tokenList = phrase.getTokens();
 
     if (tokenList.size() == 1) {
-      return new BrainResponse(phrase.getText() + costants[randomIndex(costants)], "");
+      return new BrainResponse(phrase.getText() + CONSTANTS[randomIndex(CONSTANTS)], EMPTY_STRING);
     } else if (tokenList.stream().map(x -> x.getLemma()).anyMatch(x -> x == null)) {
-      return new BrainResponse(englishAnswers[randomIndex(englishAnswers)], "");
+      return new BrainResponse(ENGLISH_ANSWERS[randomIndex(ENGLISH_ANSWERS)], EMPTY_STRING);
     }
-    return new BrainResponse(generalAnswers[randomIndex(generalAnswers)], "");
+    return new BrainResponse(GENERAL_ANSWERS[randomIndex(GENERAL_ANSWERS)], EMPTY_STRING);
   }
 
   /**
    * Returns a random index of the array given in input.
    * @param array whose index is needed
-   * @return index
+   * @return the randomly generated index
    */
   private static int randomIndex(String[] array) {
     return (int)(Math.random() * array.length);
