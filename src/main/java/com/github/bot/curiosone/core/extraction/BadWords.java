@@ -18,7 +18,7 @@ import java.util.stream.Stream;
  */
 public class BadWords {
   /**
-   * Path of the database containing known insults.
+   * Path to the database containing known insults.
    */
   private static String badWordsPath = "/conversation/bad_words.txt";
 
@@ -28,9 +28,14 @@ public class BadWords {
   private static List<String> knownBadWords;
 
   /**
-   * List of different answers that the bot gives in output.
+   * Array of different answers that the bot gives in output.
    */
-  private static String[] readyAnswers;
+  private static String[] readyAnswers = {
+    "I do not like your way of talking.",
+    "You should speak more politely.",
+    "Why are you talking like this? Are you a little kid?",
+    "Come back when you grow up."
+  };
 
   /**
    * Private constructor.
@@ -41,12 +46,6 @@ public class BadWords {
    * Loads the known bad words in memory.
    */
   private static void loadSentences() {
-    readyAnswers = new String[] {
-      "I do not like your way of talking.",
-      "You should speak more politely.",
-      "Why are you talking like this? Are you a little kid?",
-      "Come back when you grow up."
-    };
     knownBadWords = new ArrayList<>();
     Path path = null;
 
