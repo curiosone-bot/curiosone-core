@@ -38,4 +38,14 @@ public class TextConstants {
    * Stores the String representation for the two dots separator used in toString methods.
    */
   public static final String TWO_DOTS_SEP = ": ";
+
+  /**
+   * Stores opening inequality bracket symbol.
+   */
+  public static final String OPEN_INEQ_BRACKET = "<";
+
+  /**
+   * Stores closing inequality bracket symbol.
+   */
+  public static final String CLOSE_INEQ_BRACKET = ">";
 }
