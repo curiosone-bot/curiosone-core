@@ -26,9 +26,8 @@ public class Question {
    * @param  sentence [description]
    * @param  scope [description]
    * @return [description]
-   * @throws IOException 
    */
-  public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) throws IOException {
+  public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) {
     // System.out.println(sentence + " (" + scope + ")");
     Word kind;
     Word verb;
@@ -76,10 +75,20 @@ public class Question {
       return Optional.empty();
     }
 
-    SemanticNetwork semanticNetwork = SemanticNetwork.getInstance();
+    SemanticNetwork semanticNetwork;
+    try {
+      semanticNetwork = SemanticNetwork.getInstance();
+    } catch (IOException e) {
+      e.printStackTrace();
+      semanticNetwork = null;
+    }
     switch (kind.getText()) {
       case "what": {
-        SemanticQuery sq = new SemanticQuery(SemanticRelationType.IS_A, object.getText(), verb.getLemma());
+        SemanticQuery sq = new SemanticQuery(
+            SemanticRelationType.IS_A,
+            object.getText(),
+            verb.getLemma()
+        );
         Optional<Edge> opt = semanticNetwork.query(sq);
 
         String newMessage;
@@ -96,9 +105,13 @@ public class Question {
         return Optional.of(new BrainResponse(newMessage, newScope));
       }
       case "who": {
-        SemanticQuery sq = new SemanticQuery(SemanticRelationType.IS_A, object.getText(), verb.getLemma());
+        SemanticQuery sq = new SemanticQuery(
+            SemanticRelationType.IS_A,
+            object.getText(),
+            verb.getLemma()
+        );
         Optional<Edge> opt = semanticNetwork.query(sq);
-        
+
         String newMessage;
         String newScope;
         if (!opt.isPresent()) {
@@ -113,7 +126,11 @@ public class Question {
         return Optional.of(new BrainResponse(newMessage, newScope));
       }
       case "where": {
-        SemanticQuery sq = new SemanticQuery(SemanticRelationType.IS_A, object.getText(), verb.getLemma());
+        SemanticQuery sq = new SemanticQuery(
+            SemanticRelationType.IS_A,
+            object.getText(),
+            verb.getLemma()
+        );
         Optional<Edge> opt = semanticNetwork.query(sq);
 
         String newMessage;

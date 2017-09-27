@@ -28,9 +28,8 @@ public class Brain {
    * Response to something.
    * @param  sentence the sentence to generate the response to
    * @param  scope the scope of the conversation
-   * @throws IOException 
    */
-  public static Optional<BrainResponse> compute(Sentence sentence, String scope) throws IOException {
+  public static Optional<BrainResponse> compute(Sentence sentence, String scope) {
     if (sentence.isQuestion()) {
       return Question.getAnswer(sentence, scope);
     }

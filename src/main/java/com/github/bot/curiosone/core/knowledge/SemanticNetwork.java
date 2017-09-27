@@ -340,26 +340,4 @@ public class SemanticNetwork implements Graph {
   public String toString() {
     return grafo.toString(); // metodo toString utilizzato per prove di debug
   }
-
-  public static void main(String[] args) throws IOException {
-    SemanticNetwork sn = SemanticNetwork.getInstance();
-    //FIND NODO RELAZIONE -> DAMMI UN ALTRO NODO ( RESTITUISCE OPTIONAL VUOTO SE NON  PRESENTE ALCUNA RELAZIONE DI QUEL TIPO)
-    SemanticQuery sq = new SemanticQuery(SemanticRelationType.IS_A,"setter",new ArrayList<>(),"BE");
-    System.out.println(sn.query(sq).get());
-
-    //FIND NODO -> DAMMI RELAZIONE E ALTRO NODO ( NON ESISTE UN COSTRUTTORE SENZA SEMANTICRELATION, CREADO ANDREA MARINO ANCORA LO DEVE FARE)
-    SemanticQuery sq1 = new SemanticQuery(null,"beer",new ArrayList<>(),"BE");
-    System.out.println(sn.query(sq1));
-
-    //EXIST NODO RELAZIONE NODO ( NON SONO PAZZO ANDREA MARINO HA INTESO SOGGETTO COME TARGET E OGGETTO COME SOURCE)
-    SemanticQuery sq2 = new SemanticQuery(SemanticRelationType.IS_A,"person","christian",new ArrayList<>(),"BE");
-    System.out.println(sn.exist(sq2.getObject(), SemanticRelationType.IS_A, sq2.getSubject()));
-
-    //INSERT NODO RELAZIONE NODO ( DATO CHE NON HO L'INFORMAZIONE DELLA SEMANTIC QUERY SQ2 LA IMPARO E RICONTROLLO SE ESISTE)
-    sn.query(sq2);
-
-    //RICONTROLLO
-    System.out.println(sn.exist(sq2.getObject(), SemanticRelationType.IS_A, sq2.getSubject()));
-
-  }
 }

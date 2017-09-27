@@ -17,9 +17,8 @@ public class Logic {
    * talk description.
    * @param  msg [description]
    * @return [description]
-   * @throws IOException 
    */
-  public static Message talk(Message msg) throws IOException {
+  public static Message talk(Message msg) {
     if (msg == null) {
       return new Message("Sorry my head hurts, what were we talking about?", "");
     }

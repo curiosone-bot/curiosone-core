@@ -22,13 +22,12 @@ import java.util.stream.Collectors;
 public class Affirmation {
   /**
    * getAnswer description.
-   * 
+   *
    * @param sentence [description]
    * @param scope [description]
    * @return [description]
-   * @throws IOException 
    */
-  public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) throws IOException {
+  public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) {
     boolean answer = false;
     if (scope.length() > 0 && scope.charAt(scope.length() - 1) == '?') {
       answer = true;
@@ -38,7 +37,13 @@ public class Affirmation {
       Word verb;
       Word object;
       scope = scope.substring(0, scope.length() - 1);
-      SemanticNetwork semanticNetwork = SemanticNetwork.getInstance(); 
+      SemanticNetwork semanticNetwork;
+      try {
+        semanticNetwork = SemanticNetwork.getInstance();
+      } catch (IOException e) {
+        e.printStackTrace();
+        semanticNetwork = null;
+      }
 
       if (sentence.respect(POS.V, POS.NP)) {
         // System.out.println("V, NP");
@@ -51,7 +56,11 @@ public class Affirmation {
         return Optional.empty();
       }
 
-      SemanticQuery sq = new SemanticQuery(SemanticRelationType.IS_A, scope, verb.getLemma());
+      SemanticQuery sq = new SemanticQuery(
+          SemanticRelationType.IS_A,
+          scope,
+          verb.getLemma()
+      );
       Optional<Edge> opt = semanticNetwork.query(sq);
 
       String newMessage;
@@ -80,7 +89,6 @@ public class Affirmation {
       return Optional.of(new BrainResponse(newMessage, newScope));
     }
 
-    // TODO: Add a random non sense response.
     return Optional.empty();
   }
 }
