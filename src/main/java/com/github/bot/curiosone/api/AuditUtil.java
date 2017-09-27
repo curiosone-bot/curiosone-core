@@ -4,10 +4,10 @@ import spark.Request;
 import spark.Response;
 
 /**
- * Converts requests and responses into an audit logs.
+ * Converts requests and responses into audit logs.
  */
 public class AuditUtil {
-  
+
   /**
   * Default Constructor.
   */
