@@ -1,5 +1,10 @@
 package com.github.bot.curiosone.core.nlp;
 
+import static com.github.bot.curiosone.core.util.TextConstants.FREQ_MUST_BE_POS_ERR;
+import static com.github.bot.curiosone.core.util.TextConstants.OPEN_SQ_BRACKET;
+import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_SQ_BRACKET;
+import static com.github.bot.curiosone.core.util.TextConstants.COMMA_SEP;
+
 import java.util.Objects;
 
 /**
@@ -7,26 +12,7 @@ import java.util.Objects;
  */
 public class Meaning implements Comparable<Meaning> {
 
-  /**
-   * String representation of the IllegalArgumentException message thrown in setFrequency method.
-   */
-  private static final String FREQ_MUST_BE_POS_ERR = "Frequency must be positive";
-
-  /**
-   * Stores openening square bracket symbol.
-   */
-  private static final String OPEN_SQ_BRACKET = "[";
-
-  /**
-   * Stores closing square bracket symbol.
-   */
-  private static final String CLOSE_SQ_BRACKET = "]";
-
-  /**
-   * Stores the String representation for the value separator used in toString method.
-   */
-  private static final String COMMA_SEP = ", ";
-
+  private static final int DEFAULT_FREQ_VALUE = 0;
   /**
    * The part of speech type of the meaning.
    */
@@ -50,7 +36,7 @@ public class Meaning implements Comparable<Meaning> {
   public Meaning(POS pos, LEX lex) {
     this.pos = pos;
     this.lex = lex;
-    this.freq = 0;
+    this.freq = DEFAULT_FREQ_VALUE;
   }
 
   /**
@@ -80,7 +66,7 @@ public class Meaning implements Comparable<Meaning> {
    * @throws IllegalArgumentException if negative frequency is passed
    */
   public void setFrequency(int frequency) {
-    if (frequency < 0) {
+    if (frequency < DEFAULT_FREQ_VALUE) {
       throw new IllegalArgumentException(FREQ_MUST_BE_POS_ERR);
     }
     freq = frequency;
