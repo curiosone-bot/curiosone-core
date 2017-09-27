@@ -14,16 +14,22 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
- * Precomputed answers to some common bad words.
+ * Handles precomputed answers to some common bad words.
  */
 public class BadWords {
+  /**
+   * Path of the database containing known insults.
+   */
   private static String badWordsPath = "/conversation/bad_words.txt";
-  /** Path of the database containing known insults. */
 
-  /** List of different insults that the bot knows. */
+  /**
+   * List of different insults that the bot knows.
+   */
   private static List<String> knownBadWords;
 
-  /** List of different answers that the bot gives in output. */
+  /**
+   * List of different answers that the bot gives in output.
+   */
   private static String[] readyAnswers;
 
   /**
@@ -59,9 +65,11 @@ public class BadWords {
   }
 
   /**
-   * Check if the phrase contains one of the known bad words.
-   * @param phrase to check
-   * @return answer if the input is known
+   * Returns an answer for the given phrase.
+   * @param phrase the original phrase to be answered
+   * @return an Optional instance. If the instance contains a value, then an
+   *         answer has been found.
+   *         Otherwise, if the instance is empty, no answer has been found.
    */
   public static Optional<BrainResponse> getAnswer(Phrase phrase) {
     if (knownBadWords == null) {
