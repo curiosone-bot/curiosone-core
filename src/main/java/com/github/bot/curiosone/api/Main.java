@@ -14,10 +14,16 @@ import org.slf4j.LoggerFactory;
 import spark.Spark;
 
 public class Main {
+
   /**
-  * Logger for Main class.
+  * Logs Main class.
   */
   private static final Logger log = LoggerFactory.getLogger(Main.class);
+
+  /**
+   * Default port value.
+   */
+  private static final int DEFAULT_PORT = 4567;
 
   /**
    * The entry point of the APIs.
@@ -26,9 +32,10 @@ public class Main {
   public static void main(String[] args) {
 
     /**
-     * Set the port where it will run.
+     * Set the port where the server will run.
      */
-    int port = System.getenv("PORT") != null ? Integer.parseInt(System.getenv("PORT")) : 4567;
+    int port = System.getenv("PORT") != null
+        ? Integer.parseInt(System.getenv("PORT")) : DEFAULT_PORT;
     Spark.port(port);
 
     /**
@@ -65,7 +72,7 @@ public class Main {
         });
 
     /**
-     * Route requests to the curiosone core
+     * Route requests to the Curiosone Core.
      */
     Spark.post(
         "/talk",
@@ -78,7 +85,6 @@ public class Main {
             e.printStackTrace();
           }
           bot = Logic.talk(user);
-
           return new Gson().toJson(bot);
         });
   }
