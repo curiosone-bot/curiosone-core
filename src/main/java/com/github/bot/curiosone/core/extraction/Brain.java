@@ -21,7 +21,20 @@ public class Brain {
    * @return the response if the message needs a conversational answer.
    */
   public static Optional<BrainResponse> conversate(Phrase phrase) {
-    return Conversation.getAnswer(phrase);
+    Optional<BrainResponse> answ = Conversation.getAnswer(phrase);
+    if (answ.isPresent()) {
+      return answ;
+    }
+    return BadWords.getAnswer(phrase);
+  }
+
+  /**
+   * Generate a random response.
+   * @param  phrase the message to generate the response to
+   * @return the response.
+   */
+  public static Optional<BrainResponse> random(Phrase phrase) {
+    return RandomAnswer.getAnswer(phrase);
   }
 
   /**

@@ -31,7 +31,7 @@ public class Logic {
     }
     Phrase phrase = phrases.get(0);
 
-    //TODO: add analysis.
+    //TODO: add analysis here.
 
     // If it's a conversational text answer directly.
     br = Brain.conversate(phrase);
@@ -50,7 +50,14 @@ public class Logic {
     br = Brain.compute(sentence, msg.getScope());
     if (br.isPresent()) {
       BrainResponse answer = br.get();
-      //TODO: add refinement.
+      //TODO: add refinement here.
+      return new Message(answer.getMessage(), answer.getScope());
+    }
+
+    // Generate a random answer.
+    br = Brain.random(phrase);
+    if (br.isPresent()) {
+      BrainResponse answer = br.get();
       return new Message(answer.getMessage(), answer.getScope());
     }
 
