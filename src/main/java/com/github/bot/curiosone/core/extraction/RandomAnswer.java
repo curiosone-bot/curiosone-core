@@ -30,7 +30,7 @@ public class RandomAnswer {
    * @param phrase given in input
    * @return general answer
    */
-  public static Optional<BrainResponse> getAnswer(Phrase phrase) {
+  public static BrainResponse getAnswer(Phrase phrase) {
     if (costants == null) {
       costants = new String[] {
           "?",
@@ -52,17 +52,11 @@ public class RandomAnswer {
     List<Token> tokenList = phrase.getTokens();
 
     if (tokenList.size() == 1) {
-      return Optional.of(
-          new BrainResponse(phrase.getText() + costants[randomIndex(costants)], "")
-      );
+      return new BrainResponse(phrase.getText() + costants[randomIndex(costants)], "");
     } else if (tokenList.stream().map(x -> x.getLemma()).anyMatch(x -> x == null)) {
-      return Optional.of(
-          new BrainResponse(englishAnswers[randomIndex(englishAnswers)], "")
-      );
+      return new BrainResponse(englishAnswers[randomIndex(englishAnswers)], "");
     }
-    return Optional.of(
-        new BrainResponse(generalAnswers[randomIndex(generalAnswers)], "")
-    );
+    return new BrainResponse(generalAnswers[randomIndex(generalAnswers)], "");
   }
 
   /**

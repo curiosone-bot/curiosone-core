@@ -33,7 +33,7 @@ public class Brain {
    * @param  phrase the message to generate the response to
    * @return the response.
    */
-  public static Optional<BrainResponse> random(Phrase phrase) {
+  public static BrainResponse random(Phrase phrase) {
     return RandomAnswer.getAnswer(phrase);
   }
 

@@ -19,6 +19,7 @@ public class Logic {
    * @return [description]
    */
   public static Message talk(Message msg) {
+    // We are not able to parse a null string :(
     if (msg == null) {
       return new Message("Sorry my head hurts, what were we talking about?", "");
     }
@@ -43,7 +44,8 @@ public class Logic {
     // We just use the first now.
     List<Sentence> sentences = Sentence.extract(phrase);
     if (sentences.size() == 0) {
-      return new Message("Sorry my head hurts, what were we talking about?", "");
+      BrainResponse answer = Brain.random(phrase);
+      return new Message(answer.getMessage(), answer.getScope());
     }
     Sentence sentence = sentences.get(0);
 
@@ -54,13 +56,7 @@ public class Logic {
       return new Message(answer.getMessage(), answer.getScope());
     }
 
-    // Generate a random answer.
-    br = Brain.random(phrase);
-    if (br.isPresent()) {
-      BrainResponse answer = br.get();
-      return new Message(answer.getMessage(), answer.getScope());
-    }
-
+    // We have understood something but we are unable to answer now!
     return new Message("Sorry my head hurts, what were we talking about?", "");
   }
 }
