@@ -17,14 +17,18 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Precomputed answers to some common conversational phrases.
+ * Handles the precomputed answers to some common conversational phrases.
  */
 public class Conversation {
+
+  /**
+   * Path to the database containing known answers.
+   */
   private static String conversationsPath = "/conversation/conversation.txt";
-  /** Path of the database containing known answers. */
 
-
-  /** Map from recognized tokens to possible phrases given in output. */
+  /**
+   * Maps the recognized tokens to their possible phrases.
+   */
   private static Map<String[], String[]> knownQuestions;
 
   /**
@@ -58,10 +62,11 @@ public class Conversation {
   }
 
   /**
-   * Checks if the given input is present in our known answers.
-   *
-   * @param  phrase phrase given by user's input
-   * @return answer if the input is known
+   * Checks if the given input is present in a known answers.
+   * @param phrase phrase given by user's input
+   * @return An Optional instance. The instance is empty, if the input is
+   *         unknown. Otherwise, the istance has a value, representing the
+   *         answer.
    */
   public static Optional<BrainResponse> getAnswer(Phrase phrase) {
     if (knownQuestions == null) {
