@@ -8,8 +8,8 @@ import java.util.Optional;
 
 /**
  * Manages the brain of the Curiosone.
- * This class contains utility methods to conversate, compute and/or randomly
- * generate an answer to a given sentence.
+ * This class contains utility methods to conversate, compute and/or randomly generate an answer to
+ * a given sentence.
  */
 public class Brain {
   /**
@@ -20,12 +20,11 @@ public class Brain {
   /**
    * Answers to a conversational message.
    * @param phrase the message to generate the response to
-   * @return an Optional instance, containing the response, if the message needs
-   *         a conversational answer.
+   * @return an Optional instance, containing the response, if the message needs a conversational
+   *         answer.
    */
   public static Optional<BrainResponse> conversate(Phrase phrase) {
     Optional<BrainResponse> answ = Conversation.getAnswer(phrase);
-
     return (answ.isPresent()) ? answ : BadWords.getAnswer(phrase);
   }
 
