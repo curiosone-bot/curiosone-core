@@ -48,4 +48,8 @@ public class TextConstants {
    * Stores closing inequality bracket symbol.
    */
   public static final String CLOSE_INEQ_BRACKET = ">";
+
+  public static final String SPACE_OPEN_CIRC_BRACKET = " (";
+
+  public static final String CLOSE_CIRC_BRACKET = ")";
 }
