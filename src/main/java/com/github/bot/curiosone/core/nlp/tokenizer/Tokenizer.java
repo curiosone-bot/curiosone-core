@@ -4,7 +4,6 @@ import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IToken;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -451,22 +450,6 @@ public class Tokenizer {
   }
 
   /**
-   * Get {@link #stringToken}.
-   * @return {@link #stringToken}
-   */
-  private List<String> getStringToken() {
-    return stringToken;
-  }
-
-  /**
-   * Add a new element to {@link #stringToken}.
-   * @param stringToken element to add to {@link #stringToken}
-   */
-  private void addStringToken(String stringToken) {
-    this.stringToken.add(stringToken);
-  }
-
-  /**
    * Get the type.
    * @return {@link #type}
    */
@@ -496,15 +479,6 @@ public class Tokenizer {
    */
   private void addToken(Token t) {
     tokens.add(t);
-  }
-
-  /**
-   * Add a new collection of tokens to {@link #tokens}.
-   * @param toks collection of token to be add all
-   * @return true if this list changed as a result of the call, false otherwise
-   */
-  private boolean addAllTokens(Collection<? extends IToken> toks) {
-    return tokens.addAll(toks);
   }
 
   /**
