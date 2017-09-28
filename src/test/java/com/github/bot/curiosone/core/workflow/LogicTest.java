@@ -54,5 +54,8 @@ public class LogicTest {
 
     msg = Logic.talk(new Message("Where are United States of America?", ""));
     System.out.println(msg);
+
+    msg = Logic.talk(new Message("What is a bad?+", ""));
+    System.out.println(msg);
   }
 }
