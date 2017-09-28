@@ -1,12 +1,5 @@
 package com.github.bot.curiosone.core.extraction;
 
-import static com.github.bot.curiosone.core.util.TextConstants.ALREADY_KNOW;
-import static com.github.bot.curiosone.core.util.TextConstants.DOT;
-import static com.github.bot.curiosone.core.util.TextConstants.IS_A;
-import static com.github.bot.curiosone.core.util.TextConstants.QUESTION_MARK;
-import static com.github.bot.curiosone.core.util.TextConstants.WHAT_IS_A;
-import static com.github.bot.curiosone.core.util.TextConstants.WOW_LEARNED;
-
 import com.github.bot.curiosone.core.knowledge.SemanticNetwork;
 import com.github.bot.curiosone.core.knowledge.SemanticQuery;
 import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
@@ -36,7 +29,7 @@ public class Affirmation {
    *         Otherwise, the Optional instance will contain the answer.
    */
   public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) {
-    if (scope.length() > 0 && scope.charAt(scope.length() - 1) == QUESTION_MARK) {
+    if (scope.length() > 0 && scope.charAt(scope.length() - 1) == '?') {
       Word verb;
       Word object;
       scope = scope.substring(0, scope.length() - 1);
@@ -68,11 +61,11 @@ public class Affirmation {
       String newMessage;
       String newScope;
       if (opt.isPresent()) {
-        newMessage = ALREADY_KNOW + scope + IS_A + object.getText() + DOT;
+        newMessage = "I already knew that " + scope + "is a " + object.getText() + '.';
         newScope = object.getText();
       } else {
         semanticNetwork.learn(scope, SemanticRelationType.IS_A, object.getText());
-        newMessage = WOW_LEARNED + scope + IS_A + object.getText() + DOT;
+        newMessage = "Wow really interesting! Now I know that a " + scope + " is a" + object.getText() + '.';
         newScope = object.getText();
       }
 
@@ -85,11 +78,10 @@ public class Affirmation {
       String newMessage;
       String newScope;
 
-      newMessage = WHAT_IS_A + object.getText() + QUESTION_MARK;
-      newScope = object.getText() + QUESTION_MARK;
+      newMessage = "Mhh! What is a " + object.getText() + '?';
+      newScope = object.getText() + '?';
       return Optional.of(new BrainResponse(newMessage, newScope));
     }
-
     return Optional.empty();
   }
 }
