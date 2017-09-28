@@ -1,21 +1,17 @@
 package com.github.bot.curiosone.core.nlp;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.github.bot.curiosone.core.nlp.LangUtils.expandVerbs;
 import static com.github.bot.curiosone.core.nlp.LangUtils.removeDuplicatedSpaces;
 import static com.github.bot.curiosone.core.nlp.LangUtils.splitByPuntaction;
-import static com.github.bot.curiosone.core.nlp.LangUtils.expandVerbs;
+import static org.assertj.core.api.Assertions.assertThat;
 // SUPPRESS CHECKSTYLE AvoidStarImport
 import static org.junit.Assert.*;
-
-import java.util.List;
 
 import org.junit.Test;
 
 public class LangUtilsTest {
   @Test
   public void testSplitByPuntaction() {
-    List<String> l;
-
     assertThat(splitByPuntaction("test string")).hasSize(1).containsOnly("test string.");
 
     assertThat(splitByPuntaction("Unicorns are awesome! Isn't it?")).hasSize(2)
@@ -90,8 +86,6 @@ public class LangUtilsTest {
 
   @Test
   public void testExpandVerbs() {
-    String s;
-
     assertThat(expandVerbs("I'm in!")).isEqualTo("I am in!");
 
     assertThat(expandVerbs("i'm done")).isEqualTo("i am done");
