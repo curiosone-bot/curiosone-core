@@ -69,5 +69,8 @@ public class LogicTest {
 
     msg = Logic.talk(new Message("Matteo hates you!", "matteo?"));
     System.out.println(msg);
+
+    msg = Logic.talk(new Message("How old are you?", "matteo?"));
+    System.out.println(msg);
   }
 }
