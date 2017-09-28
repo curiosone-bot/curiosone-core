@@ -109,5 +109,7 @@ public class LangUtilsTest {
 
     assertThat(expandVerbs("I didn't touch your phone! You're a liar! I didn't do anything!!!"))
         .isEqualTo("I did not touch your phone! You are a liar! I did not do anything!!!");
+
+    assertThat(expandVerbs("+'m, -'re, :'s")).isEqualTo("+ am, - are, : is");
   }
 }
