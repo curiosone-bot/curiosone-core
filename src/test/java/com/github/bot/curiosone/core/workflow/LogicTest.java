@@ -58,7 +58,9 @@ public class LogicTest {
     msg = Logic.talk(new Message("What is a bad?+", ""));
     System.out.println(msg);
 
-    msg = Logic.talk(new Message("Someone else is come from earth with only purpose to kill you?", ""));
+    msg = Logic.talk(
+      new Message("Someone else is come from earth with only purpose to kill you?", "")
+    );
     System.out.println(msg);
 
     msg = Logic.talk(new Message("It is a bed!", "bed?"));
