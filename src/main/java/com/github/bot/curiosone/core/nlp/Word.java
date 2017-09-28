@@ -1,10 +1,10 @@
 package com.github.bot.curiosone.core.nlp;
 
-import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_CIRC_BRACKET;
+import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_PARENTHESIS;
 import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_SQ_BRACKET;
 import static com.github.bot.curiosone.core.util.TextConstants.COMMA_SEP;
 import static com.github.bot.curiosone.core.util.TextConstants.OPEN_SQ_BRACKET;
-import static com.github.bot.curiosone.core.util.TextConstants.SPACE_OPEN_CIRC_BRACKET;
+import static com.github.bot.curiosone.core.util.TextConstants.SPACE_OPEN_PARENTHESIS;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -115,7 +115,7 @@ public class Word {
    */
   @Override
   public String toString() {
-    return OPEN_SQ_BRACKET + text + SPACE_OPEN_CIRC_BRACKET + lemma + CLOSE_CIRC_BRACKET + COMMA_SEP
+    return OPEN_SQ_BRACKET + text + SPACE_OPEN_PARENTHESIS + lemma + CLOSE_PARENTHESIS + COMMA_SEP
         + means + CLOSE_SQ_BRACKET;
   }
 

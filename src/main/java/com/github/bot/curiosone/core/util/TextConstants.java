@@ -49,9 +49,18 @@ public class TextConstants {
    */
   public static final String CLOSE_INEQ_BRACKET = ">";
 
-  public static final String OPEN_CIRC_BRACKET = "(";
+  /**
+   * Stores opening circle bracket symbol.
+   */
+  public static final String OPEN_PARENTHESIS = "(";
 
-  public static final String SPACE_OPEN_CIRC_BRACKET = " (";
+  /**
+   * Stores a space character followed by the opening parenthesis symbol.
+   */
+  public static final String SPACE_OPEN_PARENTHESIS = " (";
 
-  public static final String CLOSE_CIRC_BRACKET = ")";
+  /**
+   * Stores closing parenthesis symbol.
+   */
+  public static final String CLOSE_PARENTHESIS = ")";
 }
