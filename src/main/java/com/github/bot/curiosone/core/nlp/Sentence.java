@@ -1,8 +1,8 @@
 package com.github.bot.curiosone.core.nlp;
 
+import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_INEQ_BRACKET;
 import static com.github.bot.curiosone.core.util.TextConstants.COMMA_SEP;
 import static com.github.bot.curiosone.core.util.TextConstants.OPEN_INEQ_BRACKET;
-import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_INEQ_BRACKET;
 
 import com.github.bot.curiosone.core.util.Interval;
 
