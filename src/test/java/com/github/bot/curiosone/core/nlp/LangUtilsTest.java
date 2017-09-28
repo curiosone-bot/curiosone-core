@@ -1,5 +1,9 @@
 package com.github.bot.curiosone.core.nlp;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static com.github.bot.curiosone.core.nlp.LangUtils.removeDuplicatedSpaces;
+import static com.github.bot.curiosone.core.nlp.LangUtils.splitByPuntaction;
+import static com.github.bot.curiosone.core.nlp.LangUtils.expandVerbs;
 // SUPPRESS CHECKSTYLE AvoidStarImport
 import static org.junit.Assert.*;
 
@@ -12,170 +16,104 @@ public class LangUtilsTest {
   public void testSplitByPuntaction() {
     List<String> l;
 
-    l = LangUtils.splitByPuntaction("test string");
-    assertEquals(1, l.size());
-    assertEquals("test string.", l.get(0));
+    assertThat(splitByPuntaction("test string")).hasSize(1).containsOnly("test string.");
 
-    l = LangUtils.splitByPuntaction("Unicorns are awesome! Isn't it?");
-    assertEquals(2, l.size());
-    assertEquals("Unicorns are awesome!", l.get(0));
-    assertEquals(" Isn't it?", l.get(1));
+    assertThat(splitByPuntaction("Unicorns are awesome! Isn't it?")).hasSize(2)
+        .containsOnly("Unicorns are awesome!", " Isn't it?");
 
-    l = LangUtils.splitByPuntaction("!!!!!!asd!!!!! dasda.!!!!???!");
-    assertEquals(2, l.size());
-    assertEquals("asd!", l.get(0));
-    assertEquals(" dasda.", l.get(1));
+    assertThat(splitByPuntaction("!!!!!!asd!!!!! dasda.!!!!???!")).hasSize(2)
+        .containsOnly("asd!", " dasda.");
 
-    l = LangUtils.splitByPuntaction("?!!!!!asd!!!!! dasda.!!!!???!");
-    assertEquals(2, l.size());
-    assertEquals("asd!", l.get(0));
-    assertEquals(" dasda.", l.get(1));
+    assertThat(splitByPuntaction("?!!!!!asd!!!!! dasda.!!!!???!")).hasSize(2)
+        .containsOnly("asd!", " dasda.");
 
-    l = LangUtils.splitByPuntaction(".!!!!!asd!!!!! dasda.!!!!???!");
-    assertEquals(2, l.size());
-    assertEquals("asd!", l.get(0));
-    assertEquals(" dasda.", l.get(1));
+    assertThat(splitByPuntaction(".!!!!!asd!!!!! dasda.!!!!???!")).hasSize(2)
+        .containsOnly("asd!", " dasda.");
 
-    l = LangUtils.splitByPuntaction("!!!!!!");
-    assertEquals(0, l.size());
+    assertThat(splitByPuntaction("!!!!!!")).isEmpty();
 
-    l = LangUtils.splitByPuntaction("!!! !!!");
-    assertEquals(1, l.size());
-    assertEquals(" !", l.get(0));
+    assertThat(splitByPuntaction("!!! !!!")).hasSize(1).containsOnly(" !");
 
-    l = LangUtils.splitByPuntaction("Hello! Visit my website: http://evil.com/pwn.you pls");
-    assertEquals(2, l.size());
-    assertEquals("Hello!", l.get(0));
-    assertEquals(" Visit my website: http://evil.com/pwn.you pls.", l.get(1));
+    assertThat(splitByPuntaction("Hello! Visit my website: http://evil.com/pwn.you pls"))
+        .hasSize(2).containsOnly("Hello!", " Visit my website: http://evil.com/pwn.you pls.");
 
-    l = LangUtils.splitByPuntaction("Hello! Visit my website: http://evil?.com/pwn.you pls");
-    assertEquals(2, l.size());
-    assertEquals("Hello!", l.get(0));
-    assertEquals(" Visit my website: http://evil?.com/pwn.you pls.", l.get(1));
+    assertThat(splitByPuntaction("Hello! Visit my website: http://evil?.com/pwn.you pls"))
+        .hasSize(2).containsOnly("Hello!", " Visit my website: http://evil?.com/pwn.you pls.");
 
-    l = LangUtils.splitByPuntaction("Hello! Visit my website: http://evil!.com/pwn.you pls");
-    assertEquals(2, l.size());
-    assertEquals("Hello!", l.get(0));
-    assertEquals(" Visit my website: http://evil!.com/pwn.you pls.", l.get(1));
+    assertThat(splitByPuntaction("Hello! Visit my website: http://evil!.com/pwn.you pls"))
+        .hasSize(2).containsOnly("Hello!", " Visit my website: http://evil!.com/pwn.you pls.");
 
-    l = LangUtils.splitByPuntaction("Hello!! Contact me at spam@bot.com to get more spam! ;)");
-    assertEquals(3, l.size());
-    assertEquals("Hello!", l.get(0));
-    assertEquals(" Contact me at spam@bot.com to get more spam!", l.get(1));
-    assertEquals(" ;).", l.get(2));
+    assertThat(splitByPuntaction("Hello!! Contact me at spam@bot.com to get more spam! ;)"))
+        .hasSize(3).containsOnly("Hello!", " Contact me at spam@bot.com to get more spam!", " ;).");
 
-    l = LangUtils.splitByPuntaction("Fortytwo.is.the.answer");
-    assertEquals(4, l.size());
-    assertEquals("Fortytwo.", l.get(0));
-    assertEquals("is.", l.get(1));
-    assertEquals("the.", l.get(2));
-    assertEquals("answer.", l.get(3));
+    assertThat(splitByPuntaction("Fortytwo.is.the.answer")).hasSize(4).containsOnly("Fortytwo.",
+        "is.", "the.", "answer.");
 
-    l = LangUtils.splitByPuntaction("Fortytwo!is!the!answer");
-    assertEquals(4, l.size());
-    assertEquals("Fortytwo!", l.get(0));
-    assertEquals("is!", l.get(1));
-    assertEquals("the!", l.get(2));
-    assertEquals("answer.", l.get(3));
+    assertThat(splitByPuntaction("Fortytwo!is!the!answer")).hasSize(4).containsOnly("Fortytwo!",
+        "is!", "the!", "answer.");
 
-    l = LangUtils.splitByPuntaction("Fortytwo?is?the?answer");
-    assertEquals(4, l.size());
-    assertEquals("Fortytwo?", l.get(0));
-    assertEquals("is?", l.get(1));
-    assertEquals("the?", l.get(2));
-    assertEquals("answer.", l.get(3));
+    assertThat(splitByPuntaction("Fortytwo?is?the?answer")).hasSize(4).containsOnly("Fortytwo?",
+        "is?", "the?", "answer.");
 
+    assertThat(splitByPuntaction("Hello!! Contact me at spam?@bot.com to get more spam! ;)"))
+        .hasSize(3)
+        .containsOnly("Hello!", " Contact me at spam?@bot.com to get more spam!"," ;).");
 
-    l = LangUtils.splitByPuntaction("Hello!! Contact me at spam?@bot.com to get more spam! ;)");
-    assertEquals(3, l.size());
-    assertEquals("Hello!", l.get(0));
-    assertEquals(" Contact me at spam?@bot.com to get more spam!", l.get(1));
-    assertEquals(" ;).", l.get(2));
+    assertThat(splitByPuntaction("Hello!! Contact me at spam!@bot.com to get more spam! ;)"))
+        .hasSize(3)
+        .containsOnly("Hello!", " Contact me at spam!@bot.com to get more spam!", " ;).");
 
-    l = LangUtils.splitByPuntaction("Hello!! Contact me at spam!@bot.com to get more spam! ;)");
-    assertEquals(3, l.size());
-    assertEquals("Hello!", l.get(0));
-    assertEquals(" Contact me at spam!@bot.com to get more spam!", l.get(1));
-    assertEquals(" ;).", l.get(2));
+    assertThat(splitByPuntaction("")).isEmpty();
 
-    l = LangUtils.splitByPuntaction("");
-    assertEquals(0, l.size());
+    assertThat(splitByPuntaction("$plit me")).hasSize(1).containsOnly("$plit me.");
 
-    l = LangUtils.splitByPuntaction("$plit me");
-    assertEquals(1, l.size());
-    assertEquals("$plit me.", l.get(0));
+    assertThat(splitByPuntaction("42 is a number")).hasSize(1).containsOnly("42 is a number.");
 
-    l = LangUtils.splitByPuntaction("42 is a number");
-    assertEquals(1, l.size());
-    assertEquals("42 is a number.", l.get(0));
+    assertThat(splitByPuntaction("42.0 is a double")).hasSize(1).containsOnly("42.0 is a double.");
 
-    l = LangUtils.splitByPuntaction("42.0 is a double");
-    assertEquals(1, l.size());
-    assertEquals("42.0 is a double.", l.get(0));
-
-    l = LangUtils.splitByPuntaction("This ://cel@.com is an invalid uri");
-    assertEquals(1, l.size());
-    assertEquals("This ://cel@.com is an invalid uri.", l.get(0));
+    assertThat(splitByPuntaction("This ://cel@.com is an invalid uri")).hasSize(1)
+        .containsOnly("This ://cel@.com is an invalid uri.");
   }
 
   @Test
   public void testRemoveDuplicatedSpaces() {
-    String s;
+    assertThat(removeDuplicatedSpaces("Hello   world!    !")).isEqualTo("Hello world! !");
 
-    s = LangUtils.removeDuplicatedSpaces("Hello   world!    !");
-    assertEquals("Hello world! !", s);
+    assertThat(removeDuplicatedSpaces("           !  ")).isEqualTo("!");
 
-    s = LangUtils.removeDuplicatedSpaces("           !  ");
-    assertEquals("!", s);
+    assertThat(removeDuplicatedSpaces("   he llo ")).isEqualTo("he llo");
 
-    s = LangUtils.removeDuplicatedSpaces("   he llo ");
-    assertEquals("he llo", s);
+    assertThat(removeDuplicatedSpaces("")).isEqualTo("");
 
-    s = LangUtils.removeDuplicatedSpaces("");
-    assertEquals("", s);
-
-    s = LangUtils.removeDuplicatedSpaces("Hello");
-    assertEquals("Hello", s);
+    assertThat(removeDuplicatedSpaces("Hello")).isEqualTo("Hello");
   }
 
   @Test
   public void testExpandVerbs() {
     String s;
 
-    s = LangUtils.expandVerbs("I'm in!");
-    assertEquals("I am in!", s);
+    assertThat(expandVerbs("I'm in!")).isEqualTo("I am in!");
 
-    s = LangUtils.expandVerbs("i'm done");
-    assertEquals("i am done", s);
+    assertThat(expandVerbs("i'm done")).isEqualTo("i am done");
 
-    s = LangUtils.expandVerbs("i've done it");
-    assertEquals("i have done it", s);
+    assertThat(expandVerbs("i've done it")).isEqualTo("i have done it");
 
-    s = LangUtils.expandVerbs("I'll kill you");
-    assertEquals("I will kill you", s);
+    assertThat(expandVerbs("I'll kill you")).isEqualTo("I will kill you");
 
-    s = LangUtils.expandVerbs("I won't kill you!");
-    assertEquals("I will not kill you!", s);
+    assertThat(expandVerbs("I won't kill you!")).isEqualTo("I will not kill you!");
 
-    s = LangUtils.expandVerbs("i'm done! i'm here!");
-    assertEquals("i am done! i am here!", s);
+    assertThat(expandVerbs("i'm done! i'm here!")).isEqualTo("i am done! i am here!");
 
-    s = LangUtils.expandVerbs("I couldn't resist...");
-    assertEquals("I could not resist...", s);
+    assertThat(expandVerbs("I couldn't resist...")).isEqualTo("I could not resist...");
 
-    s = LangUtils.expandVerbs("I could've gotten more!");
-    assertEquals("I could have gotten more!", s);
+    assertThat(expandVerbs("I could've gotten more!")).isEqualTo("I could have gotten more!");
 
-    s = LangUtils.expandVerbs("I shouldn't be here!");
-    assertEquals("I should not be here!", s);
+    assertThat(expandVerbs("I shouldn't be here!")).isEqualTo("I should not be here!");
 
-    s = LangUtils.expandVerbs("Mike's a good boy, just as you're!");
-    assertEquals("Mike is a good boy, just as you are!", s);
+    assertThat(expandVerbs("Mike's a good boy, just as you're!"))
+        .isEqualTo("Mike is a good boy, just as you are!");
 
-    s = LangUtils.expandVerbs(
-        "I didn't touch your phone! You're a liar! I didn't do anything!!!");
-    assertEquals(
-        "I did not touch your phone! You are a liar! I did not do anything!!!",
-            s);
+    assertThat(expandVerbs("I didn't touch your phone! You're a liar! I didn't do anything!!!"))
+        .isEqualTo("I did not touch your phone! You are a liar! I did not do anything!!!");
   }
 }
