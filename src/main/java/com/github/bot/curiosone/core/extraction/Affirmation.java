@@ -33,17 +33,18 @@ public class Affirmation {
       answer = true;
     }
 
+    SemanticNetwork semanticNetwork;
+    try {
+      semanticNetwork = SemanticNetwork.getInstance();
+    } catch (IOException e) {
+      e.printStackTrace();
+      semanticNetwork = null;
+    }
+
     if (answer) {
       Word verb;
       Word object;
       scope = scope.substring(0, scope.length() - 1);
-      SemanticNetwork semanticNetwork;
-      try {
-        semanticNetwork = SemanticNetwork.getInstance();
-      } catch (IOException e) {
-        e.printStackTrace();
-        semanticNetwork = null;
-      }
 
       if (sentence.respect(POS.V, POS.NP)) {
         // System.out.println("V, NP");
@@ -59,7 +60,8 @@ public class Affirmation {
       SemanticQuery sq = new SemanticQuery(
           SemanticRelationType.IS_A,
           scope,
-          verb.getLemma()
+          object.getText(),
+          null
       );
       Optional<Edge> opt = semanticNetwork.query(sq);
 
@@ -81,11 +83,25 @@ public class Affirmation {
     if (sentence.has(POS.N)) {
       List<Word> nouns = sentence.get(POS.N);
       Word object = nouns.get(nouns.size() - 1);
+
+      SemanticQuery sq = new SemanticQuery(
+          SemanticRelationType.IS_A,
+          null,
+          object.getText(),
+          null
+      );
+      Optional<Edge> opt = semanticNetwork.query(sq);
+
       String newMessage;
       String newScope;
-
-      newMessage = "Mhh! What is a " + object.getText() + "?";
-      newScope = object.getText() + "?";
+      if (opt.isPresent()) {
+        String answ = opt.get().getTarget().toString();
+        newMessage = "For what I know, " + object.getText() + " is " + answ + "!";
+        newScope = object.getText();
+      } else {
+        newMessage = "Mhh! What is a " + object.getText() + "?";
+        newScope = object.getText() + "?";
+      }
       return Optional.of(new BrainResponse(newMessage, newScope));
     }
 
