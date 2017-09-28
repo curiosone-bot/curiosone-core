@@ -147,10 +147,11 @@ public class Token {
       String word = buff.toString();
 
       Token token = new Token(word);
-      if (!token.isKnown()) {
-        word = Spelling.getInstance().correct(word);
-        token = new Token(word);
-      }
+      // This has been removed since creates problems.
+      // if (!token.isKnown()) {
+      //   word = Spelling.getInstance().correct(word);
+      //   token = new Token(word);
+      // }
       if (token.isKnown()) {
         tokens.add(0, token);
         pos -= len;
