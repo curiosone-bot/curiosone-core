@@ -1,17 +1,5 @@
 package com.github.bot.curiosone.core.extraction;
 
-import static com.github.bot.curiosone.core.util.TextConstants.DO_NOT_KNOW;
-import static com.github.bot.curiosone.core.util.TextConstants.DO_YOU;
-import static com.github.bot.curiosone.core.util.TextConstants.EXCL_MARK;
-import static com.github.bot.curiosone.core.util.TextConstants.IS;
-import static com.github.bot.curiosone.core.util.TextConstants.IS_A;
-import static com.github.bot.curiosone.core.util.TextConstants.IS_IN;
-import static com.github.bot.curiosone.core.util.TextConstants.QUESTION_MARK;
-import static com.github.bot.curiosone.core.util.TextConstants.WHAT;
-import static com.github.bot.curiosone.core.util.TextConstants.WHAT_I_KNOW;
-import static com.github.bot.curiosone.core.util.TextConstants.WHERE;
-import static com.github.bot.curiosone.core.util.TextConstants.WHO;
-
 import com.github.bot.curiosone.core.knowledge.SemanticNetwork;
 import com.github.bot.curiosone.core.knowledge.SemanticQuery;
 import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
@@ -91,7 +79,7 @@ public class Question {
       semanticNetwork = null;
     }
     switch (kind.getText()) {
-      case WHAT: {
+      case "what": {
         SemanticQuery sq = new SemanticQuery(
             SemanticRelationType.IS_A,
             object.getText(),
@@ -101,16 +89,16 @@ public class Question {
         String newMessage;
         String newScope;
         if (!opt.isPresent()) {
-          newMessage = DO_NOT_KNOW + WHAT + IS_A + object.getText() + DO_YOU;
-          newScope = object.getText() + QUESTION_MARK;
+          newMessage = "I do not know what is a " + object.getText() + "! Do you?";
+          newScope = object.getText() + '?';
         } else {
           String answer = opt.get().getTarget().toString();
-          newMessage = WHAT_I_KNOW + object.getText() + IS_A + answer + EXCL_MARK;
+          newMessage = "For what I know, " + object.getText() + " is a " + answer + '!';
           newScope = object.getText();
         }
         return Optional.of(new BrainResponse(newMessage, newScope));
       }
-      case WHO: {
+      case "who": {
         SemanticQuery sq = new SemanticQuery(
             SemanticRelationType.IS_A,
             object.getText(),
@@ -120,16 +108,16 @@ public class Question {
         String newMessage;
         String newScope;
         if (!opt.isPresent()) {
-          newMessage = DO_NOT_KNOW + WHO + IS + object.getText() + DO_YOU;
-          newScope = object.getText() + QUESTION_MARK;
+          newMessage = "I do not know who is " + object.getText() + "! Do you?";
+          newScope = object.getText() + '?';
         } else {
           String answer = opt.get().getTarget().toString();
-          newMessage = WHAT_I_KNOW + object.getText() + IS_A + answer + EXCL_MARK;
+          newMessage = "For what I know, " + object.getText() + " is a " + answer + '!';
           newScope = object.getText();
         }
         return Optional.of(new BrainResponse(newMessage, newScope));
       }
-      case WHERE: {
+      case "where": {
         SemanticQuery sq = new SemanticQuery(
             SemanticRelationType.IS_A,
             object.getText(),
@@ -139,11 +127,11 @@ public class Question {
         String newMessage;
         String newScope;
         if (!opt.isPresent()) {
-          newMessage = DO_NOT_KNOW + WHERE + IS + object.getText() + DO_YOU;
-          newScope = object.getText() + QUESTION_MARK;
+          newMessage = "I do not know where is " + object.getText() + "! Do you?";
+          newScope = object.getText() + '?';
         } else {
           String answer = opt.get().getTarget().toString();
-          newMessage = WHAT_I_KNOW + object.getText() + IS_IN + answer + EXCL_MARK;
+          newMessage = "For what I know, " + object.getText() + " is in " + answer + '!';
           newScope = object.getText();
         }
         return Optional.of(new BrainResponse(newMessage, newScope));

@@ -1,9 +1,5 @@
 package com.github.bot.curiosone.core.util;
 
-import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_PARENTHESIS;
-import static com.github.bot.curiosone.core.util.TextConstants.COMMA_SEP;
-import static com.github.bot.curiosone.core.util.TextConstants.OPEN_PARENTHESIS;
-
 import java.util.Objects;
 
 /**
@@ -77,7 +73,7 @@ public class Pair<F, S> {
    */
   @Override
   public String toString() {
-    return OPEN_PARENTHESIS + first + COMMA_SEP + second + CLOSE_PARENTHESIS;
+    return "(" + first + ", " + second + ")";
   }
 
   /**
