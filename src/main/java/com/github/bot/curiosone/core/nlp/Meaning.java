@@ -8,11 +8,16 @@ import static com.github.bot.curiosone.core.util.TextConstants.OPEN_SQ_BRACKET;
 import java.util.Objects;
 
 /**
- * A grammatical Meaning of a group of words.
+ * Handles a grammatical meaning.
+ * Provides methods to create, change and retrieve information of the Meaning.
  */
 public class Meaning implements Comparable<Meaning> {
 
+  /**
+   * Stores the default frequency value of this meaning.
+   */
   private static final int DEFAULT_FREQ_VALUE = 0;
+
   /**
    * The part of speech type of the meaning.
    */
