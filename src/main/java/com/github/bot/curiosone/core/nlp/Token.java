@@ -145,7 +145,10 @@ public class Token {
         }
       }
       String word = buff.toString();
-
+      if (word.length() == 0) {
+        pos -= len;
+        continue;
+      }
       Token token = new Token(word);
       // This has been removed since creates problems.
       // if (!token.isKnown()) {
