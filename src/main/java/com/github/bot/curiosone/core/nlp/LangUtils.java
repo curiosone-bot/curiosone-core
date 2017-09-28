@@ -18,11 +18,6 @@ public class LangUtils {
   private static final String REGEX_REMOVE_NON_ALPHANUM = "[^A-Za-z0-9 ]";
 
   /**
-   * Stores an empty String.
-   */
-  private static final String EMPTY_STRING = "";
-
-  /**
    * Stores all supported verbs abbreviations in the expandVerbs method.
    */
   private static final String[] SHORTS = {"'m", "'s", "'re", "'ve", "'ll",
