@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents a phrase.
+ * Represents a Phrase.
+ * Provides methods to create a Phrase and get its information.
  */
 public class Phrase {
+
   /**
    * Stores the text content of this Phrase.
    */
@@ -38,8 +40,7 @@ public class Phrase {
   }
 
   /**
-   * Returns {@code true} if this original string contains a question mark at the end.
-   * {@code false} otherwise
+   * Returns {@code true} if the content is a question, {@code false} otherwise.
    */
   public boolean isQuestion() {
     return question;
@@ -60,7 +61,7 @@ public class Phrase {
   }
 
   /**
-   * Returns a string representation of this phrase in the form [text, tokens].
+   * Returns a String representation of this Phrase in the form [text, tokens].
    */
   @Override
   public String toString() {
@@ -68,9 +69,9 @@ public class Phrase {
   }
 
   /**
-   * Compares this phrase to the specified object.
-   * @param other the other phrase
-   * @return {@code true} if this phrase equals the other phrase;
+   * Checks whether this Phrase equals to the given Object.
+   * @param other the other Phrase to be compared against
+   * @return {@code true} if this Phrase equals the other Phrase;
    *         {@code false} otherwise
    */
   @Override
@@ -87,6 +88,7 @@ public class Phrase {
 
   /**
    * Returns the HashCode for this Phrase.
+   * The HashCode depends on the HashCode of the content and its tokens.
    */
   @Override
   public int hashCode() {
