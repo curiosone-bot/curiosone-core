@@ -34,6 +34,9 @@ public class Token {
     known = rt.isKnown();
     means = new HashSet<>();
     lemma = rt.getLemma();
+    if (lemma == null) {
+      lemma = text;
+    }
     rt.getWords().forEach(rw -> {
       Meaning meaning = new Meaning(rw.getPos(), rw.getLexType());
       meaning.setFrequency(rw.getNum());
