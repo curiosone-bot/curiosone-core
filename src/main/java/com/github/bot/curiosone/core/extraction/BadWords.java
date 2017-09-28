@@ -1,7 +1,5 @@
 package com.github.bot.curiosone.core.extraction;
 
-import static com.github.bot.curiosone.core.util.TextConstants.EMPTY_STR;
-
 import com.github.bot.curiosone.core.nlp.Phrase;
 
 import java.io.IOException;
@@ -84,7 +82,7 @@ public class BadWords {
         .map(word -> word.getText())
         .anyMatch(word -> knownBadWords.contains(word));
     if (bad) {
-      return Optional.of(new BrainResponse(readyAnswers[randpos], EMPTY_STR));
+      return Optional.of(new BrainResponse(readyAnswers[randpos], ""));
     }
     return Optional.empty();
   }
