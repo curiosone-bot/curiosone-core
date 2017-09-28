@@ -1,5 +1,8 @@
 package com.github.bot.curiosone.core.extraction;
 
+import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_PARENTHESIS;
+import static com.github.bot.curiosone.core.util.TextConstants.OPEN_PARENTHESIS;
+
 import com.github.bot.curiosone.core.nlp.Word;
 
 import java.util.List;
@@ -10,16 +13,6 @@ import java.util.stream.Collectors;
  * Stores a response from Curiosone's Brain.
  */
 public class BrainResponse {
-
-  /**
-   * Stores the open soft bracket symbol.
-   */
-  private static final String OPEN_SOFT_BRACKET = "(";
-
-  /**
-   * Stores the close soft bracket symbol.
-   */
-  private static final String CLOSE_SOFT_BRACKET = ")";
 
   /**
    * Stores the content of the computed answer.
@@ -58,12 +51,12 @@ public class BrainResponse {
    */
   @Override
   public String toString() {
-    return text + OPEN_SOFT_BRACKET + scope + CLOSE_SOFT_BRACKET;
+    return text + OPEN_PARENTHESIS + scope + CLOSE_PARENTHESIS;
   }
 
   /**
-   * Compares this response to the specified object.
-   * @param  other the other response to be compared against
+   * Checks whether this BrainResponse equals to the given Object or not.
+   * @param other the other response to be compared against
    * @return {@code true} if this response equals the other response;
    *         {@code false} otherwise
    */
@@ -80,7 +73,8 @@ public class BrainResponse {
   }
 
   /**
-   * Returns the hashCode for this BrainResponse.
+   * Returns the HashCode for this BrainResponse.
+   * The HashCode depends on the content and the scope of this BrainResponse.
    */
   @Override
   public int hashCode() {
