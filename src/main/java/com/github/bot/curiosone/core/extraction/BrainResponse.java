@@ -1,8 +1,5 @@
 package com.github.bot.curiosone.core.extraction;
 
-import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_PARENTHESIS;
-import static com.github.bot.curiosone.core.util.TextConstants.OPEN_PARENTHESIS;
-
 import com.github.bot.curiosone.core.nlp.Word;
 
 import java.util.List;
@@ -51,7 +48,7 @@ public class BrainResponse {
    */
   @Override
   public String toString() {
-    return text + OPEN_PARENTHESIS + scope + CLOSE_PARENTHESIS;
+    return text + "(" + scope + ")";
   }
 
   /**
