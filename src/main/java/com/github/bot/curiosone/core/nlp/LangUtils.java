@@ -1,7 +1,5 @@
 package com.github.bot.curiosone.core.nlp;
 
-import static com.github.bot.curiosone.core.util.TextConstants.EMPTY_STR;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -148,6 +146,6 @@ public class LangUtils {
    * @return a new String containing the result of the non-alphanumeric characters removal
    */
   public static String removeNonAlphaNumeric(String str) {
-    return str.replaceAll(REGEX_REMOVE_NON_ALPHANUM, EMPTY_STR);
+    return str.replaceAll(REGEX_REMOVE_NON_ALPHANUM, "");
   }
 }

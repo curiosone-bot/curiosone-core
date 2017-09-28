@@ -1,10 +1,5 @@
 package com.github.bot.curiosone.core.nlp;
 
-import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_SQ_BRACKET;
-import static com.github.bot.curiosone.core.util.TextConstants.COMMA_SEP;
-import static com.github.bot.curiosone.core.util.TextConstants.FREQ_MUST_BE_POS_ERR;
-import static com.github.bot.curiosone.core.util.TextConstants.OPEN_SQ_BRACKET;
-
 import java.util.Objects;
 
 /**
@@ -72,7 +67,7 @@ public class Meaning implements Comparable<Meaning> {
    */
   public void setFrequency(int frequency) {
     if (frequency < DEFAULT_FREQ_VALUE) {
-      throw new IllegalArgumentException(FREQ_MUST_BE_POS_ERR);
+      throw new IllegalArgumentException("Frequency must be positive");
     }
     freq = frequency;
   }
@@ -82,7 +77,7 @@ public class Meaning implements Comparable<Meaning> {
    */
   @Override
   public String toString() {
-    return OPEN_SQ_BRACKET + pos + COMMA_SEP + lex + COMMA_SEP + freq + CLOSE_SQ_BRACKET;
+    return "[" + pos + ", " + lex + ", " + freq + "]";
   }
 
   /**
