@@ -1,11 +1,5 @@
 package com.github.bot.curiosone.core.nlp;
 
-import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_SQ_BRACKET;
-import static com.github.bot.curiosone.core.util.TextConstants.COMMA_SEP;
-import static com.github.bot.curiosone.core.util.TextConstants.NEWLINE;
-import static com.github.bot.curiosone.core.util.TextConstants.OPEN_SQ_BRACKET;
-import static com.github.bot.curiosone.core.util.TextConstants.POS_OUTSIDE_ERR;
-
 import com.github.bot.curiosone.core.util.Interval;
 import com.github.bot.curiosone.core.util.Pair;
 
@@ -97,8 +91,7 @@ public class ParseTable {
    */
   public Set<Rule> get(int x, int y) {
     if (y < 0 || y > size || x < 0 || x > y) {
-      throw new IndexOutOfBoundsException(POS_OUTSIDE_ERR + OPEN_SQ_BRACKET + x + COMMA_SEP + y
-          + CLOSE_SQ_BRACKET);
+      throw new IndexOutOfBoundsException("Position outside the table [" + x + ", " + y + "]");
     }
     return table[y][x].get();
   }
@@ -181,7 +174,7 @@ public class ParseTable {
       for (int y = 0; y < x + 1; y++) {
         sb.append(table[x][y]);
       }
-      sb.append(NEWLINE);
+      sb.append('\n');
     }
     return sb.toString();
   }
