@@ -1,9 +1,5 @@
 package com.github.bot.curiosone.core.util;
 
-import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_SQ_BRACKET;
-import static com.github.bot.curiosone.core.util.TextConstants.COMMA_SEP;
-import static com.github.bot.curiosone.core.util.TextConstants.OPEN_SQ_BRACKET;
-
 import java.util.Objects;
 
 /**
@@ -82,7 +78,7 @@ public class Interval implements Comparable<Interval> {
    */
   @Override
   public String toString() {
-    return OPEN_SQ_BRACKET + min + COMMA_SEP + max + CLOSE_SQ_BRACKET;
+    return "[" + min + ", " + max + "]";
   }
 
   /**
