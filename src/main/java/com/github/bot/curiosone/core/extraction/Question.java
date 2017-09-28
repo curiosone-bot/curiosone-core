@@ -1,5 +1,17 @@
 package com.github.bot.curiosone.core.extraction;
 
+import static com.github.bot.curiosone.core.util.TextConstants.DO_NOT_KNOW;
+import static com.github.bot.curiosone.core.util.TextConstants.DO_YOU;
+import static com.github.bot.curiosone.core.util.TextConstants.EXCL_MARK;
+import static com.github.bot.curiosone.core.util.TextConstants.IS;
+import static com.github.bot.curiosone.core.util.TextConstants.IS_A;
+import static com.github.bot.curiosone.core.util.TextConstants.IS_IN;
+import static com.github.bot.curiosone.core.util.TextConstants.QUESTION_MARK;
+import static com.github.bot.curiosone.core.util.TextConstants.WHAT;
+import static com.github.bot.curiosone.core.util.TextConstants.WHAT_I_KNOW;
+import static com.github.bot.curiosone.core.util.TextConstants.WHERE;
+import static com.github.bot.curiosone.core.util.TextConstants.WHO;
+
 import com.github.bot.curiosone.core.knowledge.SemanticNetwork;
 import com.github.bot.curiosone.core.knowledge.SemanticQuery;
 import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
@@ -22,62 +34,7 @@ import java.util.stream.Collectors;
 public class Question {
 
   /**
-   * Stores pronoun/determiner "what".
-   */
-  private static final String WHAT = "what";
-
-  /**
-   * Stores pronoun/determiner "who".
-   */
-  private static final String WHO = "who";
-
-  /**
-   * Stores pronoun/determiner "where".
-   */
-  private static final String WHERE = "where";
-
-  /**
-   * Stores part of the "I don't know" answer message.
-   */
-  private static final String DO_NOT_KNOW = "I do not know ";
-
-  /**
-   * Stores part of the "I don't know" answer message.
-   */
-  private static final String DO_YOU = "! Do you?";
-
-  /**
-   * Stores "is a" relation textual representation.
-   */
-  private static final String IS_A = " is a ";
-
-  /**
-   * Stores "is" relation textual representation.
-   */
-  private static final String IS = " is ";
-
-  /**
-   * Stores "is in" relation textual representation.
-   */
-  private static final String IS_IN = " is in ";
-
-  /**
-   * Stores part of the "For what i know" answer message.
-   */
-  private static final String WHAT_I_KNOW = "For what I know, ";
-
-  /**
-   * Stores question mark symbol.
-   */
-  private static final char QUESTION_MARK = '?';
-
-  /**
-   * Stores exclamation mark symbol.
-   */
-  private static final String EXCL_MARK = "!";
-
-  /**
-   * Returns an answer for the given sentence and the given scope
+   * Returns an answer for the given sentence and the given scope.
    * @param sentence the sentence to base the answer on
    * @param scope the scope for the given input sentence
    * @return an Optional instance. If an answer has been successfully computed,

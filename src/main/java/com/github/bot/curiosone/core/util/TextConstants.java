@@ -74,4 +74,60 @@ public class TextConstants {
    */
   public static final String SORRY_MY_HEAD_ERROR =
       "Sorry my head hurts, what were we talking about?";
+
+  /**
+   * Stores pronoun/determiner "what".
+   */
+  public static final String WHAT = "what";
+
+  /**
+   * Stores pronoun/determiner "who".
+   */
+  public static final String WHO = "who";
+
+  /**
+   * Stores pronoun/determiner "where".
+   */
+  public static final String WHERE = "where";
+
+  /**
+   * Stores part of the "I don't know" answer message.
+   */
+  public static final String DO_NOT_KNOW = "I do not know ";
+
+  /**
+   * Stores part of the "I don't know" answer message.
+   */
+  public static final String DO_YOU = "! Do you?";
+
+  /**
+   * Stores "is a" relation textual representation.
+   */
+  public static final String IS_A = " is a ";
+
+  /**
+   * Stores "is" relation textual representation.
+   */
+  public static final String IS = " is ";
+
+  /**
+   * Stores "is in" relation textual representation.
+   */
+  public static final String IS_IN = " is in ";
+
+  /**
+   * Stores part of the "For what i know" answer message.
+   */
+  public static final String WHAT_I_KNOW = "For what I know, ";
+
+  /**
+   * Stores question mark symbol.
+   */
+  public static final char QUESTION_MARK = '?';
+
+  /**
+   * Stores exclamation mark symbol.
+   */
+  public static final String EXCL_MARK = "!";
+
 }
