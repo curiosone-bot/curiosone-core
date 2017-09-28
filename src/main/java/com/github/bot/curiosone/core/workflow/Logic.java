@@ -1,8 +1,5 @@
 package com.github.bot.curiosone.core.workflow;
 
-import static com.github.bot.curiosone.core.util.TextConstants.EMPTY_STR;
-import static com.github.bot.curiosone.core.util.TextConstants.SORRY_MY_HEAD_ERROR;
-
 import com.github.bot.curiosone.core.extraction.Brain;
 import com.github.bot.curiosone.core.extraction.BrainResponse;
 import com.github.bot.curiosone.core.nlp.Phrase;
@@ -28,14 +25,14 @@ public class Logic {
   public static Message talk(Message msg) {
     // We are not able to parse a null string :(
     if (msg == null) {
-      return new Message(SORRY_MY_HEAD_ERROR, EMPTY_STR);
+      return new Message("Sorry my head hurts, what were we talking about?", "");
     }
     Optional<BrainResponse> br;
 
     // We just use the first now.
     List<Phrase> phrases = Phrase.extract(msg.getMessage());
     if (phrases.size() == 0) {
-      return new Message(SORRY_MY_HEAD_ERROR, EMPTY_STR);
+      return new Message("Sorry my head hurts, what were we talking about?", "");
     }
     Phrase phrase = phrases.get(0);
 
@@ -64,6 +61,6 @@ public class Logic {
     }
 
     // We have understood something but we are unable to answer now!
-    return new Message(SORRY_MY_HEAD_ERROR, EMPTY_STR);
+    return new Message("Sorry my head hurts, what were we talking about?", "");
   }
 }
