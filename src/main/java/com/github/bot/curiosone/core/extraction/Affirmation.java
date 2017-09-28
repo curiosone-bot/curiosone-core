@@ -1,5 +1,12 @@
 package com.github.bot.curiosone.core.extraction;
 
+import static com.github.bot.curiosone.core.util.TextConstants.ALREADY_KNOW;
+import static com.github.bot.curiosone.core.util.TextConstants.DOT;
+import static com.github.bot.curiosone.core.util.TextConstants.IS_A;
+import static com.github.bot.curiosone.core.util.TextConstants.QUESTION_MARK;
+import static com.github.bot.curiosone.core.util.TextConstants.WHAT_IS_A;
+import static com.github.bot.curiosone.core.util.TextConstants.WOW_LEARNED;
+
 import com.github.bot.curiosone.core.knowledge.SemanticNetwork;
 import com.github.bot.curiosone.core.knowledge.SemanticQuery;
 import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
@@ -29,12 +36,7 @@ public class Affirmation {
    *         Otherwise, the Optional instance will contain the answer.
    */
   public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) {
-    boolean answer = false;
-    if (scope.length() > 0 && scope.charAt(scope.length() - 1) == '?') {
-      answer = true;
-    }
-
-    if (answer) {
+    if (scope.length() > 0 && scope.charAt(scope.length() - 1) == QUESTION_MARK) {
       Word verb;
       Word object;
       scope = scope.substring(0, scope.length() - 1);
@@ -47,7 +49,6 @@ public class Affirmation {
       }
 
       if (sentence.respect(POS.V, POS.NP)) {
-        // System.out.println("V, NP");
         List<Word>[] extracted = sentence.parse(POS.V, POS.NP);
         verb = extracted[0].stream().filter(w -> w.itMeans(POS.V)).findFirst().get();
         List<Word> nouns =
@@ -67,12 +68,11 @@ public class Affirmation {
       String newMessage;
       String newScope;
       if (opt.isPresent()) {
-        newMessage = "I already knew that " + scope + " is a " + object.getText() + ".";
+        newMessage = ALREADY_KNOW + scope + IS_A + object.getText() + DOT;
         newScope = object.getText();
       } else {
         semanticNetwork.learn(scope, SemanticRelationType.IS_A, object.getText());
-        newMessage = "Wow really interesting! Now I know that a " + scope + " is a "
-            + object.getText() + ".";
+        newMessage = WOW_LEARNED + scope + IS_A + object.getText() + DOT;
         newScope = object.getText();
       }
 
@@ -85,8 +85,8 @@ public class Affirmation {
       String newMessage;
       String newScope;
 
-      newMessage = "Mhh! What is a " + object.getText() + "?";
-      newScope = object.getText() + "?";
+      newMessage = WHAT_IS_A + object.getText() + QUESTION_MARK;
+      newScope = object.getText() + QUESTION_MARK;
       return Optional.of(new BrainResponse(newMessage, newScope));
     }
 

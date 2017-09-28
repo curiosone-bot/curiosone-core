@@ -129,8 +129,27 @@ public class TextConstants {
   public static final char QUESTION_MARK = '?';
 
   /**
+   * Stores dot symbol.
+   */
+  public static final char DOT = '.';
+
+  /**
    * Stores exclamation mark symbol.
    */
   public static final String EXCL_MARK = "!";
 
+  /**
+   * Stores textual message to state that we already know an argument.
+   */
+  public static final String ALREADY_KNOW = "I already knew that ";
+
+  /**
+   * Stores textual message to state that we learned something new.
+   */
+  public static final String WOW_LEARNED = "Wow really interesting! Now I know that a ";
+
+  /**
+   * Stores textual message to ask about something we do not know yet.
+   */
+  public static final String WHAT_IS_A = "Mhh! What is a ";
 }
