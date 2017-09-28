@@ -29,7 +29,8 @@ public class Affirmation {
    *         Otherwise, the Optional instance will contain the answer.
    */
   public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) {
-    if (scope.length() > 0 && scope.charAt(scope.length() - 1) == '?') {
+    boolean answer = (scope.length() > 0 && scope.charAt(scope.length() - 1) == '?');
+    if (answer) {
       Word verb;
       Word object;
       scope = scope.substring(0, scope.length() - 1);
