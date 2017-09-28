@@ -1,7 +1,5 @@
 package com.github.bot.curiosone.core.extraction;
 
-import static com.github.bot.curiosone.core.util.TextConstants.EMPTY_STR;
-
 import com.github.bot.curiosone.core.nlp.Phrase;
 import com.github.bot.curiosone.core.nlp.Token;
 
@@ -54,11 +52,11 @@ public class RandomAnswer {
     List<Token> tokenList = phrase.getTokens();
 
     if (tokenList.size() == 1) {
-      return new BrainResponse(phrase.getText() + CONSTANTS[randomIndex(CONSTANTS)], EMPTY_STR);
+      return new BrainResponse(phrase.getText() + CONSTANTS[randomIndex(CONSTANTS)], "");
     } else if (tokenList.stream().map(x -> x.getLemma()).anyMatch(x -> x == null)) {
-      return new BrainResponse(ENGLISH_ANSWERS[randomIndex(ENGLISH_ANSWERS)], EMPTY_STR);
+      return new BrainResponse(ENGLISH_ANSWERS[randomIndex(ENGLISH_ANSWERS)], "");
     }
-    return new BrainResponse(GENERAL_ANSWERS[randomIndex(GENERAL_ANSWERS)], EMPTY_STR);
+    return new BrainResponse(GENERAL_ANSWERS[randomIndex(GENERAL_ANSWERS)], "");
   }
 
   /**
