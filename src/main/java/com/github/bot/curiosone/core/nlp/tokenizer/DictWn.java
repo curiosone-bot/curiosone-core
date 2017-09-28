@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
  * @see https://wordnet.princeton.edu/
  */
 
-public class DictWn {
+class DictWn {
 
   /**
    * Singleton instance on class loading is thread-safe.
@@ -55,7 +55,7 @@ public class DictWn {
    * Get DictWn instance.
    * @return a new {@link #instance}
    */
-  public static DictWn getInstance() {
+  protected static DictWn getInstance() {
     if  (instance != null) {
       return instance;
     }
@@ -76,7 +76,7 @@ public class DictWn {
    * @return Token Structure that contains Dictionary info
    * @see com.github.bot.curiosone.core.nlp.tokenizer.Token
    */
-  public static Token getToken(String item) {
+  protected static Token getToken(String item) {
     if (item.length() == 0 || item.equals(" ")) {
       return null;
     }
@@ -109,7 +109,7 @@ public class DictWn {
       this.items = items;
     }
 
-    public String[] getItems() {
+    private String[] getItems() {
       return items;
     }
   }
@@ -128,7 +128,7 @@ public class DictWn {
       this.items = items;
     }
 
-    public String[] getItems() {
+    private String[] getItems() {
       return items;
     }
   }
@@ -147,7 +147,7 @@ public class DictWn {
       this.items = items;
     }
 
-    public String[] getItems() {
+    private String[] getItems() {
       return items;
     }
   }
@@ -165,7 +165,7 @@ public class DictWn {
       this.items = items;
     }
 
-    public String[] getItems() {
+    private String[] getItems() {
       return items;
     }
   }
@@ -189,7 +189,7 @@ public class DictWn {
       this.items = items;
     }
 
-    public String[] getItems() {
+    private String[] getItems() {
       return items;
     }
   }
@@ -208,7 +208,7 @@ public class DictWn {
    * @see http://www.rfc-editor.org/rfc/rfc5322.txt
    */
 
-  public static boolean isValidEmailAddress(String email) {
+  private static boolean isValidEmailAddress(String email) {
     String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]"
         + "+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 
@@ -242,8 +242,8 @@ public class DictWn {
       com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
               retWord = new Word();
       retWord.setLemma(item);
-      retWord.setPos(PosT.NUMB);
-      retWord.setLexType(LexT.QUANTITY);
+      retWord.setPos(PosType.NUMB);
+      retWord.setLexType(LexType.QUANTITY);
       retWord.setGloss("Numeric outside WordNet");
       token.addWord(retWord);
       return token;
@@ -256,8 +256,8 @@ public class DictWn {
       com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
               retWord = new Word();
       retWord.setLemma(item);
-      retWord.setPos(PosT.N);
-      retWord.setLexType(LexT.MAIL);
+      retWord.setPos(PosType.N);
+      retWord.setLexType(LexType.MAIL);
       retWord.setGloss("Mail address outside WordNet");
       token.addWord(retWord);
       return token;
@@ -274,8 +274,8 @@ public class DictWn {
       com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
               retWord = new Word();
       retWord.setLemma(item);
-      retWord.setPos(PosT.PRON);
-      retWord.setLexType(LexT.valueOf(n.toString()));
+      retWord.setPos(PosType.PRON);
+      retWord.setLexType(LexType.valueOf(n.toString()));
       retWord.setGloss("Pronoun outside WordNet");
       token.addWord(retWord);
       return token;
@@ -292,8 +292,8 @@ public class DictWn {
       com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
           retWord = new Word();
       retWord.setLemma(item);
-      retWord.setPos(PosT.DET);
-      retWord.setLexType(LexT.valueOf(n.toString()));
+      retWord.setPos(PosType.DET);
+      retWord.setLexType(LexType.valueOf(n.toString()));
       retWord.setGloss("Determiners outside WordNet");
       token.addWord(retWord);
       return token;
@@ -310,8 +310,8 @@ public class DictWn {
       com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
           retWord = new Word();
       retWord.setLemma(item);
-      retWord.setPos(PosT.CONJ);
-      retWord.setLexType(LexT.valueOf(n.toString()));
+      retWord.setPos(PosType.CONJ);
+      retWord.setLexType(LexType.valueOf(n.toString()));
       retWord.setGloss("Conjunctions outside WordNet");
       token.addWord(retWord);
       return token;
@@ -328,8 +328,8 @@ public class DictWn {
       com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
           retWord = new Word();
       retWord.setLemma(item);
-      retWord.setPos(PosT.INTERJ);
-      retWord.setLexType(LexT.valueOf(n.toString()));
+      retWord.setPos(PosType.INTERJ);
+      retWord.setLexType(LexType.valueOf(n.toString()));
       retWord.setGloss("Interjections outside WordNet");
       token.addWord(retWord);
       return token;
@@ -346,8 +346,8 @@ public class DictWn {
       com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
           retWord = new Word();
       retWord.setLemma(item);
-      retWord.setPos(PosT.ADV);
-      retWord.setLexType(LexT.valueOf(n.toString()));
+      retWord.setPos(PosType.ADV);
+      retWord.setLexType(LexType.valueOf(n.toString()));
       retWord.setGloss("Adverbs outside WordNet");
       token.addWord(retWord);
       return token;
@@ -383,20 +383,20 @@ public class DictWn {
             retWord.setLemma(lemma);
             switch (p) {
               case NOUN:
-                retWord.setPos(PosT.N);
+                retWord.setPos(PosType.N);
                 break;
               case VERB:
-                retWord.setPos(PosT.V);
+                retWord.setPos(PosType.V);
                 break;
               case ADJECTIVE:
-                retWord.setPos(PosT.ADJ);
+                retWord.setPos(PosType.ADJ);
                 break;
               case ADVERB:
-                retWord.setPos(PosT.ADV);
+                retWord.setPos(PosType.ADV);
                 break;
-              default: retWord.setPos(PosT.UNKN);
+              default: retWord.setPos(PosType.UNKN);
             };
-            retWord.setLexType(LexT.valueOf(
+            retWord.setLexType(LexType.valueOf(
                 word.getSynset()
                             .getLexicalFile()
                             .getName()

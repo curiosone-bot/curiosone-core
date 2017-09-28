@@ -1,8 +1,7 @@
 package com.github.bot.curiosone.core.nlp.tokenizer.interfaces;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.LexT;
-import com.github.bot.curiosone.core.nlp.tokenizer.PosT;
-import com.github.bot.curiosone.core.nlp.tokenizer.Word;
+import com.github.bot.curiosone.core.nlp.tokenizer.LexType;
+import com.github.bot.curiosone.core.nlp.tokenizer.PosType;
 
 import edu.mit.jwi.item.IWordID;
 
@@ -23,7 +22,7 @@ public interface IWord {
    * @see Word#getPos()
    */
 
-  PosT getPos();
+  PosType getPos();
 
   /**
    * Get lexType.
@@ -31,7 +30,7 @@ public interface IWord {
    * @see Word#getLexType()
    */
 
-  LexT getLexType();
+  LexType getLexType();
 
   /**
    * Get lemma.
@@ -85,7 +84,7 @@ public interface IWord {
    * @see #wordId
    */
 
-  public void setWordId(IWordID wordId);
+  	void setWordId(IWordID wordId);
 
   /**
    * Set a new {@link #pos} value that is provided in input.
@@ -93,7 +92,7 @@ public interface IWord {
    * @see #pos
    */
 
-  public void setPos(PosT pos);
+  	void setPos(PosType pos);
 
   /**
    * Set a new {@link #lexType} value that is provided in input.
@@ -101,7 +100,7 @@ public interface IWord {
    * @see #lexType
    */
 
-  public void setLexType(LexT lexType);
+  	void setLexType(LexType lexType);
 
   /**
    * Set a new {@link #lemma} value that is provided in input.
@@ -109,7 +108,7 @@ public interface IWord {
    * @see #lemma
    */
 
-  public void setLemma(String lemma);
+  	void setLemma(String lemma);
 
   /**
    * Set a new {@link #gloss} value that is provided in input.
@@ -117,13 +116,13 @@ public interface IWord {
    * @see #gloss
    */
 
-  public void setGloss(String gloss);
+  	void setGloss(String gloss);
 
   /**
    * Set the number of occurrence of word.
    *
    */
-  public void setNum(int num);
+  	void setNum(int num);
 
   /**
    * Add a new element to relations.
@@ -131,7 +130,7 @@ public interface IWord {
    * @see #relations
    */
 
-  public void addRelation(String p, String value);
+  	void addRelation(String p, String value);
 
   /**
    * Set the map of relations.
@@ -139,6 +138,6 @@ public interface IWord {
    * @see #relations
    */
 
-  public void setRelations(Map<String, List<String>> relations);
+  	void setRelations(Map<String, List<String>> relations);
 
 }

@@ -25,15 +25,15 @@ public class Word implements IWord {
    * @see POST
    */
 
-  private PosT pos;
+  private PosType pos;
 
   /**
    * Lexicographic file name.
    *
-   * @see LexT
+   * @see LexType
    */
 
-  private LexT lexType;
+  private LexType lexType;
 
   /**
    * Lemma of word.
@@ -127,7 +127,7 @@ public class Word implements IWord {
    * @see #pos
    */
 
-  @Override public PosT getPos() {
+  @Override public PosType getPos() {
     return pos;
   }
 
@@ -138,7 +138,7 @@ public class Word implements IWord {
    */
 
   @Override
-  public void setPos(PosT pos) {
+  public void setPos(PosType pos) {
     this.pos = pos;
   }
 
@@ -149,7 +149,7 @@ public class Word implements IWord {
    * @see #lexType
    */
 
-  @Override public LexT getLexType() {
+  @Override public LexType getLexType() {
     return lexType;
   }
 
@@ -159,7 +159,7 @@ public class Word implements IWord {
    * @see #lexType
    */
 
-  @Override public void setLexType(LexT lexType) {
+  @Override public void setLexType(LexType lexType) {
     this.lexType = lexType;
   }
 

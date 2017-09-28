@@ -21,9 +21,9 @@ public class Tokenizer {
 
   /**
    * Typology of Sentence.
-   * @see SentenceT
+   * @see SentenceType
    */
-  private SentenceT type;
+  private SentenceType type;
 
   /**
    * Generated tokens' list.
@@ -64,20 +64,20 @@ public class Tokenizer {
    * Also checks if the {@link #inputUser} string is a question or an affirmation/answer.
    * @return {@link #type}
    */
-  public SentenceT checkSentence() {
+  private SentenceType checkSentence() {
     for (int i = 0; i < inputUser.length(); i++) {
       if (isSpecial(inputUser.charAt(i))) {
         if (i < inputUser.length() - 2) {
           switch (inputUser.charAt(i)) {
             case '?':
-              setType(SentenceT.MORE_SENTENCE);
+              setType(SentenceType.MORE_SENTENCE);
               return getType();
             case '!':
-              setType(SentenceT.MORE_SENTENCE);
+              setType(SentenceType.MORE_SENTENCE);
               return getType();
             case '.':
               setType(verifyPunct(i));
-              if (getType().equals(SentenceT.MORE_SENTENCE)) {
+              if (getType().equals(SentenceType.MORE_SENTENCE)) {
                 return getType();
               }
               break;
@@ -95,36 +95,36 @@ public class Tokenizer {
 
   /**
    * Verify if the punctuation in the phrase is an error (if true, the {@link #type}'ll be setted
-   * to {@link SentenceT#MORE_SENTENCE}, or if a symbol used for something else
-   * (and in thise case {@link #type} will be setted to {@link SentenceT#ANSWER}.
+   * to {@link SentenceType#MORE_SENTENCE}, or if a symbol used for something else
+   * (and in thise case {@link #type} will be setted to {@link SentenceType#ANSWER}.
    * @param index of start
    * @return {@link #type}
    */
-  private SentenceT verifyPunct(int index) {
+  private SentenceType verifyPunct(int index) {
     char before = inputUser.charAt(index - 1);
     char next = inputUser.charAt(index + 1);
     boolean case1 = isBlank(before) && (!isAlpha(next) && !isNumber(next));
     boolean case2 = isBlank(before) && (!isAlpha(before) && !isNumber(before));
     boolean case3 = isSpecial(before) || isSpecial(next);
     if ((case1 || case2) || case3) {
-      setType(SentenceT.MORE_SENTENCE);
+      setType(SentenceType.MORE_SENTENCE);
     } else {
-      setType(SentenceT.ANSWER);
+      setType(SentenceType.ANSWER);
     }
     return getType();
   }
 
   /**
    * Check if the last character of {@link #inputUser} represents
-   * an {@link SentenceT#ANSWER} or a {@link SentenceT#QUESTION}.
+   * an {@link SentenceType#ANSWER} or a {@link SentenceType#QUESTION}.
    * @return {@link #type}
    */
-  private SentenceT checkType() {
-    if (getType().equals(SentenceT.MORE_SENTENCE)) {
+  private SentenceType checkType() {
+    if (getType().equals(SentenceType.MORE_SENTENCE)) {
       return getType();
     } else {
       return inputUser.charAt(inputUser.length() - 1) == '?'
-        ? SentenceT.QUESTION : SentenceT.ANSWER;
+        ? SentenceType.QUESTION : SentenceType.ANSWER;
     }
   }
 
@@ -132,7 +132,7 @@ public class Tokenizer {
    * Check for every syntax errors in {@link #inputUser} and correct them.
    * @return an instance of StringBuilder that represents {@link #inputUser} cleared from errors
    */
-  public StringBuilder checkPunct() {
+  private StringBuilder checkPunct() {
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < inputUser.length(); i++) {
       char elem = inputUser.charAt(i);
@@ -322,7 +322,7 @@ public class Tokenizer {
    * @return {@link #tokens}
    * @throws Exception see {@link #createToken(int, int)}
    */
-  public List<IToken> createListOfTokens() throws Exception {
+  private List<IToken> createListOfTokens() throws Exception {
     return createToken(0, 4);
   }
 
@@ -446,7 +446,7 @@ public class Tokenizer {
    * Get {@link #inputUser} as string.
    * @return {@link #inputUser}
    */
-  public String getInputUser() {
+  private String getInputUser() {
     return inputUser.toString();
   }
 
@@ -454,7 +454,7 @@ public class Tokenizer {
    * Get {@link #stringToken}.
    * @return {@link #stringToken}
    */
-  public List<String> getStringToken() {
+  private List<String> getStringToken() {
     return stringToken;
   }
 
@@ -462,7 +462,7 @@ public class Tokenizer {
    * Add a new element to {@link #stringToken}.
    * @param stringToken element to add to {@link #stringToken}
    */
-  public void addStringToken(String stringToken) {
+  private void addStringToken(String stringToken) {
     this.stringToken.add(stringToken);
   }
 
@@ -470,7 +470,7 @@ public class Tokenizer {
    * Get the type.
    * @return {@link #type}
    */
-  public SentenceT getType() {
+  private SentenceType getType() {
     return type;
   }
 
@@ -478,7 +478,7 @@ public class Tokenizer {
    * Set {@link #type} to a new value provided in input.
    * @param t type of new value
    */
-  public void setType(SentenceT t) {
+  private void setType(SentenceType t) {
     this.type = t;
   }
 
@@ -486,7 +486,7 @@ public class Tokenizer {
    * Get {@link #tokens}.
    * @return  {@link #tokens}
    */
-  public List<IToken> getTokens() {
+  private List<IToken> getTokens() {
     return tokens;
   }
 
@@ -494,7 +494,7 @@ public class Tokenizer {
    * Add a new element to {@link #tokens}.
    * @param t token to be add
    */
-  public void addToken(Token t) {
+  private void addToken(Token t) {
     tokens.add(t);
   }
 
@@ -503,7 +503,7 @@ public class Tokenizer {
    * @param toks collection of token to be add all
    * @return true if this list changed as a result of the call, false otherwise
    */
-  public boolean addAllTokens(Collection<? extends IToken> toks) {
+  private boolean addAllTokens(Collection<? extends IToken> toks) {
     return tokens.addAll(toks);
   }
 
