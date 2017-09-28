@@ -53,8 +53,11 @@ public class RandomAnswer {
 
     if (tokenList.size() == 1) {
       return new BrainResponse(phrase.getText() + costants[randomIndex(costants)], "");
-    } else if (tokenList.stream().map(x -> x.getLemma()).anyMatch(x -> x == null)) {
-      return new BrainResponse(englishAnswers[randomIndex(englishAnswers)], "");
+    } else {
+      long count = tokenList.stream().map(Token::isKnown).filter(x -> !x).count();
+      if (count > tokenList.size() / 2) {
+        return new BrainResponse(englishAnswers[randomIndex(englishAnswers)], "");
+      }
     }
     return new BrainResponse(generalAnswers[randomIndex(generalAnswers)], "");
   }

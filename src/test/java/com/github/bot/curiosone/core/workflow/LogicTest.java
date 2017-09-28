@@ -63,5 +63,11 @@ public class LogicTest {
 
     msg = Logic.talk(new Message("It is a bed!", "bed?"));
     System.out.println(msg);
+
+    msg = Logic.talk(new Message("Matteo is a student!", "matteo?"));
+    System.out.println(msg);
+
+    msg = Logic.talk(new Message("Matteo hates you!", "matteo?"));
+    System.out.println(msg);
   }
 }
