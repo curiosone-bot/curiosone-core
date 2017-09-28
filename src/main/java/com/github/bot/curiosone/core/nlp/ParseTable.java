@@ -1,10 +1,10 @@
 package com.github.bot.curiosone.core.nlp;
 
-import static com.github.bot.curiosone.core.util.TextConstants.POS_OUTSIDE_ERR;
-import static com.github.bot.curiosone.core.util.TextConstants.OPEN_SQ_BRACKET;
 import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_SQ_BRACKET;
 import static com.github.bot.curiosone.core.util.TextConstants.COMMA_SEP;
 import static com.github.bot.curiosone.core.util.TextConstants.NEWLINE;
+import static com.github.bot.curiosone.core.util.TextConstants.OPEN_SQ_BRACKET;
+import static com.github.bot.curiosone.core.util.TextConstants.POS_OUTSIDE_ERR;
 
 import com.github.bot.curiosone.core.util.Interval;
 import com.github.bot.curiosone.core.util.Pair;
