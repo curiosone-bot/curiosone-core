@@ -3,6 +3,11 @@ package com.github.bot.curiosone.core.util;
 public class TextConstants {
 
   /**
+   * Stores an empty String.
+   */
+  public static final String EMPTY_STR = "";
+
+  /**
    * String representation of the IllegalArgumentException message thrown in Meaning.setFrequency()
    * method.
    */
@@ -63,4 +68,10 @@ public class TextConstants {
    * Stores closing parenthesis symbol.
    */
   public static final String CLOSE_PARENTHESIS = ")";
+
+  /**
+   * Stores error message to be used when the Curiosone is not able to understan a Message.
+   */
+  public static final String SORRY_MY_HEAD_ERROR =
+      "Sorry my head hurts, what were we talking about?";
 }

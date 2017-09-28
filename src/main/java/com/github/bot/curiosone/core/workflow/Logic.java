@@ -1,5 +1,8 @@
 package com.github.bot.curiosone.core.workflow;
 
+import static com.github.bot.curiosone.core.util.TextConstants.EMPTY_STR;
+import static com.github.bot.curiosone.core.util.TextConstants.SORRY_MY_HEAD_ERROR;
+
 import com.github.bot.curiosone.core.extraction.Brain;
 import com.github.bot.curiosone.core.extraction.BrainResponse;
 import com.github.bot.curiosone.core.nlp.Phrase;
@@ -10,31 +13,35 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Description.
+ * Manages the Logic Layer of the Curiosone.
+ * This class barely consists of a static method used to generate an answer to a provided message.
  */
 public class Logic {
+
   /**
-   * talk description.
-   * @param  msg [description]
-   * @return [description]
+   * Tries to compute an answer to a given Message.
+   * @param msg the Message to be answered. Can be null.
+   * @return a Message instance.
+   *         If an answer has been found, the instance contains a choerent reply body.
+   *         Otherwise, a default message is embedded in the Message instance
    */
   public static Message talk(Message msg) {
     // We are not able to parse a null string :(
     if (msg == null) {
-      return new Message("Sorry my head hurts, what were we talking about?", "");
+      return new Message(SORRY_MY_HEAD_ERROR, EMPTY_STR);
     }
     Optional<BrainResponse> br;
 
     // We just use the first now.
     List<Phrase> phrases = Phrase.extract(msg.getMessage());
     if (phrases.size() == 0) {
-      return new Message("Sorry my head hurts, what were we talking about?", "");
+      return new Message(SORRY_MY_HEAD_ERROR, EMPTY_STR);
     }
     Phrase phrase = phrases.get(0);
 
     //TODO: add analysis here.
 
-    // If it's a conversational text answer directly.
+    // If it's a conversational text, answer directly.
     br = Brain.conversate(phrase);
     if (br.isPresent()) {
       BrainResponse answer = br.get();
@@ -57,6 +64,6 @@ public class Logic {
     }
 
     // We have understood something but we are unable to answer now!
-    return new Message("Sorry my head hurts, what were we talking about?", "");
+    return new Message(SORRY_MY_HEAD_ERROR, EMPTY_STR);
   }
 }
