@@ -1,7 +1,5 @@
 package com.github.bot.curiosone.core.nlp;
 
-import static com.github.bot.curiosone.core.util.TextConstants.TWO_DOTS_SEP;
-
 import com.github.bot.curiosone.core.util.Pair;
 
 import java.io.IOException;
@@ -73,7 +71,7 @@ public class Rule {
    */
   @Override
   public String toString() {
-    return from + TWO_DOTS_SEP + to;
+    return from + ':' + to;
   }
 
   /**
