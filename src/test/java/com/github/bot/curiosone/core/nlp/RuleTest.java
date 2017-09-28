@@ -2,7 +2,7 @@ package com.github.bot.curiosone.core.nlp;
 
 import static com.github.bot.curiosone.core.nlp.Rule.allFrom;
 import static com.github.bot.curiosone.core.nlp.Rule.allTo;
-
+import static org.assertj.core.api.Assertions.assertThat;
 // SUPPRESS CHECKSTYLE AvoidStarImport
 import static org.junit.Assert.*;
 
@@ -17,68 +17,68 @@ public class RuleTest {
   @Test
   public void testEqualsReflexive() {
     Rule r = new Rule(POS.AP, new Pair(POS.NP, POS.NPP));
-    assertTrue(r.equals(r));
+    assertThat(r).isEqualTo(r);
   }
 
   @Test
   public void testEqualsSymmetric() {
     Rule r = new Rule(POS.AP, new Pair(POS.NEG, POS.ADJ));
     Rule rr = new Rule(POS.AP, new Pair(POS.NEG, POS.ADJ));
-    assertTrue(r.equals(rr) && rr.equals(r));
+    assertThat(r.equals(rr) && rr.equals(r)).isTrue();
   }
 
   @Test
   public void testEqualsNullComparison() {
     Rule r = new Rule(POS.AP, new Pair(POS.NEG, POS.ADJ));
-    assertFalse(r.equals(null));
+    assertThat(r).isNotEqualTo(null);
   }
 
   @Test
   public void testEqualsOtherObj() {
     Rule r = new Rule(POS.AP, new Pair(POS.APP, POS.APP));
-    assertFalse(r.equals(new StringBuffer("APP")));
+    assertThat(r).isNotEqualTo(new StringBuffer("APP"));
 
     r = new Rule(POS.APP, new Pair(POS.ADV, POS.CONJ));
-    assertFalse(r.equals(new Double(42.42)));
+    assertThat(r).isNotEqualTo(new Double(42.42));
 
     r = new Rule(POS.S, new Pair(POS.S, POS.DET));
-    assertFalse(r.equals(new Object()));
+    assertThat(r).isNotEqualTo(new Object());
   }
 
   @Test
   public void testHashCodeReflexive() {
     Rule r = new Rule(POS.PREP, new Pair(POS.VPP, POS.UNKN));
-    assertEquals(r.hashCode(), r.hashCode());
+    assertThat(r.hashCode()).isEqualTo(r.hashCode());
   }
 
   @Test
   public void testHashCodeSymmetric() {
     Rule r = new Rule(POS.AP, new Pair(POS.NEG, POS.ADJ));
     Rule rr = new Rule(POS.AP, new Pair(POS.NEG, POS.ADJ));
-    assertEquals(r.hashCode(), rr.hashCode());
+    assertThat(r.hashCode()).isEqualTo(rr.hashCode());
   }
 
   @Test
   public void testGetFrom() {
     Rule r = new Rule(POS.AP, new Pair(POS.AP, POS.AP));
-    assertEquals(POS.AP, r.getFrom());
+    assertThat(r.getFrom()).isEqualTo(POS.AP);
 
     r = new Rule(POS.CONJ, new Pair(POS.AP, POS.CONJ));
-    assertEquals(POS.CONJ, r.getFrom());
+    assertThat(r.getFrom()).isEqualTo(POS.CONJ);
 
     r = new Rule(POS.NPP, new Pair(POS.NP, POS.VP));
-    assertEquals(POS.NPP, r.getFrom());
+    assertThat(r.getFrom()).isEqualTo(POS.NPP);
   }
 
   @Test
   public void testGetTo() {
     Rule r = new Rule(POS.APP, new Pair(POS.AP, POS.AP));
-    assertEquals(new Pair(POS.AP, POS.AP), r.getTo());
+    assertThat(r.getTo()).isEqualTo(new Pair(POS.AP, POS.AP));
 
     r = new Rule(POS.NUMB, new Pair(POS.PREP, POS.NUMB));
-    assertEquals(new Pair(POS.PREP, POS.NUMB), r.getTo());
+    assertThat(r.getTo()).isEqualTo(new Pair(POS.PREP, POS.NUMB));
 
     r = new Rule(POS.APP, new Pair(POS.S, POS.V));
-    assertEquals(new Pair(POS.S, POS.V), r.getTo());
+    assertThat(r.getTo()).isEqualTo(new Pair(POS.S, POS.V));
   }
 }
