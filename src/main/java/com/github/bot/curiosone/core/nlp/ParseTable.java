@@ -30,6 +30,7 @@ public class ParseTable {
 
   /**
    * Lists all the tokens from witch the table was generated.
+   * @see Token
    */
   private List<Token> tokens;
 
@@ -171,7 +172,7 @@ public class ParseTable {
   }
 
   /**
-   * Returns a string representation for this CYK table.
+   * Returns a String representation for this CYK table.
    */
   @Override
   public String toString() {
@@ -187,6 +188,7 @@ public class ParseTable {
 
   /**
    * Represents a single Cell of the CYK table.
+   * Provides methods to create a Cell and retreive its content.
    */
   private class Cell {
     /**
