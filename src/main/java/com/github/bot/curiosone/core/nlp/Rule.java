@@ -1,8 +1,8 @@
 package com.github.bot.curiosone.core.nlp;
 
-import com.github.bot.curiosone.core.util.Pair;
-
 import static com.github.bot.curiosone.core.util.TextConstants.TWO_DOTS_SEP;
+
+import com.github.bot.curiosone.core.util.Pair;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
