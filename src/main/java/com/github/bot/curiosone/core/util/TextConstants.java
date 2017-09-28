@@ -1,5 +1,8 @@
 package com.github.bot.curiosone.core.util;
 
+/**
+ * Stores full or partial text messages so as that they can be easily shared between Classes.
+ */
 public class TextConstants {
 
   /**
