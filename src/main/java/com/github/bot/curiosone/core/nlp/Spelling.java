@@ -120,7 +120,7 @@ public class Spelling {
   }
 
   /**
-   * Checks whetherthe stream of strings is in {@link #dict} or not.
+   * Checks whether the stream of strings is in {@link #dict} or not.
    * @param words stream of strings
    * @return a Stream containing only the words represented by a String in {@link #dict}
    */
