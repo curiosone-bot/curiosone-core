@@ -1,9 +1,5 @@
 package com.github.bot.curiosone.core.nlp;
 
-import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_INEQ_BRACKET;
-import static com.github.bot.curiosone.core.util.TextConstants.COMMA_SEP;
-import static com.github.bot.curiosone.core.util.TextConstants.OPEN_INEQ_BRACKET;
-
 import com.github.bot.curiosone.core.util.Interval;
 
 import java.util.ArrayList;
@@ -151,7 +147,7 @@ public class Sentence {
    */
   @Override
   public String toString() {
-    return OPEN_INEQ_BRACKET + words + COMMA_SEP + lookup + CLOSE_INEQ_BRACKET;
+    return "<" + words + ", " + lookup + ">";
   }
 
   /**

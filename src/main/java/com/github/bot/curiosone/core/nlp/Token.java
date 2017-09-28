@@ -1,9 +1,5 @@
 package com.github.bot.curiosone.core.nlp;
 
-import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_SQ_BRACKET;
-import static com.github.bot.curiosone.core.util.TextConstants.COMMA_SEP;
-import static com.github.bot.curiosone.core.util.TextConstants.OPEN_SQ_BRACKET;
-
 import com.github.bot.curiosone.core.nlp.raw.RawDict;
 import com.github.bot.curiosone.core.nlp.raw.RawToken;
 
@@ -89,7 +85,7 @@ public class Token {
    */
   @Override
   public String toString() {
-    return OPEN_SQ_BRACKET + text + COMMA_SEP + means + CLOSE_SQ_BRACKET;
+    return "[" + text + ", " + means + "]";
   }
 
   /**
