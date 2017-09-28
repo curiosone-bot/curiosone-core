@@ -49,6 +49,8 @@ public class TextConstants {
    */
   public static final String CLOSE_INEQ_BRACKET = ">";
 
+  public static final String OPEN_CIRC_BRACKET = "(";
+
   public static final String SPACE_OPEN_CIRC_BRACKET = " (";
 
   public static final String CLOSE_CIRC_BRACKET = ")";
