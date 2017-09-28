@@ -1,5 +1,7 @@
 package com.github.bot.curiosone.core.extraction;
 
+import static com.github.bot.curiosone.core.util.TextConstants.EMPTY_STR;
+
 import com.github.bot.curiosone.core.nlp.Phrase;
 
 import java.io.IOException;
@@ -14,16 +16,19 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
- * Handles precomputed answers to some common bad words.
- */
+ * Handles precomputed answers to some common bad words and insults.
+ * Provides a public static method to get a coherent answer, according to the provided insults
+ * and/or bad words.
+*/
 public class BadWords {
+
   /**
-   * Path to the database containing known insults.
+   * Path to known insults database.
    */
   private static String badWordsPath = "/conversation/bad_words.txt";
 
   /**
-   * List of different insults that the bot knows.
+   * Lists different insults known by the Bot.
    */
   private static List<String> knownBadWords;
 
@@ -66,9 +71,9 @@ public class BadWords {
   /**
    * Returns an answer for the given phrase.
    * @param phrase the original phrase to be answered
-   * @return an Optional instance. If the instance contains a value, then an
-   *         answer has been found.
-   *         Otherwise, if the instance is empty, no answer has been found.
+   * @return an Optional instance.
+   *         The returned instance is empty, if no bad word or insult has been found in the original
+   *         Phrase, contains a value (an instance of BrainResponse) otherwise.
    */
   public static Optional<BrainResponse> getAnswer(Phrase phrase) {
     if (knownBadWords == null) {
@@ -79,7 +84,7 @@ public class BadWords {
         .map(word -> word.getText())
         .anyMatch(word -> knownBadWords.contains(word));
     if (bad) {
-      return Optional.of(new BrainResponse(readyAnswers[randpos], ""));
+      return Optional.of(new BrainResponse(readyAnswers[randpos], EMPTY_STR));
     }
     return Optional.empty();
   }
