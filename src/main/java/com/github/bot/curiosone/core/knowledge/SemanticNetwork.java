@@ -226,25 +226,27 @@ public class SemanticNetwork implements Graph {
       if (type.equals(SemanticRelationType.IS_A)) {
         List<Edge> edges = outgoingEdges(source).stream()
             .filter(x -> !nsr.contains(x.getType())).collect(toList());
-        switch (edges.size()) {
-          case 0: return Optional.empty();
-          case 1: return Optional.of(edges.get(0));
-          default: return getAnswer(edges);
+        if (edges.size() == 0) {
+          return Optional.empty();
+        }
+        else {
+          return getAnswer(edges);
         }
       }
 
       if (type.equals(SemanticRelationType.REGION)) {
         List<Edge> edges = outgoingEdges(source).stream()
             .filter(x -> x.getType().equals(SemanticRelationType.REGION)).collect(toList());
-        switch (edges.size()) {
-          case 0: return Optional.empty();
-          case 1: return Optional.of(edges.get(0));
-          default: return getAnswer(edges);
+        if (edges.size() == 0) {
+          return Optional.empty();
+        }
+        else {
+          return getAnswer(edges);
         }
       }
       for (Edge e : outgoingEdges(source)) {
         if (e.getType().equals(type)) {
-          return Optional.of(e);
+          return getAnswer(Arrays.asList(e));
         }
       }
     }
@@ -264,7 +266,11 @@ public class SemanticNetwork implements Graph {
   @Override
   public Optional<Edge> getAnswer(List<Edge> edges) {
     edges.sort((a,b) -> b.getWeight() - a.getWeight());
-    return Optional.of(edges.get(0));
+    Vertex source = new Concept(edges.get(0).getSource().getId().replaceAll("_", " "));
+    Vertex target = new Concept(edges.get(0).getTarget().getId().replaceAll("_", " "));
+    SemanticRelationType type = edges.get(0).getType();
+    Edge answer = new SemanticRelation(source, target, type, edges.get(0).getWeight());
+    return Optional.of(answer);
   }
 
   @Override

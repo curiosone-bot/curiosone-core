@@ -18,6 +18,7 @@ public class SemanticRelation implements Edge {
    * @param v1 vertice Sorgente
    * @param v2 Vertice Destinazione
    * @param type Tipo dell'arco
+   * @param weight Edge weight
    */
   public SemanticRelation(Vertex v1,Vertex v2, SemanticRelationType type, Integer weight) {
     this.sorgente = v1;
