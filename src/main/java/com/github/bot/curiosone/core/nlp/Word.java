@@ -1,11 +1,5 @@
 package com.github.bot.curiosone.core.nlp;
 
-import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_PARENTHESIS;
-import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_SQ_BRACKET;
-import static com.github.bot.curiosone.core.util.TextConstants.COMMA_SEP;
-import static com.github.bot.curiosone.core.util.TextConstants.OPEN_SQ_BRACKET;
-import static com.github.bot.curiosone.core.util.TextConstants.SPACE_OPEN_PARENTHESIS;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -71,7 +65,7 @@ public class Word {
   }
 
   /**
-   * Returns the set of the meanings of this Word.
+   * Returns the Set of the meanings of this Word.
    */
   public Set<Meaning> getMeanings() {
     return means;
@@ -111,17 +105,16 @@ public class Word {
   }
 
   /**
-   * Returns a string representation of this word in the form [text, word, meanings].
+   * Returns a String representation of this Word in the form [text, word, meanings].
    */
   @Override
   public String toString() {
-    return OPEN_SQ_BRACKET + text + SPACE_OPEN_PARENTHESIS + lemma + CLOSE_PARENTHESIS + COMMA_SEP
-        + means + CLOSE_SQ_BRACKET;
+    return "[" + text + " (" + lemma + ")" + ", " + means + "]";
   }
 
   /**
-   * Compares this Word to the specified object.
-   * @param  other the other Word to be compared against
+   * Checks whether this Word equals to the given Object.
+   * @param other the other Word to be compared against
    * @return {@code true} if this Word equals the other Word;
    *         {@code false} otherwise
    */
