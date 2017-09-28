@@ -1,9 +1,5 @@
 package com.github.bot.curiosone.core.workflow;
 
-import static com.github.bot.curiosone.core.util.TextConstants.CLOSE_PARENTHESIS;
-import static com.github.bot.curiosone.core.util.TextConstants.EMPTY_STR;
-import static com.github.bot.curiosone.core.util.TextConstants.SPACE_OPEN_PARENTHESIS;
-
 import java.util.Objects;
 
 /**
@@ -30,8 +26,8 @@ public class Message {
    * @param scope Message scope. Can be null.
    */
   public Message(String msg, String scope) {
-    message = (msg == null) ? EMPTY_STR : msg;
-    this.scope = (scope == null) ? EMPTY_STR : scope;
+    message = (msg == null) ? "" : msg;
+    this.scope = (scope == null) ? "" : scope;
   }
 
   /**
@@ -53,7 +49,7 @@ public class Message {
    */
   @Override
   public String toString() {
-    return message + SPACE_OPEN_PARENTHESIS + scope + CLOSE_PARENTHESIS;
+    return message + " (" + scope + ")";
   }
 
   /**
