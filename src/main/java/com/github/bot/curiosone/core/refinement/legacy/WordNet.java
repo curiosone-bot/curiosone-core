@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.refinement;
+package com.github.bot.curiosone.core.refinement.legacy;
 /**
  * @author Claudio Venanzi
  */
@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+
+import com.github.bot.curiosone.core.refinement.WordPart;
 
 public class WordNet { 
 
@@ -69,7 +71,7 @@ public class WordNet {
    * @param p part
    * @return list of stems
    */
-  public final String getStem(String w, Part p) {
+  public final String getStem(String w, WordPart p) {
     
     Comparator<String> byLength = (a, b) -> a.length() > b.length() ? 1 : -1;
     

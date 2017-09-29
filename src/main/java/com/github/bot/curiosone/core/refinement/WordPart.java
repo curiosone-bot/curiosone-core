@@ -4,7 +4,7 @@ package com.github.bot.curiosone.core.refinement;
  * @author Claudio Venanzi
  */
 
-public enum Part {
+public enum WordPart {
 
   ADJECTIVE(
       it.uniroma1.lcl.babelnet.data.BabelPOS.ADJECTIVE,
@@ -32,7 +32,7 @@ public enum Part {
   private final it.uniroma1.lcl.babelmorph.POS bm;
   private final edu.mit.jwi.item.POS wn;
 
-  private Part(
+  private WordPart(
       it.uniroma1.lcl.babelnet.data.BabelPOS bn,
       it.uniroma1.lcl.babelmorph.POS bm,
       edu.mit.jwi.item.POS wn) {
@@ -79,13 +79,13 @@ public enum Part {
    * @param pos source pos
    * @return part
    */
-  public static Part from(it.uniroma1.lcl.babelnet.data.BabelPOS pos) {
-    for (Part p : Part.values()) {
+  public static WordPart from(it.uniroma1.lcl.babelnet.data.BabelPOS pos) {
+    for (WordPart p : WordPart.values()) {
       if (pos.equals(p.forBabelNet())) {
         return p;
       }
     }
-    return Part.NONE;
+    return WordPart.NONE;
   }
 
   //-----------------------------------------------------------------------------------------------
@@ -95,13 +95,13 @@ public enum Part {
    * @param pos source pos
    * @return part
    */
-  public static Part from(it.uniroma1.lcl.babelmorph.POS pos) {
-    for (Part p : Part.values()) {
+  public static WordPart from(it.uniroma1.lcl.babelmorph.POS pos) {
+    for (WordPart p : WordPart.values()) {
       if (pos.equals(p.forBabelMorph())) {
         return p;
       }
     }
-    return Part.NONE;
+    return WordPart.NONE;
   }
 
   //-----------------------------------------------------------------------------------------------
@@ -111,13 +111,13 @@ public enum Part {
    * @param pos source pos
    * @return part
    */
-  public static Part from(edu.mit.jwi.item.POS pos) {
-    for (Part p : Part.values()) {
+  public static WordPart from(edu.mit.jwi.item.POS pos) {
+    for (WordPart p : WordPart.values()) {
       if (pos.equals(p.forWordNet())) {
         return p;
       }
     }
-    return Part.NONE;
+    return WordPart.NONE;
   }
   
   //-----------------------------------------------------------------------------------------------

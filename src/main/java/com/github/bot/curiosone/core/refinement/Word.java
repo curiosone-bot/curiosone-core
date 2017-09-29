@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class Word {
   
   private String form;
-  private Part   part;
+  private WordPart   part;
   
   //===============================================================================================
   
@@ -21,7 +21,7 @@ public class Word {
    * @param form superficial word
    * @param part part of sentence
    */
-  public Word(String form, Part part) {
+  public Word(String form, WordPart part) {
     this.form = form;
     this.part = part;
   }
@@ -42,7 +42,7 @@ public class Word {
    * Returns the part of sentence.
    * @return pos
    */
-  public Part getPart() {
+  public WordPart getPart() {
     return part;
   }
   
