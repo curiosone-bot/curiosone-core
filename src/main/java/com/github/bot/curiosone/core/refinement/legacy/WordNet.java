@@ -65,12 +65,13 @@ public class WordNet {
 
   //-----------------------------------------------------------------------------------------------
   
-  /**
+  /** NOT WORKING SINCE WordPart DOES NOT CONTAIN A POS MAPPING FOR WORDNET ANYMORE.
+   * 
    * Find the stem of a word.
    * @param w word
    * @param p part
    * @return list of stems
-   */
+   *
   public final String getStem(String w, WordPart p) {
     
     Comparator<String> byLength = (a, b) -> a.length() > b.length() ? 1 : -1;
@@ -84,7 +85,7 @@ public class WordNet {
         .min(byLength);
     
     return stem.isPresent() ? stem.get() : w;
-  }
+  }*/
 
   //-----------------------------------------------------------------------------------------------
 }

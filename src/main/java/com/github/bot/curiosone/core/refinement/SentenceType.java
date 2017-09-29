@@ -1,9 +1,12 @@
 package com.github.bot.curiosone.core.refinement;
 
 public enum SentenceType {
+  
   Question("?"),
   Answer(".");
 
+  //===============================================================================================
+  
   private String mod_end;
   
   private SentenceType(String mod_end) {
@@ -19,4 +22,6 @@ public enum SentenceType {
   public String getEnd() {
     return mod_end;
   }
+  
+  //-----------------------------------------------------------------------------------------------
 }

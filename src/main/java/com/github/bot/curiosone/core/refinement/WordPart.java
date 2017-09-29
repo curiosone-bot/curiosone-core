@@ -1,45 +1,30 @@
 package com.github.bot.curiosone.core.refinement;
 /**
- * POS wrapper used ad a common interoperability structure.
  * @author Claudio Venanzi
  */
 
+import it.uniroma1.lcl.babelnet.data.BabelPOS;
+
+import java.util.stream.Stream;
+
+import it.uniroma1.lcl.babelmorph.POS;
+
 public enum WordPart {
-
-  ADJECTIVE(
-      it.uniroma1.lcl.babelnet.data.BabelPOS.ADJECTIVE,
-      it.uniroma1.lcl.babelmorph.POS.ADJECTIVE,
-      edu.mit.jwi.item.POS.ADJECTIVE),
-
-  ADVERB(
-      it.uniroma1.lcl.babelnet.data.BabelPOS.ADVERB,
-      it.uniroma1.lcl.babelmorph.POS.ADVERB,
-      edu.mit.jwi.item.POS.ADVERB),
-
-  NOUN(
-      it.uniroma1.lcl.babelnet.data.BabelPOS.NOUN,
-      it.uniroma1.lcl.babelmorph.POS.NOUN,
-      edu.mit.jwi.item.POS.NOUN),
   
-  VERB(
-      it.uniroma1.lcl.babelnet.data.BabelPOS.VERB,
-      it.uniroma1.lcl.babelmorph.POS.VERB,
-      edu.mit.jwi.item.POS.VERB),
+  Adjective (BabelPOS.ADJECTIVE, POS.ADJECTIVE),
+  Adverb    (BabelPOS.ADVERB, POS.ADVERB),
+  Noun      (BabelPOS.NOUN, POS.NOUN),
+  Verb      (BabelPOS.VERB, POS.VERB),
+  None      (null, null);
   
-  NONE(null, null, null);
+  //===============================================================================================
   
-  private final it.uniroma1.lcl.babelnet.data.BabelPOS bn;
-  private final it.uniroma1.lcl.babelmorph.POS bm;
-  private final edu.mit.jwi.item.POS wn;
+  private final BabelPOS bn;
+  private final POS      bm;
 
-  private WordPart(
-      it.uniroma1.lcl.babelnet.data.BabelPOS bn,
-      it.uniroma1.lcl.babelmorph.POS bm,
-      edu.mit.jwi.item.POS wn) {
-    
+  private WordPart(BabelPOS bn, POS bm) {
     this.bn = bn;
     this.bm = bm;
-    this.wn = wn;
   }
 
   //===============================================================================================
@@ -48,7 +33,7 @@ public enum WordPart {
    * Returns the corresponding BabelNet POS.
    * @return pos
    */
-  public it.uniroma1.lcl.babelnet.data.BabelPOS forBabelNet() {
+  public BabelPOS forBN() {
     return bn;
   }
   
@@ -58,20 +43,10 @@ public enum WordPart {
    * Returns the corresponding BabelMorph POS.
    * @return pos
    */
-  public it.uniroma1.lcl.babelmorph.POS forBabelMorph() {
+  public POS forBM() {
     return bm;
   }
   
-  //-----------------------------------------------------------------------------------------------
-
-  /**
-   * Returns the corresponding WordNet POS.
-   * @return pos
-   */
-  public edu.mit.jwi.item.POS forWordNet() {
-    return wn;
-  }
-
   //-----------------------------------------------------------------------------------------------
 
   /**
@@ -79,13 +54,10 @@ public enum WordPart {
    * @param pos source pos
    * @return part
    */
-  public static WordPart from(it.uniroma1.lcl.babelnet.data.BabelPOS pos) {
-    for (WordPart p : WordPart.values()) {
-      if (pos.equals(p.forBabelNet())) {
-        return p;
-      }
-    }
-    return WordPart.NONE;
+  public static WordPart from(BabelPOS pos) {
+    return Stream.of(WordPart.values())
+        .filter(value -> value.forBN().equals(pos))
+        .findAny().orElse(null);
   }
 
   //-----------------------------------------------------------------------------------------------
@@ -95,29 +67,10 @@ public enum WordPart {
    * @param pos source pos
    * @return part
    */
-  public static WordPart from(it.uniroma1.lcl.babelmorph.POS pos) {
-    for (WordPart p : WordPart.values()) {
-      if (pos.equals(p.forBabelMorph())) {
-        return p;
-      }
-    }
-    return WordPart.NONE;
-  }
-
-  //-----------------------------------------------------------------------------------------------
-  
-  /**
-   * Returns Part from WordNet POS.
-   * @param pos source pos
-   * @return part
-   */
-  public static WordPart from(edu.mit.jwi.item.POS pos) {
-    for (WordPart p : WordPart.values()) {
-      if (pos.equals(p.forWordNet())) {
-        return p;
-      }
-    }
-    return WordPart.NONE;
+  public static WordPart from(POS pos) {
+    return Stream.of(WordPart.values())
+        .filter(value -> value.forBM().equals(pos))
+        .findAny().orElse(null);
   }
   
   //-----------------------------------------------------------------------------------------------
