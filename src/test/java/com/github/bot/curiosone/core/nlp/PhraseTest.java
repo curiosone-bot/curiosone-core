@@ -101,7 +101,8 @@ public class PhraseTest {
 
     assertThat(extract("a.b. ,c!")).hasSize(3);
 
-    /*TODO: fix NullPointerException;
+    /*
+    TODO: fix NullPointerException;
 
     assertThat(extract("###")).hasSize(1);
 
@@ -112,6 +113,10 @@ public class PhraseTest {
     assertThat(extract(" . I live in Rome")).hasSize(2);
 
     assertThat(extract("@.#.")).hasSize(0);
+
+    assertThat(extract(" ")).hasSize(0);
+
+    assertThat(extract(" . ")).hasSize(0);
     */
   }
 
@@ -122,10 +127,6 @@ public class PhraseTest {
 
     p = new Phrase("I l0v3 numb3rs111");
     assertThat(p.getText()).isEqualTo("I l0v3 numb3rs111");
-
-    //TODO: fix NullPointerException
-    //p = new Phrase("");
-    //assertThat(p.getText()).isEqualTo("");
   }
 
   @Test
