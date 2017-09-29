@@ -1,7 +1,6 @@
 package com.github.bot.curiosone.core.nlp;
 
-// SUPPRESS CHECKSTYLE AvoidStarImport
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,92 +14,97 @@ public class WordTest {
   @Test
   public void testInstantiation() {
     Word w = new Word("colors", "color", new HashSet<>());
-    assertTrue(w instanceof Word);
-    assertEquals("colors", w.getText());
-    assertEquals("color", w.getLemma());
-    assertEquals(0, w.getMeanings().size());
+    assertThat(w instanceof Word).isTrue();
   }
 
   @Test
   public void testToString() {
     Word w = new Word("colors", "color", new HashSet<>());
-    assertEquals("[colors (color), []]", w.toString());
+    assertThat(w.toString()).isEqualTo("[colors (color), []]");
 
     w = new Word("YEARS!", "year", new HashSet<>(Arrays.asList(new Meaning(POS.N, LEX.TIME))));
-    assertEquals("[YEARS! (year), [[N, TIME, 0]]]", w.toString());
+    assertThat(w.toString()).isEqualTo("[YEARS! (year), [[N, TIME, 0]]]");
   }
 
   @Test
   public void testGetText() {
     Word w = new Word("colors", "color", new HashSet<>());
-    assertEquals("colors", w.getText());
+    assertThat(w.getText()).isEqualTo("colors");
 
     w = new Word("United States", "united_states", new HashSet<>());
-    assertEquals("United States", w.getText());
+    assertThat(w.getText()).isEqualTo("United States");
 
     w = new Word("This is definitely not a word! But it works!", "42", new HashSet<>());
-    assertEquals("This is definitely not a word! But it works!", w.getText());
+    assertThat(w.getText()).isEqualTo("This is definitely not a word! But it works!");
+
+    w = new Word("", "", new HashSet<>());
+    assertThat(w.getText()).isEmpty();
+
+    w = new Word(" ", " ", new HashSet<>());
+    assertThat(w.getText()).isEqualTo(" ");
   }
 
   @Test
   public void testGetLemma() {
     Word w = new Word("music", "music", new HashSet<>());
-    assertEquals("music", w.getLemma());
+    assertThat(w.getLemma()).isEqualTo("music");
 
     w = new Word("United Kingdom", "united_kingdom", new HashSet<>());
-    assertEquals("united_kingdom", w.getLemma());
+    assertThat(w.getLemma()).isEqualTo("united_kingdom");
 
     w = new Word("This is definitely not a word! But it works!", "42", new HashSet<>());
-    assertEquals("42", w.getLemma());
+    assertThat(w.getLemma()).isEqualTo("42");
+
+    w = new Word("", "", new HashSet<>());
+    assertThat(w.getLemma()).isEmpty();
+
+    w = new Word(" ", " ", new HashSet<>());
+    assertThat(w.getLemma()).isEqualTo(" ");
   }
 
   @Test
   public void testGetMeanings() {
     Word w = new Word("totallyRANDOM", "totRand", new HashSet<>());
-    assertEquals(0, w.getMeanings().size());
+    assertThat(w.getMeanings()).isEmpty();
 
-    Set<Meaning> m = new HashSet<>(
-        Arrays.asList(
-            new Meaning(POS.N, LEX.PLANT),
-            new Meaning(POS.N, LEX.FOOD)));
-    w = new Word("flower", "flower", m);
-    assertTrue(m.contains(new Meaning(POS.N, LEX.PLANT)));
-    assertTrue(m.contains(new Meaning(POS.N, LEX.FOOD)));
+    Meaning m = new Meaning(POS.N, LEX.PLANT);
+    Meaning mm = new Meaning(POS.N, LEX.FOOD);
+    Set<Meaning> sm = new HashSet<>(Arrays.asList(m, mm));
+    w = new Word("flower", "flower", sm);
+    assertThat(w.getMeanings()).containsOnly(m, mm);
 
-    m = new HashSet<>(
-        Arrays.asList(
-            new Meaning(POS.N, LEX.LOCATION),
-            new Meaning(POS.N, LEX.OBJECT),
-            new Meaning(POS.N, LEX.SHAPE)));
-    w = new Word("sun", "sun", m);
-    assertTrue(m.contains(new Meaning(POS.N, LEX.OBJECT)));
-    assertTrue(m.contains(new Meaning(POS.N, LEX.LOCATION)));
-    assertTrue(m.contains(new Meaning(POS.N, LEX.SHAPE)));
+    m = new Meaning(POS.N, LEX.LOCATION);
+    mm = new Meaning(POS.N, LEX.OBJECT);
+    Meaning mmm = new Meaning(POS.N, LEX.SHAPE);
+    sm = new HashSet<>(Arrays.asList(m, mm, mmm));
+    w = new Word("sun", "sun", sm);
+    assertThat(w.getMeanings()).containsOnly(m, mm, mmm);
   }
 
   @Test
   public void testEqualsReflexive() {
     Word w = new Word("hi", "hi",
         new HashSet<>(Arrays.asList(new Meaning(POS.INTERJ, LEX.GENERIC))));
-    assertEquals(w, w);
+    assertThat(w).isEqualTo(w);
 
     w = new Word("The", "the",
         new HashSet<>(Arrays.asList(new Meaning(POS.DET, LEX.DEFINITE_ARTICLE),
             new Meaning(POS.AP, LEX.CONTACT))));
-    assertEquals(w, w);
+    assertThat(w).isEqualTo(w);
 
     w = new Word("42_The_Answer!", "42",
         new HashSet<>(Arrays.asList(new Meaning(POS.UNKN, LEX.CREATION),
             new Meaning(POS.APP, LEX.EMOTION),
             new Meaning(POS.VPP, LEX.MOTION))));
-    assertEquals(w, w);
+    assertThat(w).isEqualTo(w);
   }
 
   @Test
   public void testEqualsSymmetric() {
     Word w = new Word("symmetry", "symmetry", new HashSet<>());
     Word ww = new Word("symmetry", "symmetry", new HashSet<>());
-    assertTrue(w.equals(ww) && ww.equals(w));
+    assertThat(w).isEqualTo(ww);
+    assertThat(ww).isEqualTo(w);
 
     w = new Word("watch", "watch", new HashSet<>(Arrays.asList(
         new Meaning(POS.V, LEX.PERCEPTION),
@@ -110,13 +114,15 @@ public class WordTest {
         new Meaning(POS.V, LEX.PERCEPTION),
         new Meaning(POS.V, LEX.SOCIAL),
         new Meaning(POS.N, LEX.TIME))));
-    assertTrue(w.equals(ww) && ww.equals(w));
+    assertThat(w).isEqualTo(ww);
+    assertThat(ww).isEqualTo(w);
 
     w = new Word("car", "car", new HashSet<>(Arrays.asList(
         new Meaning(POS.N, LEX.OBJECT))));
     ww = new Word("car", "car", new HashSet<>(Arrays.asList(
         new Meaning(POS.N, LEX.OBJECT))));
-    assertTrue(w.equals(ww) && ww.equals(w));
+    assertThat(w).isEqualTo(ww);
+    assertThat(ww).isEqualTo(w);
   }
 
   @Test
@@ -124,7 +130,9 @@ public class WordTest {
     Word w = new Word("symmetry", "symmetry", new HashSet<>());
     Word ww = new Word("symmetry", "symmetry", new HashSet<>());
     Word www = new Word("symmetry", "symmetry", new HashSet<>());
-    assertTrue(w.equals(ww) && ww.equals(www) && www.equals(w));
+    assertThat(w).isEqualTo(ww);
+    assertThat(ww).isEqualTo(www);
+    assertThat(www).isEqualTo(w);
 
     w = new Word("each other", "each_other", new HashSet<>(
         Arrays.asList(new Meaning(POS.PRON, LEX.RECIPROCAL))));
@@ -132,7 +140,9 @@ public class WordTest {
         Arrays.asList(new Meaning(POS.PRON, LEX.RECIPROCAL))));
     www = new Word("each other", "each_other", new HashSet<>(
         Arrays.asList(new Meaning(POS.PRON, LEX.RECIPROCAL))));
-    assertTrue(w.equals(ww) && ww.equals(www) && www.equals(w));
+    assertThat(w).isEqualTo(ww);
+    assertThat(ww).isEqualTo(www);
+    assertThat(www).isEqualTo(w);
 
     w = new Word("YOU", "you", new HashSet<>(Arrays.asList(
         new Meaning(POS.PRON, LEX.RECIPROCAL),
@@ -143,59 +153,63 @@ public class WordTest {
     www = new Word("YOU", "you", new HashSet<>(Arrays.asList(
         new Meaning(POS.PRON, LEX.RECIPROCAL),
         new Meaning(POS.PREP, LEX.GENERIC))));
-    assertTrue(w.equals(ww) && ww.equals(www) && www.equals(w));
+    assertThat(w).isEqualTo(ww);
+    assertThat(ww).isEqualTo(www);
+    assertThat(www).isEqualTo(w);
   }
 
   @Test
   public void testEqualsConsistent() {
     Word w = new Word("consistent", "consistent", new HashSet<>());
     Word ww = new Word("consistent", "consistent", new HashSet<>());
-    assertEquals(w, ww);
+    assertThat(w).isEqualTo(ww);
     ww = new Word("CONSISTENT", "consistent", new HashSet<>());
-    assertNotEquals(w, ww);
+    assertThat(w).isNotEqualTo(ww);
 
     w = new Word("testMeOut!", "testMeOut!", new HashSet<>());
     ww = new Word("testMeOut!", "testMeOut!", new HashSet<>());
-    assertEquals(w, ww);
+    assertThat(w).isEqualTo(ww);
     ww = new Word("testMeOut!", "testMeOut!", new HashSet<>(Arrays.asList(
         new Meaning(POS.NEG, LEX.CREATION))));
-    assertEquals(w, ww);
+    assertThat(w).isEqualTo(ww);
 
     w = new Word("testMeOut!", "testMeOut!", new HashSet<>());
     ww = new Word("testMeOut!", "testMeOut!", new HashSet<>());
-    assertEquals(w, ww);
+    assertThat(w).isEqualTo(ww);
     ww = new Word("TEST ME OUTT!!!", "testMeOut!", new HashSet<>(Arrays.asList(
         new Meaning(POS.NEG, LEX.CREATION))));
-    assertNotEquals(w, ww);
+    assertThat(w).isNotEqualTo(ww);
   }
 
   @Test
   public void testEqualsNullComparison() {
     Word w = new Word("null value", "null", new HashSet<>());
-    assertNotEquals(w, null);
+    assertThat(w).isNotEqualTo(null);
 
     w = new Word("test", "test", new HashSet<>(Arrays.asList(
         new Meaning(POS.N, LEX.PROCESS))));
-    assertNotEquals(w, null);
+    assertThat(w).isNotEqualTo(null);
+
 
     w = new Word("BOTH", "both", new HashSet<>(Arrays.asList(
         new Meaning(POS.N, LEX.PROCESS),
         new Meaning(POS.N, LEX.QUANTITY))));
-    assertNotEquals(w, null);
+    assertThat(w).isNotEqualTo(null);
+
   }
 
   @Test
   public void testEqualsOtherObj() {
     Word w = new Word("object", "OBJ", new HashSet<>());
-    assertNotEquals(w, Arrays.asList("ob", "je", "ct"));
+    assertThat(w).isNotEqualTo(Arrays.asList("ob", "je", "ct"));
 
     w = new Word("gold", "AU", new HashSet<>(Arrays.asList(
         new Meaning(POS.N, LEX.SUBSTANCE))));
-    assertNotEquals(w, new StringBuffer("gold"));
+    assertThat(w).isNotEqualTo(new StringBuffer("GOLD"));
 
     w = new Word("gold", "AU", new HashSet<>(Arrays.asList(
         new Meaning(POS.N, LEX.SUBSTANCE), new Meaning(POS.V, LEX.TIME))));
-    assertNotEquals(w, new Double(42.42));
+    assertThat(w).isNotEqualTo(new Double(42.42));
   }
 
   @Test
@@ -203,24 +217,24 @@ public class WordTest {
     Word w = new Word("contract", "contract", new HashSet<>(Arrays.asList(
         new Meaning(POS.N, LEX.MOTIVE))));
     Word ww = new Word("contract", "contract", new HashSet<>());
-    assertEquals(w, ww);
-    assertEquals(w.hashCode(), ww.hashCode());
+    assertThat(w).isEqualTo(ww);
+    assertThat(w.hashCode()).isEqualTo(ww.hashCode());
 
     w = new Word("hello", "hello", new HashSet<>());
     ww = new Word("hello", "hello", new HashSet<>());
-    assertEquals(w, ww);
-    assertEquals(w.hashCode(), ww.hashCode());
+    assertThat(w).isEqualTo(ww);
+    assertThat(w.hashCode()).isEqualTo(ww.hashCode());
 
     w = new Word("HELLO", "hello", new HashSet<>());
     ww = new Word("hello", "hello", new HashSet<>());
-    assertNotEquals(w, ww);
-    assertNotEquals(w.hashCode(), ww.hashCode());
+    assertThat(w).isNotEqualTo(ww);
+    assertThat(w.hashCode()).isNotEqualTo(ww.hashCode());
 
     w = new Word("BEAutiFUL", "beautiful", new HashSet<>(Arrays.asList(
         new Meaning(POS.AP, LEX.PERSONAL_SUBJECTIVE))));
     ww = new Word("yo!", "yo", new HashSet<>());
-    assertNotEquals(w, ww);
-    assertNotEquals(w.hashCode(), ww.hashCode());
+    assertThat(w).isNotEqualTo(ww);
+    assertThat(w.hashCode()).isNotEqualTo(ww.hashCode());
   }
 
   @Test
@@ -231,14 +245,16 @@ public class WordTest {
         new HashSet<>(Arrays.asList(new Meaning(POS.N, LEX.PERSON))));
     Word www = new Word("Mark", "mark",
         new HashSet<>(Arrays.asList(new Meaning(POS.N, LEX.PERSON))));
-    assertTrue(w.hashCode() == ww.hashCode() && ww.hashCode() == www.hashCode()
-        && www.hashCode() == w.hashCode());
+    assertThat(w.hashCode()).isEqualTo(ww.hashCode());
+    assertThat(ww.hashCode()).isEqualTo(www.hashCode());
+    assertThat(www.hashCode()).isEqualTo(w.hashCode());
 
     w = new Word("42", "fortytwo", new HashSet<>());
     ww = new Word("42", "fortytwo", new HashSet<>());
     www = new Word("42", "fortytwo", new HashSet<>());
-    assertTrue(w.hashCode() == ww.hashCode() && ww.hashCode() == www.hashCode()
-        && www.hashCode() == w.hashCode());
+    assertThat(w.hashCode()).isEqualTo(ww.hashCode());
+    assertThat(ww.hashCode()).isEqualTo(www.hashCode());
+    assertThat(www.hashCode()).isEqualTo(w.hashCode());
 
     w = new Word("", "",
         new HashSet<>(Arrays.asList(new Meaning(POS.NP, LEX.ACT))));
@@ -246,19 +262,22 @@ public class WordTest {
         new HashSet<>(Arrays.asList(new Meaning(POS.NP, LEX.ACT))));
     www = new Word("", "",
         new HashSet<>(Arrays.asList(new Meaning(POS.NP, LEX.ACT))));
-    assertTrue(w.hashCode() == ww.hashCode() && ww.hashCode() == www.hashCode()
-        && www.hashCode() == w.hashCode());
+    assertThat(w.hashCode()).isEqualTo(ww.hashCode());
+    assertThat(ww.hashCode()).isEqualTo(www.hashCode());
+    assertThat(www.hashCode()).isEqualTo(w.hashCode());
   }
 
   @Test
   public void testHashCodConsistent() {
     Word w = new Word("color", "color", new HashSet<>());
     Word ww = new Word("color", "color", new HashSet<>());
-    assertEquals(w.hashCode(), ww.hashCode());
+    assertThat(w.hashCode()).isEqualTo(ww.hashCode());
+
     ww = new Word("color", "color",
         new HashSet<>(Arrays.asList(new Meaning(POS.N, LEX.SUBSTANCE))));
-    assertEquals(w.hashCode(), ww.hashCode());
+    assertThat(w.hashCode()).isEqualTo(ww.hashCode());
+
     ww = new Word("COLOR!", "color", new HashSet<>());
-    assertNotEquals(w, ww);
+    assertThat(w.hashCode()).isNotEqualTo(ww.hashCode());
   }
 }
