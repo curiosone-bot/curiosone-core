@@ -53,7 +53,7 @@ public class Word {
    * @return lemma
    */
   public Set<String> getLemma() {
-    return new EnglishMorpher().getLexemes(form, part.forBM()).stream()
+    return new EnglishMorpher().getLexemes(form, part.forBabelMorph()).stream()
     .map(Lexeme::getLemma).collect(Collectors.toSet());
   }
   

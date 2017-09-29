@@ -7,10 +7,10 @@ public enum SentenceType {
 
   //===============================================================================================
   
-  private String mod_end;
+  private String end;
   
-  private SentenceType(String mod_end) {
-    this.mod_end = mod_end;
+  private SentenceType(String end) {
+    this.end = end;
   }
   
   //===============================================================================================
@@ -20,7 +20,7 @@ public enum SentenceType {
    * @return ending string
    */
   public String getEnd() {
-    return mod_end;
+    return end;
   }
   
   //-----------------------------------------------------------------------------------------------

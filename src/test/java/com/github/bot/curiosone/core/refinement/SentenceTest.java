@@ -8,18 +8,28 @@ import org.junit.Test;
 
 public class SentenceTest {
 
-  private Sentence a;
+  private Sentence sen;
   
+  /**
+   * Test constructor.
+   */
   public SentenceTest() {
-    a = new Sentence(SentenceType.Answer);
-    a.add(new Word("cake", WordPart.Noun));
-    a.add(new Word("be",   WordPart.Verb));
-    a.add(new Word("lie",  WordPart.Noun));
-    System.out.println(a.getWords().map(Word::getForm).collect(Collectors.joining(" ")));
+    sen = new Sentence(SentenceType.Answer);
+    sen.add(new Word("cake", WordPart.Noun));
+    sen.add(new Word("be",   WordPart.Verb));
+    sen.add(new Word("lie",  WordPart.Noun));
   }
   
   @Test
+  /**
+   * Main test.
+   */
   public void main() {
-    assertTrue(a.getType().equals(SentenceType.Answer));
+    assertTrue(sen.getType().equals(SentenceType.Answer));
+    
+    assertTrue(sen.getWords()
+        .map(Word::getForm)
+        .collect(Collectors.joining(" "))
+        .equals("cake be lie"));
   }
 }
