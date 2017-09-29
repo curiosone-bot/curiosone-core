@@ -252,22 +252,15 @@ public class TokenTest {
   }
 
   @Test
-  public void testHashCodeSymmetric() {
-    List<Token> tokens = Token.tokenize("Please, please tokenize me!");
+  public void testHashCodeEqualsContract() {
+    List<Token> tokens = Token.tokenize("TokenizE, tokenize me!");
     Token t = tokens.get(0);
     Token tt = tokens.get(1);
+    assertThat(t).isEqualTo(tt);
     assertThat(t.hashCode()).isEqualTo(tt.hashCode());
-    assertThat(tt.hashCode()).isEqualTo(t.hashCode());
-  }
 
-  @Test
-  public void testHashCodeTransitive() {
-    List<Token> tokens = Token.tokenize("Please, please, PLEASE. Tokenize me!");
-    Token t = tokens.get(0);
-    Token tt = tokens.get(1);
-    Token ttt = tokens.get(2);
-    assertThat(t.hashCode()).isEqualTo(tt.hashCode());
-    assertThat(tt.hashCode()).isEqualTo(ttt.hashCode());
-    assertThat(ttt.hashCode()).isEqualTo(t.hashCode());
+    tt = tokens.get(2);
+    assertThat(t).isNotEqualTo(tt);
+    assertThat(t.hashCode()).isNotEqualTo(tt.hashCode());
   }
 }
