@@ -62,7 +62,7 @@ checkstyle {
 
 test {
   testLogging {
-    showStandardStreams = true
+    //showStandardStreams = true
   }
 }
 
