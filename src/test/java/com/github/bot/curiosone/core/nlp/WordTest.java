@@ -238,37 +238,7 @@ public class WordTest {
   }
 
   @Test
-  public void testHashCodeTransitive() {
-    Word w = new Word("Mark", "mark",
-        new HashSet<>(Arrays.asList(new Meaning(POS.N, LEX.PERSON))));
-    Word ww = new Word("Mark", "mark",
-        new HashSet<>(Arrays.asList(new Meaning(POS.N, LEX.PERSON))));
-    Word www = new Word("Mark", "mark",
-        new HashSet<>(Arrays.asList(new Meaning(POS.N, LEX.PERSON))));
-    assertThat(w.hashCode()).isEqualTo(ww.hashCode());
-    assertThat(ww.hashCode()).isEqualTo(www.hashCode());
-    assertThat(www.hashCode()).isEqualTo(w.hashCode());
-
-    w = new Word("42", "fortytwo", new HashSet<>());
-    ww = new Word("42", "fortytwo", new HashSet<>());
-    www = new Word("42", "fortytwo", new HashSet<>());
-    assertThat(w.hashCode()).isEqualTo(ww.hashCode());
-    assertThat(ww.hashCode()).isEqualTo(www.hashCode());
-    assertThat(www.hashCode()).isEqualTo(w.hashCode());
-
-    w = new Word("", "",
-        new HashSet<>(Arrays.asList(new Meaning(POS.NP, LEX.ACT))));
-    ww = new Word("", "",
-        new HashSet<>(Arrays.asList(new Meaning(POS.NP, LEX.ACT))));
-    www = new Word("", "",
-        new HashSet<>(Arrays.asList(new Meaning(POS.NP, LEX.ACT))));
-    assertThat(w.hashCode()).isEqualTo(ww.hashCode());
-    assertThat(ww.hashCode()).isEqualTo(www.hashCode());
-    assertThat(www.hashCode()).isEqualTo(w.hashCode());
-  }
-
-  @Test
-  public void testHashCodConsistent() {
+  public void testHashCodeConsistent() {
     Word w = new Word("color", "color", new HashSet<>());
     Word ww = new Word("color", "color", new HashSet<>());
     assertThat(w.hashCode()).isEqualTo(ww.hashCode());
@@ -279,5 +249,14 @@ public class WordTest {
 
     ww = new Word("COLOR!", "color", new HashSet<>());
     assertThat(w.hashCode()).isNotEqualTo(ww.hashCode());
+  }
+
+  @Test
+  public void testHashCodeReflexive() {
+    Word w = new Word("color", "color", new HashSet<>());
+    assertThat(w.hashCode()).isEqualTo(w.hashCode());
+
+    w = new Word("YEARS!", "year", new HashSet<>(Arrays.asList(new Meaning(POS.N, LEX.TIME))));
+    assertThat(w.hashCode()).isEqualTo(w.hashCode());
   }
 }
