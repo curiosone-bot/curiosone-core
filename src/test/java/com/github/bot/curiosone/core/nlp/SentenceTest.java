@@ -68,6 +68,7 @@ public class SentenceTest {
     sentences = Sentence.extract(phrase);
     assertThat(sentences).isNotEmpty();
   }
+
   @Test
   public void testRespects() {
     List<Phrase> phrases = Phrase.extract("What is an apple?");
@@ -291,6 +292,7 @@ public class SentenceTest {
     assertThat(s.hashCode()).isEqualTo(ss.hashCode());
     assertThat(ss.hashCode()).isEqualTo(s.hashCode());
   }
+  
   @Test
   public void testHashCodeTransitive() {
     List<Sentence> ls = Sentence.extract(new Phrase("What is an apple?"));

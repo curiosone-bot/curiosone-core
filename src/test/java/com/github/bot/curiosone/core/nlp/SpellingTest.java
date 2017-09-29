@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class SpellingTest {
+  
   @Test
   public void testGetInstance() {
     Spelling s = Spelling.getInstance();
