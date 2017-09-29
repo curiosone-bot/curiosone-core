@@ -1,9 +1,7 @@
 package com.github.bot.curiosone.core.nlp.tokenizer;
 
 import com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord;
-
 import edu.mit.jwi.item.IWordID;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -71,20 +69,17 @@ public class Word implements IWord {
 
   /**
    * Semantic relation with other word.
-   * List:
-   * [also_see, antonym, attribute, cause,
-   *  derivationally_related_form, derived_from_adjective, domain_of_synset_(undifferentiated),
-   *  entailment, hypernym, instance_hypernym, hyponym, instance_hyponym,
-   *  member_holonym, substance_holonym, part_holonym,
-   *  member_of_this_domain_(undifferentiated),
-   *  member_meronym, substance_meronym, part_meronym,
-   *  participle, pertainym_(pertains_to_nouns),
-   *  domain_of_synset_-_region, member_of_this_domain_-_region,
-   *  similar_to, domain_of_synset_-_topic,
-   *  member_of_this_domain_-_topic, domain_of_synset_-_usage,
-   *  member_of_this_domain_-_usage, verb_group]
-   *
-   * @see edu.mit.jwi.item.Pointer.values()
+   * 
+   * @see "edu.mit.jwi.item.Pointer.values()"
+   * 
+   *      List: [also_see, antonym, attribute, cause, derivationally_related_form,
+   *      derived_from_adjective, domain_of_synset_(undifferentiated), entailment, hypernym,
+   *      instance_hypernym, hyponym, instance_hyponym, member_holonym, substance_holonym,
+   *      part_holonym, member_of_this_domain_(undifferentiated), member_meronym, substance_meronym,
+   *      part_meronym, participle, pertainym_(pertains_to_nouns), domain_of_synset_-_region,
+   *      member_of_this_domain_-_region, similar_to, domain_of_synset_-_topic,
+   *      member_of_this_domain_-_topic, domain_of_synset_-_usage, member_of_this_domain_-_usage,
+   *      verb_group]
    */
 
   private Map<String, List<String>> relations;
@@ -96,7 +91,8 @@ public class Word implements IWord {
    * @see #IWordID
    */
 
-  @Override public IWordID getWordId() {
+  @Override
+  public IWordID getWordId() {
     return wordId;
   }
 
@@ -127,7 +123,8 @@ public class Word implements IWord {
    * @see #pos
    */
 
-  @Override public PosType getPos() {
+  @Override
+  public PosType getPos() {
     return pos;
   }
 
@@ -149,7 +146,8 @@ public class Word implements IWord {
    * @see #lexType
    */
 
-  @Override public LexType getLexType() {
+  @Override
+  public LexType getLexType() {
     return lexType;
   }
 
@@ -159,7 +157,8 @@ public class Word implements IWord {
    * @see #lexType
    */
 
-  @Override public void setLexType(LexType lexType) {
+  @Override
+  public void setLexType(LexType lexType) {
     this.lexType = lexType;
   }
 
@@ -170,7 +169,8 @@ public class Word implements IWord {
    * @see #lemma
    */
 
-  @Override public String getLemma() {
+  @Override
+  public String getLemma() {
     return lemma;
   }
 
@@ -180,7 +180,8 @@ public class Word implements IWord {
    * @see #lemma
    */
 
-  @Override public void setLemma(String lemma) {
+  @Override
+  public void setLemma(String lemma) {
     this.lemma = lemma;
   }
 
@@ -190,7 +191,8 @@ public class Word implements IWord {
    * @return the gloss
    * @see #gloss
    */
-  @Override public String getGloss() {
+  @Override
+  public String getGloss() {
     return gloss;
   }
 
@@ -199,7 +201,8 @@ public class Word implements IWord {
    *
    * @see #gloss
    */
-  @Override public void setGloss(String gloss) {
+  @Override
+  public void setGloss(String gloss) {
     this.gloss = gloss;
   }
 
@@ -207,7 +210,8 @@ public class Word implements IWord {
    * Get the number of occurrence.
    *
    */
-  @Override public int getNum() {
+  @Override
+  public int getNum() {
     return this.number;
   }
 
@@ -215,7 +219,8 @@ public class Word implements IWord {
    * Set the number of occurrence of word.
    *
    */
-  @Override public void setNum(int num) {
+  @Override
+  public void setNum(int num) {
     this.number = num;
   }
 
@@ -225,7 +230,8 @@ public class Word implements IWord {
    * @return the relations
    * @see #relations
    */
-  @Override public Map<String, List<String>> getRelations() {
+  @Override
+  public Map<String, List<String>> getRelations() {
     return relations;
   }
 
@@ -246,12 +252,12 @@ public class Word implements IWord {
    * @see #relations
    */
 
-  @Override public void addRelation(String p, String v) {
-    this.relations.merge(p,
-        new ArrayList<String>(Arrays.asList(v)),(v1,v2) -> {
-            v1.add(v);
-            return v1;
-        });
+  @Override
+  public void addRelation(String p, String v) {
+    this.relations.merge(p, new ArrayList<String>(Arrays.asList(v)), (v1, v2) -> {
+      v1.add(v);
+      return v1;
+    });
   }
 
   /**
@@ -260,7 +266,8 @@ public class Word implements IWord {
    * @see #relations
    */
 
-  @Override public void setRelations(Map<String, List<String>> relations) {
+  @Override
+  public void setRelations(Map<String, List<String>> relations) {
     this.relations.clear();
     this.relations.putAll(relations);
   }
@@ -270,20 +277,18 @@ public class Word implements IWord {
    *
    */
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
 
-    String out = "WordId = " + this.wordId
-        + " Lemma = " + this.lemma
-        + " POS = " + this.pos
-        + " LextT = " + this.lexType
-        + " Gloss = " + this.gloss
-        + " Occurrence = " + this.number;
+    String out = "WordId = " + this.wordId + " Lemma = " + this.lemma + " POS = " + this.pos
+        + " LextT = " + this.lexType + " Gloss = " + this.gloss + " Occurrence = " + this.number;
 
     out += "\n    " + relations.entrySet().toString();
     return out;
   }
 
-  @Override public boolean equals(Object obj) {
+  @Override
+  public boolean equals(Object obj) {
     if (obj == null || !(obj instanceof Word)) {
       return false;
     }
@@ -294,7 +299,8 @@ public class Word implements IWord {
     return this.getWordId().equals(w.getWordId());
   }
 
-  @Override public int hashCode() {
+  @Override
+  public int hashCode() {
     return Objects.hash(getGloss());
   }
 

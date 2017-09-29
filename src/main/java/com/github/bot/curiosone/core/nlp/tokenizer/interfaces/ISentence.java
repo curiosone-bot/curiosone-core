@@ -3,7 +3,6 @@ package com.github.bot.curiosone.core.nlp.tokenizer.interfaces;
 import com.github.bot.curiosone.core.nlp.tokenizer.Sentence;
 import com.github.bot.curiosone.core.nlp.tokenizer.SentenceType;
 import com.github.bot.curiosone.core.nlp.tokenizer.Token;
-
 import java.util.List;
 
 /**
@@ -20,7 +19,7 @@ public interface ISentence {
    * @see Sentence#getType()
    */
 
-	SentenceType getType();
+  SentenceType getType();
 
   /**
    * Get original.
@@ -28,7 +27,7 @@ public interface ISentence {
    * @see Sentence#getOriginal()
    */
 
-	String getOriginal();
+  String getOriginal();
 
   /**
    * Get tokens.
@@ -36,20 +35,22 @@ public interface ISentence {
    * @see Sentence#getTokens()
    */
 
-	List<IToken> getTokens();
-  
+  List<IToken> getTokens();
+
   /**
    * Add a new token to {@link #tokens} .
+   * 
    * @see #tokens
    * @see Token
    */
 
-	void addToken(IToken token);
+  void addToken(IToken token);
 
   /**
    * Set a new {@link #type} value provided in input.
+   * 
    * @see #type
    */
 
-	void setType(SentenceType type);
+  void setType(SentenceType type);
 }

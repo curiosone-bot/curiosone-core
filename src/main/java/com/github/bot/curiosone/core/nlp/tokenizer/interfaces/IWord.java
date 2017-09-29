@@ -2,9 +2,7 @@ package com.github.bot.curiosone.core.nlp.tokenizer.interfaces;
 
 import com.github.bot.curiosone.core.nlp.tokenizer.LexType;
 import com.github.bot.curiosone.core.nlp.tokenizer.PosType;
-
 import edu.mit.jwi.item.IWordID;
-
 import java.util.List;
 import java.util.Map;
 
@@ -84,7 +82,7 @@ public interface IWord {
    * @see #wordId
    */
 
-  	void setWordId(IWordID wordId);
+  void setWordId(IWordID wordId);
 
   /**
    * Set a new {@link #pos} value that is provided in input.
@@ -92,7 +90,7 @@ public interface IWord {
    * @see #pos
    */
 
-  	void setPos(PosType pos);
+  void setPos(PosType pos);
 
   /**
    * Set a new {@link #lexType} value that is provided in input.
@@ -100,7 +98,7 @@ public interface IWord {
    * @see #lexType
    */
 
-  	void setLexType(LexType lexType);
+  void setLexType(LexType lexType);
 
   /**
    * Set a new {@link #lemma} value that is provided in input.
@@ -108,7 +106,7 @@ public interface IWord {
    * @see #lemma
    */
 
-  	void setLemma(String lemma);
+  void setLemma(String lemma);
 
   /**
    * Set a new {@link #gloss} value that is provided in input.
@@ -116,13 +114,13 @@ public interface IWord {
    * @see #gloss
    */
 
-  	void setGloss(String gloss);
+  void setGloss(String gloss);
 
   /**
    * Set the number of occurrence of word.
    *
    */
-  	void setNum(int num);
+  void setNum(int num);
 
   /**
    * Add a new element to relations.
@@ -130,7 +128,7 @@ public interface IWord {
    * @see #relations
    */
 
-  	void addRelation(String p, String value);
+  void addRelation(String p, String value);
 
   /**
    * Set the map of relations.
@@ -138,6 +136,6 @@ public interface IWord {
    * @see #relations
    */
 
-  	void setRelations(Map<String, List<String>> relations);
+  void setRelations(Map<String, List<String>> relations);
 
 }
