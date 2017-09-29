@@ -69,7 +69,7 @@ public class PhraseTest {
   }
 
   @Test
-  public void testEqualsContract() {
+  public void testHashCodeEqualsContract() {
     Phrase p = new Phrase("Sign here.");
     Phrase pp = new Phrase("Sign here.");
     assertThat(p.equals(pp) && p.hashCode() == pp.hashCode()).isTrue();
@@ -136,15 +136,5 @@ public class PhraseTest {
 
     p = new Phrase("I have a reflexive hashCode too!");
     assertThat(p.hashCode()).isEqualTo(p.hashCode());
-  }
-
-  @Test
-  public void testHashCodeTransitive() {
-    Phrase p = new Phrase("Insert a sentence here...");
-    Phrase pp = new Phrase("Insert a sentence here...");
-    Phrase ppp = new Phrase("Insert a sentence here...");
-    assertThat(p.hashCode()).isEqualTo(pp.hashCode());
-    assertThat(pp.hashCode()).isEqualTo(ppp.hashCode());
-    assertThat(ppp.hashCode()).isEqualTo(p.hashCode());
   }
 }
