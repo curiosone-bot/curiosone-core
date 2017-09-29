@@ -183,27 +183,6 @@ public class MeaningTest {
   }
 
   @Test
-  public void testHashCodeTransitive() {
-    Meaning m = new Meaning(POS.ADV, LEX.SURPRISE);
-    Meaning mm = new Meaning(POS.ADV, LEX.SURPRISE);
-    Meaning mmm = new Meaning(POS.ADV, LEX.SURPRISE);
-    assertThat(m.hashCode() == mm.hashCode() && mm.hashCode() == mmm.hashCode()
-        && mmm.hashCode() == m.hashCode()).isTrue();
-
-    m = new Meaning(POS.PREP, LEX.MAIL);
-    mm = new Meaning(POS.PREP, LEX.MAIL);
-    mmm = new Meaning(POS.PREP, LEX.MAIL);
-    assertThat(m.hashCode() == mm.hashCode() && mm.hashCode() == mmm.hashCode()
-        && mmm.hashCode() == m.hashCode()).isTrue();
-
-    m = new Meaning(POS.V, LEX.GENERIC);
-    mm = new Meaning(POS.V, LEX.GENERIC);
-    mmm = new Meaning(POS.V, LEX.GENERIC);
-    assertThat(m.hashCode() == mm.hashCode() && mm.hashCode() == mmm.hashCode()
-        && mmm.hashCode() == m.hashCode()).isTrue();
-  }
-
-  @Test
   public void testHashCodeConsistent() {
     Meaning m = new Meaning(POS.S, LEX.INTERROGATIVE);
     Meaning mm = new Meaning(POS.S, LEX.INTERROGATIVE);
