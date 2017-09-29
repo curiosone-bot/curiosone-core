@@ -34,6 +34,16 @@ public class RuleTest {
   }
 
   @Test
+  public void testEqualsTransitive() {
+    Rule r = new Rule(POS.AP, new Pair(POS.NEG, POS.ADJ));
+    Rule rr = new Rule(POS.AP, new Pair(POS.NEG, POS.ADJ));
+    Rule rrr = new Rule(POS.AP, new Pair(POS.NEG, POS.ADJ));
+    assertThat(r).isEqualTo(rr);
+    assertThat(rr).isEqualTo(rrr);
+    assertThat(rrr).isEqualTo(r);
+  }
+
+  @Test
   public void testEqualsOtherObj() {
     Rule r = new Rule(POS.AP, new Pair(POS.APP, POS.APP));
     assertThat(r).isNotEqualTo(new StringBuffer("APP"));
@@ -52,10 +62,16 @@ public class RuleTest {
   }
 
   @Test
-  public void testHashCodeSymmetric() {
-    Rule r = new Rule(POS.AP, new Pair(POS.NEG, POS.ADJ));
-    Rule rr = new Rule(POS.AP, new Pair(POS.NEG, POS.ADJ));
+  public void testHashCodeEqualsContract() {
+    Rule r = new Rule(POS.NEG, new Pair(POS.APP, POS.AP));
+    Rule rr = new Rule(POS.NEG, new Pair(POS.APP, POS.AP));
     assertThat(r.hashCode()).isEqualTo(rr.hashCode());
+    assertThat(r).isEqualTo(rr);
+
+    r = new Rule(POS.VP, new Pair(POS.APP, POS.AP));
+    rr = new Rule(POS.VPP, new Pair(POS.CONJ, POS.VP));
+    assertThat(r.hashCode()).isNotEqualTo(rr.hashCode());
+    assertThat(r).isNotEqualTo(rr);
   }
 
   @Test
