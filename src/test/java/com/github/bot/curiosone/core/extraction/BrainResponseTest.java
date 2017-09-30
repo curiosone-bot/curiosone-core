@@ -9,11 +9,6 @@ import org.junit.Test;
 public class BrainResponseTest {
 
   @Test
-  public void testInstantiation() {
-    assertTrue(new BrainResponse("Text", "Scope") instanceof BrainResponse);
-  }
-
-  @Test
   public void testGetMessage() {
     BrainResponse br = new BrainResponse("This is the message!", "This is the scope");
     assertThat(br.getMessage()).isEqualTo("This is the message!");
@@ -62,17 +57,6 @@ public class BrainResponseTest {
 
     br = new BrainResponse(" ", " ");
     assertThat(br).isEqualTo(br);
-
-
-
-
-
-    assertFalse(br.equals(null));
-    assertFalse(br.equals(new Integer(42)));
-    BrainResponse brr = new BrainResponse("Text", "Scope");
-    //assertTrue(br.equals(brr));
-    brr = new BrainResponse("text", "scope");
-    //assertFalse(br.equals(brr));
   }
 
   @Test
