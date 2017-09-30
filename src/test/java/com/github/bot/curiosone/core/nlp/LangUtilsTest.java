@@ -4,8 +4,6 @@ import static com.github.bot.curiosone.core.nlp.LangUtils.expandVerbs;
 import static com.github.bot.curiosone.core.nlp.LangUtils.removeDuplicatedSpaces;
 import static com.github.bot.curiosone.core.nlp.LangUtils.splitByPuntaction;
 import static org.assertj.core.api.Assertions.assertThat;
-// SUPPRESS CHECKSTYLE AvoidStarImport
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 
