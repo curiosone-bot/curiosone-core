@@ -2,8 +2,6 @@ package com.github.bot.curiosone.core.nlp;
 
 import static com.github.bot.curiosone.core.nlp.Phrase.extract;
 import static org.assertj.core.api.Assertions.assertThat;
-// SUPPRESS CHECKSTYLE AvoidStarImport
-import static org.junit.Assert.*;
 
 import java.util.List;
 
