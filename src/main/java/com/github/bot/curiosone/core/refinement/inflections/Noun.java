@@ -1,5 +1,6 @@
 package com.github.bot.curiosone.core.refinement.inflections;
 /**
+ * Noun's inflections.
  * @author Claudio Venanzi
  */
 

@@ -1,5 +1,6 @@
 package com.github.bot.curiosone.core.refinement.inflections;
 /**
+ * Verb's inflections.
  * @author Claudio Venanzi
  */
 
@@ -64,9 +65,4 @@ public enum Verb implements Inflection {
   }
 
   //-----------------------------------------------------------------------------------------------
-
-/*
-  public static final Set<Verb> Plural = Stream.of(Verb.values())
-      .filter(x -> x.toString().contains("PLURAL"))
-      .collect(Collectors.toSet());*/
 }

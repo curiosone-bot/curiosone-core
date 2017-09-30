@@ -1,5 +1,6 @@
 package com.github.bot.curiosone.core.refinement;
 /**
+ * Type of sentence.
  * @author Claudio Venanzi
  */
 
