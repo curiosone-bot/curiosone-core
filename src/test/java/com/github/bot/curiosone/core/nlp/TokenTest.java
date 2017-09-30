@@ -70,10 +70,7 @@ public class TokenTest {
 
   @Test
   public void testGetLemma() {
-    Token token;
-    Token tokenn;
-
-    token = Token.tokenize("color").get(0);
+    Token token = Token.tokenize("color").get(0);
     assertThat(token.getLemma()).isEqualTo("color");
 
     token = Token.tokenize("colors").get(0);
@@ -113,9 +110,7 @@ public class TokenTest {
 
   @Test
   public void testTokenize() {
-    List<Token> tokens;
-
-    tokens = Token.tokenize("The cat is on the table!");
+    List<Token> tokens = Token.tokenize("The cat is on the table!");
     assertThat(tokens).hasSize(4);
     assertThat(tokens.get(0).getText()).isEqualTo("the");
     assertThat(tokens.get(1).getText()).isEqualTo("cat");
