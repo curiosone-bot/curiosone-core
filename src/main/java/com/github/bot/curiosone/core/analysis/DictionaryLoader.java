@@ -36,7 +36,6 @@ public class DictionaryLoader {
    */
   public static Map<String, Double> loadDict() {
     try {
-      //cambaire con percorso in github
       properties.load(new FileInputStream(uri));
     } catch (IOException e) {
       e.printStackTrace();
