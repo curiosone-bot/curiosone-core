@@ -21,7 +21,7 @@ public class Word {
   
   /**
    * Word constructor.
-   * @param form superficial word
+   * @param lemma citation form
    * @param part part of sentence
    */
   public Word(String lemma, WordPart part) {
@@ -56,7 +56,7 @@ public class Word {
     return shape.orElse(lemma);
   }
   
-  //-----------------------------------------------------------------------------------------------  
+  //-----------------------------------------------------------------------------------------------
 }
 
 /*

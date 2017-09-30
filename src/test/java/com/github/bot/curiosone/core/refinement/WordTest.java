@@ -14,13 +14,5 @@ public class WordTest {
     assertTrue(WordPart.from(BabelPOS.ADVERB).equals(WordPart.from(POS.ADVERB)));
     assertTrue(WordPart.from(BabelPOS.NOUN).equals(WordPart.Noun));
     assertTrue(WordPart.from(POS.VERB).equals(WordPart.Verb));
-    
-    new Word("unknown", WordPart.Noun).getLemma().forEach(System.out::println);
-    new Word("queens", WordPart.Noun).getLemma().forEach(System.out::println);
-    new Word("unbound", WordPart.Noun).getLemma().forEach(System.out::println);
-    new Word("greatest", WordPart.Noun).getLemma().forEach(System.out::println);
-    new Word("knew", WordPart.Noun).getLemma().forEach(System.out::println);
-
-
   }
 }

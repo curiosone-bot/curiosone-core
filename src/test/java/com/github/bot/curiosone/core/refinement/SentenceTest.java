@@ -28,7 +28,7 @@ public class SentenceTest {
     assertTrue(sen.getType().equals(SentenceType.Answer));
     
     assertTrue(sen.getWords()
-        .map(Word::getForm)
+        .map(Word::toString)
         .collect(Collectors.joining(" "))
         .equals("cake be lie"));
   }
