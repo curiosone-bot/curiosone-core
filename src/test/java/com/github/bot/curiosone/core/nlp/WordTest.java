@@ -11,11 +11,6 @@ import java.util.Set;
 import org.junit.Test;
 
 public class WordTest {
-  @Test
-  public void testInstantiation() {
-    Word w = new Word("colors", "color", new HashSet<>());
-    assertThat(w instanceof Word).isTrue();
-  }
 
   @Test
   public void testToString() {
