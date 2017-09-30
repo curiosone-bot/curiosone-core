@@ -1,8 +1,6 @@
 package com.github.bot.curiosone.core.workflow;
 
 import static org.assertj.core.api.Assertions.assertThat;
-// SUPPRESS CHECKSTYLE AvoidStarImport
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 
