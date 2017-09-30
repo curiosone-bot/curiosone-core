@@ -185,27 +185,21 @@ public class MainTest {
 
     res = request("POST", "/talk", "{message: \"che hai detto?!?\", scope: \"\"}").get();
     json = res.json();
-    //System.out.println(json.get("message") + "  " + json.get("scope"));
     assertThat(json.get("message")).isIn("I think you should speak english",
         "PLEASE, speak english!", "Are you a robot too?");
     assertThat(json.get("scope")).isEmpty();
 
     res = request("POST", "/talk", "{message: \"l'amour toujours...\", scope: \"\"}").get();
     json = res.json();
-    //System.out.println(json.get("message") + "  " + json.get("scope"));
     assertThat(json.get("message")).isIn("I think you should speak english",
         "PLEASE, speak english!", "Are you a robot too?");
     assertThat(json.get("scope")).isEmpty();
 
     res = request("POST", "/talk", "{message: \"what is a pullman?\", scope: \"\"}").get();
     json = res.json();
-    assertThat(json.get("message")).startsWith("For what I know, ").contains("pullman");
-    assertThat(json.get("scope")).isEqualTo("pullman");
+    assertThat(json.get("message")).isEqualTo("I do not know what is a pullman! Do you?");
+    assertThat(json.get("scope")).isEqualTo("pullman?");
 
-    res = request("POST", "/talk", "{message: \"what is a pullman?\", scope: \"\"}").get();
-    json = res.json();
-    assertThat(json.get("message")).startsWith("For what I know, ").contains("pullman");
-    assertThat(json.get("scope")).isEqualTo("pullman");
   }
 
   /**
