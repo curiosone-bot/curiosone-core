@@ -3,8 +3,6 @@ package com.github.bot.curiosone.core.workflow;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.anyOf;
 import static org.assertj.core.api.Assertions.assertThat;
-// SUPPRESS CHECKSTYLE AvoidStarImport
-import static org.junit.Assert.*;
 
 import java.io.IOException;
 
