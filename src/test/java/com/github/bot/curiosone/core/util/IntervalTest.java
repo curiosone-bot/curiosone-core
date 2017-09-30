@@ -2,8 +2,6 @@ package com.github.bot.curiosone.core.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-// SUPPRESS CHECKSTYLE AvoidStarImport
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -271,7 +269,7 @@ public class IntervalTest {
     Interval ii = new Interval(0, 42);
     assertThat(i.hashCode()).isEqualTo(ii.hashCode());
     ii = new Interval(0, 20);
-    assertNotEquals(i.hashCode(), ii.hashCode());
+    assertThat(i.hashCode()).isNotEqualTo(ii.hashCode());
   }
 
   @Test
