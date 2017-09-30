@@ -1,8 +1,6 @@
 package com.github.bot.curiosone.core.knowledge;
 
 import static org.assertj.core.api.Assertions.assertThat;
-// SUPPRESS CHECKSTYLE AvoidStarImport
-import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import org.junit.Test;
@@ -172,7 +170,8 @@ public class SemanticQueryTest {
     SemanticQuery sqq = new SemanticQuery(SemanticRelationType.ENTAILMENT, "pen", "ink", "HAVE");
     assertThat(sq.hashCode()).isEqualTo(sqq.hashCode());
 
-    sq = new SemanticQuery(SemanticRelationType.ENTAILMENT, "pen", "ink", new ArrayList<>(), "HAVE");
+    sq =
+        new SemanticQuery(SemanticRelationType.ENTAILMENT, "pen", "ink", new ArrayList<>(), "HAVE");
     assertThat(sq.hashCode()).isEqualTo(sqq.hashCode());
 
     sq = new SemanticQuery(SemanticRelationType.TIME, "tatto", "ink", new ArrayList<>(), "BE");
