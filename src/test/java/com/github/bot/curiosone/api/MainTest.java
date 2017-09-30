@@ -1,5 +1,6 @@
 package com.github.bot.curiosone.api;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import com.google.gson.Gson;
@@ -80,8 +81,8 @@ public class MainTest {
   public void testStatusGetRequest() {
     TestResponse res = request("GET", "/status").get();
     Map<String, String> json = res.json();
-    Assert.assertEquals(200, res.status);
-    Assert.assertEquals("ok", json.get("status"));
+    assertThat(res.status).isEqualTo(200);
+    assertThat(json.get("status")).isEqualTo("ok");
   }
 
   /**
@@ -114,11 +115,97 @@ public class MainTest {
   public void testTalkPostRequest() {
     TestResponse res = request("POST", "/talk", "{message: \"Hello\", scope: \"\"}").get();
     Map<String, String> json = res.json();
-    Assert.assertEquals(200, res.status);
-    Assert.assertTrue(json.get("message") != null);
-    Assert.assertTrue(json.get("scope") != null);
-    System.out.println(json.get("message"));
-    System.out.println(json.get("scope"));
+    assertThat(json.get("message")).isIn("Hi there!", "Hi.", "Hello!");
+    assertThat(json.get("scope")).isEmpty();
+    assertThat(res.status).isEqualTo(200);
+
+    res = request("POST", "/talk", "{message: \"DoYouUnderstandThis?!?\", scope: \"TROLL\"}").get();
+    json = res.json();
+    assertThat(json.get("message"))
+        .isIn(
+        "DoYouUnderstandThis??",
+        "DoYouUnderstandThis?? I do not understand",
+        "DoYouUnderstandThis?.. that is cool"
+      );
+    assertThat(json.get("scope")).isEmpty();
+    assertThat(res.status).isEqualTo(200);
+
+    res = request("POST", "/talk", "{message: \"42\", scope: \"theAnswer\"}").get();
+    json = res.json();
+    assertThat(res.status).isEqualTo(200);
+    assertThat(json.get("message"))
+      .isIn("42... that is cool", "42.? I do not understand", "42.?");
+    assertThat(json.get("scope")).isEmpty();
+
+    res = request("POST", "/talk", "{message: \"What is an apple?\", scope: \"apple\"}").get();
+    json = res.json();
+    assertThat(res.status).isEqualTo(200);
+    assertThat(json.get("message")).contains("For what I know, apple is");
+    assertThat(json.get("scope")).isEqualTo("apple");
+
+    res = request("POST", "/talk", "{message: \"I live in Rome\", scope: \"\"}").get();
+    json = res.json();
+    assertThat(res.status).isEqualTo(200);
+    assertThat(json.get("message")).isEqualTo("Mhh! What is a rome?");
+    assertThat(json.get("scope")).isEqualTo("rome?");
+
+    res = request("POST", "/talk", "{message: \"I have the driving license\", scope: \"license\"}")
+        .get();
+    json = res.json();
+    assertThat(res.status).isEqualTo(200);
+    assertThat(json.get("message")).isEqualTo("Mhh! What is a driving license?");
+    assertThat(json.get("scope")).isEqualTo("driving license?");
+
+    res = request("POST", "/talk",
+        "{message: \"A drive license is a document\", scope: \"document\"}").get();
+    json = res.json();
+    assertThat(res.status).isEqualTo(200);
+    assertThat(json.get("message")).isEqualTo("Mhh! What is a document?");
+    assertThat(json.get("scope")).isEqualTo("document?");
+
+    res = request("POST", "/talk", "{message: \"What is a godfather?\", scope: \"\"}").get();
+    json = res.json();
+    assertThat(json.get("message")).startsWith("For what I know").contains("godfather");
+    assertThat(json.get("scope")).isEqualTo("godfather");
+
+    res = request("POST", "/talk", "{message: \"I like pizza\", scope: \"pizza\"}").get();
+    json = res.json();
+    assertThat(json.get("message")).isEqualTo("Mhh! What is a pizza?");
+    assertThat(json.get("scope")).isEqualTo("pizza?");
+
+    res = request("POST", "/talk", "{message: \"what is pizza\", scope: \"pizza\"}").get();
+    json = res.json();
+    assertThat(json.get("message")).isEqualTo("Mhh! What is a pizza?");
+    assertThat(json.get("scope")).isEqualTo("pizza?");
+
+    res = request("POST", "/talk", "{message: \"what is pizza?\", scope: \"pizza\"}").get();
+    json = res.json();
+    assertThat(json.get("message")).startsWith("For what I know, ").contains("pizza");
+    assertThat(json.get("scope")).isEqualTo("pizza");
+
+    res = request("POST", "/talk", "{message: \"che hai detto?!?\", scope: \"\"}").get();
+    json = res.json();
+    //System.out.println(json.get("message") + "  " + json.get("scope"));
+    assertThat(json.get("message")).isIn("I think you should speak english",
+        "PLEASE, speak english!", "Are you a robot too?");
+    assertThat(json.get("scope")).isEmpty();
+
+    res = request("POST", "/talk", "{message: \"l'amour toujours...\", scope: \"\"}").get();
+    json = res.json();
+    //System.out.println(json.get("message") + "  " + json.get("scope"));
+    assertThat(json.get("message")).isIn("I think you should speak english",
+        "PLEASE, speak english!", "Are you a robot too?");
+    assertThat(json.get("scope")).isEmpty();
+
+    res = request("POST", "/talk", "{message: \"what is a pullman?\", scope: \"\"}").get();
+    json = res.json();
+    assertThat(json.get("message")).startsWith("For what I know, ").contains("pullman");
+    assertThat(json.get("scope")).isEqualTo("pullman");
+
+    res = request("POST", "/talk", "{message: \"what is a pullman?\", scope: \"\"}").get();
+    json = res.json();
+    assertThat(json.get("message")).startsWith("For what I know, ").contains("pullman");
+    assertThat(json.get("scope")).isEqualTo("pullman");
   }
 
   /**
