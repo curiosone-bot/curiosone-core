@@ -1,8 +1,6 @@
 package com.github.bot.curiosone.core.nlp;
 
 import static org.assertj.core.api.Assertions.assertThat;
-// SUPPRESS CHECKSTYLE AvoidStarImport
-import static org.junit.Assert.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -93,18 +91,31 @@ public class SentenceTest {
     sentence = sentences.get(0);
     assertThat(sentence.respect(POS.S)).isTrue();
 
-
-
-
-    List<Word>[] parameters = sentence.parse(POS.PRON, POS.V, POS.NP);
-    assertTrue(parameters.length == 3);
-    // System.out.println(parameters[0]);
-    // System.out.println(parameters[1]);
-    // System.out.println(parameters[2]);
-
-
     List<Word> words = sentence.get(POS.V);
     assertThat(words.size()).isGreaterThan(0);
+  }
+
+  @Test
+  public void testParse() {
+    List<Phrase> phrases = Phrase.extract("What is an apple?");
+    Phrase phrase = phrases.get(0);
+    List<Sentence> sentences = Sentence.extract(phrase);
+    Sentence sentence = sentences.get(0);
+    List<Word>[] parameters = sentence.parse(POS.PRON, POS.V, POS.NP);
+    assertThat(parameters.length).isEqualTo(3);
+    assertThat(parameters[0]).isNotEmpty();
+    assertThat(parameters[1]).isNotEmpty();
+    assertThat(parameters[2]).isNotEmpty();
+
+    phrases = Phrase.extract("Where is an Rome?");
+    phrase = phrases.get(0);
+    sentences = Sentence.extract(phrase);
+    sentence = sentences.get(0);
+    parameters = sentence.parse(POS.PRON, POS.V, POS.NP);
+    assertThat(parameters.length).isEqualTo(3);
+    assertThat(parameters[0]).isNotEmpty();
+    assertThat(parameters[1]).isNotEmpty();
+    assertThat(parameters[2]).isNotEmpty();
   }
 
   @Test
