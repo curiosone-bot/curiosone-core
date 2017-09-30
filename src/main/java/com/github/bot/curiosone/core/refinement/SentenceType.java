@@ -1,4 +1,7 @@
 package com.github.bot.curiosone.core.refinement;
+/**
+ * @author Claudio Venanzi
+ */
 
 public enum SentenceType {
   
