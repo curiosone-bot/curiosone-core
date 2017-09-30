@@ -3,8 +3,6 @@ package com.github.bot.curiosone.core.nlp;
 import static com.github.bot.curiosone.core.nlp.Rule.allFrom;
 import static com.github.bot.curiosone.core.nlp.Rule.allTo;
 import static org.assertj.core.api.Assertions.assertThat;
-// SUPPRESS CHECKSTYLE AvoidStarImport
-import static org.junit.Assert.*;
 
 import com.github.bot.curiosone.core.util.Pair;
 
