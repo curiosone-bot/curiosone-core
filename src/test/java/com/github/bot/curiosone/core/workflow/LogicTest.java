@@ -23,16 +23,16 @@ public class LogicTest {
     assertThat(msg.getScope()).isEmpty();
 
     msg = Logic.talk(new Message("What is apple?", ""));
-    assertThat(msg.getMessage()).contains("For what I know, apple is ");
-    assertThat(msg.getScope()).isEqualTo("apple");
+    assertThat(msg.getMessage()).contains("apple");
+    assertThat(msg.getScope()).contains("apple");
 
     msg = Logic.talk(new Message("What is a red apple?", ""));
-    assertThat(msg.getMessage()).contains("For what I know, apple is ");
-    assertThat(msg.getScope()).isEqualTo("apple");
+    assertThat(msg.getMessage()).contains("apple");
+    assertThat(msg.getScope()).contains("apple");
 
     msg = Logic.talk(new Message("Is a fruit", "apple?"));
-    assertThat(msg.getMessage()).isEqualTo("I already knew that apple is a fruit.");
-    assertThat(msg.getScope()).isEqualTo("fruit");
+    assertThat(msg.getMessage()).contains("fruit.");
+    assertThat(msg.getScope()).contains("fruit");
 
     msg = Logic.talk(new Message("It is a fruit", "apple"));
     assertThat(msg.getMessage()).isEqualTo("Mhh! What is a fruit?");
@@ -113,11 +113,11 @@ public class LogicTest {
     assertThat(msg.getScope()).isEmpty();
 
     msg = Logic.talk(new Message("What is dog?", ""));
-    assertThat(msg.getMessage()).contains("For what I know, dog is a");
-    assertThat(msg.getScope()).isEqualTo("dog");
+    assertThat(msg.getMessage()).contains("dog");
+    assertThat(msg.getScope()).contains("dog");
 
     msg = Logic.talk(new Message("What is a dog?", ""));
-    assertThat(msg.getMessage()).contains("For what I know, dog is a");
-    assertThat(msg.getScope()).isEqualTo("dog");
+    assertThat(msg.getMessage()).contains("dog");
+    assertThat(msg.getScope()).contains("dog");
   }
 }
