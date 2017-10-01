@@ -25,7 +25,7 @@ public class Brain {
    */
   public static Optional<BrainResponse> conversate(Phrase phrase) {
     Optional<BrainResponse> answ = Conversation.getAnswer(phrase);
-    return (answ.isPresent()) ? answ : BadWords.getAnswer(phrase);
+    return answ.isPresent() ? answ : BadWords.getAnswer(phrase);
   }
 
   /**
