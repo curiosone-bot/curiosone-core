@@ -34,6 +34,9 @@ public class Token {
     known = rt.isKnown();
     means = new HashSet<>();
     lemma = rt.getLemma();
+    if (lemma == null) {
+      lemma = text;
+    }
     rt.getWords().forEach(rw -> {
       Meaning meaning = new Meaning(rw.getPos(), rw.getLexType());
       meaning.setFrequency(rw.getNum());
@@ -145,7 +148,10 @@ public class Token {
         }
       }
       String word = buff.toString();
-
+      if (word.length() == 0) {
+        pos -= len;
+        continue;
+      }
       Token token = new Token(word);
       // This has been removed since creates problems.
       // if (!token.isKnown()) {

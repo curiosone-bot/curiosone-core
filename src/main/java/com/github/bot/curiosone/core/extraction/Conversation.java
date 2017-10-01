@@ -9,7 +9,8 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -25,7 +26,7 @@ public class Conversation {
 
 
   /** Map from recognized tokens to possible phrases given in output. */
-  private static Map<String[], String[]> knownQuestions;
+  private static LinkedHashMap<String, String[]> knownQuestions;
 
   /**
    * Private constructor.
@@ -36,7 +37,7 @@ public class Conversation {
    * Loads the known answers in memory.
    */
   private static void loadSentences() {
-    knownQuestions = new HashMap<>();
+    knownQuestions = new LinkedHashMap<>();
     Path path = null;
     try {
       URL resource = Conversation.class.getResource(conversationsPath);
@@ -48,7 +49,7 @@ public class Conversation {
     try (Stream<String> stream = Files.lines(path)) {
       stream.forEach(line -> {
         int splitIndex = line.indexOf(":");
-        String[] key = line.substring(0, splitIndex).split("\t");
+        String key = line.substring(0, splitIndex);
         String[] values = line.substring(splitIndex + 1, line.length()).split("\t");
         knownQuestions.put(key, values);
       });
@@ -72,10 +73,10 @@ public class Conversation {
         .map(Token::getLemma)
         .collect(Collectors.toList());
 
-    for (Map.Entry<String[], String[]> entry : knownQuestions.entrySet()) {
+    for (Map.Entry<String, String[]> entry : knownQuestions.entrySet()) {
       boolean isKnown = true;
 
-      for (String s : entry.getKey()) {
+      for (String s : entry.getKey().split("\t")) {
         if (!lemmas.contains(s)) {
           isKnown = false;
           break;
