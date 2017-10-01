@@ -1,10 +1,10 @@
 package com.github.bot.curiosone.core.refinement;
 
+import com.github.bot.curiosone.core.refinement.interfaces.Clause;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.github.bot.curiosone.core.refinement.interfaces.Clause;
 
 public class Sentence {
 
@@ -33,6 +33,14 @@ public class Sentence {
    */
   public void addClause(Clause clause) {
     clauses.add(clause);
+  }
+  
+  /**
+   * Returns the sentence type.
+   * @return type
+   */
+  public Type getSentenceType() {
+    return type;
   }
   
   /**

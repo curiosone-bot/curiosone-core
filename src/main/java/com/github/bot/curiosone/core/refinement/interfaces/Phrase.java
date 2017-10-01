@@ -1,8 +1,11 @@
 package com.github.bot.curiosone.core.refinement.interfaces;
 
-import java.util.List;
-
 public interface Phrase {
-  List<Word> getWords();
+  
+  /**
+   * Refinement logic.
+   * @return refined phrase
+   */
   @Override String toString();
+
 }

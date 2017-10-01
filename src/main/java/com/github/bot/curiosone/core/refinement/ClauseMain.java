@@ -5,16 +5,22 @@ import com.github.bot.curiosone.core.refinement.interfaces.Phrase;
 
 public class ClauseMain implements Clause {
 
-  @Override
-  public Phrase getSubject() {
-    // TODO Auto-generated method stub
-    return null;
+  private Phrase subject;
+  private Phrase predicate;
+  
+  /**
+   * Clause constructor.
+   * @param subject subject
+   * @param predicate predicate
+   */
+  public ClauseMain(Phrase subject, Phrase predicate) {
+    this.subject   = subject;
+    this.predicate = predicate;
   }
-
+  
   @Override
-  public Phrase getPredicate() {
-    // TODO Auto-generated method stub
-    return null;
+  public String toString() {
+    return "MC { " + subject + " " + predicate + " }";
   }
 
 }
