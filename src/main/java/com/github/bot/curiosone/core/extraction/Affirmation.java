@@ -53,7 +53,8 @@ public class Affirmation {
         List<Word> nouns =
             extracted[1].stream().filter(w -> w.itMeans(POS.N)).collect(Collectors.toList());
         object = nouns.get(nouns.size() - 1);
-      } if (sentence.has(POS.V) && sentence.has(POS.N)) {
+      }
+      if (sentence.has(POS.V) && sentence.has(POS.N)) {
         // System.out.println("V, N");
         verb = sentence.get(POS.V).get(0);
         List<Word> nouns = sentence.get(POS.N);
