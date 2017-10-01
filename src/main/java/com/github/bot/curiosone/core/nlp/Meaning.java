@@ -9,6 +9,11 @@ import java.util.Objects;
 public class Meaning implements Comparable<Meaning> {
 
   /**
+   * Stores the default frequency value of this meaning.
+   */
+  private static final int DEFAULT_FREQ_VALUE = 0;
+
+  /**
    * The part of speech type of the meaning.
    */
   POS pos;
@@ -31,7 +36,7 @@ public class Meaning implements Comparable<Meaning> {
   public Meaning(POS pos, LEX lex) {
     this.pos = pos;
     this.lex = lex;
-    this.freq = 0;
+    this.freq = DEFAULT_FREQ_VALUE;
   }
 
   /**
@@ -56,7 +61,7 @@ public class Meaning implements Comparable<Meaning> {
   }
 
   /**
-   * Sets the frewuency for this meaning.
+   * Sets the frequency for this meaning.
    * @param frequency the frequency value to be set
    * @throws IllegalArgumentException if negative frequency is passed
    */
