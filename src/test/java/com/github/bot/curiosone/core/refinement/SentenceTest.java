@@ -1,11 +1,11 @@
 package com.github.bot.curiosone.core.refinement;
 
+import com.github.bot.curiosone.core.refinement.word.Noun;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-
-import com.github.bot.curiosone.core.refinement.word.Noun;
 
 public class SentenceTest {
 

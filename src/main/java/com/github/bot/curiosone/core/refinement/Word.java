@@ -1,9 +1,9 @@
 package com.github.bot.curiosone.core.refinement;
 
-import java.util.stream.Stream;
-
 import it.uniroma1.lcl.babelmorph.POS;
 import it.uniroma1.lcl.babelnet.data.BabelPOS;
+
+import java.util.stream.Stream;
 
 public class Word {
   

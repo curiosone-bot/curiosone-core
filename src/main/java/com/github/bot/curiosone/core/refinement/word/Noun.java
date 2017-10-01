@@ -3,13 +3,12 @@ package com.github.bot.curiosone.core.refinement.word;
  * @author Claudio Venanzi
  */
 
-import java.util.Optional;
-
 import com.github.bot.curiosone.core.refinement.Word;
 
 import it.uniroma1.lcl.babelmorph.Lexeme;
 import it.uniroma1.lcl.babelmorph.en.EnglishMorpher;
 
+import java.util.Optional;
 
 public class Noun extends Word {
   

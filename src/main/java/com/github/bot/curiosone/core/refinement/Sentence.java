@@ -40,20 +40,13 @@ public class Sentence {
     
     for (Word word : words) {
       switch (word.getPart()) {
-/*
-        case Adjective:
-          break;
 
-        case Noun:
-          
-          break;
-
-        case Adverb:
+        case Noun:          
           break;
 
         case Verb:
           break;
-*/        
+        
         default:
           temp.add(word);
       }
