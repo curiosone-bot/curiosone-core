@@ -56,7 +56,7 @@ public class Meaning implements Comparable<Meaning> {
   }
 
   /**
-   * Sets the frewuency for this meaning.
+   * Sets the frequency for this meaning.
    * @param frequency the frequency value to be set
    * @throws IllegalArgumentException if negative frequency is passed
    */
