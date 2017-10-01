@@ -23,6 +23,6 @@ public class SentenceTest {
   
   @Test
   public void main() {
-    System.out.println("hello");
+    System.out.println(sen.refine());
   }
 }

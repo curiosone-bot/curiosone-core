@@ -33,8 +33,6 @@ public class Sentence {
     this.type = type;
     this.words = new ArrayList<>();
     words.forEach(this.words::add);
-
-    this.words.stream().map(Word::toString).forEach(System.out::println);
   }
 
   //-----------------------------------------------------------------------------------------------
