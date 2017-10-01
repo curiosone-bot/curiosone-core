@@ -140,14 +140,14 @@ public class MainTest {
     res = request("POST", "/talk", "{message: \"What is an apple?\", scope: \"apple\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
-    assertThat(json.get("message")).contains("For what I know, apple is");
+    assertThat(json.get("message")).contains("apple");
     assertThat(json.get("scope")).isEqualTo("apple");
 
     res = request("POST", "/talk", "{message: \"I live in Rome\", scope: \"\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
-    assertThat(json.get("message")).isNotNull().isNotEmpty();
-    assertThat(json.get("scope")).isNotNull();
+    assertThat(json.get("message")).containsIgnoringCase("rome");
+    assertThat(json.get("scope")).containsIgnoringCase("rome");
 
     res = request("POST", "/talk", "{message: \"I have the driving license\", scope: \"license\"}")
         .get();
@@ -166,26 +166,26 @@ public class MainTest {
     res = request("POST", "/talk", "{message: \"What is a godfather?\", scope: \"\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
-    assertThat(json.get("message")).isNotNull().isNotEmpty();
-    assertThat(json.get("scope")).isNotNull();
+    assertThat(json.get("message")).containsIgnoringCase("godfather");
+    assertThat(json.get("scope")).containsIgnoringCase("godfather");
 
     res = request("POST", "/talk", "{message: \"I like pizza\", scope: \"pizza\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
-    assertThat(json.get("message")).isNotNull().isNotEmpty();
-    assertThat(json.get("scope")).isNotNull();
+    assertThat(json.get("message")).containsIgnoringCase("pizza");
+    assertThat(json.get("scope")).containsIgnoringCase("pizza");
 
     res = request("POST", "/talk", "{message: \"what is pizza\", scope: \"pizza\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
-    assertThat(json.get("message")).isNotNull().isNotEmpty();
-    assertThat(json.get("scope")).isNotNull();
+    assertThat(json.get("message")).containsIgnoringCase("pizza");
+    assertThat(json.get("scope")).containsIgnoringCase("pizza");
 
     res = request("POST", "/talk", "{message: \"what is pizza?\", scope: \"pizza\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
-    assertThat(json.get("message")).isNotNull().isNotEmpty();
-    assertThat(json.get("scope")).isNotNull();
+    assertThat(json.get("message")).containsIgnoringCase("pizza");
+    assertThat(json.get("scope")).containsIgnoringCase("pizza");
 
     res = request("POST", "/talk", "{message: \"che hai detto?!?\", scope: \"\"}").get();
     json = res.json();
@@ -204,8 +204,8 @@ public class MainTest {
     res = request("POST", "/talk", "{message: \"what is a pullman?\", scope: \"\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
-    assertThat(json.get("message")).isNotNull().isNotEmpty();
-    assertThat(json.get("scope")).isNotNull();
+    assertThat(json.get("message")).containsIgnoringCase("pullman");
+    assertThat(json.get("scope")).containsIgnoringCase("pullman");
 
   }
 
