@@ -1,10 +1,10 @@
-package com.github.bot.curiosone.core.refinement.inflections;
+package com.github.bot.curiosone.core.refinement.zzz;
 /**
  * Verb's inflections.
  * @author Claudio Venanzi
  */
 
-public enum Verb implements Inflection {
+public enum VerbCategory {
   PresentS1("PRESENT, SINGULAR, FIRST_PERSON"),
   PresentS2("PRESENT, SINGULAR, SECOND_PERSON"),
   PresentS3("PRESENT, SINGULAR, THIRD_PERSON"),
@@ -53,7 +53,7 @@ public enum Verb implements Inflection {
   
   private String category;
 
-  private Verb(String category) {
+  private VerbCategory(String category) {
     this.category = category;
   }
 

@@ -1,59 +1,105 @@
 package com.github.bot.curiosone.core.refinement;
-/**
- * @author Claudio Venanzi
- */
 
-import java.util.Optional;
+import java.util.stream.Stream;
+
+import it.uniroma1.lcl.babelmorph.POS;
+import it.uniroma1.lcl.babelnet.data.BabelPOS;
 
 public class Word {
   
-  private String lemma;
-  private Optional<WordPart> part;
+  private String form;
+  private Part   part;
+  
+  protected Word(String form, Part part) {
+    this.form = form;
+    this.part = part;
+  }
 
   //===============================================================================================
   
   /**
    * Word constructor.
-   * @param lemma citation form
-   * @param part part of sentence
    */
-  public Word(String lemma, WordPart part) {
-    this.lemma = lemma;
-    this.part  = Optional.of(part);
+  public Word(String form) {
+    this(form, Part.None);
   }
 
   //-----------------------------------------------------------------------------------------------
   
   /**
-   * Word constructor.
-   * @param lemma citation form
+   * Get the word's form.
+   * @return form
    */
-  public Word(String lemma) {
-    this.lemma = lemma;
-    this.part  = Optional.empty();
+  public String getForm() {
+    return form;
   }
 
   //-----------------------------------------------------------------------------------------------
-
+  
   /**
-   * Returns the part.
+   * Get the word's part.
    * @return part
    */
-  public Optional<WordPart> getPart() {
+  public Part getPart() {
     return part;
   }
-
-  //-----------------------------------------------------------------------------------------------
+      
+  //===============================================================================================
   
-  @Override
-  public String toString() {
-    return lemma;
+  /**
+   * Word POS interoperability structure.
+   */
+  public enum Part {  
+    Adjective(BabelPOS.ADJECTIVE, POS.ADJECTIVE),
+    Adverb(BabelPOS.ADVERB, POS.ADVERB),
+    Noun(BabelPOS.NOUN, POS.NOUN),
+    Verb(BabelPOS.VERB, POS.VERB),
+    None(null, null);
+        
+    private final BabelPOS bn;
+    private final POS      bm;
+
+    private Part(BabelPOS bn, POS bm) {
+      this.bn = bn;
+      this.bm = bm;
+    }
+
+    /**
+     * Returns the corresponding BabelNet POS.
+     * @return pos
+     */
+    public BabelPOS forBabelNet() {
+      return bn;
+    }
+    
+    /**
+     * Returns the corresponding BabelMorph POS.
+     * @return pos
+     */
+    public POS forBabelMorph() {
+      return bm;
+    }
+    
+    /**
+     * Returns Part from BabelNet POS.
+     * @param pos source pos
+     * @return part
+     */
+    public static Part from(BabelPOS pos) {
+      return Stream.of(Part.values())
+          .filter(value -> value.forBabelNet().equals(pos))
+          .findAny().orElse(None);
+    }
+
+    /**
+     * Returns Part from BabelMorph POS.
+     * @param pos source pos
+     * @return part
+     */
+    public static Part from(POS pos) {
+      return Stream.of(Part.values())
+          .filter(value -> value.forBabelMorph().equals(pos))
+          .findAny().orElse(None);
+    }
   }
-  
-  //-----------------------------------------------------------------------------------------------
 }
-
-/*
-return new EnglishMorpher().getLexemes(shape, part.forBabelMorph()).stream()
-.map(Lexeme::getLemma).collect(Collectors.toSet());
-*/

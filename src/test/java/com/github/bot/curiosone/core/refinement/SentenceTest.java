@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.github.bot.curiosone.core.refinement.word.Noun;
+
 public class SentenceTest {
 
   private Sentence sen;
@@ -15,9 +17,9 @@ public class SentenceTest {
   public SentenceTest() {
     
     List<Word> ws = new ArrayList<>();
-    ws.add(new Word("cake", WordPart.Noun));
-    ws.add(new Word("be",   WordPart.Verb));
-    ws.add(new Word("lie",  WordPart.Noun));
+    ws.add(new Noun("cake"));
+    ws.add(new Word("be"));
+    ws.add(new Noun("lie"));
     sen = new Sentence(Sentence.Type.Answer, ws);
   }
   
