@@ -13,7 +13,7 @@ public class LangUtils {
   /**
    * Stores the regex used to remove all non-alphanumeric characters from a String.
    */
-  private static final String REGEX_REMOVE_NON_ALPHANUM = "[^A-Za-z0-9 ]";
+  private static final String REGEX_NON_ALPHANUM = "[^A-Za-z0-9 ]";
 
   /**
    * Stores all supported verbs abbreviations in the expandVerbs method.
@@ -146,6 +146,6 @@ public class LangUtils {
    * @return a new String containing the result of the non-alphanumeric characters removal
    */
   public static String removeNonAlphaNumeric(String str) {
-    return str.replaceAll(REGEX_REMOVE_NON_ALPHANUM, "");
+    return str.replaceAll(REGEX_NON_ALPHANUM, "");
   }
 }
