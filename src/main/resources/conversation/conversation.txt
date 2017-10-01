@@ -3,8 +3,6 @@ hello:Hi there!	Hi.	Hello!
 my	name	is:Wow! Your name is beautiful.
 we	friend:Facebook teached me what a friend is	I really want a friend.
 how	old	be	you:I do not know how old I am, i was succesfully built in 09/27/2017.
-you age	you:I do not know how old I am, i was succesfully built in 09/27/2017.
-your age	you:I do not know how old I am, i was succesfully built in 09/27/2017.
 how	be	you:I do not know, do robots have sentiments? What about you?	Once upon a time I heard a human saying "I'm fine, thanks", so i will say: I am fine, thanks. What about you?
 how	be	go:Ow.. I do not know.	Not so bad, what about you?
 how	break	you:You can not.	I am unbreakable!(or maybe not ;-)).	Find where my server is and kill it.	Search it in Javadoc.
@@ -51,6 +49,3 @@ i	game:I have different games in my brain, if you want to play, just click on th
 ask	you:Ask me anything you like.	Yes, sure.
 parents:I have so much "fathers", but no "mother".	I like to call my "coders" --> "fathers".
 why	not:It is just not in my nature.	Why why not?
-weather:The weather is something that I don't care about.
-your:Please let's talk about something different than me.
-you:Please let's talk about something different than me.

@@ -299,10 +299,5 @@ public enum LEX {
   /**
    * Unknown.
    */
-  UNKN,
-
-  /**
-   * Indefinite.
-   */
-  INDEFINITE
+  UNKN;
 }

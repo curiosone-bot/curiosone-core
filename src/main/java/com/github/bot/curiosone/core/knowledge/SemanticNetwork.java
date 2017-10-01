@@ -206,7 +206,7 @@ public class SemanticNetwork implements Graph {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    // System.out.println("learned");
+    System.out.println("learned");
     increase(target, 1);
   }
 

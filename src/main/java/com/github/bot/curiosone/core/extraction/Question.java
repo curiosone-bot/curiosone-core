@@ -17,24 +17,24 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Description.
+ * Provides a static method to get an answer from a given sentence and a given scope.
  */
 public class Question {
+
   /**
-   * getAnswer description.
-   *
-   * @param  sentence [description]
-   * @param  scope [description]
-   * @return [description]
+   * Returns an answer for the given sentence and the given scope.
+   * @param sentence the sentence to base the answer on
+   * @param scope the scope for the given input sentence
+   * @return an Optional instance. If an answer has been successfully computed,
+   *         the value contains the computed answer.
+   *         Otherwise, an empty Optional instance is returned.
    */
   public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) {
-    // System.out.println(sentence + " (" + scope + ")");
     Word kind;
     Word verb;
     Word object;
 
     if (sentence.respect(POS.PRON, POS.V, POS.NP)) {
-      // System.out.println("PRON, VP, NP");
       List<Word>[] extracted = sentence.parse(POS.PRON, POS.V, POS.NP);
       kind = extracted[0].stream()
           .filter(w -> w.itMeans(POS.PRON))
@@ -47,7 +47,6 @@ public class Question {
           .collect(Collectors.toList());
       object = nouns.get(nouns.size() - 1);
     } else if (sentence.respect(POS.ADV, POS.V, POS.NP)) {
-      // System.out.println("ADV, VP, NP");
       List<Word>[] extracted = sentence.parse(POS.ADV, POS.V, POS.NP);
       kind = extracted[0].stream()
           .filter(w -> w.itMeans(POS.ADV))
@@ -60,13 +59,11 @@ public class Question {
           .collect(Collectors.toList());
       object = nouns.get(nouns.size() - 1);
     } else if (sentence.has(POS.PRON) && sentence.has(POS.V) && sentence.has(POS.N)) {
-      // System.out.println("PRON, V, N");
       kind = sentence.get(POS.PRON).get(0);
       verb = sentence.get(POS.V).get(0);
       List<Word> nouns = sentence.get(POS.N);
       object = nouns.get(nouns.size() - 1);
     } else if (sentence.has(POS.ADV) && sentence.has(POS.V) && sentence.has(POS.N)) {
-      // System.out.println("ADV, V, N");
       kind = sentence.get(POS.ADV).get(0);
       verb = sentence.get(POS.V).get(0);
       List<Word> nouns = sentence.get(POS.N);
@@ -74,7 +71,6 @@ public class Question {
     } else {
       return Optional.empty();
     }
-
     SemanticNetwork semanticNetwork;
     try {
       semanticNetwork = SemanticNetwork.getInstance();
@@ -90,7 +86,6 @@ public class Question {
             verb.getLemma()
         );
         Optional<Edge> opt = semanticNetwork.query(sq);
-
         String newMessage;
         String newScope;
         if (!opt.isPresent()) {
@@ -98,10 +93,9 @@ public class Question {
           newScope = object.getText() + '?';
         } else {
           String answer = opt.get().getTarget().toString();
-          newMessage = "For what I know, " + object.getText() + " is a " + answer + "!";
+          newMessage = "For what I know, " + object.getText() + " is a " + answer + '!';
           newScope = object.getText();
         }
-
         return Optional.of(new BrainResponse(newMessage, newScope));
       }
       case "who": {
@@ -111,7 +105,6 @@ public class Question {
             verb.getLemma()
         );
         Optional<Edge> opt = semanticNetwork.query(sq);
-
         String newMessage;
         String newScope;
         if (!opt.isPresent()) {
@@ -119,10 +112,9 @@ public class Question {
           newScope = object.getText() + '?';
         } else {
           String answer = opt.get().getTarget().toString();
-          newMessage = "For what I know, " + object.getText() + " is a " + answer + "!";
+          newMessage = "For what I know, " + object.getText() + " is a " + answer + '!';
           newScope = object.getText();
         }
-
         return Optional.of(new BrainResponse(newMessage, newScope));
       }
       case "where": {
@@ -132,7 +124,6 @@ public class Question {
             verb.getLemma()
         );
         Optional<Edge> opt = semanticNetwork.query(sq);
-
         String newMessage;
         String newScope;
         if (!opt.isPresent()) {
@@ -140,10 +131,9 @@ public class Question {
           newScope = object.getText() + '?';
         } else {
           String answer = opt.get().getTarget().toString();
-          newMessage = "For what I know, " + object.getText() + " is in " + answer + "!";
+          newMessage = "For what I know, " + object.getText() + " is in " + answer + '!';
           newScope = object.getText();
         }
-
         return Optional.of(new BrainResponse(newMessage, newScope));
       }
       default: { }

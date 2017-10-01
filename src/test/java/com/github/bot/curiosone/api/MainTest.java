@@ -28,35 +28,35 @@ import spark.utils.IOUtils;
 public class MainTest {
 
   /**
-   * Set the port where it will run.
+   * Sets the port where it will run.
    */
   private static final String port = System.getenv("PORT") != null
       ? System.getenv("PORT") : "4567";
 
   /**
-   * Set server URL.
+   * Sets server URL.
    */
   private static final String server = "http://localhost:";
 
   /**
-   * Set server URL Authority.
+   * Sets server URL Authority.
    */
   private static final String urlAuthority = server + port;
 
   /**
-   * Set the expected exception thrown in test methods.
+   * Sets the expected exception thrown in test methods.
    */
   @Rule
   public ExpectedException thrown = ExpectedException.none();
 
   /**
-   * Set the expected error message on faulty requests.
+   * Sets the expected error message on faulty requests.
    */
   private static String EXPECTED_ERR_REQ_MSG = "Sending request failed: "
         + urlAuthority;
 
   /**
-  * Start the server and wait for its initialization.
+  * Starts the server and wait for its initialization.
   */
   @BeforeClass
   public static void before() {
@@ -65,7 +65,7 @@ public class MainTest {
   }
 
   /**
-  * Stop the server.
+  * Stops the server.
   */
   @AfterClass
   public static void after() {
@@ -73,7 +73,7 @@ public class MainTest {
   }
 
   /**
-   * Test GET request on /status path.
+   * Tests GET request on /status path.
    * @result The request will be replied with the right body and status code.
    */
   @Test
@@ -85,7 +85,7 @@ public class MainTest {
   }
 
   /**
-  * Test POST request on /status path.
+  * Tests POST request on /status path.
   * @result The request should throw an IOException, triggering an AssertionError.
   */
   @Test
@@ -96,7 +96,7 @@ public class MainTest {
   }
 
   /**
-  * Test GET request on /talk path.
+  * Tests GET request on /talk path.
   * @result The request should throw an IOException, triggering an AssertionError.
   */
   @Test
@@ -107,7 +107,7 @@ public class MainTest {
   }
 
   /**
-   * Test POST request on /talk path.
+   * Tests POST request on /talk path.
    * @result The request should receive a response, containing the right body and status code.
    */
   @Test
@@ -122,7 +122,7 @@ public class MainTest {
   }
 
   /**
-   * Execute a server request.
+   * Executes a server request.
    * @param method a String identifier of the desired HTTP request.
    * @param path a String containing the server path for the HTTP request.
    * @return an Optional instance.
@@ -145,7 +145,7 @@ public class MainTest {
   }
 
   /**
-   * Execute a server request.
+   * Executes a server request.
    * @param method a String identifier of the desired HTTP request.
    * @param path a String containing the server path for the HTTP request.
    * @return an Optional instance.
@@ -171,7 +171,7 @@ public class MainTest {
   }
 
   /**
-   * This class represents an implementation of a HTTP response.
+   * Represents an implementation of a HTTP response.
    */
   private static class TestResponse {
 

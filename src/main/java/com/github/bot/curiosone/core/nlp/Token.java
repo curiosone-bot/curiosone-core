@@ -9,19 +9,30 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * Handles a Token.
  * A Token is a list of words with a grammatical meaning.
+ * Provides method to create and manage a Token.
  */
 public class Token {
-  /** The text rappresentation of this token. */
+
+  /**
+   * Represents the text of this token.
+   */
   String text;
 
-  /** Base form of the world. */
+  /**
+   * Stores the base form of the word.
+   */
   String lemma;
 
-  /** Meanings of the token. */
+  /**
+   * Stores all the possible meanings for this token.
+   */
   Set<Meaning> means;
 
-  /** Whether this token is known or not. */
+  /**
+   * Whether this token is known or not.
+   */
   boolean known;
 
   /**
@@ -34,9 +45,6 @@ public class Token {
     known = rt.isKnown();
     means = new HashSet<>();
     lemma = rt.getLemma();
-    if (lemma == null) {
-      lemma = text;
-    }
     rt.getWords().forEach(rw -> {
       Meaning meaning = new Meaning(rw.getPos(), rw.getLexType());
       meaning.setFrequency(rw.getNum());
@@ -45,10 +53,7 @@ public class Token {
   }
 
   /**
-   * Checks if this token as at least a meaning.
-   *
-   * @return {@code true} if this interval equals the other interval;
-   *         {@code false} otherwise
+   * Returns {@code true} if this Token has at leas a meaning, {@code false} otherwise.
    */
   public boolean isKnown() {
     return known;
@@ -56,8 +61,6 @@ public class Token {
 
   /**
    * Returns the concatenation of the words of this token.
-   *
-   * @return the concatenation of the words of this token.
    */
   public String getText() {
     return text;
@@ -65,26 +68,20 @@ public class Token {
 
   /**
    * Returns the normalized concatenation of the words of this token.
-   *
-   * @return the normalized concatenation of the words of this token.
    */
   public String getLemma() {
     return lemma;
   }
 
   /**
-   * Returns the list of the meanings of this token.
-   *
-   * @return the list of the meanings of this token.
+   * Returns a Set containing all the meanings of this Token.
    */
   public Set<Meaning> getMeanings() {
     return means;
   }
 
   /**
-   * Returns a string representation of this token.
-   *
-   * @return a string representation of this token in the form [text, word, meanings]
+   * Returns a string representation of this tokenin the form [text, word, meanings].
    */
   @Override
   public String toString() {
@@ -93,9 +90,8 @@ public class Token {
 
   /**
    * Compares this token to the specified object.
-   *
-   * @param  other the other token
-   * @return {@code true} if this token equals the other token;
+   * @param  other the other Token to be compared against
+   * @return {@code true} if this token equals the other Token;
    *         {@code false} otherwise
    */
   @Override
@@ -111,9 +107,8 @@ public class Token {
   }
 
   /**
-   * Returns an integer hash code for this token.
-   *
-   * @return an integer hash code for this token
+   * Returns the HashCode for this Token.
+   * The HashCode is based on the HashCode of the original text.
    */
   @Override
   public int hashCode() {
@@ -121,10 +116,9 @@ public class Token {
   }
 
   /**
-   * Splits a string in a list of tokens checking groups of words.
-   *
-   * @param str the string to be tokenized
-   * @return the list of tokens of the string
+   * Splits a string in a list of Tokens, checking groups of words.
+   * @param str the String to be tokenized
+   * @return A List of tokens for the given the String
    */
   public static List<Token> tokenize(String str) {
     List<Token> tokens = new ArrayList<>();
@@ -132,14 +126,12 @@ public class Token {
     str = LangUtils.removeDuplicatedSpaces(str);
     str = LangUtils.expandVerbs(str);
     str = LangUtils.removeNonAlphaNumeric(str);
-
     String[] splitted = str.split(" ");
     int pos = splitted.length;
     int len = 4;
     while (pos > 0) {
       int start = Math.max(0, pos - len);
       int end = pos;
-
       StringBuffer buff = new StringBuffer();
       for (int i = start; i < end; i++) {
         buff.append(splitted[i]);
@@ -148,16 +140,11 @@ public class Token {
         }
       }
       String word = buff.toString();
-      if (word.length() == 0) {
-        pos -= len;
-        continue;
-      }
       Token token = new Token(word);
-      // This has been removed since creates problems.
-      // if (!token.isKnown()) {
-      //   word = Spelling.getInstance().correct(word);
-      //   token = new Token(word);
-      // }
+      if (!token.isKnown()) {
+        word = Spelling.getInstance().correct(word);
+        token = new Token(word);
+      }
       if (token.isKnown()) {
         tokens.add(0, token);
         pos -= len;
