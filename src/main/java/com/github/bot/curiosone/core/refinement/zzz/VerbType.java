@@ -4,7 +4,7 @@ package com.github.bot.curiosone.core.refinement.zzz;
  * @author Claudio Venanzi
  */
 
-public enum VerbCategory {
+public enum VerbType {
   PresentS1("PRESENT, SINGULAR, FIRST_PERSON"),
   PresentS2("PRESENT, SINGULAR, SECOND_PERSON"),
   PresentS3("PRESENT, SINGULAR, THIRD_PERSON"),
@@ -53,7 +53,7 @@ public enum VerbCategory {
   
   private String category;
 
-  private VerbCategory(String category) {
+  private VerbType(String category) {
     this.category = category;
   }
 

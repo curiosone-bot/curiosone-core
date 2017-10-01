@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.refinement;
+package com.github.bot.curiosone.core.refinement.zzz;
 
 import it.uniroma1.lcl.babelmorph.POS;
 import it.uniroma1.lcl.babelnet.data.BabelPOS;
@@ -8,9 +8,9 @@ import java.util.stream.Stream;
 public class Word {
   
   private String form;
-  private WordPart   part;
+  private Part   part;
   
-  protected Word(String form, WordPart part) {
+  protected Word(String form, Part part) {
     this.form = form;
     this.part = part;
   }
@@ -21,7 +21,7 @@ public class Word {
    * Word constructor.
    */
   public Word(String form) {
-    this(form, WordPart.None);
+    this(form, Part.None);
   }
 
   //-----------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ public class Word {
    * Get the word's part.
    * @return part
    */
-  public WordPart getPart() {
+  public Part getPart() {
     return part;
   }
       

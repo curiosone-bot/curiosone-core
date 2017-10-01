@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.refinement;
+package com.github.bot.curiosone.core.refinement.zzz;
 /**
  * @author Claudio Venanzi
  */
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Sentence {
   
-  private List<Word> words = new ArrayList<>();
+  private List<Token> tokens = new ArrayList<>();
   private SentenceType type;
   
   //===============================================================================================
@@ -28,8 +28,8 @@ public class Sentence {
    * Add a word.
    * @param word to add
    */
-  public void add(Word word) {
-    words.add(word);
+  public void add(Token word) {
+    tokens.add(word);
   }
 
   //-----------------------------------------------------------------------------------------------
@@ -40,27 +40,12 @@ public class Sentence {
   @Override
   public String toString() {
     
-    List<Word> temp = new ArrayList<>();
-    
-    for (Word word : words) {
-      switch (word.getPart()) {
-
-        case Noun:          
-          break;
-
-        case Verb:
-          break;
-        
-        default:
-          temp.add(word);
-      }
-    }
-    
-    String temp2 = temp.stream()
-        .map(Word::getForm)
+    String temp = tokens.stream()
+        .flatMap(Token::refine)
+        .map(Token::toString)
         .collect(Collectors.joining(" ", "", type.equals(SentenceType.Question) ? "?" : "."));
     
-    return temp2.substring(0, 1).toUpperCase() + temp2.substring(1);
+    return temp.substring(0, 1).toUpperCase() + temp.substring(1);
   }
   
   //-----------------------------------------------------------------------------------------------

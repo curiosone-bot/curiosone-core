@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.refinement;
+package com.github.bot.curiosone.core.refinement.zzz;
 /**
  * Sentence type.
  * @author Claudio Venanzi

@@ -1,4 +1,4 @@
-package com.github.bot.curiosone.core.refinement;
+package com.github.bot.curiosone.core.refinement.zzz;
 /**
  * Word POS interoperability structure.
  * @author Claudio Venanzi
@@ -7,7 +7,7 @@ package com.github.bot.curiosone.core.refinement;
 import it.uniroma1.lcl.babelmorph.POS;
 import it.uniroma1.lcl.babelnet.data.BabelPOS;
 
-public enum WordPart {
+public enum Part {
   Adjective(BabelPOS.ADJECTIVE, POS.ADJECTIVE),
   Adverb(BabelPOS.ADVERB, POS.ADVERB),
   Noun(BabelPOS.NOUN, POS.NOUN),
@@ -19,7 +19,7 @@ public enum WordPart {
   private final BabelPOS bn;
   private final POS      bm;
 
-  private WordPart(BabelPOS bn, POS bm) {
+  private Part(BabelPOS bn, POS bm) {
     this.bn = bn;
     this.bm = bm;
   }
