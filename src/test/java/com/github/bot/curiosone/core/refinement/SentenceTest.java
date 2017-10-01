@@ -3,8 +3,12 @@ package com.github.bot.curiosone.core.refinement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 public class SentenceTest {
 
+  private Sentence sen;
+  
   /**
    * Constructor.
    */
@@ -14,11 +18,11 @@ public class SentenceTest {
     ws.add(new Word("cake", WordPart.Noun));
     ws.add(new Word("be",   WordPart.Verb));
     ws.add(new Word("lie",  WordPart.Noun));
-    
-    System.out.println(">: " + ws);
-    
-    Sentence sen = new Sentence(Sentence.Type.Answer, ws);
-
-    //System.out.println(sen.refine());
+    sen = new Sentence(Sentence.Type.Answer, ws);
+  }
+  
+  @Test
+  public void main() {
+    System.out.println("hello");
   }
 }

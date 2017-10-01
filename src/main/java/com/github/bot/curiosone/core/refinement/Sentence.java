@@ -3,13 +3,13 @@ package com.github.bot.curiosone.core.refinement;
  * @author Claudio Venanzi
  */
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Sentence {
   
-  private List<Word>  words;
+  private List<Word> words;
   private Type type;
   
   //===============================================================================================
@@ -31,9 +31,12 @@ public class Sentence {
    */
   public Sentence(Type type, List<Word> words) {
     this.type = type;
-    words.forEach(x -> this.words.add(x));
+    this.words = new ArrayList<>();
+    words.forEach(this.words::add);
+
+    this.words.stream().map(Word::toString).forEach(System.out::println);
   }
-    
+
   //-----------------------------------------------------------------------------------------------
 
   /**
@@ -43,7 +46,7 @@ public class Sentence {
     
     //initialize
     
-    List<Word> temp = new LinkedList<>();
+    List<Word> temp = new ArrayList<>();
     
     //compose
     
