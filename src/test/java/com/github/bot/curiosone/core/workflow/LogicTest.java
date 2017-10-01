@@ -23,44 +23,44 @@ public class LogicTest {
     assertThat(msg.getScope()).isEmpty();
 
     msg = Logic.talk(new Message("What is apple?", ""));
-    assertThat(msg.getMessage()).isNotNull().isNotEmpty();
-    assertThat(msg.getScope()).isNotNull();
+    assertThat(msg.getMessage()).containsIgnoringCase("apple");
+    assertThat(msg.getScope()).containsIgnoringCase("apple");
 
     msg = Logic.talk(new Message("What is a red apple?", ""));
-    assertThat(msg.getMessage()).isNotNull().isNotEmpty();
-    assertThat(msg.getScope()).isNotNull();
+    assertThat(msg.getMessage()).containsIgnoringCase("apple");
+    assertThat(msg.getScope()).containsIgnoringCase("apple");
 
     msg = Logic.talk(new Message("Is a fruit", "apple?"));
-    assertThat(msg.getMessage()).isNotNull().isNotEmpty();
-    assertThat(msg.getScope()).isNotNull();
+    assertThat(msg.getMessage()).containsIgnoringCase("fruit");
+    assertThat(msg.getScope()).containsIgnoringCase("fruit");
 
     msg = Logic.talk(new Message("It is a fruit", "apple"));
-    assertThat(msg.getMessage()).isNotNull().isNotEmpty();
-    assertThat(msg.getScope()).isNotNull();
+    assertThat(msg.getMessage()).containsIgnoringCase("fruit");
+    assertThat(msg.getScope()).containsIgnoringCase("fruit");
 
     msg = Logic.talk(new Message("The apple is a fruit", "apple"));
-    assertThat(msg.getMessage()).isNotNull().isNotEmpty();
-    assertThat(msg.getScope()).isNotNull();
+    assertThat(msg.getMessage()).containsIgnoringCase("fruit");
+    assertThat(msg.getScope()).containsIgnoringCase("fruit");
 
     msg = Logic.talk(new Message("Who is Roberto Navigli?", ""));
     assertThat(msg.getMessage()).isNotNull().isNotEmpty();
     assertThat(msg.getScope()).isNotNull();
 
     msg = Logic.talk(new Message("Who is Roberto?", ""));
-    assertThat(msg.getMessage()).isNotNull().isNotEmpty();
-    assertThat(msg.getScope()).isNotNull();
+    assertThat(msg.getMessage()).containsIgnoringCase("roberto");
+    assertThat(msg.getScope()).containsIgnoringCase("roberto");
 
     msg = Logic.talk(new Message("Who is Navigli?", ""));
-    assertThat(msg.getMessage()).isNotNull().isNotEmpty();
-    assertThat(msg.getScope()).isNotNull();
+    assertThat(msg.getMessage()).containsIgnoringCase("Navigli");
+    assertThat(msg.getScope()).containsIgnoringCase("Navigli");
 
     msg = Logic.talk(new Message("Where is Europe?", ""));
-    assertThat(msg.getMessage()).isNotNull().isNotEmpty();
-    assertThat(msg.getScope()).isNotNull();
+    assertThat(msg.getMessage()).containsIgnoringCase("europe");
+    assertThat(msg.getScope()).containsIgnoringCase("europe");
 
     msg = Logic.talk(new Message("Where is Rome?", ""));
-    assertThat(msg.getMessage()).isNotNull().isNotEmpty();
-    assertThat(msg.getScope()).isNotNull();
+    assertThat(msg.getMessage()).containsIgnoringCase("Rome");
+    assertThat(msg.getScope()).containsIgnoringCase("Rome");
 
     msg = Logic.talk(new Message("Where are United States of America?", ""));
     assertThat(msg.getMessage()).isNotNull().isNotEmpty();
@@ -112,11 +112,11 @@ public class LogicTest {
     assertThat(msg.getScope()).isEmpty();
 
     msg = Logic.talk(new Message("What is dog?", ""));
-    assertThat(msg.getMessage()).isNotNull().isNotEmpty();
-    assertThat(msg.getScope()).isNotNull();
+    assertThat(msg.getMessage()).containsIgnoringCase("dog");
+    assertThat(msg.getScope()).containsIgnoringCase("dog");
 
     msg = Logic.talk(new Message("What is a dog?", ""));
-    assertThat(msg.getMessage()).isNotNull().isNotEmpty();
-    assertThat(msg.getScope()).isNotNull();
+    assertThat(msg.getMessage()).containsIgnoringCase("dog");
+    assertThat(msg.getScope()).containsIgnoringCase("dog");
   }
 }
