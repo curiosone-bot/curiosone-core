@@ -62,7 +62,7 @@ public class Affirmation {
       String newMessage;
       String newScope;
       if (opt.isPresent()) {
-        newMessage = "I already knew that " + scope + "is a " + object.getText() + '.';
+        newMessage = "I already knew that " + scope + " is a " + object.getText() + '.';
         newScope = object.getText();
       } else {
         semanticNetwork.learn(scope, SemanticRelationType.IS_A, object.getText());
