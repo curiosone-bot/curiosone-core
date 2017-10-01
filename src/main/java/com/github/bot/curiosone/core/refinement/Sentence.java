@@ -9,20 +9,27 @@ import java.util.stream.Collectors;
 
 public class Sentence {
   
-  private List<Word> words;
-  private Type type;
+  private List<Word> words = new ArrayList<>();
+  private SentenceType type;
   
   //===============================================================================================
    
   /**
    * Construct a sentence.
    * @param type sentence type
-   * @param words list of words
    */
-  public Sentence(Type type, List<Word> words) {
+  public Sentence(SentenceType type) {
     this.type = type;
-    this.words = new ArrayList<>();
-    words.forEach(this.words::add);
+  }
+
+  //-----------------------------------------------------------------------------------------------
+  
+  /**
+   * Add a word.
+   * @param word to add
+   */
+  public void add(Word word) {
+    words.add(word);
   }
 
   //-----------------------------------------------------------------------------------------------
@@ -30,13 +37,10 @@ public class Sentence {
   /**
    * Refinement entry point.
    */
-  public String refine() {
-    
-    //initialize
+  @Override
+  public String toString() {
     
     List<Word> temp = new ArrayList<>();
-    
-    //compose
     
     for (Word word : words) {
       switch (word.getPart()) {
@@ -52,22 +56,12 @@ public class Sentence {
       }
     }
     
-    //finalize
-    
     String temp2 = temp.stream()
         .map(Word::getForm)
-        .collect(Collectors.joining(" ", "", type.equals(Type.Question) ? "?" : "."));
+        .collect(Collectors.joining(" ", "", type.equals(SentenceType.Question) ? "?" : "."));
     
     return temp2.substring(0, 1).toUpperCase() + temp2.substring(1);
   }
   
-  //###############################################################################################
-
-  /**
-   * Sentence type.
-   */
-  public enum Type {
-    Question,
-    Answer;
-  }
+  //-----------------------------------------------------------------------------------------------
 }

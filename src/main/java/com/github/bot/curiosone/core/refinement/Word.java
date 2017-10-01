@@ -8,9 +8,9 @@ import java.util.stream.Stream;
 public class Word {
   
   private String form;
-  private Part   part;
+  private WordPart   part;
   
-  protected Word(String form, Part part) {
+  protected Word(String form, WordPart part) {
     this.form = form;
     this.part = part;
   }
@@ -21,7 +21,7 @@ public class Word {
    * Word constructor.
    */
   public Word(String form) {
-    this(form, Part.None);
+    this(form, WordPart.None);
   }
 
   //-----------------------------------------------------------------------------------------------
@@ -40,66 +40,11 @@ public class Word {
    * Get the word's part.
    * @return part
    */
-  public Part getPart() {
+  public WordPart getPart() {
     return part;
   }
       
   //===============================================================================================
   
-  /**
-   * Word POS interoperability structure.
-   */
-  public enum Part {  
-    Adjective(BabelPOS.ADJECTIVE, POS.ADJECTIVE),
-    Adverb(BabelPOS.ADVERB, POS.ADVERB),
-    Noun(BabelPOS.NOUN, POS.NOUN),
-    Verb(BabelPOS.VERB, POS.VERB),
-    None(null, null);
-        
-    private final BabelPOS bn;
-    private final POS      bm;
 
-    private Part(BabelPOS bn, POS bm) {
-      this.bn = bn;
-      this.bm = bm;
-    }
-
-    /**
-     * Returns the corresponding BabelNet POS.
-     * @return pos
-     */
-    public BabelPOS forBabelNet() {
-      return bn;
-    }
-    
-    /**
-     * Returns the corresponding BabelMorph POS.
-     * @return pos
-     */
-    public POS forBabelMorph() {
-      return bm;
-    }
-    
-    /**
-     * Returns Part from BabelNet POS.
-     * @param pos source pos
-     * @return part
-     */
-    public static Part from(BabelPOS pos) {
-      return Stream.of(Part.values())
-          .filter(value -> value.forBabelNet().equals(pos))
-          .findAny().orElse(None);
-    }
-
-    /**
-     * Returns Part from BabelMorph POS.
-     * @param pos source pos
-     * @return part
-     */
-    public static Part from(POS pos) {
-      return Stream.of(Part.values())
-          .filter(value -> value.forBabelMorph().equals(pos))
-          .findAny().orElse(None);
-    }
-  }
 }
