@@ -1,63 +1,146 @@
 package com.github.bot.curiosone.core.workflow;
 
-// SUPPRESS CHECKSTYLE AvoidStarImport
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
 public class MessageTest {
 
   @Test
-  public void testInstance() {
-    Message msg;
-
-    msg = new Message("How old are you?", "test");
-    assertEquals("How old are you?", msg.getMessage());
-    assertEquals("test", msg.getScope());
-  }
-
-  @Test
-  public void testInstantiation() {
-    assertTrue(new Message("Text", "Scope") instanceof Message);
-  }
-
-  @Test
   public void testGetMessage() {
-    assertEquals("This is the message!",
-        new Message("This is the message!", "This is the scope")
-            .getMessage());
+    Message m = new Message("This is the message!", "This is the scope");
+    assertThat(m.getMessage()).isEqualTo("This is the message!");
+
+    m = new Message("", "This is the scope");
+    assertThat(m.getMessage()).isEmpty();
+
+    m = new Message("  ..  ", "This is the scope");
+    assertThat(m.getMessage()).isEqualTo("  ..  ");
   }
 
   @Test
   public void testGetScope() {
-    assertEquals("This is the scope",
-        new Message("This is the message!", "This is the scope")
-            .getScope());
+    Message m = new Message("This is the message!", "This is the scope");
+    assertThat(m.getScope()).isEqualTo("This is the scope");
+
+    m = new Message("This is the message!", "  ");
+    assertThat(m.getScope()).isEqualTo("  ");
+
+    m = new Message("This is the message!", "");
+    assertThat(m.getScope()).isEmpty();
   }
 
   @Test
   public void testToString() {
-    assertEquals("Text (Scope)", new Message("Text", "Scope").toString());
+    Message m = new Message("Text", "Scope");
+    assertThat(m.toString()).isEqualTo("Text (Scope)");
+
+    m = new Message("I am a human", "human");
+    assertThat(m.toString()).isEqualTo("I am a human (human)");
+
+    m = new Message("Do you live here?", "here?");
+    assertThat(m.toString()).isEqualTo("Do you live here? (here?)");
+
+    m = new Message("", "");
+    assertThat(m.toString()).isEqualTo(" ()");
   }
 
   @Test
-  public void testEquals() {
-    Message br = new Message("Text", "Scope");
-    assertTrue(br.equals(br));
-    assertFalse(br.equals(null));
-    assertFalse(br.equals(new Integer(42)));
-    Message brr = new Message("Text", "Scope");
-    assertTrue(br.equals(brr));
-    brr = new Message("text", "scope");
-    assertFalse(br.equals(brr));
+  public void testEqualsReflexive() {
+    Message m = new Message("Text", "Scope");
+    assertThat(m).isEqualTo(m);
+
+    m = new Message("", "");
+    assertThat(m).isEqualTo(m);
+
+    m = new Message(" ", " ");
+    assertThat(m).isEqualTo(m);
   }
 
   @Test
-  public void testHashCode() {
-    assertEquals(new Message("Happy", "Scope.of(Happy)").hashCode(),
-        new Message("Happy", "Scope.of(Happy)").hashCode());
+  public void testEqualsSymmetric() {
+    Message m = new Message("Text", "Scope");
+    Message mm = new Message("Text", "Scope");
+    assertThat(m).isEqualTo(mm);
+    assertThat(mm).isEqualTo(m);
 
-    assertNotEquals(new Message("Different", "Message").hashCode(),
-        new Message("Test", "hashCode Scope"));
+    m = new Message(" ", " ");
+    mm = new Message(" ", " ");
+    assertThat(m).isEqualTo(mm);
+    assertThat(mm).isEqualTo(m);
+
+    m = new Message("a", "b");
+    mm = new Message("c", "d");
+    assertThat(m).isNotEqualTo(mm);
+    assertThat(mm).isNotEqualTo(m);
+  }
+
+  @Test
+  public void testEqualsTransitive() {
+    Message m = new Message("Text", "Scope");
+    Message mm = new Message("Text", "Scope");
+    Message mmm = new Message("Text", "Scope");
+    assertThat(m).isEqualTo(mm);
+    assertThat(mm).isEqualTo(mmm);
+    assertThat(mmm).isEqualTo(m);
+
+    m = new Message("", "");
+    mm = new Message("", "");
+    mmm = new Message("", "");
+    assertThat(m).isEqualTo(mm);
+    assertThat(mm).isEqualTo(mmm);
+    assertThat(mmm).isEqualTo(m);
+
+    m = new Message("1234", "numbers");
+    mm = new Message("1234", "numbers");
+    mmm = new Message("1234", "numbers");
+    assertThat(m).isEqualTo(mm);
+    assertThat(mm).isEqualTo(mmm);
+    assertThat(mmm).isEqualTo(m);
+  }
+
+  @Test
+  public void testEqualsOtherObj() {
+    Message m = new Message("Text", "Scope");
+
+    assertThat(m).isNotEqualTo("TEXT - SCOPE");
+
+    assertThat(m).isNotEqualTo(new StringBuffer("  , , "));
+
+    assertThat(m).isNotEqualTo(42);
+  }
+
+  @Test
+  public void testHashCodeReflexive() {
+    Message m = new Message("Text", "Scope");
+    assertThat(m.hashCode()).isEqualTo(m.hashCode());
+
+    m = new Message("I am eating an apple", "apple");
+    assertThat(m.hashCode()).isEqualTo(m.hashCode());
+  }
+
+  @Test
+  public void testEqualsNullComparison() {
+    Message m = new Message("Text", "Scope");
+    assertThat(m).isNotEqualTo(null);
+
+    m = new Message("", "");
+    assertThat(m).isNotEqualTo(null);
+
+    m = new Message("This is my smartphone", "smartphone");
+    assertThat(m).isNotEqualTo(null);
+  }
+
+  @Test
+  public void testHashCodeEqualsContract() {
+    Message m = new Message("Text", "Scope");
+    Message mm = new Message("Text", "Scope");
+    assertThat(m.hashCode()).isEqualTo(mm.hashCode());
+    assertThat(m).isEqualTo(mm);
+
+    m = new Message("I am eating an apple", "apple");
+    mm = new Message("I am EATING an APPLE", "APPLE");
+    assertThat(m.hashCode()).isNotEqualTo(mm.hashCode());
+    assertThat(m).isNotEqualTo(mm);
   }
 }
