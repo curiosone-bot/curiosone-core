@@ -1,13 +1,11 @@
 package com.github.bot.curiosone.core.nlp;
 
 import static org.assertj.core.api.Assertions.assertThat;
-// SUPPRESS CHECKSTYLE AvoidStarImport
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 public class SpellingTest {
-  
+
   @Test
   public void testGetInstance() {
     Spelling s = Spelling.getInstance();
