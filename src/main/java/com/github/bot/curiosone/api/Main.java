@@ -32,20 +32,20 @@ public class Main {
   public static void main(String[] args) {
 
     /**
-     * Set the port where the server will run.
+     * Sets the port where the server will run.
      */
     int port = System.getenv("PORT") != null
         ? Integer.parseInt(System.getenv("PORT")) : DEFAULT_PORT;
     Spark.port(port);
 
     /**
-     * Enable CORS
+     * Enables CORS
      */
     Spark.before(CorsUtil::headers);
     Spark.options("/*", CorsUtil::options);
 
     /**
-     * Set the right content type for the response.
+     * Sets the right content type for the response.
      */
     Spark.after(
         (req, res) -> {
@@ -53,7 +53,7 @@ public class Main {
         });
 
     /*
-     * Print audit logs.
+     * Prints audit logs.
      */
     Spark.after(
         (req, res) -> {
@@ -61,7 +61,7 @@ public class Main {
         });
 
     /**
-     * Respond with ok.
+     * Responds with ok.
      */
     Spark.get(
         "/status",
@@ -72,7 +72,7 @@ public class Main {
         });
 
     /**
-     * Route requests to the Curiosone Core.
+     * Routes requests to the Curiosone Core.
      */
     Spark.post(
         "/talk",
