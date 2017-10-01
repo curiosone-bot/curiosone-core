@@ -3,19 +3,12 @@ package com.github.bot.curiosone.core.refinement;
  * @author Claudio Venanzi
  */
 
-import it.uniroma1.lcl.babelmorph.Lexeme;
-import it.uniroma1.lcl.babelmorph.en.EnglishMorpher;
-
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Word {
-
-  private Optional<String> shape = Optional.empty();
   
-  private String  lemma;
-  private WordPart part;
+  private String lemma;
+  private Optional<WordPart> part;
 
   //===============================================================================================
   
@@ -26,26 +19,27 @@ public class Word {
    */
   public Word(String lemma, WordPart part) {
     this.lemma = lemma;
-    this.part  =  part;
+    this.part  = Optional.of(part);
   }
-  
-  //-----------------------------------------------------------------------------------------------
 
+  //-----------------------------------------------------------------------------------------------
+  
   /**
-   * Returns the lemma.
-   * @return string
+   * Word constructor.
+   * @param lemma citation form
    */
-  public String getLemma() {
-    return lemma;
+  public Word(String lemma) {
+    this.lemma = lemma;
+    this.part  = Optional.empty();
   }
 
   //-----------------------------------------------------------------------------------------------
 
   /**
    * Returns the part.
-   * @return WordPart
+   * @return part
    */
-  public WordPart getPart() {
+  public Optional<WordPart> getPart() {
     return part;
   }
 
@@ -53,7 +47,7 @@ public class Word {
   
   @Override
   public String toString() {
-    return shape.orElse(lemma);
+    return lemma;
   }
   
   //-----------------------------------------------------------------------------------------------

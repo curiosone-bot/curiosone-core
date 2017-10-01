@@ -5,6 +5,8 @@ package com.github.bot.curiosone.core.refinement;
 
 import it.uniroma1.lcl.babelmorph.POS;
 import it.uniroma1.lcl.babelnet.data.BabelPOS;
+
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public enum WordPart {
@@ -12,8 +14,7 @@ public enum WordPart {
   Adjective(BabelPOS.ADJECTIVE, POS.ADJECTIVE),
   Adverb(BabelPOS.ADVERB, POS.ADVERB),
   Noun(BabelPOS.NOUN, POS.NOUN),
-  Verb(BabelPOS.VERB, POS.VERB),
-  None(null, null);
+  Verb(BabelPOS.VERB, POS.VERB);
   
   //===============================================================================================
   
@@ -52,10 +53,10 @@ public enum WordPart {
    * @param pos source pos
    * @return part
    */
-  public static WordPart from(BabelPOS pos) {
+  public static Optional<WordPart> from(BabelPOS pos) {
     return Stream.of(WordPart.values())
         .filter(value -> value.forBabelNet().equals(pos))
-        .findAny().orElse(null);
+        .findAny();
   }
 
   //-----------------------------------------------------------------------------------------------
@@ -65,10 +66,10 @@ public enum WordPart {
    * @param pos source pos
    * @return part
    */
-  public static WordPart from(POS pos) {
+  public static Optional<WordPart> from(POS pos) {
     return Stream.of(WordPart.values())
         .filter(value -> value.forBabelMorph().equals(pos))
-        .findAny().orElse(null);
+        .findAny();
   }
   
   //-----------------------------------------------------------------------------------------------

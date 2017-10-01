@@ -1,35 +1,24 @@
 package com.github.bot.curiosone.core.refinement;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.stream.Collectors;
-
-import org.junit.Test;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SentenceTest {
 
-  private Sentence sen;
-  
   /**
-   * Test constructor.
+   * Constructor.
    */
   public SentenceTest() {
-    sen = new Sentence(SentenceType.Answer);
-    sen.add(new Word("cake", WordPart.Noun));
-    sen.add(new Word("be",   WordPart.Verb));
-    sen.add(new Word("lie",  WordPart.Noun));
-  }
-  
-  @Test
-  /**
-   * Main test.
-   */
-  public void main() {
-    assertTrue(sen.getType().equals(SentenceType.Answer));
     
-    assertTrue(sen.getWords()
-        .map(Word::toString)
-        .collect(Collectors.joining(" "))
-        .equals("cake be lie"));
+    List<Word> ws = new ArrayList<>();
+    ws.add(new Word("cake", WordPart.Noun));
+    ws.add(new Word("be",   WordPart.Verb));
+    ws.add(new Word("lie",  WordPart.Noun));
+    
+    System.out.println(">: " + ws);
+    
+    Sentence sen = new Sentence(Sentence.Type.Answer, ws);
+
+    //System.out.println(sen.refine());
   }
 }

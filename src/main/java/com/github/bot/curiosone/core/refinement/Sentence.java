@@ -5,24 +5,23 @@ package com.github.bot.curiosone.core.refinement;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class Sentence {
   
   private List<Word>  words;
-  private SentenceType type;
+  private Type type;
   
   //===============================================================================================
 
   /**
-   * Construct an empty sentence.
-   * @param type sentence type
+   * Sentence type.
    */
-  public Sentence(SentenceType type) {
-    this.words = new LinkedList<>();
-    this.type  = type;
+  public enum Type {
+    Question,
+    Answer;
   }
-  
+    
   //-----------------------------------------------------------------------------------------------
   
   /**
@@ -30,47 +29,64 @@ public class Sentence {
    * @param type sentence type
    * @param words list of words
    */
-  public Sentence(SentenceType type, List<Word> words) {
-    this(type);
-    words.forEach(word -> add(word));
+  public Sentence(Type type, List<Word> words) {
+    this.type = type;
+    words.forEach(x -> this.words.add(x));
   }
-  
-  //-----------------------------------------------------------------------------------------------
-  
-  /**
-   * Append a word.
-   * @param w word
-   */
-  public void add(Word w) {
-    words.add(w);
-  }
-  
+    
   //-----------------------------------------------------------------------------------------------
 
   /**
-   * Get the words.
-   * @return words
-   */
-  public Stream<Word> getWords() {
-    return words.stream();
-  }
-    
-  //-----------------------------------------------------------------------------------------------
-  
-  /**
-   * Get the sentence type.
-   * @return type
-   */
-  public SentenceType getType() {
-    return type;
-  }
-    
-  //-----------------------------------------------------------------------------------------------
-  
-  /**
    * Refinement entry point.
    */
-  public void refine() {
+  public String refine() {
     
+    //initialize
+    
+    List<Word> temp = new LinkedList<>();
+    
+    //compose
+    
+    for (Word word : words) {
+      
+      /*
+       * words without a part are treated as named entity
+       *  and simply added to the refined string
+       */
+      if (!word.getPart().isPresent()) {
+        temp.add(word);
+        continue;
+      }
+      
+      /*
+       * differentiate processing depending on pos
+       */
+      switch (word.getPart().get()) {
+
+        case Adjective:
+          break;
+
+        case Noun:
+          break;
+
+        case Adverb:
+          break;
+
+        case Verb:
+          break;
+          
+        default://it must never get there but checkstyle wants it, so let it be.
+      }
+    }
+    
+    //finalize
+    
+    String temp2 = temp.stream()
+        .map(x -> x.toString())
+        .collect(Collectors.joining(" ", "", type.equals(Type.Question) ? "?" : "."));
+    
+    return temp2.substring(0, 1).toUpperCase() + temp2.substring(1);
   }
+  
+  //-----------------------------------------------------------------------------------------------
 }

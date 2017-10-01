@@ -12,7 +12,7 @@ public class WordTest {
   @Test
   public void main() {
     assertTrue(WordPart.from(BabelPOS.ADVERB).equals(WordPart.from(POS.ADVERB)));
-    assertTrue(WordPart.from(BabelPOS.NOUN).equals(WordPart.Noun));
-    assertTrue(WordPart.from(POS.VERB).equals(WordPart.Verb));
+    assertTrue(WordPart.from(BabelPOS.NOUN).get().equals(WordPart.Noun));
+    assertTrue(WordPart.from(POS.VERB).get().equals(WordPart.Verb));
   }
 }
