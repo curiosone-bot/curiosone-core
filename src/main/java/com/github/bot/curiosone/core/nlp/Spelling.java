@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
- * Corrects spelling errors in sentences.
+ * Provides a method to correct spelling errors in a Sentence.
  */
 public class Spelling {
   /**
