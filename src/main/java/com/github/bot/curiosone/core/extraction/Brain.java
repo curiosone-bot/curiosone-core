@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Manages the brain of the Curiosone.
- * This class contains utility methods to conversate, compute and/or randomly generate an answer to
- * a given sentence.
+ * Manages the Brain of the Curiosone.
+ * Contains utility methods to conversate, compute and/or randomly generate an answer to a given
+ * sentence.
  */
 public class Brain {
 
@@ -40,6 +40,8 @@ public class Brain {
 
   /**
    * Answers to a sentence.
+   * This method is able to undestrad whether the Curiosone is responding to an affirmation or a
+   * question.
    * @param  sentence the sentence to generate the response to
    * @param  scope the scope of the conversation
    * @return an Optional instance, containing the response for the input sentence
