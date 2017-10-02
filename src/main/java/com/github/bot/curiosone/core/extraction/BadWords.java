@@ -17,14 +17,26 @@ import java.util.stream.Stream;
  * Precomputed answers to some common bad words.
  */
 public class BadWords {
-  private static String badWordsPath = "/conversation/bad_words.txt";
-  /** Path of the database containing known insults. */
 
-  /** List of different insults that the bot knows. */
+  /**
+   * Path to known insults database.
+   */
+  private static String badWordsPath = "/conversation/bad_words.txt";
+
+  /**
+   * Lists different insults known by the Bot.
+   */
   private static List<String> knownBadWords;
 
-  /** List of different answers that the bot gives in output. */
-  private static String[] readyAnswers;
+  /**
+   * Array of different answers that the bot gives in output.
+   */
+  private static String[] readyAnswers = {
+    "I do not like your way of talking.",
+    "You should speak more politely.",
+    "Why are you talking like this? Are you a little kid?",
+    "Come back when you grow up."
+  };
 
   /**
    * Private constructor.
@@ -35,12 +47,6 @@ public class BadWords {
    * Loads the known bad words in memory.
    */
   private static void loadSentences() {
-    readyAnswers = new String[] {
-      "I do not like your way of talking.",
-      "You should speak more politely.",
-      "Why are you talking like this? Are you a little kid?",
-      "Come back when you grow up."
-    };
     knownBadWords = new ArrayList<>();
     Path path = null;
 
@@ -59,9 +65,11 @@ public class BadWords {
   }
 
   /**
-   * Check if the phrase contains one of the known bad words.
-   * @param phrase to check
-   * @return answer if the input is known
+   * Returns an answer for the given phrase.
+   * @param phrase the original phrase to be answered
+   * @return an Optional instance.
+   *         The returned instance is empty, if no bad word or insult has been found in the original
+   *         Phrase, contains a value (an instance of BrainResponse) otherwise.
    */
   public static Optional<BrainResponse> getAnswer(Phrase phrase) {
     if (knownBadWords == null) {
