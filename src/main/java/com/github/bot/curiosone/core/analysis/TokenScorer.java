@@ -22,10 +22,7 @@ public class TokenScorer {
    */
   private static HashSet<Double> scoreSet = new HashSet<>();
 
-  /**
-   * Load SentiWordNet's dictionary.
-   */
-  private static Map<String, Double> dictionary = DictionaryLoader.loadDict();
+  private static DictionaryLoader dl = DictionaryLoader.getInstance();
 
   /**
    * Calculate the score of the Token.
@@ -33,28 +30,12 @@ public class TokenScorer {
    * @param t is the Token add t's sentiment's score to scoreSet.
    */
   public static void calculateScore(Token t) {
-    if (t.getMeanings().stream()
+    POS p = t.getMeanings().stream()
         .sorted(comparing(Meaning::getFrequency).reversed())
         .findFirst()
-        .get().getPOS() == POS.ADJ
-
-        || t.getMeanings().stream()
-            .sorted(comparing(Meaning::getFrequency).reversed())
-            .findFirst()
-            .get().getPOS() == POS.V
-
-        || t.getMeanings().stream()
-            .sorted(comparing(Meaning::getFrequency).reversed())
-            .findFirst()
-            .get().getPOS() == POS.ADV
-
-        || t.getMeanings().stream()
-            .sorted(comparing(Meaning::getFrequency).reversed())
-            .findFirst()
-            .get().getPOS() == POS.N) {
-      if (dictionary.containsKey(t.getLemma())) {
-        scoreSet.add(dictionary.get(t.getLemma()));
-      }
+        .get().getPOS();
+    if (p == POS.ADJ || p == POS.V || p == POS.ADV || p == POS.N) {
+        scoreSet.add(dl.getScore(t.getLemma()));
     }
   }
 
