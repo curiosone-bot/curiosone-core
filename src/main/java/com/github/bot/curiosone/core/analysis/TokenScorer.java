@@ -1,7 +1,10 @@
 package com.github.bot.curiosone.core.analysis;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.PosT;
-import com.github.bot.curiosone.core.nlp.tokenizer.Token;
+import static java.util.Comparator.comparing;
+
+import com.github.bot.curiosone.core.nlp.Meaning;
+import com.github.bot.curiosone.core.nlp.POS;
+import com.github.bot.curiosone.core.nlp.Token;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +16,7 @@ import java.util.Map;
  */
 
 public class TokenScorer {
-  
+
   /**
    * HashSet containing tokens' score.
    */
@@ -26,21 +29,38 @@ public class TokenScorer {
 
   /**
    * Calculate the score of the Token.
-   * 
+   *
    * @param t is the Token add t's sentiment's score to scoreSet.
    */
   public static void calculateScore(Token t) {
-    if (t.getPos() == PosT.ADJ || t.getPos() == PosT.V || t.getPos() == PosT.ADV
-        || t.getPos() == PosT.N) {
+    if (t.getMeanings().stream()
+        .sorted(comparing(Meaning::getFrequency).reversed())
+        .findFirst()
+        .get().getPOS() == POS.ADJ
+
+        || t.getMeanings().stream()
+            .sorted(comparing(Meaning::getFrequency).reversed())
+            .findFirst()
+            .get().getPOS() == POS.V
+
+        || t.getMeanings().stream()
+            .sorted(comparing(Meaning::getFrequency).reversed())
+            .findFirst()
+            .get().getPOS() == POS.ADV
+
+        || t.getMeanings().stream()
+            .sorted(comparing(Meaning::getFrequency).reversed())
+            .findFirst()
+            .get().getPOS() == POS.N) {
       if (dictionary.containsKey(t.getLemma())) {
         scoreSet.add(dictionary.get(t.getLemma()));
       }
     }
   }
-  
+
   /**
    * Calculate the score of the input token's list.
-   * 
+   *
    * @param tokenList the token list.
    */
   public static void calculateScore(List<Token> tokenList) {
@@ -48,10 +68,10 @@ public class TokenScorer {
       calculateScore(x);
     }
   }
-  
+
   /**
    * Calculate the score of the token analyzed until this method call.
-   * 
+   *
    * @return  the score of analyzed tokens.
    */
   public static Double getScore() {
@@ -59,5 +79,5 @@ public class TokenScorer {
     scoreSet = new HashSet<>();
     return temp.stream().reduce(0.0, Double::sum) / temp.size();
   }
-  
+
 }
