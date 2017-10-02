@@ -31,7 +31,7 @@ public class Conversation {
   /**
    * Maps the recognized tokens to their possible phrases.
    */
-  private static Map<String[], String[]> knownQuestions;
+  private static LinkedHashMap<String[], String[]> knownQuestions;
 
   /**
    * Private constructor.
