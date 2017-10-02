@@ -14,7 +14,8 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
- * Precomputed answers to some common bad words.
+ * Handles precomputed answers to some common bad words.
+ * Contains method to get an answer to a phrase containig one known bad word.
  */
 public class BadWords {
 
