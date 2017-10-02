@@ -2,49 +2,50 @@ package com.github.bot.curiosone.core.workflow;
 
 import java.util.Objects;
 
+/**
+ * Manages a Message.
+ * A Message consists of two String: one to store the content of the Message and the other one to
+ * store its scope.
+ * Provides all the utility methods to create, access and compare a Message.
+ */
 public class Message {
-  /** The message. */
+
+  /**
+   * Stores the content of this Message.
+   */
   String message;
 
-  /** The scope. */
+  /**
+   * Stores the scope of this Message.
+   */
   String scope;
 
   /**
-   * Constructor of a Message.
-   * @param msg the message
-   * @param scope the scope
+   * Constructs this Message from a text/content and its scope.
+   * @param msg Message content. Can be null.
+   * @param scope Message scope. Can be null.
    */
   public Message(String msg, String scope) {
-    if (msg == null) {
-      msg = "";
-    }
-    if (scope == null) {
-      scope = "";
-    }
-    this.message = msg;
-    this.scope = scope;
+    message = (msg == null) ? "" : msg;
+    this.scope = (scope == null) ? "" : scope;
   }
 
   /**
-   * Gets the message.
-   * @return the message.
+   * Gets the content of this Message.
    */
   public String getMessage() {
     return message;
   }
 
   /**
-   * Gets the scope.
-   * @return the scope.
+   * Gets the scope of this Message.
    */
   public String getScope() {
     return scope;
   }
 
   /**
-   * Returns a string representation of this message.
-   *
-   * @return a string representation of this message.
+   * Returns a String representation of this Message.
    */
   @Override
   public String toString() {
@@ -52,10 +53,9 @@ public class Message {
   }
 
   /**
-   * Compares this message to the specified object.
-   *
-   * @param  other the other message
-   * @return {@code true} if this message equals the other message;
+   * Checks whether this Message equals to the given Object.
+   * @param  other the other Message to be compared against.
+   * @return {@code true} if this Message equals the other Message;
    *         {@code false} otherwise
    */
   @Override
@@ -71,9 +71,8 @@ public class Message {
   }
 
   /**
-   * Returns an integer hash code for this message.
-   *
-   * @return an integer hash code for this message
+   * Returns the HashCode of this Message.
+   * The HashCode is based on the HashCodes of the Message content and its scope.
    */
   @Override
   public int hashCode() {
