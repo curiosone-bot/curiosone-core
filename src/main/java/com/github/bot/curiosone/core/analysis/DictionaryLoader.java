@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 
 /**
@@ -19,6 +20,9 @@ import java.util.Properties;
  */
 
 public class DictionaryLoader {
+
+  private static DictionaryLoader instance;
+
   /**
    *The Uri containing the .properties file.
    */
@@ -34,12 +38,23 @@ public class DictionaryLoader {
    */
   private static Properties properties = new Properties();
 
+  private DictionaryLoader() {
+    dict = new HashMap<>();
+    loadDict();
+  }
+
+  public static DictionaryLoader getInstance() {
+    if (instance == null) {
+      instance = new DictionaryLoader();
+    }
+    return instance;
+  }
 
   /**
    * Loading the .properties file in the dictionary.
    * @Return the loaded dictionary
    */
-  public static Map<String, Double> loadDict() {
+  private static void loadDict() {
     Path path = null;
     try {
       URL resource = DictionaryLoader.class.getResource(uri);
@@ -51,7 +66,10 @@ public class DictionaryLoader {
     for (String key : properties.stringPropertyNames()) {
       dict.put(key, Double.parseDouble(properties.get(key).toString()));
     }
-    return dict;
+  }
+
+  public Double getScore(String word) {
+    return dict.containsKey(word) ? dict.get(word) : 0.0;
   }
 
 }
