@@ -6,6 +6,8 @@ import java.util.Objects;
  *  The {@code Interval} class represents a one-dimensional interval.
  *  The interval is <em>closed</em>—it contains both endpoints.
  *  Intervals are immutable: their values cannot be changed after they are created.
+ *  Provides methods to create an Interval, retrieve its endpoints, check intesection with
+ *  another Interval and verify appartenence of a single point.
  */
 public class Interval implements Comparable<Interval> {
 
