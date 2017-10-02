@@ -7,6 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Provides utility methos to perform basic Natural Language Process tasks.
+ * These methods, applied to a Sentence, allow to: split by puntaction, remove duplicated spaces,
+ * expand verbs in contracted form and remove non-alphanumeric characters.
  */
 public class LangUtils {
 
