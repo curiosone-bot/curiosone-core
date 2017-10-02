@@ -35,11 +35,13 @@ public class Spelling {
    */
   private static String dictionaryPath = "/spelling/dictionary.txt";
 
-  /** Dictionary used in spelling and correction processes. */
+  /**
+   * Dictionary used in spelling and correction processes.
+   */
   private Map<String, Integer> dict = new HashMap<>();
 
   /**
-   * Constructor of a Spelling Dictionary.
+   * Constructs a Spelling Dictionary.
    */
   private Spelling() {
     Path path = null;
@@ -63,9 +65,7 @@ public class Spelling {
   }
 
   /**
-   * Gets an instance of the spelling dictionary.
-   *
-   * @return the instance of the spelling dictionary
+   * Gets the instance of the spelling dictionary.
    */
   public static Spelling getInstance() {
     if  (instance != null) {
@@ -77,7 +77,6 @@ public class Spelling {
 
   /**
    * Tries to correct a mispelled word.
-   *
    * @param word the word to be corrected. It should be lowercased.
    * @return the corrected word if the world can be corrected
    */
@@ -95,10 +94,9 @@ public class Spelling {
   }
 
   /**
-   * Applies all possible 1 character modifications to a string.
-   *
-   * @param word the word to modify
-   * @return a stream of all generated modified words
+   * Applies all possible single character modifications to a String.
+   * @param word the word to edit
+   * @return a stream containign all generated modified words from the original word
    */
   private Stream<String> edits(String word) {
     Stream<String> deletes = IntStream.range(0, word.length())
@@ -122,10 +120,9 @@ public class Spelling {
   }
 
   /**
-   * Verify if the stream of strings is in {@link #dict}.
-   *
-   * @param words stream of strings
-   * @return words that contains only string in {@link #dict} too
+   * Checks whether the provided Stream of Strings is in {@link #dict} or not.
+   * @param words Stream of Strings
+   * @return a Stream containing only the Words represented by a String in {@link #dict}
    */
   private Stream<String> known(Stream<String> words) {
     return words.filter((word) -> dict.containsKey(word));
