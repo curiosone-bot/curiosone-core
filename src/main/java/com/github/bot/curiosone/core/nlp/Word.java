@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 
 /**
  * Handles a Word.
- * A Word is like a Token, but with a restricted set of meanings.
+ * A Word is like a Token, but with a restricted Set of Meanings.
+ * Provides methods to create a new Word and retrieve its information.
+ *
  */
 public class Word {
 
@@ -16,12 +18,12 @@ public class Word {
   String text;
 
   /**
-   * Stores the base form of the word.
+   * Stores the base form of this Word.
    */
   String lemma;
 
   /**
-   * Stores all the possible meanings of the word.
+   * Stores all the possible meanings of this Word.
    */
   Set<Meaning> means;
 
