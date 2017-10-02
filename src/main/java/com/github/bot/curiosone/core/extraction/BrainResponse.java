@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 /**
  * Stores a response from Curiosone's Brain.
+ * Provides useful methods to create a BrainResponse and to retrieve its information.
  */
 public class BrainResponse {
 
