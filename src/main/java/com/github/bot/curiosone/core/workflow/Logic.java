@@ -11,7 +11,7 @@ import java.util.Optional;
 
 /**
  * Manages the Logic Layer of the Curiosone.
- * This class barely consists of a static method used to generate an answer to a provided message.
+ * This class consists of a static method used to generate an answer to a provided message.
  */
 public class Logic {
 
