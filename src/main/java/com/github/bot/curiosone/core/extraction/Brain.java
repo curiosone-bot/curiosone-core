@@ -7,45 +7,45 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Description.
+ * Manages the brain of the Curiosone.
+ * This class contains utility methods to conversate, compute and/or randomly generate an answer to
+ * a given sentence.
  */
 public class Brain {
+
   /**
    * Private Constructor.
    */
   private Brain() {}
 
   /**
-   * Response to a conversational message.
-   * @param  phrase the message to generate the response to
-   * @return the response if the message needs a conversational answer.
+   * Answers to a conversational message.
+   * @param phrase the message to generate the response to
+   * @return an Optional instance, containing the response, if the message needs a conversational
+   *         answer.
    */
   public static Optional<BrainResponse> conversate(Phrase phrase) {
     Optional<BrainResponse> answ = Conversation.getAnswer(phrase);
-    if (answ.isPresent()) {
-      return answ;
-    }
-    return BadWords.getAnswer(phrase);
+    return answ.isPresent() ? answ : BadWords.getAnswer(phrase);
   }
 
   /**
-   * Generate a random response.
+   * Generates a random response.
    * @param  phrase the message to generate the response to
-   * @return the response.
+   * @return a BrainResponse instance, representing the random response.
    */
   public static BrainResponse random(Phrase phrase) {
     return RandomAnswer.getAnswer(phrase);
   }
 
   /**
-   * Response to something.
+   * Answers to a sentence.
    * @param  sentence the sentence to generate the response to
    * @param  scope the scope of the conversation
+   * @return an Optional instance, containing the response for the input sentence
    */
   public static Optional<BrainResponse> compute(Sentence sentence, String scope) {
-    if (sentence.isQuestion()) {
-      return Question.getAnswer(sentence, scope);
-    }
-    return Affirmation.getAnswer(sentence, scope);
+    return sentence.isQuestion()
+        ? Question.getAnswer(sentence, scope) : Affirmation.getAnswer(sentence, scope);
   }
 }
