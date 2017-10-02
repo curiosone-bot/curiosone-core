@@ -8,6 +8,7 @@ import java.util.Optional;
 
 /**
  * Handles precomputed answers to sentences not understood by the chatbot.
+ * Contains a method to get a randomly generated answer.
  */
 public class RandomAnswer {
 
@@ -30,7 +31,7 @@ public class RandomAnswer {
   };
 
   /**
-   * Contains answers made for too much general/not understood sentence.
+   * Contains answers for too much general/not understood Sentences.
    */
   private static final String[] GENERAL_ANSWERS = {
       "What a nice day to talk to a chatbot!",
