@@ -4,11 +4,24 @@ import spark.Request;
 import spark.Response;
 
 /**
- * Utility class to convert requests and responses into audit logs.
+ * Utility class to manage CORS mechanism.
+ * Provides methods to set headers in Request objects.
  */
 public class CorsUtil {
+
+  /**
+   * String representation of HTTP Origin header.
+   */
   private static final String ORIGINS = "*";
+
+  /**
+   * String representation of HTTP Methods for RESTful Services.
+   */
   private static final String METHODS = "GET, PUT, POST, DELETE, HEAD";
+
+  /**
+   * String representation of HTTP headers.
+   */
   private static final String HEADERS = "";
 
   /**
@@ -17,7 +30,7 @@ public class CorsUtil {
   private CorsUtil() {}
 
   /**
-   * Set headers for CORS options requests.
+   * Sets headers for CORS options requests.
    * @param req The request object.
    * @param res The response object.
    * @return The response body.
@@ -37,7 +50,7 @@ public class CorsUtil {
   }
 
   /**
-   * Set headers for CORS options requests.
+   * Sets headers for CORS options requests.
    * @param req The request object.
    * @param res The response object.
    */

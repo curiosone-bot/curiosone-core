@@ -18,15 +18,20 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Precomputed answers to some common conversational phrases.
+ * Handles the precomputed answers to some common conversational phrases.
+ * Provides an utility method to get an answer from a given sentence.
  */
 public class Conversation {
+
+  /**
+   * Path to the database containing known answers.
+   */
   private static String conversationsPath = "/conversation/conversation.txt";
-  /** Path of the database containing known answers. */
 
-
-  /** Map from recognized tokens to possible phrases given in output. */
-  private static LinkedHashMap<String, String[]> knownQuestions;
+  /**
+   * Maps the recognized tokens to their possible phrases.
+   */
+  private static LinkedHashMap<String[], String[]> knownQuestions;
 
   /**
    * Private constructor.
@@ -49,7 +54,7 @@ public class Conversation {
     try (Stream<String> stream = Files.lines(path)) {
       stream.forEach(line -> {
         int splitIndex = line.indexOf(":");
-        String key = line.substring(0, splitIndex);
+        String[] key = line.substring(0, splitIndex).split("\t");
         String[] values = line.substring(splitIndex + 1, line.length()).split("\t");
         knownQuestions.put(key, values);
       });
@@ -59,10 +64,10 @@ public class Conversation {
   }
 
   /**
-   * Checks if the given input is present in our known answers.
-   *
-   * @param  phrase phrase given by user's input
-   * @return answer if the input is known
+   * Answers the given Phrase.
+   * @param phrase the input phrase to be checked
+   * @return An Optional instance. The instance is empty, if the input is an unknown Phrase.
+   *         Otherwise, the istance contains the answer, encapsulated in a BrainResponse object.
    */
   public static Optional<BrainResponse> getAnswer(Phrase phrase) {
     if (knownQuestions == null) {
@@ -73,10 +78,10 @@ public class Conversation {
         .map(Token::getLemma)
         .collect(Collectors.toList());
 
-    for (Map.Entry<String, String[]> entry : knownQuestions.entrySet()) {
+    for (Map.Entry<String[], String[]> entry : knownQuestions.entrySet()) {
       boolean isKnown = true;
 
-      for (String s : entry.getKey().split("\t")) {
+      for (String s : entry.getKey()) {
         if (!lemmas.contains(s)) {
           isKnown = false;
           break;

@@ -15,25 +15,35 @@ import java.util.stream.Stream;
 
 
 /**
- * A Rule in a context free grammar has a pair of POS values matching another
- * single POS. This trio describe a syntax procedure.
+ * Utility class to handle a grammar rule.
+ * A Rule in a context free grammar has a pair of POS values matching another single POS. This trio
+ * describes a syntax procedure.
+ * Provides useful methods to manage every single aspect of this syntax procedure.
  */
 public class Rule {
-  /** Rules that belongs to the grammar. */
+
+  /**
+   * Rules that belong to the grammar.
+   */
   private static Set<Rule> rules;
 
-  /** Grammar file path. */
+  /**
+   * Path to the Grammar file.
+   */
   private static String rulesPath = "/cyk/grammar.txt";
 
-  /** The resulting POS value of joining those in 'to'. */
+  /**
+   * The resulting POS value of joining those in 'to'.
+   */
   private POS from;
 
-  /** Pair of POS values that match with that in 'from'. */
+  /**
+   * Pair of POS values that match with that in 'from'.
+   */
   private Pair<POS, POS> to;
 
   /**
-   * Constructor for a Rule.
-   *
+   * Constructs this Rule.
    * @param from resulting POS value of joining those in 'to'.
    * @param to pair of POS values that match with that in 'from'.
    */
@@ -44,8 +54,6 @@ public class Rule {
 
   /**
    * Returns the resulting POS value of joining those in 'to'.
-   *
-   * @return Resulting POS
    */
   public POS getFrom() {
     return from;
@@ -53,17 +61,13 @@ public class Rule {
 
   /**
    * Returns a pair of POS values that match with that in 'from'.
-   *
-   * @return a pair of POS values that match with that in 'from'.
    */
   public Pair<POS, POS> getTo() {
     return to;
   }
 
   /**
-   * Returns a string representation of this rule.
-   *
-   * @return a string representation of this rule in the form F: (T0, T1)
+   * Returns a String representation of this Rule in the form F: (T0, T1).
    */
   @Override
   public String toString() {
@@ -71,9 +75,8 @@ public class Rule {
   }
 
   /**
-  * Compares this transaction to the specified object.
-  *
-  * @param  other the other rule
+  * Checks whether this transaction equals to the specified object.
+  * @param other the other Rule to be compared against
   * @return {@code true} if this rule equals the other rule;
   *         {@code false} otherwise
   */
@@ -90,9 +93,8 @@ public class Rule {
   }
 
   /**
-   * Compute a hash code using the hash codes of the underlying objects.
-   *
-   * @return a hashcode of the Rule
+   * Returns the HashCode for this Rule. The HashCode is computed using the HashCodes of the
+   * underlying objects.
    */
   @Override
   public int hashCode() {
@@ -101,7 +103,6 @@ public class Rule {
 
   /**
    * Extracts all rules that has the same 'from' value as the one provided.
-   *
    * @param from a POS value that has to match with that in 'from' of a rule
    * @return a set of rules that matches
    */
@@ -119,9 +120,8 @@ public class Rule {
 
   /**
    * Extracts all rules that has the same 'to' value as the one provided.
-   *
    * @param to a pair of POS values that has to match with that in 'to' of a rule
-   * @return a set of rules that matches
+   * @return a Set of rules that matches
    */
   public static Set<Rule> allTo(Pair<POS, POS> to) {
     load(); // Make sure that rules has been loaded
