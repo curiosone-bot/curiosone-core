@@ -7,21 +7,24 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * A response from the Curiosone yet to be refined.
+ * Stores a response from Curiosone's Brain.
  */
 public class BrainResponse {
 
-  /** Description. */
+  /**
+  * Stores the content of the computed answer.
+  */
   private String text;
 
-  /** Description. */
+  /**
+   * Stores the scope of the computed answer.
+   */
   private String scope;
 
   /**
-   * Constructor of a BrainResponse.
-   *
-   * @param text [description]
-   * @param scope [description]
+   * Constructs a BrainResponse instance, containing a text and a scope.
+   * @param text The content of the computed answer
+   * @param scope The scope of the computed answer
    */
   public BrainResponse(String text, String scope) {
     this.text = text;
@@ -29,27 +32,21 @@ public class BrainResponse {
   }
 
   /**
-   * getMessage description.
-   *
-   * @return [description]
+   * Returns the content of the computed answer.
    */
   public String getMessage() {
     return text;
   }
 
   /**
-   * getScope description.
-   *
-   * @return [description]
+   * Returns the scope of the computed answer.
    */
   public String getScope() {
     return scope;
   }
 
   /**
-   * Returns a string representation of this response.
-   *
-   * @return a string representation of this response.
+   * Returns a String representation of this BrainResponse.
    */
   @Override
   public String toString() {
@@ -57,9 +54,8 @@ public class BrainResponse {
   }
 
   /**
-   * Compares this response to the specified object.
-   *
-   * @param  other the other response
+   * Checks whether this BrainResponse equals to the given Object or not.
+   * @param other the other response to be compared against
    * @return {@code true} if this response equals the other response;
    *         {@code false} otherwise
    */
@@ -76,9 +72,8 @@ public class BrainResponse {
   }
 
   /**
-   * Returns an integer hash code for this response.
-   *
-   * @return an integer hash code for this response
+   * Returns the HashCode for this BrainResponse.
+   * The HashCode depends on the content and the scope of this BrainResponse.
    */
   @Override
   public int hashCode() {
