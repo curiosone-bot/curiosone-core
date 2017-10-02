@@ -14,9 +14,6 @@ import java.util.Properties;
 
 /**
  * Loading the dictionary from a file.
- *
- * @author Cosmo Pugliese && Francesco Natale.
- *
  */
 
 public class DictionaryLoader {
