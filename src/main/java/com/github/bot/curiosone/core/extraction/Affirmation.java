@@ -17,15 +17,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Description.
+ * Contains utility method to get an answer from a given sentence and a given scope.
  */
 public class Affirmation {
+
   /**
-   * getAnswer description.
-   *
-   * @param sentence [description]
-   * @param scope [description]
-   * @return [description]
+   * Gets a coherent answer from an input sentence and scope as Optional instance.
+   * @param sentence The quesiton to be answered
+   * @param scope The subject of the given quesiton
+   * @return an Optional instance.
+   *         If the answer has not been found, an empty Optional will be returned.
+   *         Otherwise, the Optional instance will contain the answer.
    */
   public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) {
     boolean answer = false;
@@ -47,7 +49,6 @@ public class Affirmation {
       scope = scope.substring(0, scope.length() - 1);
 
       if (sentence.respect(POS.V, POS.NP)) {
-        // System.out.println("V, NP");
         List<Word>[] extracted = sentence.parse(POS.V, POS.NP);
         verb = extracted[0].stream().filter(w -> w.itMeans(POS.V)).findFirst().get();
         List<Word> nouns =
@@ -55,7 +56,6 @@ public class Affirmation {
         object = nouns.get(nouns.size() - 1);
       }
       if (sentence.has(POS.V) && sentence.has(POS.N)) {
-        // System.out.println("V, N");
         verb = sentence.get(POS.V).get(0);
         List<Word> nouns = sentence.get(POS.N);
         object = nouns.get(nouns.size() - 1);
