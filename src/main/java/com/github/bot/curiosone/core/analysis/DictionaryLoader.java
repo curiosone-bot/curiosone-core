@@ -1,12 +1,12 @@
 package com.github.bot.curiosone.core.analysis;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -40,6 +40,9 @@ public class DictionaryLoader {
     loadDict();
   }
 
+  /**
+   * Returns the DictionaryLoader instance.
+   */
   public static DictionaryLoader getInstance() {
     if (instance == null) {
       instance = new DictionaryLoader();
@@ -57,7 +60,7 @@ public class DictionaryLoader {
       URL resource = DictionaryLoader.class.getResource(uri);
       path = Paths.get(resource.toURI());
       properties.load(new FileInputStream(path.toString()));
-    } catch (IOException|URISyntaxException e) {
+    } catch (IOException | URISyntaxException e) {
       e.printStackTrace();
     }
     for (String key : properties.stringPropertyNames()) {
