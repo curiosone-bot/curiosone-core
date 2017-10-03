@@ -6,5 +6,6 @@ package com.github.bot.curiosone.core.refinement;
 public enum SentenceType {
   Question,
   Answer;
+  
 }
 

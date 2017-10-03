@@ -14,4 +14,5 @@ public class VerbWord implements Word {
   public String toString() {
     return lemma;
   }
+  
 }

@@ -21,4 +21,5 @@ public enum NounType {
   public String toCategory() {
     return category;
   }
+  
 }

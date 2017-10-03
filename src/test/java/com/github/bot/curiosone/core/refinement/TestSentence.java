@@ -7,13 +7,12 @@ public class TestSentence {
   @Test
   public void main() {
     
-    Sentence s = new Sentence(
-        SentenceType.Answer,
-        new MainClause(
-            new NounPhrase(new NounWord(NounType.Name, "Emily")),
-            new VerbPhrase(new VerbWord("go"))
-            )
-        );
+    MainClause mc = new MainClause(
+        new NounPhrase(new NounWord(NounType.Plural, "fun")), //subject
+        new VerbPhrase(new VerbWord("go"))                    //verb
+    );
+
+    Sentence s = new Sentence(SentenceType.Answer, mc);
     
     System.out.println(s);
   }
