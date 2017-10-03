@@ -35,7 +35,7 @@ public class MainClause implements Clause {
 
   @Override
   public String toString() {
-    return "MC { " + subject + " " + predicate + " }";
+    return subject.toString() + " " + predicate.toString();
   }
 
 }
