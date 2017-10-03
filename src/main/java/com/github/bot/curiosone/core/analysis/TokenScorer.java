@@ -19,7 +19,7 @@ public class TokenScorer {
   /**
    * Calculates the sentiment value for a given Token.
    * This value ranges between -1.0 and 1.0.
-   * @param Token The Token to be analysed.
+   * @param token The Token to be analysed.
    * @return a Double value, representing the sentiment index for the given Token.
    * This index ranges between -1.00 (sad) and 1.00 (happy), 0.00 is a netural score
    */
