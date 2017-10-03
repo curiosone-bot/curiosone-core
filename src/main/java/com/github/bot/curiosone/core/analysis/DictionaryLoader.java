@@ -4,12 +4,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Properties;
 
 /**
@@ -17,6 +15,10 @@ import java.util.Properties;
  */
 
 public class DictionaryLoader {
+  /**
+   * The default value of an invalid word.
+   */
+  protected static double INVALID_SCORE = -2.0;
 
   private static DictionaryLoader instance;
 
@@ -69,7 +71,7 @@ public class DictionaryLoader {
   }
 
   public Double getScore(String word) {
-    return dict.getOrDefault(word, 0.0);
+    return dict.getOrDefault(word, INVALID_SCORE);
   }
 
 }
