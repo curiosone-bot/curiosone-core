@@ -113,13 +113,15 @@ public class MainTest {
    */
   @Test
   public void testTalkPostRequest() {
-    TestResponse res = request("POST", "/talk", "{message: \"Hello\", scope: \"\"}").get();
+    TestResponse res = request("POST", "/talk", "{message: \"Hello\", scope: \"\", emotion: \"\"}")
+        .get();
     Map<String, String> json = res.json();
     assertThat(json.get("message")).isIn("Hi there!", "Hi.", "Hello!");
     assertThat(json.get("scope")).isEmpty();
     assertThat(res.status).isEqualTo(200);
 
-    res = request("POST", "/talk", "{message: \"DoYouUnderstandThis?!?\", scope: \"TROLL\"}").get();
+    res = request("POST", "/talk",
+        "{message: \"DoYouUnderstandThis?!?\", scope: \"TROLL\", emotion: \"\"}").get();
     json = res.json();
     assertThat(json.get("message"))
         .isIn(
@@ -130,78 +132,87 @@ public class MainTest {
     assertThat(json.get("scope")).isEmpty();
     assertThat(res.status).isEqualTo(200);
 
-    res = request("POST", "/talk", "{message: \"42\", scope: \"theAnswer\"}").get();
+    res = request("POST", "/talk", "{message: \"42\", scope: \"theAnswer\", emotion: \"\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
     assertThat(json.get("message"))
       .isIn("42... that is cool", "42.? I do not understand", "42.?");
     assertThat(json.get("scope")).isEmpty();
 
-    res = request("POST", "/talk", "{message: \"What is an apple?\", scope: \"apple\"}").get();
+    res = request("POST", "/talk",
+        "{message: \"What is an apple?\", scope: \"apple\", emotion: \"\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
     assertThat(json.get("message")).contains("apple");
     assertThat(json.get("scope")).isEqualTo("apple");
 
-    res = request("POST", "/talk", "{message: \"I live in Rome\", scope: \"\"}").get();
+    res = request("POST", "/talk", "{message: \"I live in Rome\", scope: \"\", emotion: \"\"}")
+        .get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
     assertThat(json.get("message")).containsIgnoringCase("rome");
     assertThat(json.get("scope")).containsIgnoringCase("rome");
 
-    res = request("POST", "/talk", "{message: \"I have the driving license\", scope: \"license\"}")
-        .get();
+    res = request("POST", "/talk",
+        "{message: \"I have the driving license\", scope: \"license\", emotion: \"\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
     assertThat(json.get("message")).isNotNull().isNotEmpty();
     assertThat(json.get("scope")).isNotNull();
 
     res = request("POST", "/talk",
-        "{message: \"A drive license is a document\", scope: \"document\"}").get();
+        "{message: \"A drive license is a document\", scope: \"document\", emotion: \"\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
     assertThat(json.get("message")).isNotNull().isNotEmpty();
     assertThat(json.get("scope")).isNotNull();
 
-    res = request("POST", "/talk", "{message: \"What is a godfather?\", scope: \"\"}").get();
+    res = request("POST", "/talk",
+        "{message: \"What is a godfather?\", scope: \"\", emotion: \"\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
     assertThat(json.get("message")).containsIgnoringCase("godfather");
     assertThat(json.get("scope")).containsIgnoringCase("godfather");
 
-    res = request("POST", "/talk", "{message: \"I like pizza\", scope: \"pizza\"}").get();
+    res = request("POST", "/talk",
+        "{message: \"I like pizza\", scope: \"pizza\", emotion: \"\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
     assertThat(json.get("message")).containsIgnoringCase("pizza");
     assertThat(json.get("scope")).containsIgnoringCase("pizza");
 
-    res = request("POST", "/talk", "{message: \"what is pizza\", scope: \"pizza\"}").get();
+    res = request("POST", "/talk",
+        "{message: \"what is pizza\", scope: \"pizza\", emotion: \"\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
     assertThat(json.get("message")).containsIgnoringCase("pizza");
     assertThat(json.get("scope")).containsIgnoringCase("pizza");
 
-    res = request("POST", "/talk", "{message: \"what is pizza?\", scope: \"pizza\"}").get();
+    res = request("POST", "/talk",
+        "{message: \"what is pizza?\", scope: \"pizza\", emotion: \"\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
     assertThat(json.get("message")).containsIgnoringCase("pizza");
     assertThat(json.get("scope")).containsIgnoringCase("pizza");
 
-    res = request("POST", "/talk", "{message: \"che hai detto?!?\", scope: \"\"}").get();
+    res = request("POST", "/talk",
+        "{message: \"che hai detto?!?\", scope: \"\", emotion: \"\"}").get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
     assertThat(json.get("message")).isIn("I think you should speak english",
         "PLEASE, speak english!", "Are you a robot too?");
     assertThat(json.get("scope")).isEmpty();
 
-    res = request("POST", "/talk", "{message: \"l'amour toujours...\", scope: \"\"}").get();
+    res = request("POST", "/talk", "{message: \"l'amour toujours...\", scope: \"\", emotion: \"\"}")
+        .get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
     assertThat(json.get("message")).isIn("I think you should speak english",
         "PLEASE, speak english!", "Are you a robot too?");
     assertThat(json.get("scope")).isEmpty();
 
-    res = request("POST", "/talk", "{message: \"what is a pullman?\", scope: \"\"}").get();
+    res = request("POST", "/talk", "{message: \"what is a pullman?\", scope: \"\", emotion: \"\"}")
+        .get();
     json = res.json();
     assertThat(res.status).isEqualTo(200);
     assertThat(json.get("message")).containsIgnoringCase("pullman");

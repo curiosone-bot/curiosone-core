@@ -21,13 +21,20 @@ public class Message {
   String scope;
 
   /**
-   * Constructs this Message from a text/content and its scope.
-   * @param msg Message content. Can be null.
-   * @param scope Message scope. Can be null.
+   * Stores the scope of this Message.
    */
-  public Message(String msg, String scope) {
-    message = (msg == null) ? "" : msg;
+  String emotion;
+
+  /**
+   * Constructs this Message from a text/content and its scope.
+   * @param message Message content. Can be null.
+   * @param scope Message scope. Can be null.
+   * @param emotion Message emotion. Can be null.
+   */
+  public Message(String message, String scope, String emotion) {
+    this.message = (message == null) ? "" : message;
     this.scope = (scope == null) ? "" : scope;
+    this.emotion = (emotion == null) ? "" : emotion;
   }
 
   /**
@@ -45,11 +52,18 @@ public class Message {
   }
 
   /**
+   * Gets the emotion of this Message.
+   */
+  public String getEmotion() {
+    return emotion;
+  }
+
+  /**
    * Returns a String representation of this Message.
    */
   @Override
   public String toString() {
-    return message + " (" + scope + ")";
+    return message + " (" + scope + ")[" + emotion + "]";
   }
 
   /**
@@ -67,7 +81,9 @@ public class Message {
       return false;
     }
     Message that = (Message) other;
-    return this.message.equals(that.message) && this.scope.equals(that.scope);
+    return this.message.equals(that.message)
+      && this.scope.equals(that.scope)
+      && this.emotion.equals(that.emotion);
   }
 
   /**
@@ -76,6 +92,6 @@ public class Message {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(message, scope);
+    return Objects.hash(message, scope, emotion);
   }
 }
