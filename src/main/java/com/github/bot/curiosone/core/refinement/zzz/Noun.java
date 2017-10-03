@@ -21,20 +21,6 @@ public class Noun {
   public Noun(String lemma) {
     this.lemma = lemma;
     
-    String s = new EnglishMorpher()
-        .getInflection(this.lemma, "PLURAL", Part.Noun.forBabelMorph())
-        .stream().map(Lexeme::toString).findAny().orElse("");
-    
-    List<String> l = Arrays.asList(s.split("[\\[\\]]"));
-    
-    plural = Optional.ofNullable(l.get(l.size() - 1));
-  }
-  
-  //-----------------------------------------------------------------------------------------------
-  
-  public boolean hasPlural() {
-    System.out.println(plural.get());
-    return plural.isPresent();
   }
   
 }
