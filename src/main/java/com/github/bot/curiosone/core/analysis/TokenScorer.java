@@ -14,6 +14,10 @@ import java.util.OptionalDouble;
  */
 
 public class TokenScorer {
+
+  /**
+   * Stores the dictionary instance, used to compute the sentiment index value.
+   */
   private static DictionaryLoader dict = DictionaryLoader.getInstance();
 
   /**
