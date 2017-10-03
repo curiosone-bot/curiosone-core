@@ -37,11 +37,13 @@ public class TokenScorer {
    *
    * @param tokenList the token list.
    * 
-   * @return a double in range -1.0 and 1.0. 
+   * @return a double in range -1.0 and 1.0(Saddest to Happiest, 0.0 is a neutral score). 
    */
   public static double calculateScore(List<Token> tokenList) {
-    OptionalDouble d = tokenList.stream().mapToDouble(TokenScorer::calculateScore)
-        .filter(x -> (x != -2.0)).average();
-    return d.isPresent() ? d.getAsDouble() : DictionaryLoader.INVALID_SCORE;
+    OptionalDouble d = tokenList.stream()
+        .mapToDouble(TokenScorer::calculateScore)
+        .filter(x -> (x != -DictionaryLoader.INVALID_SCORE))
+        .average();
+    return d.isPresent() ? d.getAsDouble() : 0.0;
   }
 }
