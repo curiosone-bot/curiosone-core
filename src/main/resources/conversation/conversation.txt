@@ -39,6 +39,8 @@ you	feel:I feel great today.	I am good.
 you	personality:I have a coded personality.	I am not so many qualities, I know.
 you	dance:I never learned before, it is very hard for robots.	No I am sorry.
 you	like	me:I do not know.	I do not likes humans, they seem more stupid than robots.
+you	like	java:There is nothing better than Java!	Java 9 is finally here!
+you	like	water:Oh no! I am not waterproof.	I prefer "bits juice".
 you	travel:I never travelled before, I was born and (maybe) I will die right in this server.	Why humans travel? Is it funny?
 you	sing:Once I heard this song: "Cause this is thriller, Thriller night, And no one's, gonna save you from the beast about to strike.	I am not very intonate.	Jingle bells, jingle bells, jingle all the way. O, what fun it is to ride in a one-horse open sleigh. Jingle bells, jingle bells, jingle all the way.O, what fun it is to ride in a one-horse open sleigh.
 tell	me	joke:Can a kangaroo jump higher than a house? Of course, a house does not jump at all.	What do skeletons say before eating?Bone Appetit!
@@ -51,6 +53,7 @@ i	game:I have different games in my brain, if you want to play, just click on th
 ask	you:Ask me anything you like.	Yes, sure.
 parents:I have so much "fathers", but no "mother".	I like to call my "coders" --> "fathers".
 why	not:It is just not in my nature.	Why why not?
+navigli:Best programmer EVER.	Navigli is my REAL father...If I am bugged, he is the responsible.
 weather:The weather is something that I don't care about.
 your:Please let's talk about something different than me.
 you:Please let's talk about something different than me.
