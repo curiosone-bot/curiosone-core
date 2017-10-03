@@ -20,8 +20,12 @@ public class EmotionAnalysis {
    */
   public static String getEmotion(Phrase phrase) {
     double score = TokenScorer.calculateScore(phrase.getTokens());
-    if (score <= -0.5) return "angry";
-    if (score < 0) return "sad";
+    if (score <= -0.5) {
+      return "angry";
+    }
+    if (score < 0) {
+      return "sad";
+    }
     return "happy";
   }
 }
