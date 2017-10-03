@@ -16,8 +16,7 @@ public class EmotionAnalysis {
   /**
    * Performs an emotion analysis of the provided Phrase.
    * @param p the Phrase to be analysed.
-   * @return a String representation of the calculated emotion.
-   * Currently, supports "sad", "happy", "angry" and "neutral" feelings.
+   * @return a String representation of the calculated emotion. Supports "sad", "happy" and "angry"
    */
   public static String getEmotion(Phrase p) {
     //TODO: Add implementation.
