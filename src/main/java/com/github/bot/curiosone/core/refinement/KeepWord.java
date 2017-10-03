@@ -2,16 +2,16 @@ package com.github.bot.curiosone.core.refinement;
 
 import com.github.bot.curiosone.core.refinement.interfaces.Word;
 
-public class Verb implements Word {
+public class KeepWord implements Word {
 
-  private String lemma;
+  private String stuff;
   
-  public Verb(String lemma) {
-    this.lemma = lemma;
+  public KeepWord(String stuff) {
+    this.stuff = stuff;
   }
   
   @Override
   public String toString() {
-    return lemma;
+    return stuff;
   }
 }

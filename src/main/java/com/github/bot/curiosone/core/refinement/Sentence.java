@@ -15,7 +15,8 @@ public class Sentence {
   
   /**
    * Sentence constructor.
-   * @param main 
+   * @param type type of sentence
+   * @param main main clause
    */
   public Sentence(Type type, MainClause main) {
     this.type = type;

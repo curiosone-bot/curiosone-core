@@ -4,9 +4,9 @@ import com.github.bot.curiosone.core.refinement.interfaces.Phrase;
 
 public class VerbPhrase implements Phrase {
 
-  private Verb main;
+  private VerbWord main;
   
-  public VerbPhrase(Verb main) {
+  public VerbPhrase(VerbWord main) {
     this.main = main;
   }
   

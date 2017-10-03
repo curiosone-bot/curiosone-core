@@ -5,9 +5,9 @@ import com.github.bot.curiosone.core.refinement.interfaces.Word;
 
 public class NounPhrase implements Phrase {
 
-  private Noun main;
+  private NounWord main;
   
-  public NounPhrase(Noun main) {
+  public NounPhrase(NounWord main) {
     this.main = main;
   }
   

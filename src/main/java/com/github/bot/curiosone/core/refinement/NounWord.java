@@ -2,11 +2,11 @@ package com.github.bot.curiosone.core.refinement;
 
 import com.github.bot.curiosone.core.refinement.interfaces.Word;
 
-public class Noun implements Word {
+public class NounWord implements Word {
 
   private String lemma;
   
-  public Noun(String lemma) {
+  public NounWord(String lemma) {
     this.lemma = lemma;
   }
   

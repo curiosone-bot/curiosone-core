@@ -12,8 +12,8 @@ public class TestSentence {
     Sentence s = new Sentence(
         Type.Answer,
         new MainClause(
-            new NounPhrase(new Noun("Emily")),
-            new VerbPhrase(new Verb("go"))
+            new NounPhrase(new NounWord("Emily")),
+            new VerbPhrase(new VerbWord("go"))
             )
         );
     
