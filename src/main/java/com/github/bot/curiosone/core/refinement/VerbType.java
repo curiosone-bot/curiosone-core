@@ -1,9 +1,8 @@
-package com.github.bot.curiosone.core.refinement.zzz;
-/**
- * Verb's inflections.
- * @author Claudio Venanzi
- */
+package com.github.bot.curiosone.core.refinement;
 
+/**
+ * Type of verb.
+ */
 public enum VerbType {
   PresentS1("PRESENT, SINGULAR, FIRST_PERSON"),
   PresentS2("PRESENT, SINGULAR, SECOND_PERSON"),
@@ -49,20 +48,18 @@ public enum VerbType {
   
   Infinitive("INFINITIVE");
 
-  //===============================================================================================
-  
   private String category;
 
   private VerbType(String category) {
     this.category = category;
   }
 
-  //===============================================================================================
-
-  @Override
-  public String toString() {
+  /**
+   * Return verb's category.
+   * @return category
+   */
+  public String toCategory() {
     return category;
   }
 
-  //-----------------------------------------------------------------------------------------------
 }
