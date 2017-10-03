@@ -16,14 +16,12 @@ import java.util.Properties;
 
 public class DictionaryLoader {
   /**
-   * The default value of an invalid word.
+   * Description
    */
-  protected static double INVALID_SCORE = -2.0;
-
   private static DictionaryLoader instance;
 
   /**
-   *The Uri containing the .properties file.
+   * The Uri containing the .properties file.
    */
   private static final String uri = "/dictionary/DataDict.properties";
 
@@ -54,7 +52,7 @@ public class DictionaryLoader {
 
   /**
    * Loading the .properties file in the dictionary.
-   * @Return the loaded dictionary
+   * @return the loaded dictionary
    */
   private static void loadDict() {
     Path path = null;
@@ -70,8 +68,13 @@ public class DictionaryLoader {
     }
   }
 
-  public Double getScore(String word) {
-    return dict.getOrDefault(word, INVALID_SCORE);
+  /**
+   * getScore description.
+   * @param word [description]
+   * @return [description]
+   */
+  public double getScore(String word) {
+    return dict.getOrDefault(word, 0.0);
   }
 
 }
