@@ -11,37 +11,42 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Loading the dictionary from a file.
+ * Handles the dictionary used to score a sentiment index.
+ * Provides methods to load the dictionary in memory and get data from it.
  */
 
 public class DictionaryLoader {
+
   /**
-   * Description
+   * Singleton instance of this class.
    */
   private static DictionaryLoader instance;
 
   /**
-   * The Uri containing the .properties file.
+   * Stores the path to the dictionary file.
    */
   private static final String uri = "/dictionary/DataDict.properties";
 
   /**
-   * The map which contains words and their sentiment's score.
+   * Stores the Map with the word-sentiment score association.
    */
   private static Map<String, Double> dict;
 
   /**
-   * Initializing of the properties.
+   * Stores an utility Properties object, used during the loading process.
    */
   private static Properties properties = new Properties();
 
+  /**
+   * Constructs the Singleton instance, loading dictionary data into memory.
+   */
   private DictionaryLoader() {
     dict = new HashMap<>();
     loadDict();
   }
 
   /**
-   * Returns the DictionaryLoader instance.
+   * Returns the Singleton instance.
    */
   public static DictionaryLoader getInstance() {
     if (instance == null) {
@@ -51,8 +56,7 @@ public class DictionaryLoader {
   }
 
   /**
-   * Loading the .properties file in the dictionary.
-   * @return the loaded dictionary
+   * Loads in memory the data from the dictionary file.
    */
   private static void loadDict() {
     Path path = null;
@@ -69,9 +73,9 @@ public class DictionaryLoader {
   }
 
   /**
-   * getScore description.
-   * @param word [description]
-   * @return [description]
+   * Returns a Double value, representing the sentiment score for the given Word.
+   * If the Word is unknown, a netural score (0.00) is returned.
+   * @param word the Word to be analysed
    */
   public double getScore(String word) {
     return dict.getOrDefault(word, 0.0);
