@@ -10,12 +10,15 @@ public class TestSentence {
 
   @Test
   public void main() {
-    Sentence s = new Sentence(Type.Answer);
-    Clause main;
-    Phrase np = new PhraseNoun();
-    Phrase vp = new PhraseVerb();
-    main = new ClauseMain(np, vp);
-    s.addClause(main);
+    
+    Sentence s = new Sentence(
+        Type.Answer,
+        new MainClause(
+            new NounPhrase(),
+            new VerbPhrase()
+            )
+        );
+    
     System.out.println(s);
   }
   

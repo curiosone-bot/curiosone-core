@@ -1,14 +1,8 @@
 package com.github.bot.curiosone.core.refinement;
 
-import com.github.bot.curiosone.core.refinement.interfaces.Clause;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class Sentence {
 
-  private List<Clause> clauses;
+  private MainClause main;
   private Type type;
   
   /**
@@ -21,26 +15,19 @@ public class Sentence {
   
   /**
    * Sentence constructor.
+   * @param main 
    */
-  public Sentence(Type type) {
-    clauses = new LinkedList<Clause>();
+  public Sentence(Type type, MainClause main) {
     this.type = type;
+    this.main = main;
   }
   
   /**
-   * Add a clause.
-   * @param clause clause
+   * Returns the main clause.
+   * @return clause
    */
-  public void addClause(Clause clause) {
-    clauses.add(clause);
-  }
-  
-  /**
-   * Returns the sentence type.
-   * @return type
-   */
-  public Type getSentenceType() {
-    return type;
+  public MainClause getMainClause() {
+    return main;
   }
   
   /**
@@ -48,9 +35,8 @@ public class Sentence {
    */
   @Override
   public String toString() {
-    String temp = clauses.stream()
-        .map(Clause::toString)
-        .collect(Collectors.joining(" ", "", type.equals(Type.Question) ? "?" : "."));
+    String temp = main.toString();
+    temp += type.equals(Type.Question) ? "?" : ".";
     return temp.substring(0, 1).toUpperCase() + temp.substring(1);
   }
   
