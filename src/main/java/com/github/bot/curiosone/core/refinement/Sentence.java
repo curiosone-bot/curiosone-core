@@ -3,22 +3,14 @@ package com.github.bot.curiosone.core.refinement;
 public class Sentence {
 
   private MainClause main;
-  private Type type;
-  
-  /**
-   * Type of sentence.
-   */
-  public enum Type {
-    Question,
-    Answer;
-  }
+  private SentenceType type;
   
   /**
    * Sentence constructor.
    * @param type type of sentence
    * @param main main clause
    */
-  public Sentence(Type type, MainClause main) {
+  public Sentence(SentenceType type, MainClause main) {
     this.type = type;
     this.main = main;
   }
@@ -37,7 +29,7 @@ public class Sentence {
   @Override
   public String toString() {
     String temp = main.toString();
-    temp += type.equals(Type.Question) ? "?" : ".";
+    temp += type.equals(SentenceType.Question) ? "?" : ".";
     return temp.substring(0, 1).toUpperCase() + temp.substring(1);
   }
   

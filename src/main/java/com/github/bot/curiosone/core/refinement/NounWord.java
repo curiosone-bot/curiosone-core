@@ -5,9 +5,11 @@ import com.github.bot.curiosone.core.refinement.interfaces.Word;
 public class NounWord implements Word {
 
   private String lemma;
+  private NounType type;
   
-  public NounWord(String lemma) {
+  public NounWord(NounType type, String lemma) {
     this.lemma = lemma;
+    this.type = type;
   }
   
   @Override

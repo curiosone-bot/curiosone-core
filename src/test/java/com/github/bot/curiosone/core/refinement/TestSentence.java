@@ -1,7 +1,5 @@
 package com.github.bot.curiosone.core.refinement;
 
-import com.github.bot.curiosone.core.refinement.Sentence.Type;
-
 import org.junit.Test;
 
 public class TestSentence {
@@ -10,9 +8,9 @@ public class TestSentence {
   public void main() {
     
     Sentence s = new Sentence(
-        Type.Answer,
+        SentenceType.Answer,
         new MainClause(
-            new NounPhrase(new NounWord("Emily")),
+            new NounPhrase(new NounWord(NounType.Name, "Emily")),
             new VerbPhrase(new VerbWord("go"))
             )
         );
