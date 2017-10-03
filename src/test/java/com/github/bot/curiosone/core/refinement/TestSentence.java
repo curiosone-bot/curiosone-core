@@ -8,7 +8,7 @@ public class TestSentence {
   public void main() {
     
     MainClause mc = new MainClause(
-        new NounPhrase(new NounWord(NounType.Plural, "fun")), //subject
+        new NounPhrase(new NounWord(NounType.Plural, "cat")), //subject
         new VerbPhrase(new VerbWord("go"))                    //verb
     );
 
