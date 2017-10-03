@@ -16,18 +16,20 @@ public class DictionaryLoaderTest {
   public void testGetScore() {
     DictionaryLoader dl = DictionaryLoader.getInstance();
 
-    assertThat(dl.getScore("jostling")).isEqualTo(-0.125);
+    assertThat(dl.getScore("jostling")).isNegative();
 
-    assertThat(dl.getScore("vermiculate")).isEqualTo(-0.041666666666666664);
+    assertThat(dl.getScore("vermiculate")).isNegative();
 
-    assertThat(dl.getScore("ashkhabad")).isEqualTo(0.0);
+    assertThat(dl.getScore("ashkhabad")).isZero();
 
-    assertThat(dl.getScore("car")).isEqualTo(0.0);
+    assertThat(dl.getScore("car")).isZero();
 
-    assertThat(dl.getScore("happy")).isEqualTo(0.5625);
+    assertThat(dl.getScore("happy")).isPositive();
 
-    assertThat(dl.getScore("dog")).isEqualTo(-0.1875);
+    assertThat(dl.getScore("dog")).isNegative();
 
-    assertThat(dl.getScore("cat")).isEqualTo(-0.0125);
+    assertThat(dl.getScore("cat")).isNegative();
+
+    assertThat(dl.getScore("happy")).isPositive();
   }
 }
