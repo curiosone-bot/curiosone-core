@@ -5,21 +5,28 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents a phrase.
+ * Represents a Phrase.
+ * Provides methods to create a Phrase and get its information.
  */
 public class Phrase {
-  /** The string representation of the phrase. */
+
+  /**
+   * Stores the text content of this Phrase.
+   */
   private String text;
 
-  /** True if the phrase ends with a question mark. */
+  /**
+   * Wether the text ends with a question mark.
+   */
   private boolean question;
 
-  /** The list of tokens extracted from the phrase. */
+  /**
+   * Lists the tokens extracted from this Phrase.
+   */
   private List<Token> tokens = new ArrayList<>();
 
   /**
-   * Constructs a phrase, using the string provided by the user.
-   *
+   * Constructs a Phrase, using the String provided by the user.
    * @param str The phrase to be created
    */
   public Phrase(String str) {
@@ -29,38 +36,28 @@ public class Phrase {
   }
 
   /**
-   * Checks if this phrase is a question.
-   *
-   * @return {@code true} if this original string contains a question mark at
-   *         the end.
-   *         {@code false} otherwise
+   * Returns {@code true} if the content is a question, {@code false} otherwise.
    */
   public boolean isQuestion() {
     return question;
   }
 
   /**
-   * Gets the string representation of the phrase.
-   *
-   * @return the string representation of the phrase
+   * Gets the text content of this Phrase.
    */
   public String getText() {
     return text;
   }
 
   /**
-   * The list of tokens extracted from the phrase.
-   *
-   * @return the list of tokens extracted from the phrase
+   * Returns the list of tokens extracted from this Phrase.
    */
   public List<Token> getTokens() {
     return new ArrayList<Token>(tokens);
   }
 
   /**
-   * Returns a string representation of this phrase.
-   *
-   * @return a string representation of this phrase in the form [text, tokens]
+   * Returns a String representation of this Phrase in the form [text, tokens].
    */
   @Override
   public String toString() {
@@ -68,10 +65,9 @@ public class Phrase {
   }
 
   /**
-   * Compares this phrase to the specified object.
-   *
-   * @param  other the other phrase
-   * @return {@code true} if this phrase equals the other phrase;
+   * Checks whether this Phrase equals to the given Object.
+   * @param other the other Phrase to be compared against
+   * @return {@code true} if this Phrase equals the other Phrase;
    *         {@code false} otherwise
    */
   @Override
@@ -87,9 +83,8 @@ public class Phrase {
   }
 
   /**
-   * Returns an integer hash code for this phrase.
-   *
-   * @return an integer hash code for this phrase
+   * Returns the HashCode for this Phrase.
+   * The HashCode depends on the HashCode of the content and its tokens.
    */
   @Override
   public int hashCode() {
@@ -98,9 +93,8 @@ public class Phrase {
 
   /**
    * Extracts phrases from an input text, splitting it by punctuation.
-   *
    * @param input the text to be splitted in phrases
-   * @return the phrases of the given text
+   * @return a List containing all the phrases of the given text.
    */
   public static List<Phrase> extract(String input) {
     List<String> splitted = LangUtils.splitByPuntaction(input);

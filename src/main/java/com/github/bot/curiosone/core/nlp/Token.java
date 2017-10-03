@@ -9,19 +9,30 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * Handles a Token.
  * A Token is a list of words with a grammatical meaning.
+ * Provides methods to create and manage a Token.
  */
 public class Token {
-  /** The text rappresentation of this token. */
+
+  /**
+   * Represents the text of this token.
+   */
   String text;
 
-  /** Base form of the world. */
+  /**
+   * Stores the base form of the word.
+   */
   String lemma;
 
-  /** Meanings of the token. */
+  /**
+   * Stores all the possible meanings for this token.
+   */
   Set<Meaning> means;
 
-  /** Whether this token is known or not. */
+  /**
+   * Whether this token is known or not.
+   */
   boolean known;
 
   /**
@@ -45,10 +56,7 @@ public class Token {
   }
 
   /**
-   * Checks if this token as at least a meaning.
-   *
-   * @return {@code true} if this interval equals the other interval;
-   *         {@code false} otherwise
+   * Returns {@code true} if this Token has at leas a meaning, {@code false} otherwise.
    */
   public boolean isKnown() {
     return known;
@@ -56,8 +64,6 @@ public class Token {
 
   /**
    * Returns the concatenation of the words of this token.
-   *
-   * @return the concatenation of the words of this token.
    */
   public String getText() {
     return text;
@@ -65,26 +71,20 @@ public class Token {
 
   /**
    * Returns the normalized concatenation of the words of this token.
-   *
-   * @return the normalized concatenation of the words of this token.
    */
   public String getLemma() {
     return lemma;
   }
 
   /**
-   * Returns the list of the meanings of this token.
-   *
-   * @return the list of the meanings of this token.
+   * Returns a Set containing all the meanings of this Token.
    */
   public Set<Meaning> getMeanings() {
     return means;
   }
 
   /**
-   * Returns a string representation of this token.
-   *
-   * @return a string representation of this token in the form [text, word, meanings]
+   * Returns a String representation of this Token, formatted as: [text, word, meanings].
    */
   @Override
   public String toString() {
@@ -92,10 +92,9 @@ public class Token {
   }
 
   /**
-   * Compares this token to the specified object.
-   *
-   * @param  other the other token
-   * @return {@code true} if this token equals the other token;
+   * Checks whether this token equals to the specified object.
+   * @param  other the other Token to be compared against
+   * @return {@code true} if this Token equals the other Token;
    *         {@code false} otherwise
    */
   @Override
@@ -111,9 +110,8 @@ public class Token {
   }
 
   /**
-   * Returns an integer hash code for this token.
-   *
-   * @return an integer hash code for this token
+   * Returns the HashCode for this Token.
+   * The HashCode is based on the HashCode of the original text.
    */
   @Override
   public int hashCode() {
@@ -121,10 +119,9 @@ public class Token {
   }
 
   /**
-   * Splits a string in a list of tokens checking groups of words.
-   *
-   * @param str the string to be tokenized
-   * @return the list of tokens of the string
+   * Splits a string in a list of Tokens, checking groups of words.
+   * @param str the String to be tokenized
+   * @return A List of tokens for the given the String
    */
   public static List<Token> tokenize(String str) {
     List<Token> tokens = new ArrayList<>();

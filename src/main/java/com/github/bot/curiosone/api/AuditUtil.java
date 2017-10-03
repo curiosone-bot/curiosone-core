@@ -4,19 +4,21 @@ import spark.Request;
 import spark.Response;
 
 /**
- * Utility class to convert requests and responses into audit logs.
+ * Converts requests and responses into audit logs.
+ * Provides a public static method to format a request-response interaction.
  */
 public class AuditUtil {
+
   /**
   * Default Constructor.
   */
   private AuditUtil() {}
 
   /**
-   * Format an audit log record.
+   * Formats an audit log record.
    * @param req The request object.
    * @param res The response object.
-   * @return The auti log object.
+   * @return a String containing the audit log.
    */
   public static String format(Request req, Response res) {
     StringBuilder sb = new StringBuilder();
