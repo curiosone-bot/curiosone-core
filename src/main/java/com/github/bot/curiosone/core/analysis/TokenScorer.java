@@ -9,19 +9,19 @@ import java.util.List;
 import java.util.OptionalDouble;
 
 /**
- * Finding Sentiment's score.
- *
+ * Calculates the Sentiment of a Sentence.
+ * Provides methods to calcolate the sentiment score from a single Token or a Token List.
  */
 
 public class TokenScorer {
   private static DictionaryLoader dict = DictionaryLoader.getInstance();
 
   /**
-   * Calculate the score of the Token.
-   *
-   * @param token [description]
-   *
-   * @return a double value of the given token.
+   * Calculates the sentiment value for a given Token.
+   * This value ranges between -1.0 and 1.0.
+   * @param Token The Token to be analysed.
+   * @return a Double value, representing the sentiment index for the given Token.
+   * This index ranges between -1.00 (sad) and 1.00 (happy), 0.00 is a netural score
    */
   public static double calculateScore(Token token) {
     POS pos = token.getMeanings().stream()
@@ -33,11 +33,11 @@ public class TokenScorer {
   }
 
   /**
-   * Calculate the score of the input token's list.
-   *
-   * @param tokenList the token list.
-   *
-   * @return a double in range -1.0 and 1.0(Saddest to Happiest, 0.0 is a neutral score).
+   * Calculates the sentiment value for a given Token List.
+   * This value ranges between -1.0 and 1.0.
+   * @param tokenList The Token List to be analysed.
+   * @return a Double value, representing the sentiment index for the given Token List.
+   * This index ranges between -1.00 (sad) and 1.00 (happy), 0.00 is a netural score
    */
   public static double calculateScore(List<Token> tokenList) {
     OptionalDouble score = tokenList.stream()
