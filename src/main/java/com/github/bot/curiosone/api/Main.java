@@ -13,32 +13,44 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Spark;
 
+/**
+ * Represents the entry point of the Curiosone APIs.
+ * Contains the main method, where the server runs.
+ */
 public class Main {
+
   /**
-  * Logger for Main class.
+  * Logs Main class.
   */
   private static final Logger log = LoggerFactory.getLogger(Main.class);
 
   /**
+   * Default port value.
+   */
+  private static final int DEFAULT_PORT = 4567;
+
+  /**
    * The entry point of the APIs.
+   * This method activates and runs the server.
    * @param args Unused arguments.
    */
   public static void main(String[] args) {
 
     /**
-     * Set the port where it will run.
+     * Sets the port where the server run.
      */
-    int port = System.getenv("PORT") != null ? Integer.parseInt(System.getenv("PORT")) : 4567;
+    int port = System.getenv("PORT") != null
+        ? Integer.parseInt(System.getenv("PORT")) : DEFAULT_PORT;
     Spark.port(port);
 
     /**
-     * Enable CORS
+     * Enables CORS
      */
     Spark.before(CorsUtil::headers);
     Spark.options("/*", CorsUtil::options);
 
     /**
-     * Set the right content type for the response.
+     * Sets the right content type for the response.
      */
     Spark.after(
         (req, res) -> {
@@ -46,7 +58,7 @@ public class Main {
         });
 
     /*
-     * Print audit logs.
+     * Prints audit logs.
      */
     Spark.after(
         (req, res) -> {
@@ -54,7 +66,7 @@ public class Main {
         });
 
     /**
-     * Respond with ok.
+     * Responds with ok.
      */
     Spark.get(
         "/status",
@@ -65,7 +77,7 @@ public class Main {
         });
 
     /**
-     * Route requests to the curiosone core
+     * Routes requests to the curiosone core
      */
     Spark.post(
         "/talk",

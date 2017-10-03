@@ -7,18 +7,24 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Provides utility methos to perform basic Natural Language Process tasks.
+ * These methods, applied to a Sentence, allow to: split by puntaction, remove duplicated spaces,
+ * expand verbs in contracted form and remove non-alphanumeric characters.
  */
 public class LangUtils {
 
   /**
-   * Stores all supported verbs abbreviations in the expandVerbs method.
+   * Stores the regex used to remove all non-alphanumeric characters from a String.
+   */
+  private static final String REGEX_NON_ALPHANUM = "[^A-Za-z0-9 ]";
+
+  /**
+   * Stores all supported verbs abbreviations by the expandVerbs method.
    */
   private static final String[] SHORTS = {"'m", "'s", "'re", "'ve", "'ll",
       "won't", "n't"};
 
   /**
-   * Stores all the expanded forms for the supported contracted verbs by
-   * expandVerbs method.
+   * Stores all the expanded forms for the supported contracted verbs by expandVerbs method.
    */
   private static final String[] LONGS = {" am", " is", " are", " have", " will",
       "will not", " not"};
@@ -137,11 +143,11 @@ public class LangUtils {
   }
 
   /**
-   * removeNonAlphaNumeric description.
-   * @param str [description]
-   * @return [description]
+   * Removes non-alphanumeric characters from the given String.
+   * @param str the String to remove non-alphanumeric characters from
+   * @return a new String containing the result of the non-alphanumeric characters removal
    */
   public static String removeNonAlphaNumeric(String str) {
-    return str.replaceAll("[^A-Za-z0-9 ]", "");
+    return str.replaceAll(REGEX_NON_ALPHANUM, "");
   }
 }

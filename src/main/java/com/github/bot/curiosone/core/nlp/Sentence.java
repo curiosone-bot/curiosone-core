@@ -14,22 +14,33 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
- * Semantically complete sentence.
+ * Represents a semantically complete Sentence.
+ * A semantically complete Sentence is a list of words with a lookup check syntax table and a
+ * boolean flag, stating whether the phrase is a question or not.
+ * Contains utility method to easily manage, check and get semantically information about the
+ * Sentence.
  */
 public class Sentence {
-  /** The list of words of the sentence. */
+
+  /**
+   * The list of words of this Sentence.
+   */
   private List<Word> words;
 
-  /** Control if this sentence is a question or not. */
+  /**
+   * Whether this Sentence is a question or not.
+   */
   private boolean question;
 
-  /** The lookup table used to check the syntax. */
+  /**
+   * The lookup table used to check the syntax.
+   */
   private Map<POS, TreeSet<Interval>> lookup;
 
   /**
-   * Constructor of a Sentence.
-   * @param words a list of words that forms that particular sentence
-   * @param lookup the lookup table to use to check syntax
+   * Constructs this Sentence.
+   * @param words the list of words to create this Sentence from
+   * @param lookup the lookup table used to check syntax
    */
   private Sentence(List<Word> words, Map<POS, TreeSet<Interval>> lookup, boolean question) {
     this.words = words;
@@ -38,19 +49,16 @@ public class Sentence {
   }
 
   /**
-   * Checks if this sentence is a question.
-   *
-   * @return {@code true} if the original phrase from where the sentence was
-   *         extracted ends with a question mark.
-   *         {@code false} otherwise
+   * Returns {@code true} if the original phrase from where the sentence was extracted ends with a
+   * question mark.
+   * {@code false} otherwise
    */
   public boolean isQuestion() {
     return question;
   }
 
   /**
-   * Gets the list of words of the sentence.
-   * @return the list of words of the sentence
+   * Gets the List of words of the sentence.
    */
   public List<Word> getWords() {
     return words;
@@ -59,14 +67,14 @@ public class Sentence {
   /**
    * Checks if a sentence contains a certain POS type.
    * @param pos the pos type to check
-   * @return true if contained.
+   * @return {@code true} if contained, {@code false} otherwise.
    */
   public boolean has(POS pos) {
     return lookup.getOrDefault(pos, new TreeSet<>()).size() > 0;
   }
 
   /**
-   * Gets a list of words of a certains POS type.
+   * Gets a List of Words of a certain POS type.
    * @param pos the pos type to extract
    * @return the list of words
    */
@@ -136,9 +144,7 @@ public class Sentence {
   }
 
   /**
-   * Returns a string representation of this sentence.
-   *
-   * @return a string representation of this sentence in the form [text, tokens]
+   * Returns a string representation of this Sentence, formatted as: [text, tokens].
    */
   @Override
   public String toString() {
@@ -146,10 +152,9 @@ public class Sentence {
   }
 
   /**
-   * Compares this sentence to the specified object.
-   *
-   * @param  other the other sentence
-   * @return {@code true} if this sentence equals the other sentence;
+   * Checks whether this Sentence equals to the specified object.
+   * @param  other the other Sentence to be compared against
+   * @return {@code true} if this Sentence equals the other Sentence;
    *         {@code false} otherwise
    */
   @Override
@@ -165,9 +170,8 @@ public class Sentence {
   }
 
   /**
-   * Returns an integer hash code for this sentence.
-   *
-   * @return an integer hash code for this sentence
+   * Returns the HashCode for this Sentence.
+   * The HashCode depends on the list of words and the lookup table of this Sentence.
    */
   @Override
   public int hashCode() {
@@ -176,9 +180,8 @@ public class Sentence {
 
   /**
    * Extracts semantically complete sentences from a phrase using the CYK table.
-   *
-   * @param phrase the phrase to be splitted in sentences
-   * @return the sentences of the given phrase
+   * @param phrase the Phrase to be splitted into Sentences
+   * @return the Sentences of the given Phrase
    */
   public static List<Sentence> extract(Phrase phrase) {
     List<Token> tokens = phrase.getTokens();

@@ -3,18 +3,22 @@ package com.github.bot.curiosone.core.util;
 import java.util.Objects;
 
 /**
- * Container to ease passing around a tuple of two objects.
+ * Provides utility methods to easily create and manage an immutable tuple of Objects.
  */
 public class Pair<F, S> {
-  /** The first element of the pair. */
+
+  /**
+   * Stores the first element of the pair.
+   */
   private final F first;
 
-  /** The second element of the pair. */
+  /**
+   * Stores the second element of the pair.
+   */
   private final S second;
 
   /**
-   * Constructor for a Pair.
-   *
+   * Constructs this Pair.
    * @param first the first object in the pair
    * @param second the second object in the pair
    */
@@ -25,8 +29,6 @@ public class Pair<F, S> {
 
   /**
    * Gets the first element of the pair.
-   *
-   * @return the first element of the pair.
    */
   public F getFirst() {
     return first;
@@ -34,8 +36,6 @@ public class Pair<F, S> {
 
   /**
    * Gets the second element of the pair.
-   *
-   * @return the second element of the pair.
    */
   public S getSecond() {
     return second;
@@ -44,10 +44,9 @@ public class Pair<F, S> {
   /**
    * Checks the two objects for equality by delegating to their respective
    * {@link Object#equals(Object)} methods.
-   *
-   * @param other the {@link Pair} to which this one is to be checked for equality
-   * @return true if the underlying objects of the Pair are both considered
-   *         equal
+   * @param other the {@link Pair} to be compared against
+   * @return {@code true} if the underlying objects of the Pair are both equal;
+             {@code false} otherwise.
    */
   @Override
   public boolean equals(Object other) {
@@ -62,9 +61,8 @@ public class Pair<F, S> {
   }
 
   /**
-   * Compute a hash code using the hash codes of the underlying objects.
-   *
-   * @return a hashcode of the pair
+   * Returns the HashCode for this Pair.
+   * The HashCode is based on the HashCode of each element.
    */
   @Override
   public int hashCode() {
@@ -72,9 +70,7 @@ public class Pair<F, S> {
   }
 
   /**
-   * Returns a string representation of this pair.
-   *
-   * @return a string representation of this interval in the form (first, second)
+   * Returns a String representation of this pair in the form (first, second).
    */
   @Override
   public String toString() {
@@ -82,11 +78,10 @@ public class Pair<F, S> {
   }
 
   /**
-   * Convenience method for creating an appropriately typed pair.
-   *
-   * @param a the first object in the pair
-   * @param b the second object in the pair
-   * @return a pair that is templatized with the types of a and b
+   * Utility method to create a new immutable Pair.
+   * @param a the first Object of the new immutable Pair
+   * @param b the second Object of the new immutable Pair
+   * @return the new immutable Pair
    */
   public static <A, B> Pair<A, B> create(A a, B b) {
     return new Pair<A, B>(a, b);

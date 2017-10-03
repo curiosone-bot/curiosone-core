@@ -10,13 +10,17 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Description.
+ * Manages the Logic Layer of the Curiosone.
+ * This class consists of a static method used to generate an answer to a provided message.
  */
 public class Logic {
+
   /**
-   * talk description.
-   * @param  msg [description]
-   * @return [description]
+   * Tries to compute an answer to a given Message.
+   * @param msg the Message to be answered. Can be null.
+   * @return a Message instance.
+   *         If an answer has been found, the instance contains a choerent reply body.
+   *         Otherwise, a default message is embedded in the Message instance
    */
   public static Message talk(Message msg) {
     // We are not able to parse a null string :(
