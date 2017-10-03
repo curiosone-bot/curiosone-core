@@ -69,7 +69,7 @@ public class DictionaryLoader {
   }
 
   public Double getScore(String word) {
-    return dict.containsKey(word) ? dict.get(word) : 0.0;
+    return dict.getOrDefault(word, 0.0);
   }
 
 }
