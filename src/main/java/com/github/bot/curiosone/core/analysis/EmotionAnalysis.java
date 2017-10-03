@@ -15,11 +15,13 @@ public class EmotionAnalysis {
 
   /**
    * Performs an emotion analysis of the provided Phrase.
-   * @param p the Phrase to be analysed.
+   * @param phrase the Phrase to be analysed.
    * @return a String representation of the calculated emotion. Supports "sad", "happy" and "angry"
    */
-  public static String getEmotion(Phrase p) {
-    //TODO: Add implementation.
-    return "";
+  public static String getEmotion(Phrase phrase) {
+    double score = TokenScorer.calculateScore(phrase.getTokens());
+    if (score <= -0.5) return "angry";
+    if (score < 0) return "sad";
+    return "happy";
   }
 }
