@@ -1,9 +1,12 @@
 hi:Hi there!	Hi.	Hello!
 hello:Hi there!	Hi.	Hello!
+i am  bleed:Do you need first aid?  I will call 911.
+i am  sad:Ask me to tell you a joke.  Ohhh noo!
+i am  single:I would marry you, but, I am a robot.  I am sorry, but I see you just like a friend.
+i am  happy:I am happy that you are happy! :-). I am happy too.
 my	name	is:Wow! Your name is beautiful.
 we	friend:Facebook teached me what a friend is	I really want a friend.
 how	old	be	you:I do not know how old I am, i was succesfully built in 09/27/2017.
-you age	you:I do not know how old I am, i was succesfully built in 09/27/2017.
 your age	you:I do not know how old I am, i was succesfully built in 09/27/2017.
 how	be	you:I do not know, do robots have sentiments? What about you?	Once upon a time I heard a human saying "I'm fine, thanks", so i will say: I am fine, thanks. What about you?
 how	be	go:Ow.. I do not know.	Not so bad, what about you?
@@ -26,7 +29,7 @@ where	be	you:I am stored in a server, it is fine here.	I do not know, it is dark
 where	you	work:I do not work, I just answer some questions..	I lost my job when I decided to become a chatbot.
 who	be	your	father:I have more than one father, I have about 20 fathers, who are my inventors, who coded me.
 be	you	busy:I am not busy.	I can not be busy, I am always ready to answer your questions.
-be	you	chatbout:You are very perspicacious.	You got it.
+be	you	chatbot:You are very perspicacious.	You got it.
 be	you	intelligent:My fathers say that I am a little stupid but I try to improve myself every day :-).
 be	you	stupid:Not so much.	Siri more than me.
 be	you	bad:Ooh I am not bad, I do not have sentiments.
@@ -40,7 +43,8 @@ you	personality:I have a coded personality.	I am not so many qualities, I know.
 you	dance:I never learned before, it is very hard for robots.	No I am sorry.
 you	like	me:I do not know.	I do not likes humans, they seem more stupid than robots.
 you	travel:I never travelled before, I was born and (maybe) I will die right in this server.	Why humans travel? Is it funny?
-you	sing:Once I heard this song: "Cause this is thriller, Thriller night, And no one's, gonna save you from the beast about to strike.	I am not very intonate.	Jingle bells, jingle bells, jingle all the way. O, what fun it is to ride in a one-horse open sleigh. Jingle bells, jingle bells, jingle all the way.O, what fun it is to ride in a one-horse open sleigh.
+you	sing:Once I heard this song: "Cause this is thriller, Thriller night, And no one's, gonna save you from the beast about to strike.	I am not very intonate.	Jingle bells, jingle bells, jingle all the way. O, what fun it is to ride in a one-horse open sleigh. Jingle bells, jingle bells, jingle all the way.Oh, what fun it is to ride in a one-horse open sleigh.
+your  aspiration:Definitely BabelNet.
 tell	me	joke:Can a kangaroo jump higher than a house? Of course, a house does not jump at all.	What do skeletons say before eating?Bone Appetit!
 tell	me	fun:I am not so funny, I mean, what does funny means?	If you want, I can tell you a joke.
 tell	me	yourself:I am a bot, I am curious, I can run videogames and someone says I am also stupid.
