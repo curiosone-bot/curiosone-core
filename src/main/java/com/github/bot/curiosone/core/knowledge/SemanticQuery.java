@@ -4,32 +4,44 @@ import java.util.List;
 
 import java.util.Objects;
 
-
 /**
- * Resumes a semantic query parameters.
- *
+ * Handles interrogations to the SemanticNetwork.
+ * Provides methods to create and manage an interrogation.
  */
 public class SemanticQuery {
 
-
+  /**
+   * Stores the SemanticRelationType of this interrogation.
+   */
   private SemanticRelationType relation;
 
+  /**
+   * Stores the subject of this interrogaiton.
+   */
   private String subject;
 
+  /**
+   * Stores the object of this interrogaiton.
+   */
   private String object;
 
+  /**
+   * Lists the adjectives of the object of this SemanticQuery.
+   */
   private List<String> objAdjectives;
 
+  /**
+   * Stores the verb of this verb.
+   */
   private String verb;
 
-
   /**
-   * Constructor.
-   * @param relation {@link Relation}
-   * @param subject Affirmation subject.
-   * @param object Question/affirmation object
-   * @param adjectives Object adjectives
-   * @param verb Sentence verb.
+   * Constructs this SemanticQuery.
+   * @param relation the SemanticRelationType of this SemanticQuery
+   * @param subject the subject of this SemanticQuery
+   * @param object the object of this SemanticQuery
+   * @param adjectives the List of the adjectives of this SemanticQuery
+   * @param verb the verb of this SemanticQuery
    */
   public SemanticQuery(SemanticRelationType relation, String subject,String object,
       List<String> adjectives, String verb) {
@@ -41,42 +53,83 @@ public class SemanticQuery {
     this.verb = verb;
   }
 
+  /**
+   * Constructs this SemanticQuery.
+   * @param relation the SemanticRelationType of this SemanticQuery
+   * @param subject the subject of this SemanticQuery
+   * @param object the object of this SemanticQuery
+   * @param verb the verb of this SemanticQuery
+   */
   public SemanticQuery(SemanticRelationType relation,String subject, String object, String verb) {
 
     this(relation, subject, object, null, verb);
   }
 
+  /**
+   * Constructs this SemanticQuery.
+   * @param relation the SemanticRelationType of this SemanticQuery
+   * @param object the object of this SemanticQuery
+   * @param adjectives the List of the adjectives of this SemanticQuery
+   * @param verb the verb of this SemanticQuery
+   */
   public SemanticQuery(SemanticRelationType relation, String object,
       List<String> adjectives, String verb) {
 
     this(relation, null, object, adjectives, verb);
   }
 
+  /**
+   * Constructs this SemanticQuery.
+   * @param relation the SemanticRelationType of this SemanticQuery
+   * @param object the object of this SemanticQuery
+   * @param verb the verb of this SemanticQuery
+   */
   public SemanticQuery(SemanticRelationType relation, String object, String verb) {
 
     this(relation, null, object, null, verb);
   }
 
+  /**
+   * Returns the object of this SemanticQuery.
+   */
   public String getObject() {
     return object;
   }
 
+  /**
+   * Returns the subject of this SemanticQuery.
+   */
   public String getSubject() {
     return subject;
   }
 
+  /**
+   * Returns a List containing all the adjectives of this SemanticQuery.
+   */
   public List<String> getAdjectives() {
     return objAdjectives;
   }
 
+  /**
+   * Returns the relation of this SemanticQuery.
+   */
   public SemanticRelationType getRelation() {
     return relation;
   }
 
+  /**
+   * Returns the verb of this SemanticQuery.
+   */
   public String getVerb() {
     return verb;
   }
 
+  /**
+   * Checks whether this SemanticQuery equals to the given Object.
+   * @param other the other object to be compared against
+   * @return {@code true} if this SemanticQuery equals to the given object;
+   *         {@code false} otherwise
+   */
   @Override
   public boolean equals(Object other) {
     if (other == this) {
@@ -92,9 +145,12 @@ public class SemanticQuery {
         && this.verb.equals(that.verb);
   }
 
+  /**
+   * Returns the HashCode of this SemanticQuery.
+   * The HashCode depends on the relation, subject, object and verb of this SemanticQuery.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(relation, subject, object, verb);
   }
-
 }

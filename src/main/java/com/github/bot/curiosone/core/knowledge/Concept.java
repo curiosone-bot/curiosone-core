@@ -3,25 +3,25 @@ package com.github.bot.curiosone.core.knowledge;
 import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
 /**
- * This class represents a Concept of a Semantic Network.
- * @author Christian Sordi.
+ * represents a Concepts of a SemanticNetwork.
  */
 public class Concept implements Vertex {
+
   /**
-   * Name of the represented Concept.
+   * Represents the ID of the Concept.
    */
   private final String id;
 
   /**
-   * Default class constructor.
-   * @param id Concept name.
+   * Constructs this Concept with the given ID.
+   * @param id ID of this Concept.
    */
   public Concept(String id) {
     this.id = id;
   }
 
   /**
-   * Returns Concept name.
+   * Returns the ID of this Concept.
    */
   @Override
   public String getId() {
@@ -29,16 +29,17 @@ public class Concept implements Vertex {
   }
 
   /**
-   * Returns Concept String representation.
+   * Returns a String representation of this Concept.
    */
   public String toString() {
     return getId();
   }
 
   /**
-   * Method to confront the instance with another object.
-   * @param o the other Concept to be confronted with.
-   * @return true, if the concept are equal, false if not.
+   * Checks whether this Concept equals to the given Object.
+   * @param o the other Concept to be compared against.
+   * @return {@code true} if this Concept equals to the other Concept;
+   *         {@code false} otherwise
    */
   @Override
   public boolean equals(Object o) {
@@ -52,7 +53,8 @@ public class Concept implements Vertex {
   }
 
   /**
-   * Returns the HashCode of the Concept name.
+   * Returns the HashCode of this Concept.
+   * The HashCode depends on the ID of this Concept.
    */
   @Override
   public int hashCode() {

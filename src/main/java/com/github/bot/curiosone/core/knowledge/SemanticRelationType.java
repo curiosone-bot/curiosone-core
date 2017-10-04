@@ -1,10 +1,10 @@
 package com.github.bot.curiosone.core.knowledge;
 
 /**
- * Semantic Relation Type that can be used between two Concepts.
- * @author Christian Sordi
+ * Represents a SemanticRelationType.
  */
 public enum SemanticRelationType {
+  
   /**
    * Entailment.
    */
@@ -14,12 +14,12 @@ public enum SemanticRelationType {
    * Hyperonym.
    */
   HYPERNYM,
- 
+
   /**
    *  What is.
    */
   IS_A,
-  
+
   /*
    * who
    */
@@ -34,12 +34,12 @@ public enum SemanticRelationType {
    * Similar.
    */
   SIMILAR_TO,
-  
+
   /*
    *  Date
    */
   TIME;
-  
+
   @Override
   public String toString() {
     return this.name();
