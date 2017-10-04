@@ -28,11 +28,13 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * This class is used to implement a Semantic Network.
- * @author Christian Sordi
+ * Represents a Semantic Network.
  */
 public class SemanticNetwork implements Graph {
 
+  /**
+   * Stores all the SemanticRelationType different from IS_A.
+   */
   private static final Set<SemanticRelationType> nsr = new HashSet<>(
       Arrays.asList(
           SemanticRelationType.TIME,
@@ -40,13 +42,24 @@ public class SemanticNetwork implements Graph {
           SemanticRelationType.IS_PERSON
       )
   );
+
+  /**
+   * Stores the Semantic Network.
+   */
   private Map<Vertex,Set<Edge>> grafo;
+
+  /**
+   * String representation of the path to the Semantic Network database.
+   */
   private Path percorso = Paths.get("src/main/resources/knowledge/CuriosoneSemanticNetwork.txt");
+
+  /**
+   * Singleton instance of this class.
+   */
   private static SemanticNetwork curiosoneSemanticNetwork;
 
   /**
    * Returns the Semantic Network.
-   * @throws IOException if there is any problem.
    */
   public static SemanticNetwork getInstance() throws IOException {
     if (curiosoneSemanticNetwork == null) {
@@ -55,6 +68,10 @@ public class SemanticNetwork implements Graph {
     return curiosoneSemanticNetwork;
   }
 
+  /**
+   * private constructor.
+   * @throws IOException if there is a problem with the input file.
+   */
   private SemanticNetwork() throws IOException {
     this.grafo = new HashMap<>();
     List<String> lines = new ArrayList<>();
@@ -70,16 +87,28 @@ public class SemanticNetwork implements Graph {
     }
   }
 
+  /**
+   * Returns the Map representation of this Semantic Network.
+   * @return [description]
+   */
   @Override
   public Map<Vertex,Set<Edge>> getGrafo() {
     return grafo;
   }
 
+  /**
+   * Adds a SemanticRelation to this SemanticNetwork.
+   * @param e the SemanticRelation to be added
+   */
   @Override
   public void add(Edge e) {
     addEdge(e.getSource(), e.getTarget(), e.getType(), e.getWeight());
   }
 
+  /**
+   * Adds the given Vertex to this SemanticNetwork, if is not already present.
+   * @param v the Vertex to be added
+   */
   @Override
   public void add(Vertex v) {
     if (!grafo.containsKey(v)) {
@@ -88,6 +117,13 @@ public class SemanticNetwork implements Graph {
     }
   }
 
+  /**
+   * Adds a SemanticRelation.
+   * @param v1 the source Vertex of the SemanticRelation to be added
+   * @param v2 the target Vertex of the SemanticRelation to be added
+   * @param type the SemanticRelationType of the SemanticRelation to be added
+   * @param weight the weight of the SemanticRelation to be added
+   */
   @Override
   public void addEdge(Vertex v1, Vertex v2, SemanticRelationType type, Integer weight) {
     if (!grafo.containsKey(v1)) {
@@ -101,6 +137,12 @@ public class SemanticNetwork implements Graph {
     grafo.get(v2).add(arco);
   }
 
+  /**
+   * Checks whether this SemanticNetwork contains the given Edge or not.
+   * @param e the Edge to be searched.
+   * @return {@code true} if this SemanticNetwork contains the given Edge;
+   *         {@code false} otherwise.
+   */
   @Override
   public boolean containsEdge(Edge e) {
     for (Set<Edge> archiTemp : grafo.values()) {
@@ -111,13 +153,19 @@ public class SemanticNetwork implements Graph {
     return false;
   }
 
+  /**
+   * Checks whether this SemanticNetwork contains the given Vertex or not.
+   * @param v the Vertex to be searched.
+   * @return {@code true} if this SemanticNetwork contains the given Vertex;
+   *         {@code false} otherwise.
+   */
   @Override
   public boolean containsVertex(Vertex v) {
     return grafo.keySet().contains(v);
   }
 
   /**
-   * Ritorno tutti gli edge del grafo.
+   * Returns a Set containing all the Edges of this SemanticNetwork.
    */
   @Override
   public Set<Edge> edgeSet() {
@@ -129,7 +177,7 @@ public class SemanticNetwork implements Graph {
   }
 
   /**
-   * Ritorno tutti i vertici.
+   * Returns a Set containing all the Vertices of this SemanticNetwork.
    */
   @Override
   public Set<Vertex> vertexSet() {
@@ -137,8 +185,7 @@ public class SemanticNetwork implements Graph {
   }
 
   /**
-   * Prendo tutti gli archi che hanno come sorgente il vertice v
-   * controllando il getSource di ogni arco.
+   * Returns a Set containg all the Semantis Relations outgoing from the given Vertex.
    */
   @Override
   public Set<Edge> outgoingEdges(Vertex v) {
@@ -154,8 +201,7 @@ public class SemanticNetwork implements Graph {
   }
 
   /**
-   * Prendo tutti gli archi che hanno come destinazione il vertice v
-   * controllando il getTarget di ogni arco.
+   * Returns a Set containg all the Semantis Relations incoming from the given Vertex.
    */
   @Override
   public Set<Edge> incomingEdges(Vertex v) {
@@ -170,6 +216,10 @@ public class SemanticNetwork implements Graph {
     return incomingEdges;
   }
 
+  /**
+   * Adds all the Semantic Relations in the given Collection to this SemanticNetwork.
+   * @param edgeSet the Collection to be added
+   */
   @Override
   public void addEdges(Collection<? extends Edge> edgeSet) {
     for (Edge arco : edgeSet) {
@@ -177,6 +227,14 @@ public class SemanticNetwork implements Graph {
     }
   }
 
+  /**
+   * Checks whether this SemanticNetwork contains the given SemanticRelation.
+   * @param v1 the source Vertex for the SemanticRelation to be checked
+   * @param relation the SemanticRelationType of the SemanticRelation to be checked
+   * @param v2 the target Vertex for the SemanticRelation to be checked
+   * @return {@code true} if this SemanticNetwork contains the given SemanticRelation;
+   *         {@code false} otherwise
+   */
   @Override
   public boolean exist(String v1, SemanticRelationType relation, String v2) {
     Vertex source = new Concept(v1.replaceAll(" ", "_"));
@@ -188,6 +246,12 @@ public class SemanticNetwork implements Graph {
     return false;
   }
 
+  /**
+   * Learns the given SemanticRelation.
+   * @param v1 the source Vertex of the SemanticRelation to be learnt
+   * @param relation the SemanticRelationType of the SemanticRelation to be learnt
+   * @param v2 the target Vertex of the SemanticRelation to be learnt
+   */
   @Override
   public void learn(String v1, SemanticRelationType relation, String v2) {
     Vertex source = new Concept(v1.replace(" ", "_"));
@@ -210,6 +274,14 @@ public class SemanticNetwork implements Graph {
     increase(target, 1);
   }
 
+  /**
+   * Returns the strongest Edge of the given SemanticRelationType.
+   * @param v1 String representation of the Vertex source
+   * @param type SemanticRelationType of the strongest Edge to be searched
+   * @return an Optional instance. The instance is empty, if no Edge is found. Otherwise, it
+   *         contains the found Edge.
+   * @throws IOException exception
+   */
   @Override
   public Optional<Edge> getAnswer(String v1, SemanticRelationType type) {
     Vertex source = new Concept(v1.replaceAll(" ", "_"));
@@ -247,6 +319,12 @@ public class SemanticNetwork implements Graph {
     return Optional.empty();
   }
 
+  /**
+   * Returns the strongest Edge of the given Concept.
+   * @param v1 String representation of the Vertex source
+   * @return An Optional instance. The instance is empty, if no Edge has been found, otherwise it
+   *         contains the found Edge.
+   */
   @Override
   public Optional<Edge> getAnswer(String v1) {
     Vertex source = new Concept(v1.replaceAll(" ", "_"));
@@ -257,12 +335,23 @@ public class SemanticNetwork implements Graph {
     return Optional.empty();
   }
 
+  /**
+   * Finds the strongest Edge in the given Edge List.
+   * @param edges Edge List to be searched in
+   * @return an Optional instance. The instance contains an Edge, if the strongest Edge is found.
+   *         It is empty, otherwise
+   */
   @Override
   public Optional<Edge> getAnswer(List<Edge> edges) {
     edges.sort((a,b) -> b.getWeight() - a.getWeight());
     return Optional.of(edges.get(0));
   }
 
+  /**
+   * Increases the usage score for all the Edges with the given Vertex as target.
+   * @param v the target Vertex
+   * @throws IOException if no input file is found.
+   */
   @Override
   public void increase(Vertex v, Integer score) {
     int nodo = 2;
@@ -302,6 +391,13 @@ public class SemanticNetwork implements Graph {
     writer.close();
   }
 
+  /**
+   * Executes a SemanticQuery.
+   * @param sq the SemanticQuery to be exectued
+   * @return Returns an Optional instance.
+   *         The instance is empty, if no result is found.
+   *         Otherwise, it contains the query response
+   */
   @Override
   public Optional<Edge> query(SemanticQuery sq) {
     if (sq.getSubject() == null && sq.getRelation() == null) {
@@ -314,6 +410,12 @@ public class SemanticNetwork implements Graph {
     return Optional.empty();
   }
 
+  /**
+   * Checks whether this SemanticNetwork equals to the given Object.
+   * @param o the Object to be compared against.
+   * @return {@code true} if this SemanticNetwork equals to the given Object;
+   *         {@code false} otherwise
+   */
   @Override
   public boolean equals(Object o) {
     if (o == this) {
@@ -326,7 +428,8 @@ public class SemanticNetwork implements Graph {
   }
 
   /**
-   * Hashcode basato su gli hascode di tutti i grafi e tutti i vertici.
+   * Returns the HashCode of this SemanticNetwork.
+   * The HashCode depends on the Vertices and Edges of this SemanticNetwork.
    */
   @Override
   public int hashCode() {
@@ -336,8 +439,11 @@ public class SemanticNetwork implements Graph {
     return result;
   }
 
+  /**
+   * Returns a String representation of this SemanticNetwork.
+   */
   @Override
   public String toString() {
-    return grafo.toString(); // metodo toString utilizzato per prove di debug
+    return grafo.toString();
   }
 }
