@@ -294,7 +294,7 @@ public class SemanticNetwork implements Graph {
       if (type.equals(SemanticRelationType.IS_A)) {
         List<Edge> edges = outgoingEdges(source).stream()
             .filter(x -> !nsr.contains(x.getType())).collect(toList());
-            return edges.size() == 0 ? Optional.empty() : getAnswer(edges);
+        return edges.size() == 0 ? Optional.empty() : getAnswer(edges);
       }
 
       if (type.equals(SemanticRelationType.REGION)) {
