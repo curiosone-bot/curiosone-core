@@ -3,39 +3,33 @@ package com.github.bot.curiosone.core.knowledge.interfaces;
 import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
 
 /**
- * Interface for SemanticRelation.
- * @author Christian
- *
+ * Represents an Edge of a Semantic Network.
  */
 public interface Edge {
 
   /**
-   *  Method that returns SemanticRelation source Vertex.
-   * @return Object Vertex
+   * Returns the source of the Edge.
    */
   Vertex getSource();
 
   /**
-   *  Method that returns SemanticRelation target Vertex.
-   * @return Object Vertex
+   * Returns the Target of the Edge.
    */
   Vertex getTarget();
 
   /**
-   *  Method that returns SemanticRelation Type.
-   * @return Enum SemanticRelationType
+   * Returns the type of the Edge.
    */
   SemanticRelationType getType();
-  
+
   /**
-   * Method that returns SemanticRelation weight.
-   * @return Integer weight
+   * Returns the weight of the Edge.
    */
   Integer getWeight();
-  
+
   /**
-   * Method that sets SemanticRelation weight.
-   * @param i weight
+   * Sets the weight of the Edge.
+   * @param i weight integer value to be set
    */
   void setWeight(Integer i);
 }
