@@ -3,7 +3,7 @@ package com.github.bot.curiosone.core.knowledge.interfaces;
 import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
 
 /**
- * Represents an Edge of a Semantic Network.
+ * Represents an Edge of a Graph.
  */
 public interface Edge {
 
