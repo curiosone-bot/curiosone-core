@@ -1,9 +1,16 @@
 package com.github.bot.curiosone.core.knowledge;
 
 import static java.util.Arrays.asList;
+import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.junit.Test;
 
@@ -250,5 +257,134 @@ public class SemanticNetworkTest {
 
     sn.learn("123455678900", SemanticRelationType.TIME, "00987654321%");
     assertThat(sn.edgeSet().size()).isEqualTo(prevEdgesSize);
+  }
+
+  @Test
+  public void testIncrease() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+
+    Concept c = new Concept("pen");
+    SortedSet<Edge> ie = new TreeSet<>(comparing(Edge::getWeight));
+    ie.addAll(sn.incomingEdges(c));
+    int prevScore = ie.first().getWeight();
+    sn.increase(c, 42);
+    ie.addAll(sn.incomingEdges(c));
+    assertThat(ie.first().getWeight()).isEqualTo(prevScore + 42);
+    prevScore += 42;
+
+    c = new Concept("human");
+    ie = new TreeSet<>(comparing(Edge::getWeight));
+    ie.addAll(sn.incomingEdges(c));
+    prevScore = ie.first().getWeight();
+    sn.increase(c, 10);
+    ie.addAll(sn.incomingEdges(c));
+    assertThat(ie.first().getWeight()).isEqualTo(prevScore + 10);
+    prevScore += 10;
+  }
+
+  @Test
+  public void testGetAnswerStrongestVertexRelation() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+
+    assertThat(sn.getAnswer("descendant", SemanticRelationType.SIMILAR_TO)).isPresent();
+
+    assertThat(sn.getAnswer("dog", SemanticRelationType.HYPERNYM)).isPresent();
+
+    assertThat(sn.getAnswer("double", SemanticRelationType.HYPERNYM)).isPresent();
+
+    assertThat(sn.getAnswer("lsdjlckjjd", SemanticRelationType.SIMILAR_TO)).isNotPresent();
+
+    assertThat(sn.getAnswer("jc,nkjknkj", SemanticRelationType.TIME)).isNotPresent();
+  }
+
+  @Test
+  public void testGetAnswerStrongestVertex() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+
+    assertThat(sn.getAnswer("earphone")).isPresent();
+
+    assertThat(sn.getAnswer("locker_room")).isPresent();
+
+    assertThat(sn.getAnswer("locker")).isPresent();
+
+    assertThat(sn.getAnswer("a_e_i_o_u")).isNotPresent();
+
+    assertThat(sn.getAnswer("42222")).isNotPresent();
+  }
+
+  @Test
+  public void testGetAnswerStrongestRelation() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+
+    Concept c = new Concept("lockout");
+    List<Edge> le = new ArrayList(sn.outgoingEdges(c));
+    assertThat(sn.getAnswer(le)).isPresent();
+
+    c = new Concept("waiting_room");
+    le = new ArrayList(sn.outgoingEdges(c));
+    assertThat(sn.getAnswer(le)).isPresent();
+
+    c = new Concept("clothing");
+    le = new ArrayList(sn.incomingEdges(c));
+    assertThat(sn.getAnswer(le)).isPresent();
+  }
+
+  @Test
+  public void testQuery() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+
+    SemanticQuery sq = new SemanticQuery(SemanticRelationType.HYPERNYM, "Louis_XVI", "human",
+        new ArrayList<>(), "is");
+    assertThat(sn.query(sq)).isNotPresent();
+
+    sq = new SemanticQuery(SemanticRelationType.HYPERNYM, "human", new ArrayList<>(), "is");
+    assertThat(sn.query(sq)).isPresent();
+
+    sq = new SemanticQuery(null, "human", new ArrayList<>(), "is");
+    assertThat(sn.query(sq)).isPresent();
+  }
+
+  @Test
+  public void testEqualsReflexive() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+    assertThat(sn).isEqualTo(sn);
+  }
+
+  @Test
+  public void testEqualsNullComparison() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+    assertThat(sn).isNotEqualTo(null);
+  }
+
+  @Test
+  public void testEqualsOtherObj() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+
+    assertThat(sn).isNotEqualTo(new Integer(42));
+
+    assertThat(sn).isNotEqualTo(new String("42"));
+  }
+
+  @Test
+  public void testHashCodeReflexive() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+
+    assertThat(sn.hashCode()).isEqualTo(sn.hashCode());
+  }
+
+  @Test
+  public void testHashCodeEqualsContract() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+    String s = "hash me!";
+
+    assertThat(sn.hashCode()).isNotEqualTo(s.hashCode());
+    assertThat(sn).isNotEqualTo(s);
+  }
+
+  @Test
+  public void testToString() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+
+    assertThat(sn.toString()).isNotNull().isNotEmpty();
   }
 }
