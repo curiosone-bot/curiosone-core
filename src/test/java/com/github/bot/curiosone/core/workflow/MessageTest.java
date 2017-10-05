@@ -89,8 +89,8 @@ public class MessageTest {
 
   @Test
   public void testEqualsSymmetric() {
-    Message m = new Message("Text", "Scope", "");
-    Message mm = new Message("Text", "Scope", "");
+    Message m = new Message("Text", "Scope", "Emotion");
+    Message mm = new Message("Text", "Scope", "Emotion");
     assertThat(m).isEqualTo(mm);
     assertThat(mm).isEqualTo(m);
 
@@ -107,9 +107,9 @@ public class MessageTest {
 
   @Test
   public void testEqualsTransitive() {
-    Message m = new Message("Text", "Scope", "");
-    Message mm = new Message("Text", "Scope", "");
-    Message mmm = new Message("Text", "Scope", "");
+    Message m = new Message("Text", "Scope", "Emotion");
+    Message mm = new Message("Text", "Scope", "Emotion");
+    Message mmm = new Message("Text", "Scope", "Emotion");
     assertThat(m).isEqualTo(mm);
     assertThat(mm).isEqualTo(mmm);
     assertThat(mmm).isEqualTo(m);
@@ -131,7 +131,7 @@ public class MessageTest {
 
   @Test
   public void testEqualsOtherObj() {
-    Message m = new Message("Text", "Scope", "");
+    Message m = new Message("Text", "Scope", "Emotion");
 
     assertThat(m).isNotEqualTo("TEXT - SCOPE");
 
