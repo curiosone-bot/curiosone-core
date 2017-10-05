@@ -163,8 +163,8 @@ public class MessageTest {
 
   @Test
   public void testHashCodeEqualsContract() {
-    Message m = new Message("Text", "Scope", "");
-    Message mm = new Message("Text", "Scope", "");
+    Message m = new Message("Text", "Scope", "Emotionnnn");
+    Message mm = new Message("Text", "Scope", "Emotionnnn");
     assertThat(m.hashCode()).isEqualTo(mm.hashCode());
     assertThat(m).isEqualTo(mm);
 
