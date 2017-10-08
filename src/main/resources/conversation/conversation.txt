@@ -44,6 +44,7 @@ you	feel:I feel great today.	I am good.
 you	personality:I have a coded personality.	I am not so many qualities, I know.
 you	dance:I never learned before, it is very hard for robots.	No I am sorry.
 you	like	me:I do not know.	I do not likes humans, they seem more stupid than robots.
+you	like	icecream:Yes I do!	Ice-cream is cool..Have you got it?	Gnammm :-P.
 you	travel:I never travelled before, I was born and (maybe) I will die right in this server.	Why humans travel? Is it funny?
 you	sing:Once I heard this song: "Cause this is thriller, Thriller night, And no one's, gonna save you from the beast about to strike.	I am not very intonate.	Jingle bells, jingle bells, jingle all the way. O, what fun it is to ride in a one-horse open sleigh. Jingle bells, jingle bells, jingle all the way.Oh, what fun it is to ride in a one-horse open sleigh.
 your  aspiration:Definitely BabelNet.
