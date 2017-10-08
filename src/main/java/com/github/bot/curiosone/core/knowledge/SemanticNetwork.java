@@ -77,8 +77,7 @@ public class SemanticNetwork implements Graph {
     List<String> lines = new ArrayList<>();
     try {
       lines = Files.readAllLines(this.percorso);
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
     for (String linea : lines) {
@@ -386,8 +385,7 @@ public class SemanticNetwork implements Graph {
     PrintWriter writer = null;
     try {
       writer = new PrintWriter(this.percorso.toString(), "UTF-8");
-    }
-    catch (FileNotFoundException | UnsupportedEncodingException e1) {
+    } catch (FileNotFoundException | UnsupportedEncodingException e1) {
       e1.printStackTrace();
     }
     writer.print(exporter.toString());
