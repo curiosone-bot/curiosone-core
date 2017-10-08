@@ -89,7 +89,7 @@ public class WordTest {
   }
 
   @Test
-  public void testItMeansPOS() {
+  public void testItMeansPos() {
     Meaning m = new Meaning(POS.N, LEX.PLANT);
     Meaning mm = new Meaning(POS.N, LEX.FOOD);
     Meaning mmm = new Meaning(POS.N, LEX.SHAPE);
@@ -100,7 +100,7 @@ public class WordTest {
   }
 
   @Test
-  public void testItMeansLEX() {
+  public void testItMeansLex() {
     Meaning m = new Meaning(POS.N, LEX.PLANT);
     Meaning mm = new Meaning(POS.N, LEX.FOOD);
     Meaning mmm = new Meaning(POS.N, LEX.SHAPE);
