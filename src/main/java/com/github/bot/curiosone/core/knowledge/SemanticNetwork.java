@@ -72,10 +72,15 @@ public class SemanticNetwork implements Graph {
    * private constructor.
    * @throws IOException if there is a problem with the input file.
    */
-  private SemanticNetwork() throws IOException {
+  private SemanticNetwork() {
     this.grafo = new HashMap<>();
     List<String> lines = new ArrayList<>();
-    lines = Files.readAllLines(this.percorso);
+    try {
+      lines = Files.readAllLines(this.percorso);
+    }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
     for (String linea : lines) {
       String[] linee = linea.split(",");
       Vertex source = new Concept(linee[0]);
@@ -381,7 +386,8 @@ public class SemanticNetwork implements Graph {
     PrintWriter writer = null;
     try {
       writer = new PrintWriter(this.percorso.toString(), "UTF-8");
-    } catch (FileNotFoundException | UnsupportedEncodingException e1) {
+    }
+    catch (FileNotFoundException | UnsupportedEncodingException e1) {
       e1.printStackTrace();
     }
     writer.print(exporter.toString());
