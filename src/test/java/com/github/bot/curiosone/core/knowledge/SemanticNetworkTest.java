@@ -298,9 +298,26 @@ public class SemanticNetworkTest {
 
     assertThat(sn.getAnswer("double", SemanticRelationType.HYPERNYM)).isPresent();
 
+    assertThat(sn.getAnswer("Gothic", SemanticRelationType.REGION)).isPresent();
+
     assertThat(sn.getAnswer("lsdjlckjjd", SemanticRelationType.IS_A)).isNotPresent();
 
     assertThat(sn.getAnswer("jc,nkjknkj", SemanticRelationType.REGION)).isNotPresent();
+  }
+
+  @Test
+  public void testLearnAnswer() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+
+    sn.learn("a", SemanticRelationType.IS_A, "b");
+    assertThat(sn.getAnswer("a", SemanticRelationType.IS_A)).isPresent();
+    assertThat(sn.getAnswer("b", SemanticRelationType.IS_A)).isNotPresent();
+    assertThat(sn.getAnswer("a", SemanticRelationType.TIME)).isNotPresent();
+
+    sn.learn("abc", SemanticRelationType.REGION, "alphabet");
+    assertThat(sn.getAnswer(("abc"), SemanticRelationType.REGION)).isPresent();
+    assertThat(sn.getAnswer(("alphabet"), SemanticRelationType.REGION)).isNotPresent();
+    assertThat(sn.getAnswer(("abc"), SemanticRelationType.IS_PERSON)).isNotPresent();
   }
 
   @Test
