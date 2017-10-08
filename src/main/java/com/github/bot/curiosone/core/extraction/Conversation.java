@@ -94,4 +94,9 @@ public class Conversation {
     }
     return Optional.empty();
   }
+  
+  public static void main(String[] args) 
+  {
+	System.out.println(Conversation.getAnswer(new Phrase("Do you like ice-cream?")));
+  }
 }

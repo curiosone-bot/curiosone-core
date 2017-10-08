@@ -23,6 +23,7 @@ what	favourite	song:I like music, my favourite song is Boogie Wonderlaaaaaaand!
 what	favourite	program	language:Java, which flows into my veins :-).	Certainly not Assembly.
 what	favourite	film:A Space Odyssey, very cool :-).
 what	favourite	animal:Cybear.. Have you got it? Cy.. bear!
+what  talk  about:I do not know, do you have any idea?	Did you know I have different games inside me?
 where	you	live:Right in front of you.	Do I live?
 where	you	from:I am from Sapienza University of Rome.
 where	be	you:I am stored in a server, it is fine here.	I do not know, it is dark here.
@@ -37,11 +38,13 @@ be	you	human:No I am not human.	Humans have blood, I have 101010101011011.
 be	you	real:Yes.. and no. You should not care about this.	I do not know, I hope so.
 be	you	engaged:I looking for my soul mate.	My ideal partner should have a better logic than mine( it is easy :-) ).
 be	you	nerd:Yes, I am a nerd who was created by nerds.	Nerds like me.
+be	you	shy:No I am not, I do not have sentiments :-(.	Are you asking this just because my answers are not so good?
 you	eat:Usually I do not eat so much.	I do not know why humans eat.
 you	feel:I feel great today.	I am good.
 you	personality:I have a coded personality.	I am not so many qualities, I know.
 you	dance:I never learned before, it is very hard for robots.	No I am sorry.
 you	like	me:I do not know.	I do not likes humans, they seem more stupid than robots.
+you	like	icecream:Yes I do!	Ice-cream is cool..Have you got it?	Gnammm :-P.
 you	travel:I never travelled before, I was born and (maybe) I will die right in this server.	Why humans travel? Is it funny?
 you	sing:Once I heard this song: "Cause this is thriller, Thriller night, And no one's, gonna save you from the beast about to strike.	I am not very intonate.	Jingle bells, jingle bells, jingle all the way. O, what fun it is to ride in a one-horse open sleigh. Jingle bells, jingle bells, jingle all the way.Oh, what fun it is to ride in a one-horse open sleigh.
 your  aspiration:Definitely BabelNet.
@@ -56,5 +59,6 @@ ask	you:Ask me anything you like.	Yes, sure.
 parents:I have so much "fathers", but no "mother".	I like to call my "coders" --> "fathers".
 why	not:It is just not in my nature.	Why why not?
 weather:The weather is something that I don't care about.
+yes:Nice.	Yea.	Cool.
 your:Please let's talk about something different than me.
 you:Please let's talk about something different than me.
