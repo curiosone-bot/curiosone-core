@@ -22,6 +22,12 @@ public class SemanticNetworkTest {
   }
 
   @Test
+  public void testGetGrafo() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+    assertThat(sn.getGrafo()).isNotNull().isNotEmpty();
+  }
+
+  @Test
   public void testAddEdgeConcept() throws IOException {
     SemanticNetwork sn = SemanticNetwork.getInstance();
     int prevSize = sn.edgeSet().size();
@@ -228,7 +234,7 @@ public class SemanticNetworkTest {
   }
 
   @Test
-  public void testExist() throws IOException {
+  public void testExists() throws IOException {
     SemanticNetwork sn = SemanticNetwork.getInstance();
 
     assertThat(sn.exist("derived", SemanticRelationType.SIMILAR_TO, "derivative")).isTrue();
@@ -292,9 +298,9 @@ public class SemanticNetworkTest {
 
     assertThat(sn.getAnswer("double", SemanticRelationType.HYPERNYM)).isPresent();
 
-    assertThat(sn.getAnswer("lsdjlckjjd", SemanticRelationType.SIMILAR_TO)).isNotPresent();
+    assertThat(sn.getAnswer("lsdjlckjjd", SemanticRelationType.IS_A)).isNotPresent();
 
-    assertThat(sn.getAnswer("jc,nkjknkj", SemanticRelationType.TIME)).isNotPresent();
+    assertThat(sn.getAnswer("jc,nkjknkj", SemanticRelationType.REGION)).isNotPresent();
   }
 
   @Test
