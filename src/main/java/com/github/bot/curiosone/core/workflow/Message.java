@@ -41,28 +41,32 @@ public class Message {
   }
 
   /**
-   * @return  the content of this Message.
+   * Gets the content of this Message.
+   * @return  the content of this Message
    */
   public String getMessage() {
     return message;
   }
 
   /**
-   * @return  the scope of this Message.
+   * Gets the scope of this Message.
+   * @return  the scope of this Message
    */
   public String getScope() {
     return scope;
   }
 
   /**
-   * @return  the emotion of this Message.
+   * Gets the emotion of this Message.
+   * @return  the emotion of this Message
    */
   public String getEmotion() {
     return emotion;
   }
 
   /**
-   * @return  a String representation of this Message.
+   * Returns a String representation of this Message.
+   * @return  a String representation of this Message
    */
   @Override
   public String toString() {
