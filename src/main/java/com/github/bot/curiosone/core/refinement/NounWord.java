@@ -13,7 +13,7 @@ public class NounWord implements Word {
   private String lemma;
   private NounType type;
   
-  public NounWord(NounType type, String lemma) {
+  public NounWord(String lemma, NounType type) {
     this.lemma = lemma;
     this.type = type;
   }

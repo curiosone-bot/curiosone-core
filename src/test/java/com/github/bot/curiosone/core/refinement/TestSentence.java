@@ -6,15 +6,17 @@ public class TestSentence {
 
   @Test
   public void main() {
-    
-    MainClause mc = new MainClause(
-        new NounPhrase(new NounWord(NounType.Plural, "cat")), //subject
-        new VerbPhrase(new VerbWord("go", VerbType.SimplePastP3))                    //verb
-    );
+        
+    System.out.println(Refiner.refine("cat", "be", "animal", false, false, false));
+    System.out.println(Refiner.refine("cat", "be", "animal", false, false, true));
+    System.out.println(Refiner.refine("cat", "be", "animal", false, true, false));
+    System.out.println(Refiner.refine("cat", "be", "animal", false, true, true));
 
-    Sentence s = new Sentence(SentenceType.Answer, mc);
-    
-    System.out.println(s);
+    System.out.println(Refiner.refine("cat", "be", "animal", true, false, false));
+    System.out.println(Refiner.refine("cat", "be", "animal", true, false, true));
+    System.out.println(Refiner.refine("cat", "be", "animal", true, true, false));
+    System.out.println(Refiner.refine("cat", "be", "animal", true, true, true));
+
   }
   
 }
