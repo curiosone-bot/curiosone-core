@@ -38,14 +38,16 @@ public class Interval implements Comparable<Interval> {
   }
 
   /**
-   * @return  the min endpoint of this Interval.
+   * Gets the minumum endpoint of this Interval.
+   * @return  the minumum endpoint of this Interval
    */
   public int min() {
     return min;
   }
 
   /**
-   * @return  the max endpoint of this Interval.
+   * Gets the maximum endpoint of this Interval.
+   * @return  the maximum endpoint of this Interval
    */
   public int max() {
     return max;
@@ -74,14 +76,16 @@ public class Interval implements Comparable<Interval> {
   }
 
   /**
-   * @return  the length of this Interval.
+   * Calculates the length of this Interval.
+   * @return  the length of this Interval
    */
   public double length() {
     return max - min;
   }
 
   /**
-   * @return  a String representation of this interval in the form [min, max].
+   * Returns a String representation of this Interval.
+   * @return  a String representation of this interval in the form [min, max]
    */
   @Override
   public String toString() {
