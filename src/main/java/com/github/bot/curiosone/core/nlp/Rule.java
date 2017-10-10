@@ -60,21 +60,24 @@ public class Rule {
   }
 
   /**
-   * @return  the resulting POS value of joining those in 'to'.
+   * Gets the source POS of this Rule.
+   * @return  the source POS of this Rule
    */
   public POS getFrom() {
     return from;
   }
 
   /**
-   * @return  a Pair of POS values that match with that in 'from'.
+   * Gets the target POS values of this Rule.
+   * @return  a Pair instance, containing the target POS values of this Rule
    */
   public Pair<POS, POS> getTo() {
     return to;
   }
 
   /**
-   * @return  a String representation of this Rule in the form F: (T0, T1).
+   * Returns a String representation of this Rule.
+   * @return  a String representation of this Rule in the form F: (T0, T1)
    */
   @Override
   public String toString() {
