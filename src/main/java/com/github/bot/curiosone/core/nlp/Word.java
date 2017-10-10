@@ -61,21 +61,24 @@ public class Word {
   }
 
   /**
-   * @return  the textual representation of this Word.
+   * Gets the text of this Word.
+   * @return  the textual representation of this Word
    */
   public String getText() {
     return text;
   }
 
   /**
-   * @return  the lemma of this Word.
+   * Gets the lemma of this Word.
+   * @return  the lemma of this Word
    */
   public String getLemma() {
     return lemma;
   }
 
   /**
-   * @return  the Set of the meanings of this Word.
+   * Gets all the Meanings of this Word.
+   * @return  the Set of the meanings of this Word
    * @see  com.github.bot.curiosone.core.nlp.Meaning The Meaning Class
    */
   public Set<Meaning> getMeanings() {
@@ -122,7 +125,8 @@ public class Word {
   }
 
   /**
-   * @return  a String representation of this Word in the form [text, word, meanings].
+   * Returns a String representation of this Word.
+   * @return  a String representation of this Word in the form [text, word, meanings]
    */
   @Override
   public String toString() {
