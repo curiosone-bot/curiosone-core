@@ -70,7 +70,8 @@ public class SemanticRelation implements Edge {
   }
 
   /**
-   * @return  the source Vertex of this SemanticRelation.
+   * Gets the source Vertex of this SemanticRelation Relation.
+   * @return  the source Vertex of this SemanticRelation
    */
   @Override
   public Vertex getSource() {
@@ -78,7 +79,8 @@ public class SemanticRelation implements Edge {
   }
 
   /**
-   * @return  the target Vertex of this SemanticRelation.
+   * Gets the target Vertex of this SemanticRelation.
+   * @return  the target Vertex of this SemanticRelation
    */
   @Override
   public Vertex getTarget() {
@@ -86,7 +88,8 @@ public class SemanticRelation implements Edge {
   }
 
   /**
-   * @return  the SemanticRelationType of this SemanticRelation.
+   * Gets the SemanticRelationType of this SemanticRelation.
+   * @return  the SemanticRelationType of this SemanticRelation
    */
   @Override
   public SemanticRelationType getType() {
@@ -94,7 +97,8 @@ public class SemanticRelation implements Edge {
   }
 
   /**
-   * @return  the weight of this SemanticRelation.
+   * Gets the weight of this SemanticRelation.
+   * @return  the weight of this SemanticRelation
    */
   @Override
   public Integer getWeight() {
@@ -110,7 +114,8 @@ public class SemanticRelation implements Edge {
   }
 
   /**
-   * @return  a String representation of this SemanticRelation.
+   * Returns a String representation of this SemanticRelation.
+   * @return  a String representation of this SemanticRelation
    */
   @Override
   public String toString() {
