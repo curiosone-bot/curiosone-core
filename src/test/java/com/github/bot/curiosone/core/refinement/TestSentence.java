@@ -9,7 +9,7 @@ public class TestSentence {
     
     MainClause mc = new MainClause(
         new NounPhrase(new NounWord(NounType.Plural, "cat")), //subject
-        new VerbPhrase(new VerbWord("go"))                    //verb
+        new VerbPhrase(new VerbWord("go", VerbType.SimplePastP3))                    //verb
     );
 
     Sentence s = new Sentence(SentenceType.Answer, mc);

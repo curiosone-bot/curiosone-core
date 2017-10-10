@@ -7,7 +7,6 @@ import it.uniroma1.lcl.babelmorph.en.EnglishMorpher;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class NounWord implements Word {
 
@@ -32,23 +31,17 @@ public class NounWord implements Word {
     /*
      * noun is plural
      */
-    Optional<String> lexs = new EnglishMorpher()
-        .getInflection(lemma, type.toCategory(), WordPart.Noun.forBabelMorph())
-        .stream().map(Lexeme::toString).findAny();
-    
-    /*
-     * known word doesn't have a plural form
-     * (unknown words have an auto-generated plural form)
-     */
-    if (!lexs.isPresent()) {
+    try {
+      String lexs = new EnglishMorpher()
+          .getInflection(lemma, type.toCategory(), WordPart.Noun.forBabelMorph())
+          .stream().map(Lexeme::toString).findAny().get();
+
+      List<String> lexl = Arrays.asList(lexs.split("[\\[\\]]"));
+      return lexl.get(lexl.size() - 1);
+      
+    } catch (Exception e) {
       return lemma;
     }
-    
-    /*
-     * extract the plural from the lexeme string
-     */
-    List<String> lexl = Arrays.asList(lexs.get().split("[\\[\\]]"));
-    return lexl.get(lexl.size() - 1);
   }
   
 }
