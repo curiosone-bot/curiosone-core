@@ -4,8 +4,8 @@ import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
 /**
  * Represents a Concepts of a SemanticNetwork.
- * @see  com.github.bot.curiosone.core.nlp.SemanticNetwork The Sentence SemanticNetwork
- * @see  com.github.bot.curiosone.core.nlp.SemantiRelation The Sentence SemanticRelation
+ * @see  com.github.bot.curiosone.core.nlp.SemanticNetwork The SemanticNetwork Class
+ * @see  com.github.bot.curiosone.core.nlp.SemanticRelation The SemanticRelation Class
  */
 public class Concept implements Vertex {
 
@@ -24,7 +24,8 @@ public class Concept implements Vertex {
   }
 
   /**
-   * @return  the ID of this Concept.
+   * Gets the ID of this Concept.
+   * @return  the ID of this Concept
    */
   @Override
   public String getId() {
@@ -32,7 +33,8 @@ public class Concept implements Vertex {
   }
 
   /**
-   * @return  a String representation of this Concept.
+   * Returns the String representation of this Concept.
+   * @return  the String representation of this Concept
    */
   public String toString() {
     return getId();
