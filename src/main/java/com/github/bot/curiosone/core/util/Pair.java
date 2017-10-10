@@ -30,14 +30,16 @@ public class Pair<F, S> {
   }
 
   /**
-   * @return  the first element of this Pair.
+   * Gets the first element of this Pair.
+   * @return  the first element of this Pair
    */
   public F getFirst() {
     return first;
   }
 
   /**
-   * @return  the second element of this Pair.
+   * Gets the second element of this Pair.
+   * @return  the second element of this Pair
    */
   public S getSecond() {
     return second;
@@ -75,7 +77,8 @@ public class Pair<F, S> {
   }
 
   /**
-   * @return  a String representation of this Pair in the form (first, second).
+   * Returns a String representation of this Pair.
+   * @return  a String representation of this Pair in the form (first, second)
    */
   @Override
   public String toString() {
