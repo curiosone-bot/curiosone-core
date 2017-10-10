@@ -59,29 +59,33 @@ public class Token {
   }
 
   /**
+   * Gets whether this Token is known or not.
    * @return  {@code true} if this Token has at leas a Meaning;
-   *          {@code false} otherwise.
+   *          {@code false} otherwise
    */
   public boolean isKnown() {
     return known;
   }
 
   /**
-   * @return  the concatenation of the words of this token.
+   * Gets the text of this Token.
+   * @return  the text of this Token
    */
   public String getText() {
     return text;
   }
 
   /**
-   * @return  the normalized concatenation of the words of this token.
+   * Gets the normalized concatenation of the words of this token.
+   * @return  the normalized concatenation of the words of this token
    */
   public String getLemma() {
     return lemma;
   }
 
   /**
-   * @return  a Set containing all the meanings of this Token.
+   * Gets all the Meanings of this Token.
+   * @return  a Set containing all the meanings of this Token
    * @see  com.github.bot.curiosone.core.nlp.Meaning The Meaning Class
    */
   public Set<Meaning> getMeanings() {
@@ -89,7 +93,8 @@ public class Token {
   }
 
   /**
-   * @return  a String representation of this Token, formatted as: [text, word, meanings].
+   * Returns a String representation of this Token.
+   * @return  a String representation of this Token, formatted as: [text, word, meanings]
    */
   @Override
   public String toString() {
