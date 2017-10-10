@@ -1,11 +1,11 @@
 package com.github.bot.curiosone.core.nlp;
 
 /**
-* Part Of Speech (PoS) type.
-*
-* @see href="https://en.oxforddictionaries.com/grammar/word-classes-or-parts-of-speech"
+* Represents a Part of Speech Type.
+* @see  <a href="https://goo.gl/9YCScy">Word classes (or parts of speech)</a>
 */
 public enum POS {
+  
   /**
    * Adjective Phrase.
    */
