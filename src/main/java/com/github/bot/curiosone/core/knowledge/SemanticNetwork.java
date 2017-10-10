@@ -37,6 +37,7 @@ public class SemanticNetwork implements Graph {
 
   /**
    * Stores all the SemanticRelationType different from IS_A.
+   * com.github.bot.curiosone.core.nlp.SemanticRelationType The SemanticRelationType Class
    */
   private static final Set<SemanticRelationType> nsr = new HashSet<>(
       Arrays.asList(
@@ -453,7 +454,7 @@ public class SemanticNetwork implements Graph {
   }
 
   /**
-   * Returns the HashCode of this SemanticNetwork.
+   * Calculates the HashCode of this SemanticNetwork.
    * The HashCode depends on the Vertices and Edges of this SemanticNetwork.
    * @return  the HashCode of this SemanticNetwork
    */
