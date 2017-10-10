@@ -13,6 +13,50 @@ import org.junit.Test;
 public class RuleTest {
 
   @Test
+  public void testToString() {
+    Rule r = new Rule(POS.CONJ, new Pair(POS.AP, POS.ADJ));
+    assertThat(r.toString()).isEqualTo("CONJ: (AP, ADJ)");
+
+    r = new Rule(POS.VPP, new Pair(POS.V, POS.V));
+    assertThat(r.toString()).isEqualTo("VPP: (V, V)");
+  }
+
+  @Test
+  public void testAllFrom() {
+    assertThat(Rule.allFrom(POS.NP)).isNotNull().isNotEmpty();
+    assertThat(Rule.allFrom(POS.S)).isNotNull().isNotEmpty();
+    assertThat(Rule.allFrom(POS.VP)).isNotNull().isNotEmpty();
+    assertThat(Rule.allFrom(POS.CONJ)).isNotNull().isNotEmpty();
+    assertThat(Rule.allFrom(POS.AP)).isNotNull().isEmpty();
+    assertThat(Rule.allFrom(POS.UNKN)).isNotNull().isEmpty();
+  }
+
+  @Test
+  public void testAllTo() {
+    Pair p = new Pair(POS.VP, POS.NP);
+    assertThat(Rule.allTo(p)).isNotNull().isNotEmpty();
+
+    p = new Pair(POS.DET, POS.N);
+    assertThat(Rule.allTo(p)).isNotNull().isNotEmpty();
+
+    p = new Pair(POS.UNKN, POS.NP);
+    assertThat(Rule.allTo(p)).isNotNull().isEmpty();
+
+    p = new Pair(POS.ADJ, POS.AP);
+    assertThat(Rule.allTo(p)).isNotNull().isEmpty();
+  }
+
+  @Test
+  public void testEquals() {
+    Rule r = new Rule(POS.UNKN, new Pair(POS.UNKN, POS.UNKN));
+    Rule rr = new Rule(POS.UNKN, new Pair(POS.UNKN, POS.UNKN));
+    assertThat(r).isEqualTo(rr);
+
+    rr = new Rule(POS.S, new Pair(POS.UNKN, POS.VP));
+    assertThat(r).isNotEqualTo(rr);
+  }
+
+  @Test
   public void testEqualsReflexive() {
     Rule r = new Rule(POS.AP, new Pair(POS.NP, POS.NPP));
     assertThat(r).isEqualTo(r);
