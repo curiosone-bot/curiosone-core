@@ -63,7 +63,8 @@ public class SemanticNetwork implements Graph {
   private static SemanticNetwork curiosoneSemanticNetwork;
 
   /**
-   * @return  the Semantic Network.
+   * Gets the Singleton instance.
+   * @return  the Semantic Network
    */
   public static SemanticNetwork getInstance() throws IOException {
     if (curiosoneSemanticNetwork == null) {
@@ -75,7 +76,7 @@ public class SemanticNetwork implements Graph {
   /**
    * Private constructor.
    * Loads the Semantic Network in memory.
-   * @throws IOException if there is a problem with the input file.
+   * @throws IOException if there is a problem with the input file
    */
   private SemanticNetwork() throws IOException {
     this.grafo = new HashMap<>();
@@ -93,7 +94,8 @@ public class SemanticNetwork implements Graph {
   }
 
   /**
-   * @return  the Map representation of this Semantic Network.
+   * Gets the Map representation of this Semantic Network.
+   * @return  the Map representation of this Semantic Network
    */
   @Override
   public Map<Vertex,Set<Edge>> getGrafo() {
@@ -180,7 +182,8 @@ public class SemanticNetwork implements Graph {
   }
 
   /**
-   * @return  a Set containing all the Edges of this SemanticNetwork.
+   * Gets all the Edges of this SemanticNetwork.
+   * @return  a Set containing all the Edges of this SemanticNetwork
    */
   @Override
   public Set<Edge> edgeSet() {
@@ -192,7 +195,8 @@ public class SemanticNetwork implements Graph {
   }
 
   /**
-   * @return  a Set containing all the Vertices of this SemanticNetwork.
+   * Gets all the Vertices of this SemanticNetwork.
+   * @return  a Set containing all the Vertices of this SemanticNetwork
    */
   @Override
   public Set<Vertex> vertexSet() {
@@ -200,7 +204,8 @@ public class SemanticNetwork implements Graph {
   }
 
   /**
-   * @return  a Set containg all the Semantis Relations outgoing from the given Vertex.
+   * Gets all the outgoing Edges from the given Vertex.
+   * @return  a Set containg all the Semantis Relations outgoing from the given Vertex
    */
   @Override
   public Set<Edge> outgoingEdges(Vertex v) {
@@ -216,7 +221,8 @@ public class SemanticNetwork implements Graph {
   }
 
   /**
-   * @return  a Set containg all the Semantis Relations incoming from the given Vertex.
+   * Gets all the incoming Edges to the given Vertex.
+   * @return  a Set containg all the Semantis Relations coming to the given Vertex
    */
   @Override
   public Set<Edge> incomingEdges(Vertex v) {
@@ -467,7 +473,8 @@ public class SemanticNetwork implements Graph {
   }
 
   /**
-   * @return  a String representation of this SemanticNetwork.
+   * Returns a String representation of this SemanticNetwork.
+   * @return  a String representation of this SemanticNetwork
    */
   @Override
   public String toString() {
