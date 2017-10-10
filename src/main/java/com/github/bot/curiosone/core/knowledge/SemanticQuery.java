@@ -6,12 +6,15 @@ import java.util.Objects;
 
 /**
  * Handles interrogations to the SemanticNetwork.
- * Provides methods to create and manage an interrogation.
+ * Provides methods to create and manage an interrogation to the SemanticNetwork.
+ * @see  com.github.bot.curiosone.core.knowledge.SemanticNetwork The SemanticNetwork Class
  */
 public class SemanticQuery {
 
   /**
    * Stores the SemanticRelationType of this interrogation.
+   * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType The SemanticRelationType
+   *       Enum
    */
   private SemanticRelationType relation;
 
@@ -37,11 +40,16 @@ public class SemanticQuery {
 
   /**
    * Constructs this SemanticQuery.
-   * @param relation the SemanticRelationType of this SemanticQuery
-   * @param subject the subject of this SemanticQuery
-   * @param object the object of this SemanticQuery
-   * @param adjectives the List of the adjectives of this SemanticQuery
-   * @param verb the verb of this SemanticQuery
+   * @param  relation
+   *         the SemanticRelationType of this SemanticQuery
+   * @param  subject
+   *         the subject of this SemanticQuery
+   * @param  object
+   *         the object of this SemanticQuery
+   * @param  adjectives
+   *         the List of the adjectives of this SemanticQuery
+   * @param  verb
+   *         the verb of this SemanticQuery
    */
   public SemanticQuery(SemanticRelationType relation, String subject,String object,
       List<String> adjectives, String verb) {
@@ -55,10 +63,14 @@ public class SemanticQuery {
 
   /**
    * Constructs this SemanticQuery.
-   * @param relation the SemanticRelationType of this SemanticQuery
-   * @param subject the subject of this SemanticQuery
-   * @param object the object of this SemanticQuery
-   * @param verb the verb of this SemanticQuery
+   * @param  relation
+   *         the SemanticRelationType of this SemanticQuery
+   * @param  subject
+   *         the subject of this SemanticQuery
+   * @param  object
+   *         the object of this SemanticQuery
+   * @param  verb
+   *         the verb of this SemanticQuery
    */
   public SemanticQuery(SemanticRelationType relation,String subject, String object, String verb) {
 
@@ -67,10 +79,14 @@ public class SemanticQuery {
 
   /**
    * Constructs this SemanticQuery.
-   * @param relation the SemanticRelationType of this SemanticQuery
-   * @param object the object of this SemanticQuery
-   * @param adjectives the List of the adjectives of this SemanticQuery
-   * @param verb the verb of this SemanticQuery
+   * @param  relation
+   *         the SemanticRelationType of this SemanticQuery
+   * @param  object
+   *         the object of this SemanticQuery
+   * @param  adjectives
+   *         the List of the adjectives of this SemanticQuery
+   * @param  verb
+   *         the verb of this SemanticQuery
    */
   public SemanticQuery(SemanticRelationType relation, String object,
       List<String> adjectives, String verb) {
@@ -80,9 +96,12 @@ public class SemanticQuery {
 
   /**
    * Constructs this SemanticQuery.
-   * @param relation the SemanticRelationType of this SemanticQuery
-   * @param object the object of this SemanticQuery
-   * @param verb the verb of this SemanticQuery
+   * @param  relation
+   *         the SemanticRelationType of this SemanticQuery
+   * @param  object
+   *         the object of this SemanticQuery
+   * @param  verb
+   *         the verb of this SemanticQuery
    */
   public SemanticQuery(SemanticRelationType relation, String object, String verb) {
 
@@ -90,35 +109,35 @@ public class SemanticQuery {
   }
 
   /**
-   * Returns the object of this SemanticQuery.
+   * @return  the object of this SemanticQuery.
    */
   public String getObject() {
     return object;
   }
 
   /**
-   * Returns the subject of this SemanticQuery.
+   * @return  the subject of this SemanticQuery.
    */
   public String getSubject() {
     return subject;
   }
 
   /**
-   * Returns a List containing all the adjectives of this SemanticQuery.
+   * @return  a List containing all the adjectives of this SemanticQuery.
    */
   public List<String> getAdjectives() {
     return objAdjectives;
   }
 
   /**
-   * Returns the relation of this SemanticQuery.
+   * @return  the relation of this SemanticQuery.
    */
   public SemanticRelationType getRelation() {
     return relation;
   }
 
   /**
-   * Returns the verb of this SemanticQuery.
+   * @return  the verb of this SemanticQuery.
    */
   public String getVerb() {
     return verb;
@@ -126,9 +145,10 @@ public class SemanticQuery {
 
   /**
    * Checks whether this SemanticQuery equals to the given Object.
-   * @param other the other object to be compared against
-   * @return {@code true} if this SemanticQuery equals to the given object;
-   *         {@code false} otherwise
+   * @param  other
+   *         the other object to be compared against
+   * @return  {@code true} if this SemanticQuery equals to the given object;
+   *          {@code false} otherwise
    */
   @Override
   public boolean equals(Object other) {
@@ -146,8 +166,9 @@ public class SemanticQuery {
   }
 
   /**
-   * Returns the HashCode of this SemanticQuery.
+   * Calculates the HashCode of this SemanticQuery.
    * The HashCode depends on the relation, subject, object and verb of this SemanticQuery.
+   * @return  the HashCode of this SemanticQuery
    */
   @Override
   public int hashCode() {
