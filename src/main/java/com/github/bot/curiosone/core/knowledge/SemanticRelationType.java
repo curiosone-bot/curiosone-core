@@ -41,6 +41,7 @@ public enum SemanticRelationType {
   TIME;
 
   /**
+   * Returns a String representation of the SemanticRelationType.
    * @return  a String representation of the SemanticRelationType
    */
   @Override
