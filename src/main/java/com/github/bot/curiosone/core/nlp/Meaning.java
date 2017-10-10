@@ -75,7 +75,8 @@ public class Meaning implements Comparable<Meaning> {
   }
 
   /**
-   * @return  a String representation of this Meaning in the form [pos, lex, frequency].
+   * Returns a String representation of this Meaning.
+   * @return  a String representation of this Meaning in the form [pos, lex, frequency]
    */
   @Override
   public String toString() {
