@@ -17,17 +17,21 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Contains utility method to get an answer from a given sentence and a given scope.
+ * Contains an utility method to get an answer from a given Sentence and its scope.
+ * @see  com.github.bot.curiosone.core.nlp.Sentence The Sentence Class
  */
 public class Affirmation {
 
   /**
    * Gets a coherent answer from an input sentence and scope as Optional instance.
-   * @param sentence The quesiton to be answered
-   * @param scope The subject of the given quesiton
-   * @return an Optional instance.
-   *         If the answer has not been found, an empty Optional will be returned.
-   *         Otherwise, the Optional instance will contain the answer.
+   * @param  sentence
+   *         The quesiton to be answered
+   * @param  scope
+   *         The subject of the given quesiton
+   * @return  an Optional instance.
+   *          If the answer has not been found, an empty Optional will be returned.
+   *          Otherwise, the Optional instance will contain the answer.
+   * @see  com.github.bot.curiosone.core.nlp.Sentence The Sentence Class
    */
   public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) {
     boolean answer = false;
