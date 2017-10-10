@@ -4,7 +4,7 @@ import com.github.bot.curiosone.core.nlp.Phrase;
 
 /**
  * Handles phrasal emotion analysis.
- * Provides a single public static method to calculate the emotion of a given Phrase.
+ * Provides a public static method to calculate the emotion of a given Phrase.
  */
 public class EmotionAnalysis {
 
