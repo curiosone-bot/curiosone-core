@@ -75,7 +75,7 @@ public class BadWords {
    *          original Phrase, contains a value (an instance of BrainResponse) otherwise.
    * @see  com.github.bot.curiosone.core.nlp.Phrase The Phrase Class
    * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
-   * @see com.github.bot.curiosone.core.extraction.BrainResponse The BrainResponse Class
+   * @see  com.github.bot.curiosone.core.extraction.BrainResponse The BrainResponse Class
    */
   public static Optional<BrainResponse> getAnswer(Phrase phrase) {
     if (knownBadWords == null) {
