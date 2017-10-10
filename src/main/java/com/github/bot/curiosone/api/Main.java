@@ -16,6 +16,7 @@ import spark.Spark;
 /**
  * Represents the entry point of the Curiosone APIs.
  * Contains the main method, where the server runs.
+ * @see  <a href="https://spark.apache.org/docs/latest/api/java/index.html">Spark Javadoc</a>
  */
 public class Main {
 
@@ -32,7 +33,8 @@ public class Main {
   /**
    * The entry point of the APIs.
    * This method activates and runs the server.
-   * @param args Unused arguments.
+   * @param  args
+   *         Unused arguments.
    */
   public static void main(String[] args) {
 
@@ -66,7 +68,7 @@ public class Main {
         });
 
     /**
-     * Responds with ok.
+     * Responds with "ok".
      */
     Spark.get(
         "/status",
@@ -77,7 +79,7 @@ public class Main {
         });
 
     /**
-     * Routes requests to the curiosone core
+     * Routes requests to the Curiosone Core
      */
     Spark.post(
         "/talk",
