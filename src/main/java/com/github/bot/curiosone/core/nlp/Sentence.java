@@ -58,6 +58,7 @@ public class Sentence {
   }
 
   /**
+   * Gets whether this Sentence is a question or not.
    * @return  {@code true} if the original phrase from where the sentence was extracted ends with a
    *          question mark;
    *          {@code false} otherwise
@@ -67,7 +68,8 @@ public class Sentence {
   }
 
   /**
-   * @return  the List of Words of the Sentence.
+   * Gets the Words of this Sentence.
+   * @return  the List of Words of the Sentence
    * @see  com.github.bot.curiosone.core.nlp.Word The Word Class
    */
   public List<Word> getWords() {
@@ -169,7 +171,8 @@ public class Sentence {
   }
 
   /**
-   * @return  a String representation of this Sentence, formatted as: [text, tokens].
+   * Returns a String representation of this Sentence.
+   * @return  a String representation of this Sentence, formatted as: [text, tokens]
    */
   @Override
   public String toString() {
