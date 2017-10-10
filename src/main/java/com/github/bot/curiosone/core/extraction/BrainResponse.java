@@ -24,8 +24,10 @@ public class BrainResponse {
 
   /**
    * Constructs a BrainResponse instance, containing a text and a scope.
-   * @param text The content of the computed answer
-   * @param scope The scope of the computed answer
+   * @param  text
+   *         The content of the computed answer
+   * @param  scope
+   *         The scope of the computed answer
    */
   public BrainResponse(String text, String scope) {
     this.text = text;
@@ -33,21 +35,21 @@ public class BrainResponse {
   }
 
   /**
-   * Returns the content of the computed answer.
+   * @return  the content of the computed answer.
    */
   public String getMessage() {
     return text;
   }
 
   /**
-   * Returns the scope of the computed answer.
+   * @return  the scope of the computed answer.
    */
   public String getScope() {
     return scope;
   }
 
   /**
-   * Returns a String representation of this BrainResponse.
+   * @return  a String representation of this BrainResponse.
    */
   @Override
   public String toString() {
@@ -56,9 +58,10 @@ public class BrainResponse {
 
   /**
    * Checks whether this BrainResponse equals to the given Object or not.
-   * @param other the other response to be compared against
-   * @return {@code true} if this response equals the other response;
-   *         {@code false} otherwise
+   * @param  other
+   *         the other BrainResponse to be compared against
+   * @return  {@code true} if this BrainResponse equals the other BrainResponse;
+   *          {@code false} otherwise
    */
   @Override
   public boolean equals(Object other) {
@@ -75,6 +78,7 @@ public class BrainResponse {
   /**
    * Returns the HashCode for this BrainResponse.
    * The HashCode depends on the content and the scope of this BrainResponse.
+   * @see  <a href="https://goo.gl/inr6Ra">The hashCode method of the Object Class</a>
    */
   @Override
   public int hashCode() {
