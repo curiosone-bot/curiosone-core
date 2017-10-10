@@ -47,6 +47,7 @@ public class DictionaryLoader {
   }
 
   /**
+   * Gets the Singleton instance.
    * @return  the Singleton instance.
    */
   public static DictionaryLoader getInstance() {
