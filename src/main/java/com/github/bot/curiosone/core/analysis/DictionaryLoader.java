@@ -38,7 +38,8 @@ public class DictionaryLoader {
   private static Properties properties = new Properties();
 
   /**
-   * Constructs the Singleton instance, loading dictionary data into memory.
+   * Constructs the Singleton instance.
+   * Loads dictionary data into memory.
    */
   private DictionaryLoader() {
     dict = new HashMap<>();
@@ -46,7 +47,7 @@ public class DictionaryLoader {
   }
 
   /**
-   * Returns the Singleton instance.
+   * @return  the Singleton instance.
    */
   public static DictionaryLoader getInstance() {
     if (instance == null) {
@@ -74,8 +75,9 @@ public class DictionaryLoader {
 
   /**
    * Returns a Double value, representing the sentiment score for the given Word.
-   * If the Word is unknown, a netural score (0.00) is returned.
-   * @param word the Word to be analysed
+   * If the given Word is unknown, a neutral score (0.00) is returned.
+   * @param  word
+   *         the Word to be analysed
    */
   public double getScore(String word) {
     return dict.getOrDefault(word, 0.0);
