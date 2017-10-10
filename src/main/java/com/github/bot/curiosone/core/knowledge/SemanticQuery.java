@@ -109,35 +109,40 @@ public class SemanticQuery {
   }
 
   /**
-   * @return  the object of this SemanticQuery.
+   * Gets the object of this SemanticQuery.
+   * @return  the object of this SemanticQuery
    */
   public String getObject() {
     return object;
   }
 
   /**
-   * @return  the subject of this SemanticQuery.
+   * Gets the subject of this SemanticQuery.
+   * @return  the subject of this SemanticQuery
    */
   public String getSubject() {
     return subject;
   }
 
   /**
-   * @return  a List containing all the adjectives of this SemanticQuery.
+   * Gets the adjectives of this SemanticQuery.
+   * @return  a List containing all the adjectives of this SemanticQuery
    */
   public List<String> getAdjectives() {
     return objAdjectives;
   }
 
   /**
-   * @return  the relation of this SemanticQuery.
+   * Gets the relation of this SemanticQuery.
+   * @return  the relation of this SemanticQuery
    */
   public SemanticRelationType getRelation() {
     return relation;
   }
 
   /**
-   * @return  the verb of this SemanticQuery.
+   * Gets the verb of this SemanticQuery.
+   * @return  the verb of this SemanticQuery
    */
   public String getVerb() {
     return verb;
