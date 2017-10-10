@@ -3,7 +3,9 @@ package com.github.bot.curiosone.core.knowledge;
 import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
 /**
- * represents a Concepts of a SemanticNetwork.
+ * Represents a Concepts of a SemanticNetwork.
+ * @see  com.github.bot.curiosone.core.nlp.SemanticNetwork The Sentence SemanticNetwork
+ * @see  com.github.bot.curiosone.core.nlp.SemantiRelation The Sentence SemanticRelation
  */
 public class Concept implements Vertex {
 
@@ -14,14 +16,15 @@ public class Concept implements Vertex {
 
   /**
    * Constructs this Concept with the given ID.
-   * @param id ID of this Concept.
+   * @param  id
+   *         ID of this Concept.
    */
   public Concept(String id) {
     this.id = id;
   }
 
   /**
-   * Returns the ID of this Concept.
+   * @return  the ID of this Concept.
    */
   @Override
   public String getId() {
@@ -29,7 +32,7 @@ public class Concept implements Vertex {
   }
 
   /**
-   * Returns a String representation of this Concept.
+   * @return  a String representation of this Concept.
    */
   public String toString() {
     return getId();
@@ -37,9 +40,10 @@ public class Concept implements Vertex {
 
   /**
    * Checks whether this Concept equals to the given Object.
-   * @param o the other Concept to be compared against.
-   * @return {@code true} if this Concept equals to the other Concept;
-   *         {@code false} otherwise
+   * @param  o
+   *         the other Concept to be compared against.
+   * @return  {@code true} if this Concept equals to the other Concept;
+   *          {@code false} otherwise
    */
   @Override
   public boolean equals(Object o) {
@@ -55,6 +59,7 @@ public class Concept implements Vertex {
   /**
    * Returns the HashCode of this Concept.
    * The HashCode depends on the ID of this Concept.
+   * @return  the HashCode of this Concept.
    */
   @Override
   public int hashCode() {
