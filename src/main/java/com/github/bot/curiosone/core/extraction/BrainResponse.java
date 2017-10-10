@@ -35,21 +35,24 @@ public class BrainResponse {
   }
 
   /**
-   * @return  the content of the computed answer.
+   * Gets the content of the computed answer.
+   * @return  the content of the computed answer
    */
   public String getMessage() {
     return text;
   }
 
   /**
-   * @return  the scope of the computed answer.
+   * Gets the scope of the computed answer.
+   * @return  the scope of the computed answer
    */
   public String getScope() {
     return scope;
   }
 
   /**
-   * @return  a String representation of this BrainResponse.
+   * Returns a String representation of this BrainResponse.
+   * @return  a String representation of this BrainResponse
    */
   @Override
   public String toString() {
