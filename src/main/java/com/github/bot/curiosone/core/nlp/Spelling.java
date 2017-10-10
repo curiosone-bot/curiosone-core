@@ -66,7 +66,8 @@ public class Spelling {
   }
 
   /**
-   * @return  the instance of the spelling dictionary.
+   * Gets the Singleton instance.
+   * @return  the instance of the spelling dictionary
    */
   public static Spelling getInstance() {
     if  (instance != null) {
