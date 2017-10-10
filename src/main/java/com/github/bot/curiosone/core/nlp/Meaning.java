@@ -10,26 +10,26 @@ import java.util.Objects;
 public class Meaning implements Comparable<Meaning> {
 
   /**
-   * The Part of the Speech type of this meaning.
+   * The Part of the Speech type of this Meaning.
    */
   POS pos;
 
   /**
-   * The Lexical Type of this meaning.
+   * The Lexical Type of this Meaning.
    */
   LEX lex;
 
   /**
-   * The frequency of this meaning.
+   * The frequency of this Meaning.
    */
   int freq;
 
   /**
    * Constructs this Meaning instance with a given POS, LEX and a default frequency.
    * @param  pos
-   *         the part of speech type for this new meaning
+   *         the part of speech type for this new Meaning
    * @param  lex
-   *         the lexical category for this new meaning
+   *         the lexical category for this new Meaning
    */
   public Meaning(POS pos, LEX lex) {
     this.pos = pos;
@@ -38,28 +38,31 @@ public class Meaning implements Comparable<Meaning> {
   }
 
   /**
-   * @return  the part of speech type for this meaning.
+   * Gets the Part of Speech type for this Meaning.
+   * @return  the Part of Speech type for this Meaning
    */
   public POS getPOS() {
     return pos;
   }
 
   /**
-   * @return  the lexical category for this meaning.
+   * Gets the Lexical category for this Meaning.
+   * @return  the Lexical category for this Meaning
    */
   public LEX getLEX() {
     return lex;
   }
 
   /**
-   * @return  frequency for this meaning.
+   * Gets the frequency for this Meaning.
+   * @return  frequency for this Meaning
    */
   public int getFrequency() {
     return freq;
   }
 
   /**
-   * Sets the frequency for this meaning.
+   * Sets the frequency for this Meaning.
    * @param frequency
    *        the frequency value to be set. Must be a positive integer
    * @throws IllegalArgumentException if negative frequency is passed
@@ -109,7 +112,7 @@ public class Meaning implements Comparable<Meaning> {
   }
 
   /**
-   * Compares this Meaning to the other meaning.
+   * Compares this Meaning to the other Meaning.
    * @param  other
    *         the other Meaning to be compared against
    * @return a negative value if this is ordered before other;
