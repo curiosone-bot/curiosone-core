@@ -41,28 +41,32 @@ public class Phrase {
   }
 
   /**
-   * @return  {@code true} if the content is a question, {@code false} otherwise.
+   * Returns whether this Phrase is a question or not.
+   * @return  {@code true} if the content is a question, {@code false} otherwise
    */
   public boolean isQuestion() {
     return question;
   }
 
   /**
-   * @return  the text content of this Phrase.
+   * Gets the text of this Phrase.
+   * @return  the text content of this Phrase
    */
   public String getText() {
     return text;
   }
 
   /**
-   * @return  the list of tokens extracted from this Phrase.
+   * Gets the Tokens of this Phrase.
+   * @return  the list of tokens extracted from this Phrase
    */
   public List<Token> getTokens() {
     return new ArrayList<Token>(tokens);
   }
 
   /**
-   * @return  a String representation of this Phrase in the form [text, tokens].
+   * Returns a String representation of this Phrase.
+   * @return  a String representation of this Phrase in the form [text, tokens]
    */
   @Override
   public String toString() {
