@@ -1,7 +1,4 @@
 package com.github.bot.curiosone.core.refinement.zzz;
-/**
- * @author Claudio Venanzi
- */
 
 import edu.mit.jwi.morph.SimpleStemmer;
 import edu.mit.jwi.morph.WordnetStemmer;

@@ -28,8 +28,7 @@ public class Sentence {
    */
   @Override
   public String toString() {
-    String temp = main.toString();
-    temp += type.equals(SentenceType.Question) ? "?" : ".";
+    String temp = main.toString() + type.getMark();
     return temp.substring(0, 1).toUpperCase() + temp.substring(1);
   }
   
