@@ -31,7 +31,7 @@ public class Affirmation {
    * @return  an Optional instance.
    *          If the answer has not been found, an empty Optional will be returned.
    *          Otherwise, the Optional instance will contain the answer.
-   * @see  Optional The Optional Class
+   * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
    * @see  BrainResponse The BrainResponse Class
    * @see  Sentence The Sentence Class
    */
