@@ -13,70 +13,60 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Syntax/Semantic information of a RawWord.
- *
- * @author Andrea Rivitto && Eugenio Schintu
+ * Stores a Word with its Syntax/Semantic information.
  */
 public class RawWord {
 
   /**
-   * Part of speech.
-   *
-   * @see POST
+   * Part of Speech of this RawWord.
    */
   private POS pos;
 
   /**
-   * Lexicographic file name.
-   *
-   * @see LEX
+   * Lexicographic type of this RawWord.
    */
   private LEX lexType;
 
   /**
-   * Lemma of word.
-   *
-   * @see RawWord
+   * Lemma of this RawWord.
    */
   private String lemma;
 
   /**
-   * IWordID.
-   *
-   * @see IWordID
+   * Stores the WordNet ID of this RawWord.
+   * @see  IWordID
    */
   private IWordID wordId;
 
   /**
-   * Glossary information.
+   * Stores the glossary information.
    */
   private String gloss;
 
   /**
-   * Number of occurrence.
-   *
+   * Stores the number of occurrence.
    */
   private int number;
 
   /**
-   * Semantic relation with other word.
-   *
-   * @see String
+   * Maps the Semantic Relations of this RawWord with other words.
+   * @see  Map
+   * @see  List
    */
   private Map<String, List<String>> relations;
 
   /**
-   * Get WordID.
-   *
-   * @return the WordID
-   * @see #IWordID
+   * Gets the WordID.
+   * @return  the WordID
+   * @see IWordID
+   * @see #wordId
    */
   public IWordID getWordId() {
     return wordId;
   }
 
   /**
-   * Constructor.
+   * Constructs an empty RawWord.
    */
   public RawWord() {
     relations = new HashMap<String, List<String>>();
@@ -84,8 +74,9 @@ public class RawWord {
 
 
   /**
-   * Set a new {@link #wordId} value that is provided in input.
-   *
+   * Sets the {@link #wordId} of this RawWord.
+   * @param  wordId
+   *         the word ID to be set
    * @see #wordId
    */
   public void setWordId(IWordID wordId) {
@@ -93,9 +84,8 @@ public class RawWord {
   }
 
   /**
-   * Get pos.
-   *
-   * @return the pos
+   * Gets the POS of this RawWord.
+   * @return  the POS value of this RawWord
    * @see #pos
    */
   public POS getPos() {
@@ -103,8 +93,9 @@ public class RawWord {
   }
 
   /**
-   * Set a new {@link #pos} value that is provided in input.
-   *
+   * Sets the {@link #pos} of this RawWord.
+   * @param  pos
+   *         the POS value to be set
    * @see #pos
    */
   public void setPos(POS pos) {
@@ -112,9 +103,8 @@ public class RawWord {
   }
 
   /**
-   * Get lexType.
-   *
-   * @return lexType
+   * Gets the LEX of this RawWord.
+   * @return the LEX value of this RawWord
    * @see #lexType
    */
   public LEX getLexType() {
@@ -122,8 +112,9 @@ public class RawWord {
   }
 
   /**
-   * Set a new {@link #lexType} value that is provided in input.
-   *
+   * Sets the {@link #lexType} of this RawWord.
+   * @param  lexType
+   *         the LEX value to be set
    * @see #lexType
    */
   public void setLexType(LEX lexType) {
@@ -131,9 +122,8 @@ public class RawWord {
   }
 
   /**
-   * Get lemma.
-   *
-   * @return the lemma
+   * Gets the lemma of this RawWord.
+   * @return  the lemma of this RawWord
    * @see #lemma
    */
   public String getLemma() {
@@ -141,8 +131,9 @@ public class RawWord {
   }
 
   /**
-   * Set a new {@link #lemma} value that is provided in input.
-   *
+   * Sets the lemma of this RawWord.
+   * @param  lemma
+   *         the String representation of the lemma to be set
    * @see #lemma
    */
   public void setLemma(String lemma) {
@@ -150,9 +141,8 @@ public class RawWord {
   }
 
   /**
-   * Get gloss.
-   *
-   * @return the gloss
+   * Gets the gloss of this RawWord.
+   * @return  the gloss of this RawWord
    * @see #gloss
    */
   public String getGloss() {
@@ -160,8 +150,9 @@ public class RawWord {
   }
 
   /**
-   * Set a new {@link #gloss} value that is provided in input.
-   *
+   * Sets a new {@link #gloss} value
+   * @param  gloss
+   *         String representation of the new gloss to be set
    * @see #gloss
    */
   public void setGloss(String gloss) {
@@ -169,44 +160,53 @@ public class RawWord {
   }
 
   /**
-   * Get the number of occurrence.
-   *
+   * Gets the number of occurrence of this RawWord.
+   * @return  the number of occurrence of this RawWord
    */
   public int getNum() {
     return this.number;
   }
 
   /**
-   * Set the number of occurrence of word.
-   *
+   * Sets the number of occurrence of this RawWord.
+   * @param  num
+   *         the number of occurrence to be set
    */
   public void setNum(int num) {
     this.number = num;
   }
 
   /**
-   * Get relations.
-   *
-   * @return the relations
-   * @see #relations
+   * Gets all the relations of this RawWord.
+   * @return  a Map containing all the relations of this RawWord
+   * @see  #relations
+   * @see  Map
+   * @see  List
    */
   public Map<String, List<String>> getRelations() {
     return relations;
   }
 
   /**
-   * Get relations by String.
-   *
-   * @see RawWord#getRelationsByString()
+   * Gets relations by String.
+   * Returns null, if no Relation by String is found.
+   * @param  pointer
+   *         the String representation of the source.
+   *         This String is supposed to be a key in the #relations Map.
+   * @return  a List containing all the Words in relation with the given Word
    */
   public List<String> getRelationsByString(String pointer) {
     return new ArrayList<String>(relations.getOrDefault(pointer, null));
   }
 
   /**
-   * Add a new element to relations.
-   *
+   * Adds a new Relation to this RawWord.
+   * @param  p
+   *         the source of the new Relation
+   * @param  v
+   *         the target of the new Relation
    * @see #relations
+   * @see Map#merge
    */
   public void addRelation(String p, String v) {
     this.relations.merge(
@@ -218,9 +218,12 @@ public class RawWord {
   }
 
   /**
-   * Set the map of relations.
-   *
+   * Sets the relations of this RawWord.
+   * @param  relations
+   *         the Map containing the relations of this RawWord to be set
    * @see #relations
+   * @see Map
+   * @see List
    */
   public void setRelations(Map<String, List<String>> relations) {
     this.relations.clear();
@@ -228,7 +231,8 @@ public class RawWord {
   }
 
   /**
-   * toString.
+   * Returns a String representation of this RawWord.
+   * @return  a String representation of this RawWord
    *
    */
   @Override
@@ -246,11 +250,11 @@ public class RawWord {
   }
 
   /**
-   * Compares this RawWord to the given object.
-   * @param obj the objects to be compared against
-   * @return <code>true</code> if the given object represents the same RawWord
-   *         of this instance;
-             <code>false</code> otherwise
+   * Checks wheter this RawWord equals to the given object.
+   * @param  obj
+   *         the object to be compared against
+   * @return  {@code true} if the given object represents the same RawWord of this instance;
+              {@code false} otherwise
    */
   @Override
   public boolean equals(Object obj) {
@@ -265,7 +269,10 @@ public class RawWord {
   }
 
   /**
-   * Returns the hashcode for this RawWord.
+   * Calculates the hashCode of this RawWord.
+   * The hashCode depends on the gloss of this RawWord.
+   * @return  the hashCode of this RawWord
+   * @see  #gloss
    */
   @Override
   public int hashCode() {
