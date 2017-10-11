@@ -84,7 +84,7 @@ public class RawDict {
    * @param  item
    *         String to be searched in WordNet
    * @return  RawToken Structure that contains RawDict info
-   * @see  com.github.bot.curiosone.core.nlp.raw.RawToken
+   * @see  RawToken The RawToken Class
    */
   public RawToken getRawToken(String item) {
     if (item.length() == 0 || item.equals(" ")) {
