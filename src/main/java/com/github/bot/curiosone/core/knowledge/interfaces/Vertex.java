@@ -6,7 +6,8 @@ package com.github.bot.curiosone.core.knowledge.interfaces;
 public interface Vertex {
 
   /**
-   * Returns a String representation of the ID of the Vertex.
+   * Gets the ID of the Vertex.
+   * @return  a String representation of the ID of the Vertex
    */
   String getId();
 }
