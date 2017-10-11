@@ -22,8 +22,12 @@ public class WordVerb implements Word {
   public String toString() {
     
     if (lemma.equals("be")) {
-      if (type.equals(TypeVerb.PresentS1)) {return "am";}
-      if (type.equals(TypeVerb.PresentS3)) {return "is";}
+      if (type.equals(TypeVerb.PresentS1)) {
+        return "am";
+      }
+      if (type.equals(TypeVerb.PresentS3)) {
+        return "is";
+      }
     }
     
     try {

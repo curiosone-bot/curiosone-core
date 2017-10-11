@@ -1,8 +1,8 @@
 package com.github.bot.curiosone.core.refinement;
 
-import java.util.Optional;
-
 import com.github.bot.curiosone.core.refinement.interfaces.Phrase;
+
+import java.util.Optional;
 
 public class PhraseVerb implements Phrase {
 

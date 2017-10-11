@@ -26,8 +26,11 @@ public class WordNoun implements Word {
     }
     
     if (type.equals(TypeNoun.Singular)) {
-      if (lemma.matches("h?[aeiou].*")) {return "an " + lemma;}
-      else                              {return  "a " + lemma;}
+      if (lemma.matches("h?[aeiou].*")) {
+        return "an " + lemma;
+      } else {
+        return  "a " + lemma;
+      }
     }
     
     try {
