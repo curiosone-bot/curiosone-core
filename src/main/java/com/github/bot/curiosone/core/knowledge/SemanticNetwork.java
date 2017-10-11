@@ -50,11 +50,13 @@ public class SemanticNetwork implements Graph {
 
   /**
    * Stores the Semantic Network.
+   * @see  Map The Map Interface
    */
   private Map<Vertex,Set<Edge>> grafo;
 
   /**
    * String representation of the path to the Semantic Network database.
+   * @see  Path The Path Class
    */
   private Path percorso = Paths.get("src/main/resources/knowledge/CuriosoneSemanticNetwork.txt");
 
@@ -100,6 +102,7 @@ public class SemanticNetwork implements Graph {
   /**
    * Gets the Map representation of this Semantic Network.
    * @return  the Map representation of this Semantic Network
+   * @see  #grafo
    */
   @Override
   public Map<Vertex,Set<Edge>> getGrafo() {
@@ -110,6 +113,7 @@ public class SemanticNetwork implements Graph {
    * Adds a SemanticRelation to this SemanticNetwork.
    * @param  e
    *         the SemanticRelation to be added
+   * @see  #grafo
    */
   @Override
   public void add(Edge e) {
@@ -120,6 +124,7 @@ public class SemanticNetwork implements Graph {
    * Adds the given Vertex to this SemanticNetwork, if is not already present.
    * @param  v
    *         the Vertex to be added
+   * @see  #grafo
    */
   @Override
   public void add(Vertex v) {
@@ -142,6 +147,7 @@ public class SemanticNetwork implements Graph {
    * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
    * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType The SemanticRelationType
    *       Enum
+   * @see  #grafo
    */
   @Override
   public void addEdge(Vertex v1, Vertex v2, SemanticRelationType type, Integer weight) {
@@ -163,6 +169,7 @@ public class SemanticNetwork implements Graph {
    * @return  {@code true} if this SemanticNetwork contains the given Edge;
    *          {@code false} otherwise.
    * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
+   * @see  #grafo
    */
   @Override
   public boolean containsEdge(Edge e) {
@@ -180,6 +187,7 @@ public class SemanticNetwork implements Graph {
    *         the Vertex to be searched.
    * @return  {@code true} if this SemanticNetwork contains the given Vertex;
    *          {@code false} otherwise.
+   * @see  #grafo
    */
   @Override
   public boolean containsVertex(Vertex v) {
@@ -189,6 +197,8 @@ public class SemanticNetwork implements Graph {
   /**
    * Gets all the Edges of this SemanticNetwork.
    * @return  a Set containing all the Edges of this SemanticNetwork
+   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
+   * @see  #grafo
    */
   @Override
   public Set<Edge> edgeSet() {
@@ -202,6 +212,8 @@ public class SemanticNetwork implements Graph {
   /**
    * Gets all the Vertices of this SemanticNetwork.
    * @return  a Set containing all the Vertices of this SemanticNetwork
+   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
+   * @see  #grafo
    */
   @Override
   public Set<Vertex> vertexSet() {
@@ -211,6 +223,9 @@ public class SemanticNetwork implements Graph {
   /**
    * Gets all the outgoing Edges from the given Vertex.
    * @return  a Set containg all the Semantis Relations outgoing from the given Vertex
+   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
+   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
+   * @see  #grafo
    */
   @Override
   public Set<Edge> outgoingEdges(Vertex v) {
@@ -228,6 +243,9 @@ public class SemanticNetwork implements Graph {
   /**
    * Gets all the incoming Edges to the given Vertex.
    * @return  a Set containg all the Semantis Relations coming to the given Vertex
+   * @see  Edge The Edge Interface
+   * @see  Vertex The Vertex Interface
+   * @see  #grafo
    */
   @Override
   public Set<Edge> incomingEdges(Vertex v) {
@@ -246,6 +264,9 @@ public class SemanticNetwork implements Graph {
    * Adds all the Semantic Relations in the given Collection to this SemanticNetwork.
    * @param  edgeSet
    *         the Collection to be added
+   * @see  Edge The Edge Interface
+   * @see  #grafo
+   * @see  Collection The Collection Interface
    */
   @Override
   public void addEdges(Collection<? extends Edge> edgeSet) {
@@ -264,6 +285,8 @@ public class SemanticNetwork implements Graph {
    *         the target Vertex for the SemanticRelation to be checked
    * @return  {@code true} if this SemanticNetwork contains the given SemanticRelation;
    *          {@code false} otherwise
+   * @see  SemanticRelationType the SemanticRelationType Enum
+   * @see  Vertex The Vertex Interface
    */
   @Override
   public boolean exist(String v1, SemanticRelationType relation, String v2) {
@@ -284,6 +307,7 @@ public class SemanticNetwork implements Graph {
    *         the SemanticRelationType of the SemanticRelation to be learnt
    * @param  v2
    *         the target Vertex of the SemanticRelation to be learnt
+   * @see  SemanticRelationType The SemanticRelationType Enum
    */
   @Override
   public void learn(String v1, SemanticRelationType relation, String v2) {
@@ -315,6 +339,9 @@ public class SemanticNetwork implements Graph {
    *         SemanticRelationType of the strongest Edge to be searched
    * @return  an Optional instance. The instance is empty, if no Edge is found. Otherwise, it
    *         contains the found Edge.
+   * @see  Optional The Optional Class
+   * @see  Edge The Edge Interface
+   * @see  SemanticRelationType The SemanticRelationType Enum
    */
   @Override
   public Optional<Edge> getAnswer(String v1, SemanticRelationType type) {
@@ -351,6 +378,8 @@ public class SemanticNetwork implements Graph {
    *         String representation of the Vertex source
    * @return  An Optional instance. The instance is empty, if no Edge has been found, otherwise it
    *         contains the found Edge.
+   * @see  Optional The Optional Class
+   * @see  Edge The Edge Interface
    */
   @Override
   public Optional<Edge> getAnswer(String v1) {
@@ -368,6 +397,9 @@ public class SemanticNetwork implements Graph {
    *         Edge List to be searched in
    * @return an Optional instance. The instance contains an Edge, if the strongest Edge is found.
    *         It is empty, otherwise
+   * @see  Optional The Optional Class
+   * @see  List The List Interface
+   * @see  Edge The Edge Interface
    */
   @Override
   public Optional<Edge> getAnswer(List<Edge> edges) {
@@ -384,6 +416,7 @@ public class SemanticNetwork implements Graph {
    * Increases the usage score for all the Edges with the given Vertex as target.
    * @param  v
    *         the target Vertex
+   * @see  Vertex The Vertex Inteerface
    */
   @Override
   public void increase(Vertex v, Integer score) {
@@ -431,6 +464,7 @@ public class SemanticNetwork implements Graph {
    * @return  Returns an Optional instance.
    *          The instance is empty, if no result is found.
    *          Otherwise, it contains the query response
+   * @see  SemanticQuery The SemanticQuery Class
    */
   @Override
   public Optional<Edge> query(SemanticQuery sq) {
@@ -466,6 +500,7 @@ public class SemanticNetwork implements Graph {
    * Calculates the HashCode of this SemanticNetwork.
    * The HashCode depends on the Vertices and Edges of this SemanticNetwork.
    * @return  the HashCode of this SemanticNetwork
+   * @see  #grafo
    */
   @Override
   public int hashCode() {
@@ -478,6 +513,7 @@ public class SemanticNetwork implements Graph {
   /**
    * Returns a String representation of this SemanticNetwork.
    * @return  a String representation of this SemanticNetwork
+   * @see  #grafo
    */
   @Override
   public String toString() {
