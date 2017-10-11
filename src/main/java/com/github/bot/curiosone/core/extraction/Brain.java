@@ -10,8 +10,8 @@ import java.util.Optional;
  * Manages the Brain of the Curiosone.
  * Contains utility methods to conversate, compute and/or randomly generate an answer to a given
  * Sentence.
- * @see  com.github.bot.curiosone.core.nlp.Phrase The Phrase Class
- * @see  com.github.bot.curiosone.core.nlp.Sentence The Sentence Class
+ * @see Phrase The Phrase Class
+ * @see Sentence The Sentence Class
  */
 public class Brain {
 
@@ -26,9 +26,9 @@ public class Brain {
    *         the message to generate the response to
    * @return  an Optional instance, containing the response, if the message needs a conversational
    *          answer. The response is encapsulated in a BrainResponse instance.
-   * @see  com.github.bot.curiosone.core.nlp.Phrase The Phrase Class
-   * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
-   * @see  com.github.bot.curiosone.core.extraction.BrainResponse The BrainResponse Class
+   * @see  Phrase The Phrase Class
+   * @see  Optional The Optional Class
+   * @see  BrainResponse The BrainResponse Class
    */
   public static Optional<BrainResponse> conversate(Phrase phrase) {
     Optional<BrainResponse> answ = Conversation.getAnswer(phrase);
@@ -40,8 +40,8 @@ public class Brain {
    * @param  phrase
    *         the message to generate the response to
    * @return  a BrainResponse instance, representing the randomly generated response.
-   * @see  com.github.bot.curiosone.core.nlp.Phrase The Phrase Class
-   * @see  com.github.bot.curiosone.core.extraction.BrainResponse The BrainResponse Class
+   * @see  Phrase The Phrase Class
+   * @see  BrainResponse The BrainResponse Class
    */
   public static BrainResponse random(Phrase phrase) {
     return RandomAnswer.getAnswer(phrase);
@@ -56,9 +56,9 @@ public class Brain {
    * @param  scope
    *         the scope of the conversation
    * @return  an Optional instance, containing the response for the input Sentence
-   * @see  com.github.bot.curiosone.core.nlp.Phrase The Phrase Class
-   * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
-   * @see  com.github.bot.curiosone.core.extraction.BrainResponse The BrainResponse Class
+   * @see  Phrase The Phrase Class
+   * @see  Optional The Optional Class
+   * @see  BrainResponse The BrainResponse Class
    */
   public static Optional<BrainResponse> compute(Sentence sentence, String scope) {
     return sentence.isQuestion()
