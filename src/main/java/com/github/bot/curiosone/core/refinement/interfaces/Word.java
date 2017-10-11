@@ -7,5 +7,4 @@ public interface Word {
    * @return refined word
    */
   @Override String toString();
-  
 }
