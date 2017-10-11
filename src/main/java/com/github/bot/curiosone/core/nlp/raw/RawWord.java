@@ -50,8 +50,6 @@ public class RawWord {
 
   /**
    * Maps the Semantic Relations of this RawWord with other words.
-   * @see  Map
-   * @see  List
    */
   private Map<String, List<String>> relations;
 
@@ -74,10 +72,9 @@ public class RawWord {
 
 
   /**
-   * Sets the {@link #wordId} of this RawWord.
+   * Sets the WordID of this RawWord.
    * @param  wordId
    *         the word ID to be set
-   * @see #wordId
    */
   public void setWordId(IWordID wordId) {
     this.wordId = wordId;
@@ -86,7 +83,6 @@ public class RawWord {
   /**
    * Gets the POS of this RawWord.
    * @return  the POS value of this RawWord
-   * @see #pos
    */
   public POS getPos() {
     return pos;
@@ -96,7 +92,6 @@ public class RawWord {
    * Sets the {@link #pos} of this RawWord.
    * @param  pos
    *         the POS value to be set
-   * @see #pos
    */
   public void setPos(POS pos) {
     this.pos = pos;
@@ -105,7 +100,6 @@ public class RawWord {
   /**
    * Gets the LEX of this RawWord.
    * @return the LEX value of this RawWord
-   * @see #lexType
    */
   public LEX getLexType() {
     return lexType;
@@ -115,7 +109,6 @@ public class RawWord {
    * Sets the {@link #lexType} of this RawWord.
    * @param  lexType
    *         the LEX value to be set
-   * @see #lexType
    */
   public void setLexType(LEX lexType) {
     this.lexType = lexType;
@@ -124,7 +117,6 @@ public class RawWord {
   /**
    * Gets the lemma of this RawWord.
    * @return  the lemma of this RawWord
-   * @see #lemma
    */
   public String getLemma() {
     return lemma;
@@ -143,17 +135,15 @@ public class RawWord {
   /**
    * Gets the gloss of this RawWord.
    * @return  the gloss of this RawWord
-   * @see #gloss
    */
   public String getGloss() {
     return gloss;
   }
 
   /**
-   * Sets a new {@link #gloss} value
+   * Sets the gloss of this RawWord.
    * @param  gloss
-   *         String representation of the new gloss to be set
-   * @see #gloss
+   *         String representation of the gloss to be set
    */
   public void setGloss(String gloss) {
     this.gloss = gloss;
@@ -179,9 +169,6 @@ public class RawWord {
   /**
    * Gets all the relations of this RawWord.
    * @return  a Map containing all the relations of this RawWord
-   * @see  #relations
-   * @see  Map
-   * @see  List
    */
   public Map<String, List<String>> getRelations() {
     return relations;
@@ -205,8 +192,6 @@ public class RawWord {
    *         the source of the new Relation
    * @param  v
    *         the target of the new Relation
-   * @see #relations
-   * @see Map#merge
    */
   public void addRelation(String p, String v) {
     this.relations.merge(
@@ -222,8 +207,6 @@ public class RawWord {
    * @param  relations
    *         the Map containing the relations of this RawWord to be set
    * @see #relations
-   * @see Map
-   * @see List
    */
   public void setRelations(Map<String, List<String>> relations) {
     this.relations.clear();
@@ -272,7 +255,6 @@ public class RawWord {
    * Calculates the hashCode of this RawWord.
    * The hashCode depends on the gloss of this RawWord.
    * @return  the hashCode of this RawWord
-   * @see  #gloss
    */
   @Override
   public int hashCode() {
