@@ -2,6 +2,10 @@ package com.github.bot.curiosone.core.knowledge;
 
 import static java.util.stream.Collectors.toList;
 
+import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
+import com.github.bot.curiosone.core.knowledge.interfaces.Graph;
+import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,10 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
-import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
-import com.github.bot.curiosone.core.knowledge.interfaces.Graph;
-import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
 /**
  * Represents a Semantic Network.
