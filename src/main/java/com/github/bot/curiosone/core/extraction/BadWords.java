@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 /**
  * Handles precomputed answers to some common bad words.
  * Contains an utility method to get an answer to a Phrase containig one known bad word.
- * @see  com.github.bot.curiosone.core.nlp.Phrase The Phrase Class
+ * @see Phrase The Phrase Class
  */
 public class BadWords {
 
@@ -27,6 +27,7 @@ public class BadWords {
 
   /**
    * Lists different insults known by the Bot.
+   * @see List The List Interface
    */
   private static List<String> knownBadWords;
 
@@ -73,9 +74,9 @@ public class BadWords {
    * @return  an Optional instance.
    *          The returned instance is empty, if no bad word or insult has been found in the
    *          original Phrase, contains a value (an instance of BrainResponse) otherwise.
-   * @see  com.github.bot.curiosone.core.nlp.Phrase The Phrase Class
-   * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
-   * @see  com.github.bot.curiosone.core.extraction.BrainResponse The BrainResponse Class
+   * @see Phrase The Phrase Class
+   * @see The Optional Class
+   * @see BrainResponse The BrainResponse Class
    */
   public static Optional<BrainResponse> getAnswer(Phrase phrase) {
     if (knownBadWords == null) {
