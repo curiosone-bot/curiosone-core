@@ -21,16 +21,15 @@ public class WordNoun implements Word {
   @Override
   public String toString() {
     
-    /*
-     * noun is a named entity or singular
-     */
-    if (!type.equals(TypeNoun.Plural)) {
+    if (type.equals(TypeNoun.Name)) {
       return lemma;
     }
     
-    /*
-     * noun is plural
-     */
+    if (type.equals(TypeNoun.Singular)) {
+      if (lemma.matches("h?[aeiou].*")) {return "an " + lemma;}
+      else                              {return  "a " + lemma;}
+    }
+    
     try {
       String lexs = new EnglishMorpher()
           .getInflection(lemma, type.toCategory(), WordPart.Noun.forBabelMorph())
