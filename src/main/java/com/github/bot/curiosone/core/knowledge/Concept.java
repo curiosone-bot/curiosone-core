@@ -4,8 +4,8 @@ import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
 /**
  * Represents a Concepts of a SemanticNetwork.
- * @see  com.github.bot.curiosone.core.nlp.SemanticNetwork The SemanticNetwork Class
- * @see  com.github.bot.curiosone.core.nlp.SemanticRelation The SemanticRelation Class
+ * @see  com.github.bot.curiosone.core.knowledge.SemanticNetwork The SemanticNetwork Class
+ * @see  com.github.bot.curiosone.core.knowledge.SemanticRelation The SemanticRelation Class
  */
 public class Concept implements Vertex {
 
