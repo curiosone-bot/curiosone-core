@@ -4,29 +4,28 @@ import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
 
 /**
  * Represents an Edge of a Graph.
- * @see com.github.bot.curiosone.core.knowledge.interfaces.Graph The Graph Interface
+ * @see Graph The Graph Interface
  */
 public interface Edge {
 
   /**
    * Gets the source of the Edge.
    * @return  the source of the Edge
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
+   * @see  Vertex The Vertex Interface
    */
   Vertex getSource();
 
   /**
    * Gets the Target of the Edge.
    * @return  the Target of the Edge
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
+   * @see  Vertex The Vertex Interface
    */
   Vertex getTarget();
 
   /**
    * Gets the type of the Edge.
    * @return  the type of the Edge
-   * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType the SemanticRelationType
-   *       Enum
+   * @see  SemanticRelationType the SemanticRelationType Enum
    */
   SemanticRelationType getType();
 
@@ -38,7 +37,8 @@ public interface Edge {
 
   /**
    * Sets the weight of the Edge.
-   * @param i weight integer value to be set
+   * @param  i
+   *         the weight of the Edge
    */
   void setWeight(Integer i);
 }
