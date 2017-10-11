@@ -29,7 +29,7 @@ public abstract class Refiner {
         new WordVerb(verb, vt),
         new PhraseNoun(new WordNoun(object, ot)));
     
-    return new Sentence(SentenceType.Answer, new ClauseMain(subjectp, verbp)).toString();
+    return new SentenceMain(SentenceType.Answer, new ClauseMain(subjectp, verbp)).toString();
   }
   
 }

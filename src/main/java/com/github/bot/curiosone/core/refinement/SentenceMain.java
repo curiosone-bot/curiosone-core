@@ -1,6 +1,8 @@
 package com.github.bot.curiosone.core.refinement;
 
-public class Sentence {
+import com.github.bot.curiosone.core.refinement.interfaces.Sentence;
+
+public class SentenceMain implements Sentence {
 
   private ClauseMain main;
   private SentenceType type;
@@ -10,7 +12,7 @@ public class Sentence {
    * @param type type of sentence
    * @param main main clause
    */
-  public Sentence(SentenceType type, ClauseMain main) {
+  public SentenceMain(SentenceType type, ClauseMain main) {
     this.type = type;
     this.main = main;
   }

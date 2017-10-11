@@ -1,10 +1,10 @@
 package com.github.bot.curiosone.core.refinement.interfaces;
 
-public interface Word {
+public interface Sentence {
   
   /**
    * Refinement logic.
-   * @return refined word
+   * @return refined sentence
    */
   @Override String toString();
   
