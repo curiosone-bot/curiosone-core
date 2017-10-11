@@ -9,8 +9,8 @@ import java.util.Optional;
 /**
  * Handles precomputed answers to sentences not understood by the chatbot.
  * Contains a method to get a randomly generated answer.
- * @see  com.github.bot.curiosone.core.nlp.Phrase The Phrase Class
- * @see  com.github.bot.curiosone.core.extraction.BrainResponse The BrainResponse Class
+ * @see  Phrase The Phrase Class
+ * @see  BrainResponse The BrainResponse Class
  */
 public class RandomAnswer {
 
@@ -51,8 +51,8 @@ public class RandomAnswer {
    * @param  phrase
    *         given in input
    * @return  a BrainResponse instance, containing a general answer
-   * @see  com.github.bot.curiosone.core.nlp.Phrase The Sentence Phrase
-   * @see  com.github.bot.curiosone.core.extraction.BrainResponse The BrainResponse Class
+   * @see  Phrase The Sentence Phrase
+   * @see  BrainResponse The BrainResponse Class
    */
   public static BrainResponse getAnswer(Phrase phrase) {
     List<Token> tokenList = phrase.getTokens();
@@ -69,10 +69,10 @@ public class RandomAnswer {
   }
 
   /**
-   * Returns a random index of the array given in input.
+   * Picks a random index of the array given in input.
    * @param  array
-   *         whose index is needed
-   * @return  the randomly generated index
+   *         the source array
+   * @return  the randomly generated index of the given array
    */
   private static int randomIndex(String[] array) {
     return (int)(Math.random() * array.length);
