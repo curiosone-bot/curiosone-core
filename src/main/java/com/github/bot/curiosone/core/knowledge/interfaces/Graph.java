@@ -12,8 +12,8 @@ import java.util.Set;
 
 /**
  * Represents a Graph.
- * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
- * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
+ * @see  Vertex The Vertex Interface
+ * @see  Edge The Edge Interface
  */
 public interface Graph {
 
@@ -21,7 +21,7 @@ public interface Graph {
    * Adds an Edge to the Graph.
    * @param  e
    *         the Edge to be added
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
+   * @see  Edge The Edge Interface
    */
   void add(Edge e);
 
@@ -29,7 +29,7 @@ public interface Graph {
    * Adds a Vertex to the Graph.
    * @param  v
    *         the Vertex to be added
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
+   * @see  Vertex The Vertex Interface
    */
   void add(Vertex v);
 
@@ -43,8 +43,8 @@ public interface Graph {
    *         the type of the Edge to be added
    * @param  weight
    *         the weight of the Edge to be added
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
-   * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType The SemanticRelationType
+   * @see  Vertex The Vertex Interface
+   * @see  SemanticRelationType The SemanticRelationType
    *       Enum
    */
   void addEdge(Vertex v1, Vertex v2, SemanticRelationType type, Integer weight);
@@ -55,7 +55,7 @@ public interface Graph {
    *         the Edge to be searched
    * @return  {@code true} if the Graph contains the given Edge,
               {@code false} otherwise
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
+   * @see  Edge The Edge Interface
    */
   boolean containsEdge(Edge e);
 
@@ -65,21 +65,21 @@ public interface Graph {
    *         the Vertex to be searched
    * @return  {@code true} if the Graph contains the given Vertex,
               {@code false} otherwise
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
+   * @see  Vertex The Vertex Interface
    */
   boolean containsVertex(Vertex v);
 
   /**
    * Gets all the Edges of this Graph.
    * @return  a Set containing all the Edges of the Graph
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
+   * @see  Edge The Edge Interface
    */
   Set<Edge> edgeSet();
 
   /**
    * Gets all the Vertices of this Graph.
    * @return  a Set containing all the Vertices of the Graph
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
+   * @see  Vertex The Vertex Interface
    */
   Set<Vertex> vertexSet();
 
@@ -88,8 +88,8 @@ public interface Graph {
    * @param  v
    *         the interested Vertex
    * @return  a Set containing all the outgoing Edges from the given Vertex
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
+   * @see  Vertex The Vertex Interface
+   * @see  Edge The Edge Interface
    */
   Set<Edge> outgoingEdges(Vertex v);
 
@@ -98,8 +98,8 @@ public interface Graph {
    * @param  v
    *         the interested Vertex
    * @return  a Set containing all the coming Edges to the given Vertex
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
+   * @see  Vertex The Vertex Interface
+   * @see  Edge The Edge Interface
    */
   Set<Edge> incomingEdges(Vertex v);
 
@@ -107,17 +107,17 @@ public interface Graph {
    * Adds all the given Edges to the Edges of the Graph.
    * @param  edgeSet
    *         the Edges to be added
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
-   * @see  java.util.Collection The Collection Interface
+   * @see  Edge The Edge Interface
+   * @see  <a href="https://goo.gl/CnxWAz">The Collection Interface</a>
    */
   void addEdges(Collection<? extends Edge> edgeSet);
 
   /**
    * Gets the Graph.
    * @return  a Map representation of the Graph
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
-   * @see  java.util.Map The Map Interface
+   * @see  Vertex The Vertex Interface
+   * @see  Edge The Edge Interface
+   * @see  <a href="https://goo.gl/9aXrZs">The Map Interface</a>
    */
   Map<Vertex, Set<Edge>> getGrafo();
 
@@ -127,8 +127,8 @@ public interface Graph {
    *         String representation of the Vertex source
    * @return  An Optional instance. The instance is empty, if no Edge has been found, otherwise it
    *          contains the found Edge.
-   * @see  java.util.Optional The Optional Class
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
+   * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
+   * @see  Edge The Edge Interface
    */
   Optional<Edge> getAnswer(String v1);
 
@@ -140,9 +140,9 @@ public interface Graph {
    *         SemanticRelationType of the strongest Edge to be searched
    * @return  an Optional instance. The instance is empty, if no Edge is found. Otherwise, it
    *          contains the found Edge.
-   * @see  java.util.Optional The Optional Class
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
-   * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType The SemanticRelationType
+   * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
+   * @see  Edge The Edge Interface
+   * @see  SemanticRelationType The SemanticRelationType
    *       Enum
    */
   Optional<Edge> getAnswer(String source,SemanticRelationType type);
@@ -153,8 +153,8 @@ public interface Graph {
    *         Edge List to be searched in
    * @return  an Optional instance. The instance contains an Edge, if the strongest Edge is found.
    *          It is empty, otherwise
-   * @see  java.util.Optional The Optional Class
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
+   * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
+   * @see  Edge The Edge Interface
    */
   Optional<Edge> getAnswer(List<Edge> edges);
 
@@ -166,8 +166,7 @@ public interface Graph {
    *         SemanticRelationType for the Edge to be learned
    * @param  v2
    *         String representation of the target for the Edge to be learned
-   * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType The SemanticRelationType
-   *       Enum
+   * @see  SemanticRelationType The SemanticRelationType Enum
    */
   void learn(String v1, SemanticRelationType relation, String v2);
 
@@ -187,7 +186,7 @@ public interface Graph {
    * @return  Returns an Optional instance.
    *          The instance is empty, if no result is found.
    *          Otherwise, it contains the query response
-   * @see  com.github.bot.curiosone.core.knowledge.SemanticQuery The SemanticQuery Class
+   * @see  SemanticQuery The SemanticQuery Class
    */
   Optional<Edge> query(SemanticQuery sq);
 
@@ -201,8 +200,7 @@ public interface Graph {
    *         String representation of the target Vertex of the Edge to be searched
    * @return  {@code true} if the Edge exists,
    *          {@code false} otherwise
-   * @see  com.github.bot.curiosone.core.knowledge.SemanticQuery The SemanticQuery Class
-   *       Enum
+   * @see  SemanticQuery The SemanticQuery Class Enum
    */
   boolean exist(String v1, SemanticRelationType relation, String v2);
 }
