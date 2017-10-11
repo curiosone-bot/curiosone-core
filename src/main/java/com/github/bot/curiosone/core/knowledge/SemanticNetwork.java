@@ -30,14 +30,15 @@ import java.util.Set;
 /**
  * Represents a Semantic Network.
  * Provides methods to load the Semantic Network in memory and manage all of its components.
- * @see  com.github.bot.curiosone.core.nlp.SemanticRelation The SemanticRelation Class
- * @see  com.github.bot.curiosone.core.nlp.SemanticQuery The SemanticQuery Class
+ * @see  com.github.bot.curiosone.core.knowledge.SemanticRelation The SemanticRelation Class
+ * @see  com.github.bot.curiosone.core.knowledge.SemanticQuery The SemanticQuery Class
  */
 public class SemanticNetwork implements Graph {
 
   /**
    * Stores all the SemanticRelationType different from IS_A.
-   * com.github.bot.curiosone.core.nlp.SemanticRelationType The SemanticRelationType Class
+   * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType The SemanticRelationType
+   *       Class
    */
   private static final Set<SemanticRelationType> nsr = new HashSet<>(
       Arrays.asList(
@@ -65,6 +66,8 @@ public class SemanticNetwork implements Graph {
   /**
    * Gets the Singleton instance.
    * @return  the Semantic Network
+   * @throws  IOException
+   *          if something unexpected happens
    */
   public static SemanticNetwork getInstance() throws IOException {
     if (curiosoneSemanticNetwork == null) {
@@ -76,7 +79,8 @@ public class SemanticNetwork implements Graph {
   /**
    * Private constructor.
    * Loads the Semantic Network in memory.
-   * @throws IOException if there is a problem with the input file
+   * @throws  IOException
+   *          if there is a problem with the input file
    */
   private SemanticNetwork() throws IOException {
     this.grafo = new HashMap<>();
@@ -135,8 +139,9 @@ public class SemanticNetwork implements Graph {
    *         the SemanticRelationType of the SemanticRelation to be added
    * @param  weight
    *         the weight of the SemanticRelation to be added
-   * @see  com.github.bot.curiosone.core.nlp.interfaces.Vertex The Vertex Interface
-   * @see  com.github.bot.curiosone.core.nlp.SemanticRelationType The SemanticRelationType Enum
+   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
+   * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType The SemanticRelationType
+   *       Enum
    */
   @Override
   public void addEdge(Vertex v1, Vertex v2, SemanticRelationType type, Integer weight) {
@@ -157,7 +162,7 @@ public class SemanticNetwork implements Graph {
    *         the Edge to be searched.
    * @return  {@code true} if this SemanticNetwork contains the given Edge;
    *          {@code false} otherwise.
-   * @see  com.github.bot.curiosone.core.nlp.interfaces.Edge The Edge Interface
+   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
    */
   @Override
   public boolean containsEdge(Edge e) {
@@ -310,7 +315,6 @@ public class SemanticNetwork implements Graph {
    *         SemanticRelationType of the strongest Edge to be searched
    * @return  an Optional instance. The instance is empty, if no Edge is found. Otherwise, it
    *         contains the found Edge.
-   * @throws IOException exception
    */
   @Override
   public Optional<Edge> getAnswer(String v1, SemanticRelationType type) {
@@ -380,7 +384,6 @@ public class SemanticNetwork implements Graph {
    * Increases the usage score for all the Edges with the given Vertex as target.
    * @param  v
    *         the target Vertex
-   * @throws IOException if no input file is found.
    */
   @Override
   public void increase(Vertex v, Integer score) {
