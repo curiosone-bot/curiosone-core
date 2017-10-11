@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 /**
  * Contains an utility method to get an answer from a given Sentence and its scope.
- * @see  com.github.bot.curiosone.core.nlp.Sentence The Sentence Class
+ * @see  Sentence The Sentence Class
  */
 public class Affirmation {
 
@@ -31,7 +31,9 @@ public class Affirmation {
    * @return  an Optional instance.
    *          If the answer has not been found, an empty Optional will be returned.
    *          Otherwise, the Optional instance will contain the answer.
-   * @see  com.github.bot.curiosone.core.nlp.Sentence The Sentence Class
+   * @see  Optional The Optional Class
+   * @see  BrainResponse The BrainResponse Class
+   * @see  Sentence The Sentence Class
    */
   public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) {
     boolean answer = false;
