@@ -10,7 +10,7 @@ import java.util.Optional;
  * Handles precomputed answers to sentences not understood by the chatbot.
  * Contains a method to get a randomly generated answer.
  * @see  com.github.bot.curiosone.core.nlp.Phrase The Phrase Class
- * @see  com.github.bot.curiosone.core.nlp.BrainResponse The BrainResponse Class
+ * @see  com.github.bot.curiosone.core.extraction.BrainResponse The BrainResponse Class
  */
 public class RandomAnswer {
 
@@ -52,7 +52,7 @@ public class RandomAnswer {
    *         given in input
    * @return  a BrainResponse instance, containing a general answer
    * @see  com.github.bot.curiosone.core.nlp.Phrase The Sentence Phrase
-   * @see  com.github.bot.curiosone.core.nlp.BrainResponse The BrainResponse Class
+   * @see  com.github.bot.curiosone.core.extraction.BrainResponse The BrainResponse Class
    */
   public static BrainResponse getAnswer(Phrase phrase) {
     List<Token> tokenList = phrase.getTokens();
