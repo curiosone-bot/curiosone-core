@@ -8,9 +8,9 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Grammar and semantic word information pointer class.
- * @author Andrea Rivitto && Eugenio Schintu
- * @see IToken
+ * Represent a Token.
+ * A Token is a Word with some additional information.
+ * Provides methods to create a RawToken and manage all of its aspects.
  */
 public class RawToken {
 
@@ -35,15 +35,16 @@ public class RawToken {
   private boolean known;
 
   /**
-   * Various semantic informations' list.
-   * @see Word
-   * @see RawWord
+   * Lists various semantic information
+   * @see  Word
+   * @see  RawWord
    */
   private List<RawWord> words;
 
   /**
    * constructs a RawToken, using an original value.
-   * @param originalValue the original token value.
+   * @param  originalValue
+   *         the original token value
    */
   public RawToken(String originalValue) {
     this.originalValue = originalValue;
@@ -54,8 +55,9 @@ public class RawToken {
   }
 
   /**
-   * Returns the original value.
-   * @see #originalValue
+   * Gets the original value.
+   * @return  the original value
+   * @see  #originalValue
    */
   public String getOValue() {
     return originalValue;
@@ -71,8 +73,9 @@ public class RawToken {
   }
 
   /**
-   * Returns <code>true</code> if this Token is correct;
-   *         <code>false</code> otherwise.
+   * Returns wheter this Token is correct or not.
+   * @return  {@code true} if this Token is correct;
+   *          {@code false} otherwise
    * @see #corrected
    */
   public boolean isCorrected() {
@@ -90,6 +93,7 @@ public class RawToken {
 
   /**
    * Gets the modified String value.
+   * @return  the value
    * @see #value
    */
   public String getValue() {
@@ -97,8 +101,9 @@ public class RawToken {
   }
 
   /**
-   * Returns <code>true</code> if this Token is known;
-   *         <code>false</code> otherwise.
+   * Returns whether this RawToken is known or not.
+   * @return  {@code true} if this Token is known;
+   *          {@code false} otherwise.
    * @see #known
    */
   public boolean isKnown() {
@@ -107,6 +112,8 @@ public class RawToken {
 
   /**
    * Gets the lemma for this Token.
+   * Returns null, if this RawToken is unknown.
+   * @return  the lemma of this Token
    * @see #lemma
    */
   public String getLemma() {
@@ -118,6 +125,8 @@ public class RawToken {
 
   /**
    * Gets the part of speech for this Token.
+   * Returns null, if this Token is unknown.
+   * @return  the POS value of this Token
    * @see #POS
    */
   public POS getPos() {
@@ -129,6 +138,8 @@ public class RawToken {
 
   /**
    * Gets the lexical type for this Token.
+   * Returns null, if this Token is unknown.
+   * @return  the LEX value of this Token
    * @see #LEX
    */
   public LEX getLexT() {
@@ -140,7 +151,8 @@ public class RawToken {
 
   /**
    * Sets wheter this Token is known or not.
-   * @param known wheter this Token is known or not
+   * @param  known
+   *         wheter this Token is known or not
    * @see #known
    */
   public void setKnown(boolean known) {
@@ -149,7 +161,8 @@ public class RawToken {
 
   /**
    * Sets the modified String value for this Token.
-   * @param value the modified String value to be used to set value.
+   * @param  value
+   *         the modified String value to be used to set value.
    * @see #value
    */
   public void setValue(String value) {
@@ -158,6 +171,7 @@ public class RawToken {
 
   /**
    * Gets all the words for this Token.
+   * @return  a List containing all the RawWord of this Token
    * @see #words
    */
   public List<RawWord> getWords() {
@@ -165,8 +179,9 @@ public class RawToken {
   }
 
   /**
-   * Adds a word to the already present words Collection.
-   * @param word the word to be added
+   * Adds a RawWord to the Words of this Token.
+   * @param  word
+   *         the word to be added
    * @see #words
    */
   public void addWord(RawWord word) {
@@ -174,16 +189,19 @@ public class RawToken {
   }
 
   /**
-   * Adds a Collection of word to the already present words Collection.
-   * @param words a Collection of words to be added
+   * Adds a Collection of RawWords to the Words of this Token.
+   * @param  words
+   *         a Collection of words to be added
    * @see #words
+   * @see java.util.Collection The Collection Interface
    */
   public void addAllWords(Collection<RawWord> words) {
     this.words.addAll(words);
   }
 
   /**
-   * Returns a String representation of this Token.
+   * Returns a String representation of this RawToken.
+   * @return  a String representation of this Token
    */
   @Override
   public String toString() {
