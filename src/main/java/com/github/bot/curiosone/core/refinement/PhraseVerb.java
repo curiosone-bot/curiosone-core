@@ -4,17 +4,17 @@ import java.util.Optional;
 
 import com.github.bot.curiosone.core.refinement.interfaces.Phrase;
 
-public class VerbPhrase implements Phrase {
+public class PhraseVerb implements Phrase {
 
-  private VerbWord main;
-  private Optional<NounPhrase> object;
+  private WordVerb main;
+  private Optional<PhraseNoun> object;
 
-  public VerbPhrase(VerbWord main, NounPhrase dependents) {
+  public PhraseVerb(WordVerb main, PhraseNoun dependents) {
     this.main = main;
     this.object = Optional.of(dependents);
   }
 
-  public VerbPhrase(VerbWord main) {
+  public PhraseVerb(WordVerb main) {
     this.main = main;
     this.object = Optional.empty();
   }

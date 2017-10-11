@@ -2,17 +2,17 @@ package com.github.bot.curiosone.core.refinement;
 
 import com.github.bot.curiosone.core.refinement.interfaces.Clause;
 
-public class MainClause implements Clause {
+public class ClauseMain implements Clause {
 
-  private NounPhrase subject;
-  private VerbPhrase predicate;
+  private PhraseNoun subject;
+  private PhraseVerb predicate;
   
   /**
    * Clause constructor.
    * @param subject subject
    * @param predicate predicate
    */
-  public MainClause(NounPhrase subject, VerbPhrase predicate) {
+  public ClauseMain(PhraseNoun subject, PhraseVerb predicate) {
     this.subject   = subject;
     this.predicate = predicate;
   }
@@ -21,7 +21,7 @@ public class MainClause implements Clause {
    * Returns the subject phrase.
    * @return phrase
    */
-  public NounPhrase getSubject() {
+  public PhraseNoun getSubject() {
     return subject;
   }
 
@@ -29,7 +29,7 @@ public class MainClause implements Clause {
    * Returns the predicate phrase.
    * @return phrase
    */
-  public VerbPhrase getPredicate() {
+  public PhraseVerb getPredicate() {
     return predicate;
   }
 

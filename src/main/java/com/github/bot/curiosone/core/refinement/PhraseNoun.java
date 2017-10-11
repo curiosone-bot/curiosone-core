@@ -2,11 +2,11 @@ package com.github.bot.curiosone.core.refinement;
 
 import com.github.bot.curiosone.core.refinement.interfaces.Phrase;
 
-public class NounPhrase implements Phrase {
+public class PhraseNoun implements Phrase {
 
-  private NounWord main;
+  private WordNoun main;
   
-  public NounPhrase(NounWord main) {
+  public PhraseNoun(WordNoun main) {
     this.main = main;
   }
   

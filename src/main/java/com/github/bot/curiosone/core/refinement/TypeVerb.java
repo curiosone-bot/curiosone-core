@@ -3,7 +3,7 @@ package com.github.bot.curiosone.core.refinement;
 /**
  * Type of verb.
  */
-public enum VerbType {
+public enum TypeVerb {
   PresentS1("PRESENT, SINGULAR, FIRST_PERSON"),
   PresentS2("PRESENT, SINGULAR, SECOND_PERSON"),
   PresentS3("PRESENT, SINGULAR, THIRD_PERSON"),
@@ -50,7 +50,7 @@ public enum VerbType {
 
   private String category;
 
-  private VerbType(String category) {
+  private TypeVerb(String category) {
     this.category = category;
   }
 

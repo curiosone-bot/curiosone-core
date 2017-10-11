@@ -14,22 +14,22 @@ public abstract class Refiner {
    */
   public static String refine(String subject, String verb, String object, boolean sp, boolean vp, boolean op) {
     
-    NounType st = sp ? NounType.Plural : NounType.Singular;
-    VerbType vt = VerbType.Infinitive;
-    NounType ot = op ? NounType.Plural : NounType.Singular;
+    TypeNoun st = sp ? TypeNoun.Plural : TypeNoun.Singular;
+    TypeVerb vt = TypeVerb.Infinitive;
+    TypeNoun ot = op ? TypeNoun.Plural : TypeNoun.Singular;
     
-    if (!sp && !vp) { vt = VerbType.PresentS1; }
-    if ( sp && !vp) { vt = VerbType.PresentP1; }
-    if (!sp &&  vp) { vt = VerbType.SimplePastS1; }
-    if ( sp &&  vp) { vt = VerbType.SimplePastP1; }    
+    if (!sp && !vp) { vt = TypeVerb.PresentS1; }
+    if ( sp && !vp) { vt = TypeVerb.PresentP1; }
+    if (!sp &&  vp) { vt = TypeVerb.SimplePastS1; }
+    if ( sp &&  vp) { vt = TypeVerb.SimplePastP1; }    
     
-    NounPhrase subjectp = new NounPhrase(new NounWord(subject, st));
+    PhraseNoun subjectp = new PhraseNoun(new WordNoun(subject, st));
 
-    VerbPhrase verbp = new VerbPhrase(
-        new VerbWord(verb, vt),
-        new NounPhrase(new NounWord(object, ot)));
+    PhraseVerb verbp = new PhraseVerb(
+        new WordVerb(verb, vt),
+        new PhraseNoun(new WordNoun(object, ot)));
     
-    return new Sentence(SentenceType.Answer, new MainClause(subjectp, verbp)).toString();
+    return new Sentence(SentenceType.Answer, new ClauseMain(subjectp, verbp)).toString();
   }
   
 }

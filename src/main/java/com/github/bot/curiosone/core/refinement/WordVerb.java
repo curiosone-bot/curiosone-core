@@ -8,12 +8,12 @@ import it.uniroma1.lcl.babelmorph.en.EnglishMorpher;
 import java.util.Arrays;
 import java.util.List;
 
-public class NounWord implements Word {
+public class WordVerb implements Word {
 
   private String lemma;
-  private NounType type;
+  private TypeVerb type;
   
-  public NounWord(String lemma, NounType type) {
+  public WordVerb(String lemma, TypeVerb type) {
     this.lemma = lemma;
     this.type = type;
   }
@@ -21,24 +21,15 @@ public class NounWord implements Word {
   @Override
   public String toString() {
     
-    /*
-     * noun is a named entity or singular
-     */
-    if (!type.equals(NounType.Plural)) {
-      return lemma;
-    }
-    
-    /*
-     * noun is plural
-     */
     try {
       String lexs = new EnglishMorpher()
-          .getInflection(lemma, type.toCategory(), WordPart.Noun.forBabelMorph())
+          .getInflection(lemma, type.toCategory(), WordPart.Verb.forBabelMorph())
           .stream().map(Lexeme::toString).findAny().get();
-
-      List<String> lexl = Arrays.asList(lexs.split("[\\[\\]]"));
-      return lexl.get(lexl.size() - 1);
       
+      List<String> lexla = Arrays.asList(lexs.split("[\\[\\]]"));
+      List<String> lexlb = Arrays.asList(lexla.get(lexla.size() - 1).split(", "));
+      return lexlb.get(0);
+
     } catch (Exception e) {
       return lemma;
     }

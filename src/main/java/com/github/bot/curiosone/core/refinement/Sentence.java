@@ -2,7 +2,7 @@ package com.github.bot.curiosone.core.refinement;
 
 public class Sentence {
 
-  private MainClause main;
+  private ClauseMain main;
   private SentenceType type;
   
   /**
@@ -10,7 +10,7 @@ public class Sentence {
    * @param type type of sentence
    * @param main main clause
    */
-  public Sentence(SentenceType type, MainClause main) {
+  public Sentence(SentenceType type, ClauseMain main) {
     this.type = type;
     this.main = main;
   }
@@ -19,7 +19,7 @@ public class Sentence {
    * Returns the main clause.
    * @return clause
    */
-  public MainClause getMainClause() {
+  public ClauseMain getMainClause() {
     return main;
   }
   
