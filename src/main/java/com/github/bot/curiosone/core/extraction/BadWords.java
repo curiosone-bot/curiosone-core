@@ -75,7 +75,7 @@ public class BadWords {
    *          The returned instance is empty, if no bad word or insult has been found in the
    *          original Phrase, contains a value (an instance of BrainResponse) otherwise.
    * @see  Phrase The Phrase Class
-   * @see  Optional The Optional Class
+   * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
    * @see  BrainResponse The BrainResponse Class
    */
   public static Optional<BrainResponse> getAnswer(Phrase phrase) {
