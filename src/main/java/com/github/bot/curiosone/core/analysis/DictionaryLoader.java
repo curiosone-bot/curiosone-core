@@ -75,10 +75,11 @@ public class DictionaryLoader {
   }
 
   /**
-   * Returns a Double value, representing the sentiment score for the given Word.
+   * Calculates a Double value, representing the sentiment score for the given Word.
    * If the given Word is unknown, a neutral score (0.00) is returned.
    * @param  word
    *         the Word to be analysed
+   * @return the sentiment score of the given word
    */
   public double getScore(String word) {
     return dict.getOrDefault(word, 0.0);
