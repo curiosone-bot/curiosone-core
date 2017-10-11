@@ -28,8 +28,6 @@ public class BrainResponse {
    *         The content of the computed answer
    * @param  scope
    *         The scope of the computed answer
-   * @see  #text
-   * @see  #scope
    */
   public BrainResponse(String text, String scope) {
     this.text = text;
@@ -39,7 +37,6 @@ public class BrainResponse {
   /**
    * Gets the content of the computed answer.
    * @return  the content of the computed answer
-   * @see  #text
    */
   public String getMessage() {
     return text;
@@ -48,7 +45,6 @@ public class BrainResponse {
   /**
    * Gets the scope of the computed answer.
    * @return  the scope of the computed answer
-   * @see  #scope
    */
   public String getScope() {
     return scope;
@@ -86,8 +82,6 @@ public class BrainResponse {
    * Returns the HashCode for this BrainResponse.
    * The HashCode depends on the content and the scope of this BrainResponse.
    * @see  <a href="https://goo.gl/inr6Ra">The hashCode method of the Object Class</a>
-   * @see  #text
-   * @see  #scope
    */
   @Override
   public int hashCode() {
