@@ -6,27 +6,26 @@ import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 /**
  * Represents a Semantic Relation of a Semantic Network.
  * Provides methods to create a Semantic Relation and get its information.
- * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
- * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType The SemanticRelationType Enum
+ * @see  Vertex The Vertex Interface
+ * @see  SemanticRelationType The SemanticRelationType Enum
  */
 public class SemanticRelation implements Edge {
 
   /**
    * Stores the source Vertex of this SemanticRelation.
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
+   * @see  Vertex The Vertex Interface
    */
   private Vertex sorgente;
 
   /**
    * Stores the target Vertex of this SemanticRelation.
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
+   * @see  Vertex The Vertex Interface
    */
   private Vertex destinazione;
 
   /**
    * Stores the SemanticRelationType of this SemanticRelation.
-   * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType The SemanticRelationType
-   *       Enum
+   * @see  SemanticRelationType The SemanticRelationType Enum
    */
   private SemanticRelationType collegamento;
 
