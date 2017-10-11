@@ -46,6 +46,8 @@ dependencies {
   compile 'org.apache.commons:commons-io:1.3.2'
 
   compile name: 'edu.mit.jwi_2.4.0'
+
+  compile name: 'babelmorph_english'
 }
 
 jacocoTestReport {
