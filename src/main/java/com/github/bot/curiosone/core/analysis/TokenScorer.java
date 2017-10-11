@@ -11,7 +11,7 @@ import java.util.OptionalDouble;
 /**
  * Calculates the Sentiment score of a Sentence.
  * Provides methods to calculate the sentiment score from a single Token or a Token List.
- * @see  com.github.bot.curiosone.core.nlp.Token
+ * @see  Token The Token Class
  */
 
 public class TokenScorer {
@@ -28,7 +28,7 @@ public class TokenScorer {
    *         The Token to be analysed.
    * @return  a Double value, representing the sentiment index for the given Token.
    *          This index ranges between -1.00 (sad) and 1.00 (happy), 0.00 is a neutral score
-   * @see  com.github.bot.curiosone.core.nlp.Token
+   * @see  Token The Token Class
    */
   public static double calculateScore(Token token) {
     POS pos = token.getMeanings().stream()
@@ -46,7 +46,7 @@ public class TokenScorer {
    *         The Token List to be analysed.
    * @return  a Double value, representing the sentiment index for the given Token List.
    *          This index ranges between -1.00 (sad) and 1.00 (happy), 0.00 is a neutral score
-   * @see  com.github.bot.curiosone.core.nlp.Token
+   * @see  Token The Token Class
    */
   public static double calculateScore(List<Token> tokenList) {
     OptionalDouble score = tokenList.stream()
