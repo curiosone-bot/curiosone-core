@@ -114,7 +114,7 @@ public class RawToken {
    * Gets the lemma for this Token.
    * Returns null, if this RawToken is unknown.
    * @return  the lemma of this Token
-   * @see #lemma
+   * @see RawWord#getLemma
    */
   public String getLemma() {
     if (!isKnown()) {
@@ -127,7 +127,7 @@ public class RawToken {
    * Gets the part of speech for this Token.
    * Returns null, if this Token is unknown.
    * @return  the POS value of this Token
-   * @see #POS
+   * @see RawWord#getPos
    */
   public POS getPos() {
     if (!isKnown()) {
@@ -140,7 +140,7 @@ public class RawToken {
    * Gets the lexical type for this Token.
    * Returns null, if this Token is unknown.
    * @return  the LEX value of this Token
-   * @see #LEX
+   * @see RawWord#getLexType
    */
   public LEX getLexT() {
     if (!isKnown()) {
