@@ -18,10 +18,10 @@ public abstract class Refiner {
     TypeVerb vt = TypeVerb.Infinitive;
     TypeNoun ot = op ? TypeNoun.Plural : TypeNoun.Singular;
     
-    if (!sp && !vp) { vt = TypeVerb.PresentS1; }
-    if ( sp && !vp) { vt = TypeVerb.PresentP1; }
-    if (!sp &&  vp) { vt = TypeVerb.SimplePastS1; }
-    if ( sp &&  vp) { vt = TypeVerb.SimplePastP1; }    
+    if (!sp && !vp) { vt = TypeVerb.PresentS3; }
+    if ( sp && !vp) { vt = TypeVerb.PresentP3; }
+    if (!sp &&  vp) { vt = TypeVerb.SimplePastS3; }
+    if ( sp &&  vp) { vt = TypeVerb.SimplePastP3; }    
     
     PhraseNoun subjectp = new PhraseNoun(new WordNoun(subject, st));
 

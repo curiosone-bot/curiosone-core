@@ -21,6 +21,11 @@ public class WordVerb implements Word {
   @Override
   public String toString() {
     
+    if (lemma.equals("be")) {
+      if (type.equals(TypeVerb.PresentS1)) {return "am";}
+      if (type.equals(TypeVerb.PresentS3)) {return "is";}
+    }
+    
     try {
       String lexs = new EnglishMorpher()
           .getInflection(lemma, type.toCategory(), WordPart.Verb.forBabelMorph())
