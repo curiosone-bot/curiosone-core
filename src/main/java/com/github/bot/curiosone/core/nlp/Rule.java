@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 /**
  * Utility class to handle a grammar Rule.
  * A Rule in a context free Grammar is a trio, consisting of a source POS and a pair of target POS.
- * Only Sentences that respect the "Source->Pair of target POS" relation are allowed in the Grammar.
+ * Only Sentences that respect the "Source - Pair of target POS" relation are allowed in the Grammar.
  * Provides useful methods to manage every single aspect of the Rule.
  * @see  com.github.bot.curiosone.core.nlp.POS The POS Enum
  * @see  com.github.bot.curiosone.core.util.Pair The Pair Class
