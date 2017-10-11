@@ -48,6 +48,7 @@ dependencies {
   compile name: 'edu.mit.jwi_2.4.0'
 
   compile name: 'babelmorph_english'
+  compile name: 'babelnet-api-3.7'
 }
 
 jacocoTestReport {
