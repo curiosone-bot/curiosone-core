@@ -31,6 +31,7 @@ public class Conversation {
 
   /**
    * Maps the recognized tokens to their possible phrases.
+   * @see  <a href="https://goo.gl/CR2S3b">The LinkedHashMap Class</a>
    */
   private static LinkedHashMap<String[], String[]> knownQuestions;
 
@@ -70,9 +71,9 @@ public class Conversation {
    *         the input phrase to be checked
    * @return  An Optional instance. The instance is empty, if the input is an unknown Phrase.
    *          Otherwise, the istance contains the answer, encapsulated in a BrainResponse object.
-   * @see  com.github.bot.curiosone.core.nlp.Phrase The Phrase Class
+   * @see  Phrase The Phrase Class
    * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
-   * @see  com.github.bot.curiosone.core.extraction.BrainResponse The BrainResponse Class
+   * @see  BrainResponse The BrainResponse Class
    */
   public static Optional<BrainResponse> getAnswer(Phrase phrase) {
     if (knownQuestions == null) {
