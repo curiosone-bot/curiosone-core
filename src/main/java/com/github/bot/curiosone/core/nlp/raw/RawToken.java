@@ -57,7 +57,6 @@ public class RawToken {
   /**
    * Gets the original value.
    * @return  the original value
-   * @see  #originalValue
    */
   public String getOValue() {
     return originalValue;
@@ -65,8 +64,8 @@ public class RawToken {
 
   /**
    * Sets the original value.
-   * @param originalValue the value to set the original value to.
-   * @see #originalValue
+   * @param  originalValue
+   *         the value to set the original value to.
    */
   public void setOValue(String originalValue) {
     this.originalValue = originalValue;
@@ -76,7 +75,6 @@ public class RawToken {
    * Returns wheter this Token is correct or not.
    * @return  {@code true} if this Token is correct;
    *          {@code false} otherwise
-   * @see #corrected
    */
   public boolean isCorrected() {
     return corrected;
@@ -85,7 +83,6 @@ public class RawToken {
   /**
    * Sets wheter this Token is correct or not.
    * @param corrected wheter the token is correct or not.
-   * @see #corrected
    */
   public void setCorrected(boolean corrected) {
     this.corrected = corrected;
@@ -94,7 +91,6 @@ public class RawToken {
   /**
    * Gets the modified String value.
    * @return  the value
-   * @see #value
    */
   public String getValue() {
     return value;
@@ -104,7 +100,6 @@ public class RawToken {
    * Returns whether this RawToken is known or not.
    * @return  {@code true} if this Token is known;
    *          {@code false} otherwise.
-   * @see #known
    */
   public boolean isKnown() {
     return known;
@@ -153,7 +148,6 @@ public class RawToken {
    * Sets wheter this Token is known or not.
    * @param  known
    *         wheter this Token is known or not
-   * @see #known
    */
   public void setKnown(boolean known) {
     this.known = known;
@@ -163,7 +157,6 @@ public class RawToken {
    * Sets the modified String value for this Token.
    * @param  value
    *         the modified String value to be used to set value.
-   * @see #value
    */
   public void setValue(String value) {
     this.value = value;
@@ -172,7 +165,6 @@ public class RawToken {
   /**
    * Gets all the words for this Token.
    * @return  a List containing all the RawWord of this Token
-   * @see #words
    */
   public List<RawWord> getWords() {
     return words;
@@ -182,7 +174,6 @@ public class RawToken {
    * Adds a RawWord to the Words of this Token.
    * @param  word
    *         the word to be added
-   * @see #words
    */
   public void addWord(RawWord word) {
     this.words.add(word);
@@ -192,8 +183,7 @@ public class RawToken {
    * Adds a Collection of RawWords to the Words of this Token.
    * @param  words
    *         a Collection of words to be added
-   * @see #words
-   * @see java.util.Collection The Collection Interface
+   * @see  <a href="https://goo.gl/d3eV5L">The Collection Interface</a>
    */
   public void addAllWords(Collection<RawWord> words) {
     this.words.addAll(words);
