@@ -30,15 +30,14 @@ import java.util.Set;
 /**
  * Represents a Semantic Network.
  * Provides methods to load the Semantic Network in memory and manage all of its components.
- * @see  com.github.bot.curiosone.core.knowledge.SemanticRelation The SemanticRelation Class
- * @see  com.github.bot.curiosone.core.knowledge.SemanticQuery The SemanticQuery Class
+ * @see  SemanticRelation The SemanticRelation Class
+ * @see  SemanticQuery The SemanticQuery Class
  */
 public class SemanticNetwork implements Graph {
 
   /**
    * Stores all the SemanticRelationType different from IS_A.
-   * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType The SemanticRelationType
-   *       Class
+   * @see  SemanticRelationType The SemanticRelationType Enum
    */
   private static final Set<SemanticRelationType> nsr = new HashSet<>(
       Arrays.asList(
@@ -50,13 +49,12 @@ public class SemanticNetwork implements Graph {
 
   /**
    * Stores the Semantic Network.
-   * @see  Map The Map Interface
+
    */
   private Map<Vertex,Set<Edge>> grafo;
 
   /**
    * String representation of the path to the Semantic Network database.
-   * @see  Path The Path Class
    */
   private Path percorso = Paths.get("src/main/resources/knowledge/CuriosoneSemanticNetwork.txt");
 
@@ -102,7 +100,6 @@ public class SemanticNetwork implements Graph {
   /**
    * Gets the Map representation of this Semantic Network.
    * @return  the Map representation of this Semantic Network
-   * @see  #grafo
    */
   @Override
   public Map<Vertex,Set<Edge>> getGrafo() {
@@ -113,7 +110,6 @@ public class SemanticNetwork implements Graph {
    * Adds a SemanticRelation to this SemanticNetwork.
    * @param  e
    *         the SemanticRelation to be added
-   * @see  #grafo
    */
   @Override
   public void add(Edge e) {
@@ -124,7 +120,6 @@ public class SemanticNetwork implements Graph {
    * Adds the given Vertex to this SemanticNetwork, if is not already present.
    * @param  v
    *         the Vertex to be added
-   * @see  #grafo
    */
   @Override
   public void add(Vertex v) {
@@ -144,10 +139,8 @@ public class SemanticNetwork implements Graph {
    *         the SemanticRelationType of the SemanticRelation to be added
    * @param  weight
    *         the weight of the SemanticRelation to be added
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
-   * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType The SemanticRelationType
-   *       Enum
-   * @see  #grafo
+   * @see  Vertex The Vertex Interface
+   * @see  SemanticRelationType The SemanticRelationType Enum
    */
   @Override
   public void addEdge(Vertex v1, Vertex v2, SemanticRelationType type, Integer weight) {
@@ -168,8 +161,7 @@ public class SemanticNetwork implements Graph {
    *         the Edge to be searched.
    * @return  {@code true} if this SemanticNetwork contains the given Edge;
    *          {@code false} otherwise.
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
-   * @see  #grafo
+   * @see  Edge The Edge Interface
    */
   @Override
   public boolean containsEdge(Edge e) {
@@ -187,7 +179,6 @@ public class SemanticNetwork implements Graph {
    *         the Vertex to be searched.
    * @return  {@code true} if this SemanticNetwork contains the given Vertex;
    *          {@code false} otherwise.
-   * @see  #grafo
    */
   @Override
   public boolean containsVertex(Vertex v) {
@@ -197,8 +188,7 @@ public class SemanticNetwork implements Graph {
   /**
    * Gets all the Edges of this SemanticNetwork.
    * @return  a Set containing all the Edges of this SemanticNetwork
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
-   * @see  #grafo
+   * @see  Edge The Edge Interface
    */
   @Override
   public Set<Edge> edgeSet() {
@@ -212,8 +202,7 @@ public class SemanticNetwork implements Graph {
   /**
    * Gets all the Vertices of this SemanticNetwork.
    * @return  a Set containing all the Vertices of this SemanticNetwork
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
-   * @see  #grafo
+   * @see  Vertex The Vertex Interface
    */
   @Override
   public Set<Vertex> vertexSet() {
@@ -223,9 +212,8 @@ public class SemanticNetwork implements Graph {
   /**
    * Gets all the outgoing Edges from the given Vertex.
    * @return  a Set containg all the Semantis Relations outgoing from the given Vertex
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
-   * @see  com.github.bot.curiosone.core.knowledge.interfaces.Vertex The Vertex Interface
-   * @see  #grafo
+   * @see  Edge The Edge Interface
+   * @see  Vertex The Vertex Interface
    */
   @Override
   public Set<Edge> outgoingEdges(Vertex v) {
@@ -245,7 +233,6 @@ public class SemanticNetwork implements Graph {
    * @return  a Set containg all the Semantis Relations coming to the given Vertex
    * @see  Edge The Edge Interface
    * @see  Vertex The Vertex Interface
-   * @see  #grafo
    */
   @Override
   public Set<Edge> incomingEdges(Vertex v) {
@@ -265,7 +252,6 @@ public class SemanticNetwork implements Graph {
    * @param  edgeSet
    *         the Collection to be added
    * @see  Edge The Edge Interface
-   * @see  #grafo
    * @see  Collection The Collection Interface
    */
   @Override
@@ -500,7 +486,6 @@ public class SemanticNetwork implements Graph {
    * Calculates the HashCode of this SemanticNetwork.
    * The HashCode depends on the Vertices and Edges of this SemanticNetwork.
    * @return  the HashCode of this SemanticNetwork
-   * @see  #grafo
    */
   @Override
   public int hashCode() {
@@ -513,7 +498,6 @@ public class SemanticNetwork implements Graph {
   /**
    * Returns a String representation of this SemanticNetwork.
    * @return  a String representation of this SemanticNetwork
-   * @see  #grafo
    */
   @Override
   public String toString() {
