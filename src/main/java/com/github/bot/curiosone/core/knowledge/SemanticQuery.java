@@ -7,14 +7,13 @@ import java.util.Objects;
 /**
  * Handles interrogations to the SemanticNetwork.
  * Provides methods to create and manage an interrogation to the SemanticNetwork.
- * @see  com.github.bot.curiosone.core.knowledge.SemanticNetwork The SemanticNetwork Class
+ * @see  SemanticNetwork The SemanticNetwork Class
  */
 public class SemanticQuery {
 
   /**
    * Stores the SemanticRelationType of this interrogation.
-   * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType The SemanticRelationType
-   *       Enum
+   * @see  SemanticRelationType The SemanticRelationType Enum
    */
   private SemanticRelationType relation;
 
