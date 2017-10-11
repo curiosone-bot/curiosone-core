@@ -87,8 +87,12 @@ public class Pair<F, S> {
 
   /**
    * Utility method to create a new immutable Pair.
+   * @param  <A>
+   *         the type of the first Object in this Pair
    * @param  a
    *         the first Object of the new immutable Pair
+   * @param  <B>
+   *         the type of the second Object in this Pair
    * @param  b
    *         the second Object of the new immutable Pair
    * @return  the new immutable Pair
