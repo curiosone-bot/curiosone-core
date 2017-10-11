@@ -18,7 +18,8 @@ public class EmotionAnalysis {
    * @param  phrase
    *         the Phrase to be analysed.
    * @return  a String representation of the calculated emotion. Supports "sad", "happy" and "angry"
-   * @see  com.github.bot.curiosone.core.nlp.Phrase
+   *          emotions
+   * @see  Phrase The Phrase Class
    */
   public static String getEmotion(Phrase phrase) {
     double score = TokenScorer.calculateScore(phrase.getTokens());
