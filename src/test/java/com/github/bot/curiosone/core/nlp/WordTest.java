@@ -50,7 +50,7 @@ public class WordTest {
     w = new Word("This is definitely not a word! But it works!", "42", new HashSet<>());
     assertThat(w.getLemma()).isEqualTo("42");
 
-    w = new Word("", "", new HashSet<>());
+    w = new Word("", "", new Meaning(POS.N, LEX.OBJECT));
     assertThat(w.getLemma()).isEmpty();
 
     w = new Word(" ", " ", new HashSet<>());
@@ -74,6 +74,40 @@ public class WordTest {
     sm = new HashSet<>(Arrays.asList(m, mm, mmm));
     w = new Word("sun", "sun", sm);
     assertThat(w.getMeanings()).containsOnly(m, mm, mmm);
+  }
+
+  @Test
+  public void testItMeans() {
+    Meaning m = new Meaning(POS.N, LEX.PLANT);
+    Meaning mm = new Meaning(POS.N, LEX.FOOD);
+    Meaning mmm = new Meaning(POS.N, LEX.SHAPE);
+    Set<Meaning> sm = new HashSet<>(Arrays.asList(m, mm, mmm));
+    Word w = new Word("meaning", "mean", sm);
+    assertThat(w.itMeans(m)).isTrue();
+    m = new Meaning(POS.NP, LEX.SHAPE);
+    assertThat(w.itMeans(m)).isFalse();
+  }
+
+  @Test
+  public void testItMeansPos() {
+    Meaning m = new Meaning(POS.N, LEX.PLANT);
+    Meaning mm = new Meaning(POS.N, LEX.FOOD);
+    Meaning mmm = new Meaning(POS.N, LEX.SHAPE);
+    Set<Meaning> sm = new HashSet<>(Arrays.asList(m, mm, mmm));
+    Word w = new Word("meaning", "mean", sm);
+    assertThat(w.itMeans(POS.N)).isTrue();
+    assertThat(w.itMeans(POS.NP)).isFalse();
+  }
+
+  @Test
+  public void testItMeansLex() {
+    Meaning m = new Meaning(POS.N, LEX.PLANT);
+    Meaning mm = new Meaning(POS.N, LEX.FOOD);
+    Meaning mmm = new Meaning(POS.N, LEX.SHAPE);
+    Set<Meaning> sm = new HashSet<>(Arrays.asList(m, mm, mmm));
+    Word w = new Word("meaning", "mean", sm);
+    assertThat(w.itMeans(LEX.FOOD)).isTrue();
+    assertThat(w.itMeans(LEX.TOPS)).isFalse();
   }
 
   @Test
