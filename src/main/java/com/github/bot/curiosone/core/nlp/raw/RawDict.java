@@ -28,20 +28,18 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
- * RawDict for tokenizer using WordNet DB.
- *
- * @author Andrea Rivitto && Eugenio Schintu
- * @see https://wordnet.princeton.edu/
+ * Interfaces with the WordNet database.
+ * @see  <a href="https://wordnet.princeton.edu/">WordNet Homepage</a>
  */
 public class RawDict {
 
   /**
-   * Singleton instance on class loading is thread-safe.
+   * The Singleton instance of this Class.
    */
   private static RawDict instance = null;
 
   /**
-   * Path of Wordnet database files.
+   * Path to the WordNet database files.
    */
   private static final String wdnPath = "/dict";
 
@@ -69,7 +67,10 @@ public class RawDict {
     }
   }
 
-  /** Returns the RawDict. */
+  /**
+   * Gets the Singleton instance.
+   * @return  the Singleton instance
+   */
   public static RawDict getInstance() {
     if  (instance != null) {
       return instance;
@@ -79,10 +80,11 @@ public class RawDict {
   }
 
   /**
-   * Creates RawToken Structure that contains dict info.
-   * @param item String to be searched in WordNet
-   * @return RawToken Structure that contains RawDict info
-   * @see com.github.bot.curiosone.core.nlp.raw.RawToken
+   * Creates a RawToken Structure that contains dict info.
+   * @param  item
+   *         String to be searched in WordNet
+   * @return  RawToken Structure that contains RawDict info
+   * @see  com.github.bot.curiosone.core.nlp.raw.RawToken
    */
   public RawToken getRawToken(String item) {
     if (item.length() == 0 || item.equals(" ")) {
@@ -95,7 +97,7 @@ public class RawDict {
   }
 
   /**
-   * Pronouns outside WN.
+   * Stores pronouns outside WN.
    */
   private enum PronounsOutWn {
 
@@ -111,75 +113,123 @@ public class RawDict {
       INDEFINITE("anything", "anybody", "anyone", "something", "somebody",
               "someone", "nothing", "nobody", "none", "no one");
 
+    /**
+     * Stores some additional pronouns.
+     */
     private String[] items;
 
+    /**
+     * Private constructor.
+     * @param  items
+     *         One or more additional pronouns
+     */
     private PronounsOutWn(String...items) {
       this.items = items;
     }
 
+    /**
+     * Gets the additional pronouns.
+     * @return  an array containing all the additional pronouns
+     */
     public String[] getItems() {
       return items;
     }
   }
 
   /**
-   * Determiners outside WN.
+   * Stores determiners outside WN.
    */
   private enum DeterminersOutWn {
 
     INDEFINITE_ARTICLE("a", "an"),
     DEFINITE_ARTICLE("the");
 
+    /**
+     * Stores some additional pronouns.
+     */
     private String[] items;
 
+    /**
+     * Private constructor.
+     * @param  items
+     *         One or more additional determiners
+     */
     private DeterminersOutWn(String...items) {
       this.items = items;
     }
 
+    /**
+     * Gets the additional determiners.
+     * @return  an array containing all the additional determiners
+     */
     public String[] getItems() {
       return items;
     }
   }
 
   /**
-   * Conjunctions outside WN.
+   * Stores conjunctions outside WN.
    */
   private enum ConjunctionsOutWn {
 
     COORDINATOR("and", "or", "but"),
     SUBORDINATOR("while", "because", "before", "since", "till", "unless", "whereas", "wheter");
 
+    /**
+     * Stores some additional conjunctions.
+     */
     private String[] items;
 
+    /**
+     * Private constructor.
+     * @param  items
+     *         One or more additional conjunctions
+     */
     private ConjunctionsOutWn(String...items) {
       this.items = items;
     }
 
+    /**
+     * Gets the additional conjunctions.
+     * @return  an array containing all the additional conjunctions
+     */
     public String[] getItems() {
       return items;
     }
   }
 
   /**
-   * Adverbs outside WN.
+   * Stores adverbs outside WN.
    */
   private enum AdverbsOutWn {
 
     INTERROGATIVE("how");
 
+    /**
+     * Stores some additional adverbs.
+     */
     private String[] items;
 
+    /**
+     * Private constructor.
+     * @param  items
+     *         One or more additional adverbs
+     */
     private AdverbsOutWn(String...items) {
       this.items = items;
     }
 
+    /**
+     * Gets the additional adverbs.
+     * @return  an array containing all the additional adverbs
+     */
     public String[] getItems() {
       return items;
     }
   }
 
   /**
-   * Interjections outside WN.
+   * Stores interjections outside WN.
    */
   private enum InterjectionsOutWn {
 
@@ -191,22 +241,37 @@ public class RawDict {
     SURPRISE("oh"),
     PAIN("ouch", "ohi");
 
+    /**
+     * Stores some additional interjections.
+     */
     private String[] items;
 
+    /**
+     * Private constructor.
+     * @param  items
+     *         One or more additional interjections
+     */
     private InterjectionsOutWn(String...items) {
       this.items = items;
     }
 
+    /**
+     * Gets the additional interjections.
+     * @return  an array containing all the additional interjections
+     */
     public String[] getItems() {
       return items;
     }
   }
 
   /**
-   * Get token outside of WordNet Database.
-   * @param token         [description]
-   * @param item          [description]
-   * @return          [description]
+   * Gets a Token outside of WordNet Database.
+   * @param  token
+   *         the external Token
+   *
+   * @param  item
+   *         the value of the given Token
+   * @return  the original Token
    */
   private RawToken getRawTokenNotWn(RawToken token, String item) {
 
@@ -317,12 +382,14 @@ public class RawDict {
   }
 
   /**
-   * Get token from WordNet Database.
-   * List of words descending ordered based on frequency occurrence (getTagCount()).
-   * @param token [description]
-   * @param item [description]
-   * @return [description]
-   * @see https://stackoverflow.com/questions/21264158/how-to-access-frequency-count-in-wordnet-in-any-java-wordnet-interface
+   * Gets the given Token from the WordNet Database.
+   * In case of ambiguity, the Token with higher frequency is returned.
+   * @param  token
+   *         The desired Token
+   * @param  item
+   *         String content of the desired Token
+   * @return  the desired Token, taken from the WordNet database
+   * @see  <a href="https://goo.gl/mCeRcp">How to get the Token with higher frequency</a>
    */
   private RawToken getRawTokenWn(RawToken token, String item) {
     Set<RawWord> retWords = new HashSet<RawWord>();
@@ -408,22 +475,28 @@ public class RawDict {
   }
 
   /**
-   * Verify if an array of String contains a String.
-   * @param array [description]
-   * @param searchValue [description]
-   * @return [description]
+   * Checks whether a given array of a type contains the given object.
+   * @param  <T>
+   *         the type of the object to be searched and the objects stored in the array
+   * @param  array
+   *         the array to search in
+   * @param  searchValue
+   *         the value to be searched in the given array
+   * @return  {@code true} if the given array contains the given object;
+   *          {@code false} otherwise
    */
   private static <T> boolean contains(T[] array, T searchValue) {
     return Arrays.stream(array).anyMatch(searchValue::equals);
   }
 
   /**
-   * Checks if the given email address is valid.
-   * @param email the email address to be validated.
-   * @return <code>true</code> if the given email address is valid;
-             <code>false</code> otherwise
-   * @see http://howtodoinjava.com/regex/java-regex-validate-email-address/
-   * @see http://www.rfc-editor.org/rfc/rfc5322.txt
+   * Validates the given email addres.
+   * @param  email
+   *         the email address to be validated.
+   * @return  {@code true} if the given email address is valid;
+              {@code false} otherwise
+   * @see  <a href="https://goo.gl/vRTEkF">The Regex used for the validation</a>
+   * @see  <a href="http://www.rfc-editor.org/rfc/rfc5322.txt">Internet Message Format</a>
    */
   public static boolean isValidEmailAddress(String email) {
     String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]"
@@ -433,10 +506,12 @@ public class RawDict {
   }
 
   /**
-   * Checks whether the given String represents a numeric value.
-   * @param str the string to be checked.
-   * @return <code>true</code> if the given String is a numeric value;
-             <code>false</code> otherwise.
+   * Checks whether the given String represents a numeric value or not.
+   * Accepts both integers and floating point values.
+   * @param  str
+   *         the string to be checked.
+   * @return  {@code true} if the given String is a numeric value;
+              {@code false} otherwise.
    */
   private static boolean isNumeric(String str) {
     try {
