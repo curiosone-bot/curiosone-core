@@ -25,7 +25,7 @@ public interface Edge {
   /**
    * Gets the type of the Edge.
    * @return  the type of the Edge
-   * @see  com.github.bot.curiosone.core.knowledge..SemanticRelationType the SemanticRelationType
+   * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType the SemanticRelationType
    *       Enum
    */
   SemanticRelationType getType();
