@@ -140,8 +140,6 @@ public interface Graph {
    *         SemanticRelationType of the strongest Edge to be searched
    * @return  an Optional instance. The instance is empty, if no Edge is found. Otherwise, it
    *          contains the found Edge.
-   * @throws  IOException
-   *          if something unexpected happens
    * @see  java.util.Optional The Optional Class
    * @see  com.github.bot.curiosone.core.knowledge.interfaces.Edge The Edge Interface
    * @see  com.github.bot.curiosone.core.knowledge.SemanticRelationType The SemanticRelationType
@@ -177,8 +175,8 @@ public interface Graph {
    * Increases the usage score for all the Edges with the given Vertex as target.
    * @param  v
    *         the target Vertex
-   * @throws  IOException
-   *          if no input file is found.
+   * @param  score
+   *         the score of the Edge to be learnt
    */
   void increase(Vertex v, Integer score);
 
