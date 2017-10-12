@@ -24,7 +24,7 @@ public class SemanticNetworkTest {
   @Test
   public void testGetGrafo() throws IOException {
     SemanticNetwork sn = SemanticNetwork.getInstance();
-    assertThat(sn.getGrafo()).isNotNull().isNotEmpty();
+    assertThat(sn.getGraph()).isNotNull().isNotEmpty();
   }
 
   @Test
