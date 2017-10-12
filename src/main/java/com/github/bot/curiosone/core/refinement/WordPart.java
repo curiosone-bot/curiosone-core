@@ -4,6 +4,7 @@ import it.uniroma1.lcl.babelmorph.POS;
 import it.uniroma1.lcl.babelnet.data.BabelPOS;
 
 /**
+ * Handles easily interaction between BabelPOS and BabelMorph POS.
  * @see  <a href="https://goo.gl/tjM6pT">The BabelPOS Enum</a>
  */
 public enum WordPart {
