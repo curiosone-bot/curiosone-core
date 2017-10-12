@@ -1,10 +1,25 @@
 package com.github.bot.curiosone.core.workflow;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 import org.junit.Test;
 
 public class MessageTest {
+
+  @Test
+  public void testNullConstructor() {
+    assertThatCode(() -> new Message(null, "null", "value")).doesNotThrowAnyException();
+
+    assertThatCode(() -> new Message(null, null, "value")).doesNotThrowAnyException();
+
+    assertThatCode(() -> new Message(null, null, null)).doesNotThrowAnyException();
+
+    Message m = new Message(null, null, null);
+    assertThat(m.getMessage()).isEmpty();
+    assertThat(m.getScope()).isEmpty();
+    assertThat(m.getEmotion()).isEmpty();
+  }
 
   @Test
   public void testGetMessage() {
@@ -28,6 +43,21 @@ public class MessageTest {
 
     m = new Message("This is the message!", "", "");
     assertThat(m.getScope()).isEmpty();
+  }
+
+  @Test
+  public void testGetEmotion() {
+    Message m  = new Message("I am a message with an emotion!", "emotion", "happy");
+    assertThat(m.getEmotion()).isEqualTo("happy");
+
+    m = new Message("Just a little sad :(", "sad", "sad");
+    assertThat(m.getEmotion()).isEqualTo("sad");
+
+    m = new Message("ANGRY, ANGRY!", ":/", "angry");
+    assertThat(m.getEmotion()).isEqualTo("angry");
+
+    m = new Message("ANGRY, ANGRY!", ":/", "");
+    assertThat(m.getEmotion()).isEmpty();
   }
 
   @Test
@@ -59,8 +89,8 @@ public class MessageTest {
 
   @Test
   public void testEqualsSymmetric() {
-    Message m = new Message("Text", "Scope", "");
-    Message mm = new Message("Text", "Scope", "");
+    Message m = new Message("Text", "Scope", "Emotion");
+    Message mm = new Message("Text", "Scope", "Emotion");
     assertThat(m).isEqualTo(mm);
     assertThat(mm).isEqualTo(m);
 
@@ -77,9 +107,9 @@ public class MessageTest {
 
   @Test
   public void testEqualsTransitive() {
-    Message m = new Message("Text", "Scope", "");
-    Message mm = new Message("Text", "Scope", "");
-    Message mmm = new Message("Text", "Scope", "");
+    Message m = new Message("Text", "Scope", "Emotion");
+    Message mm = new Message("Text", "Scope", "Emotion");
+    Message mmm = new Message("Text", "Scope", "Emotion");
     assertThat(m).isEqualTo(mm);
     assertThat(mm).isEqualTo(mmm);
     assertThat(mmm).isEqualTo(m);
@@ -101,7 +131,7 @@ public class MessageTest {
 
   @Test
   public void testEqualsOtherObj() {
-    Message m = new Message("Text", "Scope", "");
+    Message m = new Message("Text", "Scope", "Emotion");
 
     assertThat(m).isNotEqualTo("TEXT - SCOPE");
 
@@ -133,8 +163,8 @@ public class MessageTest {
 
   @Test
   public void testHashCodeEqualsContract() {
-    Message m = new Message("Text", "Scope", "");
-    Message mm = new Message("Text", "Scope", "");
+    Message m = new Message("Text", "Scope", "Emotionnnn");
+    Message mm = new Message("Text", "Scope", "Emotionnnn");
     assertThat(m.hashCode()).isEqualTo(mm.hashCode());
     assertThat(m).isEqualTo(mm);
 
