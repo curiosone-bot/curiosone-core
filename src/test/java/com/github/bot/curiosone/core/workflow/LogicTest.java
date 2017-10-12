@@ -16,6 +16,14 @@ public class LogicTest {
     assertThat(msg.getMessage()).isEqualTo("Sorry my head hurts, what were we talking about?");
     assertThat(msg.getScope()).isEmpty();
 
+    msg = Logic.talk(null);
+    assertThat(msg.getMessage()).isEqualTo("Sorry my head hurts, what were we talking about?");
+    assertThat(msg.getScope()).isEmpty();
+
+    msg = Logic.talk(new Message("Sorry my head hurts, what were we talking about?", "", ""));
+    assertThat(msg.getMessage())
+        .containsIgnoringCase("Sorry my head hurts, what were we talking about?");
+
     msg = Logic.talk(new Message("How old are you?", "", ""));
     assertThat(msg.getMessage())
         .isNotEmpty()

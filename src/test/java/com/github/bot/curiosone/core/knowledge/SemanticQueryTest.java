@@ -1,8 +1,11 @@
 package com.github.bot.curiosone.core.knowledge;
 
+import static java.util.Arrays.asList;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 
 public class SemanticQueryTest {
@@ -41,6 +44,41 @@ public class SemanticQueryTest {
 
     sq = new SemanticQuery(SemanticRelationType.IS_A, "", "BE");
     assertThat(sq.getObject()).isEmpty();
+  }
+
+  @Test
+  public void testGetAdjectives() {
+    SemanticQuery sq =
+        new SemanticQuery(SemanticRelationType.IS_A, "animal", "cat", new ArrayList<>(), "BE");
+    assertThat(sq.getAdjectives()).isNotNull().isEmpty();
+
+    List<String> la = new ArrayList(asList("Beautiful", "Gracious", "Puffy"));
+    sq = new SemanticQuery(SemanticRelationType.IS_A, "animal", "cat", la, "BE");
+    assertThat(sq.getAdjectives()).containsOnly("Beautiful", "Gracious", "Puffy");
+  }
+
+  @Test
+  public void testGetVerb() {
+    SemanticQuery sq = new SemanticQuery(SemanticRelationType.TIME, "time", "time", "VERB");
+    assertThat(sq.getVerb()).isEqualTo("VERB");
+
+    sq = new SemanticQuery(SemanticRelationType.TIME, "a", "b", "x");
+    assertThat(sq.getVerb()).isEqualTo("x");
+
+    sq = new SemanticQuery(SemanticRelationType.TIME, "time", "time", "");
+    assertThat(sq.getVerb()).isEqualTo("");
+
+    sq = new SemanticQuery(SemanticRelationType.TIME, "time", "time", "  ");
+    assertThat(sq.getVerb()).isEqualTo("  ");
+  }
+
+  @Test
+  public void testEquals() {
+    SemanticQuery sq =
+        new SemanticQuery(SemanticRelationType.IS_PERSON, "Navigli", "Professor", "BE");
+    SemanticQuery sqq =
+        new SemanticQuery(SemanticRelationType.IS_PERSON, "Navigli", "Professor", "BE");
+    assertThat(sq).isEqualTo(sqq);
   }
 
   @Test
