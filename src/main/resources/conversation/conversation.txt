@@ -23,7 +23,7 @@ what	favourite	song:I like music, my favourite song is Boogie Wonderlaaaaaaand!
 what	favourite	program	language:Java, which flows into my veins :-).	Certainly not Assembly.
 what	favourite	film:A Space Odyssey, very cool :-).
 what	favourite	animal:Cybear.. Have you got it? Cy.. bear!
-what  talk  about:I do not know, do you have any idea?	Did you know I have different games inside me?
+what  talk  about:I do not know, do you have any idea?
 where	you	live:Right in front of you.	Do I live?
 where	you	from:I am from Sapienza University of Rome.
 where	be	you:I am stored in a server, it is fine here.	I do not know, it is dark here.
