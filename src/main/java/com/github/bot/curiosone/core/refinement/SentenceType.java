@@ -14,7 +14,7 @@ public enum SentenceType {
   private String mark;
 
   /**
-   * Constructs a SentenceType with a given mark.
+   * Sets the mark.
    * @param  String
    *         the String representation of the mark for this SentenceType
    */
