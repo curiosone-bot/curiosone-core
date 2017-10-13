@@ -46,7 +46,7 @@ public class SemanticNetwork implements Graph {
   /**
    * Stores the Semantic Network.
    */
-  private Map<Vertex,Set<Edge>> grafo;
+  private Map<Vertex,Set<Edge>> graph;
 
   /**
    * String representation of the path to the Semantic Network database.
@@ -72,10 +72,14 @@ public class SemanticNetwork implements Graph {
    * private constructor.
    * @throws IOException if there is a problem with the input file.
    */
-  private SemanticNetwork() throws IOException {
-    this.grafo = new HashMap<>();
+  private SemanticNetwork() {
+    this.graph = new HashMap<>();
     List<String> lines = new ArrayList<>();
-    lines = Files.readAllLines(this.percorso);
+    try {
+      lines = Files.readAllLines(this.percorso);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     for (String linea : lines) {
       String[] linee = linea.split(",");
       Vertex source = new Concept(linee[0]);
@@ -92,8 +96,8 @@ public class SemanticNetwork implements Graph {
    * @return [description]
    */
   @Override
-  public Map<Vertex,Set<Edge>> getGrafo() {
-    return grafo;
+  public Map<Vertex,Set<Edge>> getGraph() {
+    return graph;
   }
 
   /**
@@ -111,9 +115,9 @@ public class SemanticNetwork implements Graph {
    */
   @Override
   public void add(Vertex v) {
-    if (!grafo.containsKey(v)) {
+    if (!graph.containsKey(v)) {
       Set<Edge> lista = new HashSet<>();
-      grafo.put(v,lista);
+      graph.put(v,lista);
     }
   }
 
@@ -126,15 +130,15 @@ public class SemanticNetwork implements Graph {
    */
   @Override
   public void addEdge(Vertex v1, Vertex v2, SemanticRelationType type, Integer weight) {
-    if (!grafo.containsKey(v1)) {
+    if (!graph.containsKey(v1)) {
       add(v1);
     }
-    if (!grafo.containsKey(v2)) {
+    if (!graph.containsKey(v2)) {
       add(v2);
     }
     SemanticRelation arco = new SemanticRelation(v1,v2,type,weight);
-    grafo.get(v1).add(arco);
-    grafo.get(v2).add(arco);
+    graph.get(v1).add(arco);
+    graph.get(v2).add(arco);
   }
 
   /**
@@ -145,7 +149,7 @@ public class SemanticNetwork implements Graph {
    */
   @Override
   public boolean containsEdge(Edge e) {
-    for (Set<Edge> archiTemp : grafo.values()) {
+    for (Set<Edge> archiTemp : graph.values()) {
       if (archiTemp.contains(e)) {
         return true;
       }
@@ -161,7 +165,7 @@ public class SemanticNetwork implements Graph {
    */
   @Override
   public boolean containsVertex(Vertex v) {
-    return grafo.keySet().contains(v);
+    return graph.keySet().contains(v);
   }
 
   /**
@@ -170,7 +174,7 @@ public class SemanticNetwork implements Graph {
   @Override
   public Set<Edge> edgeSet() {
     Set<Edge> archi = new HashSet<>();
-    for (Set<Edge> archiTemp : grafo.values()) {
+    for (Set<Edge> archiTemp : graph.values()) {
       archi.addAll(archiTemp);
     }
     return archi;
@@ -181,7 +185,7 @@ public class SemanticNetwork implements Graph {
    */
   @Override
   public Set<Vertex> vertexSet() {
-    return grafo.keySet();
+    return graph.keySet();
   }
 
   /**
@@ -191,7 +195,7 @@ public class SemanticNetwork implements Graph {
   public Set<Edge> outgoingEdges(Vertex v) {
     Set<Edge> outgoingEdges = new HashSet<>();
     if (containsVertex(v)) {
-      for (Edge arco : grafo.get(v)) {
+      for (Edge arco : graph.get(v)) {
         if (arco.getSource().equals(v)) {
           outgoingEdges.add(arco);
         }
@@ -207,7 +211,7 @@ public class SemanticNetwork implements Graph {
   public Set<Edge> incomingEdges(Vertex v) {
     Set<Edge> incomingEdges = new HashSet<>();
     if (containsVertex(v)) {
-      for (Edge arco : grafo.get(v)) {
+      for (Edge arco : graph.get(v)) {
         if (arco.getTarget().equals(v)) {
           incomingEdges.add(arco);
         }
@@ -441,6 +445,6 @@ public class SemanticNetwork implements Graph {
    */
   @Override
   public String toString() {
-    return grafo.toString();
+    return graph.toString();
   }
 }
