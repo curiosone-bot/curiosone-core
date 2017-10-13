@@ -59,6 +59,6 @@ public class ClauseMainTest {
     WordVerb wv = new WordVerb("have", TypeVerb.PresentP3);
     PhraseVerb pv = new PhraseVerb(wv);
     ClauseMain cm = new ClauseMain(pn, pv);
-    assertThat(cm.toString()).isEqualTo("Animales have");
+    assertThat(cm.toString()).isEqualTo("Animals have");
   }
 }
