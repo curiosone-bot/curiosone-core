@@ -44,5 +44,14 @@ public class RefinerTest {
     objIsPlural = false;
     r = refine(subj, verb, obj, subjIsPlural, verbIsPast, objIsPlural);
     assertThat(r).containsIgnoringCase("cats").containsIgnoringCase("animal.");
+
+    subj = "I";
+    verb = "love";
+    obj = "car";
+    subjIsPlural = false;
+    verbIsPast = false;
+    objIsPlural = true;
+    r = refine(subj, verb, obj, subjIsPlural, verbIsPast, objIsPlural);
+    assertThat(r).contains("I").containsIgnoringCase("love").containsIgnoringCase("cars.");
   }
 }
