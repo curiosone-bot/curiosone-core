@@ -15,7 +15,7 @@ public class PhraseNoun implements Phrase {
 
   /**
    * Constructs this PhraseNoun with a given Noun.
-   * @param  WordNoun
+   * @param  main
    *         the  given Noun
    * @see  WordNoun The WordNoun Class
    */
