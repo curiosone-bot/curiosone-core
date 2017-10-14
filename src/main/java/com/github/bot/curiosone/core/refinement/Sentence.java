@@ -17,7 +17,7 @@ public class Sentence {
   private SentenceType type;
 
   /**
-   * Constructs a Sentence with a given type
+   * Constructs a Sentence with a given type.
    * @param  type
    *         the type of the Sentence
    * @param  main
