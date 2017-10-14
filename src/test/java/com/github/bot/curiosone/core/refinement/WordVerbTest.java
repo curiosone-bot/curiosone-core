@@ -29,7 +29,13 @@ public class WordVerbTest {
     wv = new WordVerb("be", TypeVerb.PresentS3);
     assertThat(wv.toString()).isNotNull().isNotEmpty().isEqualTo("is");
 
+    wv = new WordVerb("be", TypeVerb.PresentP3);
+    assertThat(wv.toString()).isNotNull().isNotEmpty().isEqualTo("are");
+
     wv = new WordVerb("djshckjsdhckjsdck", TypeVerb.PresentS2);
     assertThat(wv.toString()).isNotNull().isNotEmpty().isEqualTo("djshckjsdhckjsdck");
+
+    assertThatCode(() -> new WordVerb("thinkable", TypeVerb.Infinitive).toString())
+        .doesNotThrowAnyException();
   }
 }
