@@ -3,11 +3,8 @@ package com.github.bot.curiosone.core.workflow;
 import com.github.bot.curiosone.core.analysis.EmotionAnalysis;
 import com.github.bot.curiosone.core.extraction.Brain;
 import com.github.bot.curiosone.core.extraction.BrainResponse;
-import com.github.bot.curiosone.core.nlp.POS;
 import com.github.bot.curiosone.core.nlp.Phrase;
 import com.github.bot.curiosone.core.nlp.Sentence;
-import com.github.bot.curiosone.core.nlp.Token;
-import com.github.bot.curiosone.core.refinement.Refiner;
 
 import java.io.IOException;
 import java.util.List;
@@ -61,40 +58,11 @@ public class Logic {
     br = Brain.compute(sentence, msg.getScope());
     if (br.isPresent()) {
       BrainResponse answer = br.get();
-      /*
-      String subject = answer.getScope();
-      String verb = findFirstVerb(answer.getMessage());
-      String object = "";
-      boolean sp = false;
-      boolean vp = false;
-      boolean op = false;
-
-      String refined = Refiner.refine(subject, verb, object, sp, vp, op);
       //TODO: add refinement here.
-      */
       return new Message(answer.getMessage(), answer.getScope(), emotion);
     }
 
     // We have understood something but we are unable to answer now!
     return new Message("Sorry my head hurts, what were we talking about?", "", emotion);
-  }
-
-  /**
-   * Finds the first verb in the given Sentence.
-   * @param  String
-   *         the sentence to search in
-   * @return  the String representation of the first verb in the given sentence
-   * @see  Token The Token class
-   * @see  POS The Part of Speech Type Enum
-   */
-  private static final String findFirstVerb(String sentence) {
-    List<Token> tl = Token.tokenize(sentence);
-
-    return tl.stream().filter(t -> {
-      POS p = t.getMeanings().iterator().next().getPOS();
-      return p.equals(POS.V) || p.equals(POS.VP);
-    })
-      .findFirst()
-      .toString();
   }
 }
