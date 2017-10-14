@@ -2,7 +2,6 @@ package com.github.bot.curiosone.core.refinement;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import com.github.bot.curiosone.core.refinement.interfaces.Word;
 
