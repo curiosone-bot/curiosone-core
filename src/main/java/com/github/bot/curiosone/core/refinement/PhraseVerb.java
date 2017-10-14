@@ -11,7 +11,7 @@ import java.util.Optional;
 public class PhraseVerb implements Phrase {
 
   /**
-   * Stores the verb of this Phrase
+   * Stores the verb of this Phrase.
    */
   private WordVerb main;
 
@@ -23,9 +23,9 @@ public class PhraseVerb implements Phrase {
 
   /**
    * Constructs a Phrase with a given verb and its object.
-   * @param  WordVerb
+   * @param  main
    *         the verb of this Phrase
-   * @param  PhraseNoun
+   * @param  dependents
    *         the object of the given verb
    * @see  WordVerb The WordVerb Class
    * @see  PhraseNoun The PhraseNoun Class
@@ -37,7 +37,7 @@ public class PhraseVerb implements Phrase {
 
   /**
    * Constructs a Phrase with a given verb.
-   * @param  WordVerb
+   * @param  main
    *         the verb of this Phrase
    * @see  WordVerb The WordVerb Class
    * @see  PhraseNoun The PhraseNoun Class
