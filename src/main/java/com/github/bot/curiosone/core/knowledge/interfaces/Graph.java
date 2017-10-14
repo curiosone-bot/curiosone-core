@@ -83,7 +83,7 @@ public interface Graph {
   /**
    * Returns a Map representation of the Graph.
    */
-  Map<Vertex, Set<Edge>> getGrafo();
+  Map<Vertex, Set<Edge>> getGraph();
 
   /**
    * Returns the strongest Edge of the given Concept.

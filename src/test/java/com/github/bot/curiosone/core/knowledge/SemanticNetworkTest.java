@@ -22,6 +22,12 @@ public class SemanticNetworkTest {
   }
 
   @Test
+  public void testGetGrafo() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+    assertThat(sn.getGraph()).isNotNull().isNotEmpty();
+  }
+
+  @Test
   public void testAddEdgeConcept() throws IOException {
     SemanticNetwork sn = SemanticNetwork.getInstance();
     int prevSize = sn.edgeSet().size();
@@ -228,7 +234,7 @@ public class SemanticNetworkTest {
   }
 
   @Test
-  public void testExist() throws IOException {
+  public void testExists() throws IOException {
     SemanticNetwork sn = SemanticNetwork.getInstance();
 
     assertThat(sn.exist("derived", SemanticRelationType.SIMILAR_TO, "derivative")).isTrue();
@@ -292,9 +298,26 @@ public class SemanticNetworkTest {
 
     assertThat(sn.getAnswer("double", SemanticRelationType.HYPERNYM)).isPresent();
 
-    assertThat(sn.getAnswer("lsdjlckjjd", SemanticRelationType.SIMILAR_TO)).isNotPresent();
+    assertThat(sn.getAnswer("Gothic", SemanticRelationType.REGION)).isPresent();
 
-    assertThat(sn.getAnswer("jc,nkjknkj", SemanticRelationType.TIME)).isNotPresent();
+    assertThat(sn.getAnswer("lsdjlckjjd", SemanticRelationType.IS_A)).isNotPresent();
+
+    assertThat(sn.getAnswer("jc,nkjknkj", SemanticRelationType.REGION)).isNotPresent();
+  }
+
+  @Test
+  public void testLearnAnswer() throws IOException {
+    SemanticNetwork sn = SemanticNetwork.getInstance();
+
+    sn.learn("a", SemanticRelationType.IS_A, "b");
+    assertThat(sn.getAnswer("a", SemanticRelationType.IS_A)).isPresent();
+    assertThat(sn.getAnswer("b", SemanticRelationType.IS_A)).isNotPresent();
+    assertThat(sn.getAnswer("a", SemanticRelationType.TIME)).isNotPresent();
+
+    sn.learn("abc", SemanticRelationType.REGION, "alphabet");
+    assertThat(sn.getAnswer(("abc"), SemanticRelationType.REGION)).isPresent();
+    assertThat(sn.getAnswer(("alphabet"), SemanticRelationType.REGION)).isNotPresent();
+    assertThat(sn.getAnswer(("abc"), SemanticRelationType.IS_PERSON)).isNotPresent();
   }
 
   @Test
