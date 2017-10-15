@@ -62,10 +62,7 @@ public class SemanticRelation implements Edge {
    *         SemanticRelationType of this SemanticRelation
    */
   public SemanticRelation(Vertex v1, Vertex v2, SemanticRelationType type) {
-    this.sorgente = v1;
-    this.destinazione = v2;
-    this.collegamento = type;
-    this.weight = 0;
+    this(v1, v2, type, 0);
   }
 
   /**

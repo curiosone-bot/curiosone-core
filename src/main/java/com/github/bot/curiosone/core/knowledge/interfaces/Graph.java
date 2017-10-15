@@ -119,7 +119,7 @@ public interface Graph {
    * @see  Edge The Edge Interface
    * @see  <a href="https://goo.gl/9aXrZs">The Map Interface</a>
    */
-  Map<Vertex, Set<Edge>> getGrafo();
+  Map<Vertex, Set<Edge>> getGraph();
 
   /**
    * Returns the strongest Edge of the given Concept.
