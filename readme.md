@@ -14,7 +14,7 @@
 </div>
 <div align="center">
   <sub>
-    The API Backend of the Curiosone.
+    The API Backend of the Curiosone bot.
   </sub>
 </div>
 
