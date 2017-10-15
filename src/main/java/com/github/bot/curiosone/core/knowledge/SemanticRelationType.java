@@ -4,7 +4,7 @@ package com.github.bot.curiosone.core.knowledge;
  * Represents a SemanticRelationType.
  */
 public enum SemanticRelationType {
-  
+
   /**
    * Entailment.
    */
@@ -40,6 +40,10 @@ public enum SemanticRelationType {
    */
   TIME;
 
+  /**
+   * Returns a String representation of the SemanticRelationType.
+   * @return  a String representation of the SemanticRelationType
+   */
   @Override
   public String toString() {
     return this.name();

@@ -4,7 +4,7 @@ import spark.Request;
 import spark.Response;
 
 /**
- * Utility class to manage CORS mechanism.
+ * Utility Class to manage CORS mechanism.
  * Provides methods to set headers in Request objects.
  */
 public class CorsUtil {
@@ -31,9 +31,13 @@ public class CorsUtil {
 
   /**
    * Sets headers for CORS options requests.
-   * @param req The request object.
-   * @param res The response object.
-   * @return The response body.
+   * @param  req
+   *         The Request Object.
+   * @param  res
+   *         The Response Object.
+   * @return  The response body.
+   * @see  <a href="https://goo.gl/T8LFRm">Spark Request Javadoc</a>
+   * @see  <a href="https://goo.gl/nFCekX">Spark Response Javadoc</a>
    */
   public static String options(Request req, Response res) {
     String accessControlRequestHeaders = req.headers("Access-Control-Request-Headers");
@@ -50,9 +54,13 @@ public class CorsUtil {
   }
 
   /**
-   * Sets headers for CORS options requests.
-   * @param req The request object.
-   * @param res The response object.
+   * Sets headers for CORS options Requests.
+   * @param  req
+   *         The Request Object.
+   * @param  res
+   *         The Response Object.
+   * @see  <a href="https://goo.gl/T8LFRm">Spark Request Javadoc</a>
+   * @see  <a href="https://goo.gl/nFCekX">Spark Response Javadoc</a>
    */
   public static void headers(Request req, Response res) {
     res.header("Access-Control-Allow-Origin", ORIGINS);

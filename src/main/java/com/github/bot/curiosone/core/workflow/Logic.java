@@ -13,15 +13,24 @@ import java.util.Optional;
 /**
  * Manages the Logic Layer of the Curiosone.
  * This class consists of a static method used to generate an answer to a provided message.
+ * @see  com.github.bot.curiosone.core.workflow.Message The Message Class
  */
 public class Logic {
 
   /**
    * Tries to compute an answer to a given Message.
-   * @param msg the Message to be answered. Can be null.
+   * @param  msg
+   *         the Message to be answered. Can be null.
    * @return a Message instance.
    *         If an answer has been found, the instance contains a choerent reply body.
    *         Otherwise, a default message is embedded in the Message instance
+   * @see  com.github.bot.curiosone.core.workflow.Message The Message Class
+   * @see  com.github.bot.curiosone.core.extraction.Brain The Brain Class
+   * @see  com.github.bot.curiosone.core.extraction.BrainResponse The BrainResponse Class
+   * @see  com.github.bot.curiosone.core.nlp.Phrase The Phrase Class
+   * @see  com.github.bot.curiosone.core.nlp.Sentence The Sentence Class
+   * @see  com.github.bot.curiosone.core.nlp.Phrase The Phrase Class
+   * @see  java.util.Optional The Optional Class
    */
   public static Message talk(Message msg) {
     // We are not able to parse a null string :(
