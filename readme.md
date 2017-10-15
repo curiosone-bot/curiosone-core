@@ -64,6 +64,23 @@ The project comes with some useful tools that will help you automatize some comm
 
 ## Authors
 * **Simone Primarosa** - [simonepri](https://github.com/simonepri)
+* **Luca Pierfederici** - [LucaPierfederici](https://github.com/LucaPierfederici)
+* **Daniele Solombrino** - [DS98](https://github.com/DS98)
+* **Andrea Marino** - [thefauxandrea](https://github.com/thefauxandrea)
+* **Gianfranco Passanisi** - [passahr](https://github.com/passahr)
+* **Andrea Pedini** - [thefauxandrea](https://github.com/rytma)
+* **Andrea Rivitto** - [arivitto](https://github.com/arivitto)
+* **Eugenio Schintu** - [euschi](https://github.com/euschi)
+* **Claudio Venanzi** - [CL124C41A](https://github.com/CL124C41A)
+* **Jacopo Rufini** - [jacopoRufini](https://github.com/jacopoRufini)
+* **Christian Sordi** - [ChristianSordi](https://github.com/ChristianSordi)
+* **Alessandro Olivieri** - [alexoli883](https://github.com/alexoli883)
+* **Alfredo Orsini** - [AlfredoOrsini](https://github.com/AlfredoOrsini)
+* **Cosmo Pugliese** - [CosmoPug](https://github.com/CosmoPug)
+* **Francesco Natale** - [LightFoe](https://github.com/LightFoe)
+* **Michele Rossi** - [MicheleRossi](https://github.com/MicheleRossi)
+
+
 
 See also the list of [contributors](https://github.com/curiosone-bot/curiosone-core/contributors) who participated in this project.
 

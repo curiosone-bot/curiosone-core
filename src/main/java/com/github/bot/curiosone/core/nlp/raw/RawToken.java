@@ -8,9 +8,9 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Grammar and semantic word information pointer class.
- * @author Andrea Rivitto && Eugenio Schintu
- * @see IToken
+ * Represent a Token.
+ * A Token is a Word with some additional information.
+ * Provides methods to create a RawToken and manage all of its aspects.
  */
 public class RawToken {
 
@@ -35,15 +35,16 @@ public class RawToken {
   private boolean known;
 
   /**
-   * Various semantic informations' list.
-   * @see Word
-   * @see RawWord
+   * Lists various semantic information
+   * @see  Word
+   * @see  RawWord
    */
   private List<RawWord> words;
 
   /**
    * constructs a RawToken, using an original value.
-   * @param originalValue the original token value.
+   * @param  originalValue
+   *         the original token value
    */
   public RawToken(String originalValue) {
     this.originalValue = originalValue;
@@ -54,8 +55,8 @@ public class RawToken {
   }
 
   /**
-   * Returns the original value.
-   * @see #originalValue
+   * Gets the original value.
+   * @return  the original value
    */
   public String getOValue() {
     return originalValue;
@@ -63,17 +64,17 @@ public class RawToken {
 
   /**
    * Sets the original value.
-   * @param originalValue the value to set the original value to.
-   * @see #originalValue
+   * @param  originalValue
+   *         the value to set the original value to.
    */
   public void setOValue(String originalValue) {
     this.originalValue = originalValue;
   }
 
   /**
-   * Returns <code>true</code> if this Token is correct;
-   *         <code>false</code> otherwise.
-   * @see #corrected
+   * Returns wheter this Token is correct or not.
+   * @return  {@code true} if this Token is correct;
+   *          {@code false} otherwise
    */
   public boolean isCorrected() {
     return corrected;
@@ -82,7 +83,6 @@ public class RawToken {
   /**
    * Sets wheter this Token is correct or not.
    * @param corrected wheter the token is correct or not.
-   * @see #corrected
    */
   public void setCorrected(boolean corrected) {
     this.corrected = corrected;
@@ -90,16 +90,16 @@ public class RawToken {
 
   /**
    * Gets the modified String value.
-   * @see #value
+   * @return  the value
    */
   public String getValue() {
     return value;
   }
 
   /**
-   * Returns <code>true</code> if this Token is known;
-   *         <code>false</code> otherwise.
-   * @see #known
+   * Returns whether this RawToken is known or not.
+   * @return  {@code true} if this Token is known;
+   *          {@code false} otherwise.
    */
   public boolean isKnown() {
     return known;
@@ -107,7 +107,9 @@ public class RawToken {
 
   /**
    * Gets the lemma for this Token.
-   * @see #lemma
+   * Returns null, if this RawToken is unknown.
+   * @return  the lemma of this Token
+   * @see RawWord#getLemma
    */
   public String getLemma() {
     if (!isKnown()) {
@@ -118,7 +120,9 @@ public class RawToken {
 
   /**
    * Gets the part of speech for this Token.
-   * @see #POS
+   * Returns null, if this Token is unknown.
+   * @return  the POS value of this Token
+   * @see RawWord#getPos
    */
   public POS getPos() {
     if (!isKnown()) {
@@ -129,7 +133,9 @@ public class RawToken {
 
   /**
    * Gets the lexical type for this Token.
-   * @see #LEX
+   * Returns null, if this Token is unknown.
+   * @return  the LEX value of this Token
+   * @see RawWord#getLexType
    */
   public LEX getLexT() {
     if (!isKnown()) {
@@ -140,8 +146,8 @@ public class RawToken {
 
   /**
    * Sets wheter this Token is known or not.
-   * @param known wheter this Token is known or not
-   * @see #known
+   * @param  known
+   *         wheter this Token is known or not
    */
   public void setKnown(boolean known) {
     this.known = known;
@@ -149,8 +155,8 @@ public class RawToken {
 
   /**
    * Sets the modified String value for this Token.
-   * @param value the modified String value to be used to set value.
-   * @see #value
+   * @param  value
+   *         the modified String value to be used to set value.
    */
   public void setValue(String value) {
     this.value = value;
@@ -158,32 +164,34 @@ public class RawToken {
 
   /**
    * Gets all the words for this Token.
-   * @see #words
+   * @return  a List containing all the RawWord of this Token
    */
   public List<RawWord> getWords() {
     return words;
   }
 
   /**
-   * Adds a word to the already present words Collection.
-   * @param word the word to be added
-   * @see #words
+   * Adds a RawWord to the Words of this Token.
+   * @param  word
+   *         the word to be added
    */
   public void addWord(RawWord word) {
     this.words.add(word);
   }
 
   /**
-   * Adds a Collection of word to the already present words Collection.
-   * @param words a Collection of words to be added
-   * @see #words
+   * Adds a Collection of RawWords to the Words of this Token.
+   * @param  words
+   *         a Collection of words to be added
+   * @see  <a href="https://goo.gl/d3eV5L">The Collection Interface</a>
    */
   public void addAllWords(Collection<RawWord> words) {
     this.words.addAll(words);
   }
 
   /**
-   * Returns a String representation of this Token.
+   * Returns a String representation of this RawToken.
+   * @return  a String representation of this Token
    */
   @Override
   public String toString() {
