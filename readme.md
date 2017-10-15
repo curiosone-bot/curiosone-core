@@ -14,7 +14,7 @@
 </div>
 <div align="center">
   <sub>
-    The API backend of the Curiosone.
+    The API Backend of the Curiosone.
   </sub>
 </div>
 
@@ -24,7 +24,7 @@ You can try it [here](https://curiosone-bot.github.io/curiosone-web).
 
 ## Development
 The bot codebase is splitted in different repositories:
-- Curiosone Brain - [curiosone-core](https://github.com/curiosone-bot/curiosone-core)
+- Curiosone API Backend - [curiosone-core](https://github.com/curiosone-bot/curiosone-core)
 - Curiosone Web App - [curiosone-web](https://github.com/curiosone-bot/curiosone-web)
 - Curiosone Android App - [curiosone-app](https://github.com/curiosone-bot/curiosone-app)
 
