@@ -18,16 +18,22 @@ import java.util.stream.Collectors;
 
 /**
  * Provides a static method to get an answer from a given sentence and a given scope.
+ * @see  Sentence The Sentence Class
  */
 public class Question {
 
   /**
    * Returns an answer for the given sentence and the given scope.
-   * @param sentence the sentence to base the answer on
-   * @param scope the scope for the given input sentence
-   * @return an Optional instance. If an answer has been successfully computed, the value contains
-             the computed answer.
-   *         Otherwise, an empty Optional instance is returned.
+   * @param  sentence
+   *         the sentence to base the answer on
+   * @param  scope
+   *         the scope for the given input sentence
+   * @return  an Optional instance. If an answer has been successfully computed, the value contains
+              the computed answer.
+   *          Otherwise, an empty Optional instance is returned.
+   * @see  Sentence The Sentence Class
+   * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
+   * @see  BrainResponse The BrainResponse Class
    */
   public static Optional<BrainResponse> getAnswer(Sentence sentence, String scope) {
     Word kind;

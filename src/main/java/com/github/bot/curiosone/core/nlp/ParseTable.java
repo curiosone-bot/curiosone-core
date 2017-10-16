@@ -12,20 +12,23 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
- * Handles the CYK parsing table, which contains all possible parsing trees for the given sentence.
+ * Handles the CYK parsing table, which contains all possible parsing trees for the given Sentence.
  * Provides all the useful methods to create and manage the parsed CYK table.
+ * @see  com.github.bot.curiosone.core.nlp.Token The Token Class
+ * @see  com.github.bot.curiosone.core.nlp.Rule The Rule Class
+ * @see  Class The Cell Class
  */
 public class ParseTable {
 
   /**
    * Stores the CYK table.
-   * @see Cell
+   * @see  Cell The Cell Class
    */
   private Cell[][] table;
 
   /**
    * Lists all the tokens from witch the table was generated.
-   * @see Token
+   * @see  com.github.bot.curiosone.core.nlp.Token The Token Class
    */
   private List<Token> tokens;
 
@@ -36,7 +39,10 @@ public class ParseTable {
 
   /**
    * Constructs a CYK table for the given tokens list.
-   * @param tokens list of tokens to be parsed
+   * @param  tokens
+   *         list of tokens to be parsed
+   * @see  com.github.bot.curiosone.core.nlp.Token The Token Class
+   * @see  com.github.bot.curiosone.core.nlp.Rule The Rule Class
    */
   public ParseTable(List<Token> tokens) {
     this.tokens = tokens;
@@ -85,10 +91,13 @@ public class ParseTable {
 
   /**
    * Gets the content of a specific cell of the CYK.
-   * @param x x coordinate of the table
-   * @param y y coordinate of the table
-   * @return a set of all rules that makes us arrive to that cell
+   * @param  x
+   *         x coordinate of the table
+   * @param  y
+   *         y coordinate of the table
+   * @return  a set of all rules that makes us arrive to that cell
    * @throws IndexOutOfBoundsException if at least one coordinate is outside of the parsed table.
+   * @see  com.github.bot.curiosone.core.nlp.Rule The Rule Class
    */
   public Set<Rule> get(int x, int y) {
     if (y < 0 || y > size || x < 0 || x > y) {
@@ -99,6 +108,7 @@ public class ParseTable {
 
   /**
    * Gets the height of the table.
+   * @return  the height of the table
    */
   public int getHeight() {
     return size;
@@ -106,6 +116,9 @@ public class ParseTable {
 
   /**
    * Gets the width at a specific distance from the top of the table.
+   * @param  y
+   *         the specific distance from the top of the table
+   * @return  the width at a specific distance from the top of the table
    */
   public int getWidthAt(int y) {
     return y + 1;
@@ -113,11 +126,20 @@ public class ParseTable {
 
   /**
    * Visits the table and extracts intervals.
-   * @param meanings the list of meanings extracted for each token
-   * @param lookup the map where the intervals are stored
-   * @param x the x position of the table
-   * @param y the y position of the table
-   * @param current the role to use at this position
+   * @param  meanings
+   *         the list of meanings extracted for each token
+   * @param  lookup
+   *         the map where the intervals are stored
+   * @param  x
+   *         the x position of the table
+   * @param  y
+   *         the y position of the table
+   * @param  current
+   *         the role to use at this position
+   * @see  com.github.bot.curiosone.core.nlp.Meaning The Meaning Class
+   * @see  com.github.bot.curiosone.core.nlp.POS The POS Enum
+   * @see  com.github.bot.curiosone.core.util.Interval The Interval Class
+   * @see  com.github.bot.curiosone.core.nlp.Rule The Rule Class
    */
   public void traverse(List<Set<Meaning>> meanings, Map<POS, TreeSet<Interval>> lookup,
                        int x, int y, Rule current) {
@@ -166,7 +188,8 @@ public class ParseTable {
   }
 
   /**
-   * Returns a String representation for this CYK table.
+   * Returns a String representation of this CYK table.
+   * @return  a String representation for this CYK table
    */
   @Override
   public String toString() {
@@ -183,11 +206,13 @@ public class ParseTable {
   /**
    * Represents a single Cell of the CYK table.
    * Provides methods to create a Cell and retreive its content.
+   * @see  com.github.bot.curiosone.core.nlp.Rule The Rule Class
    */
   private class Cell {
 
     /**
      * A Set of Rules that makes us arrive to that Cell.
+     * @see  com.github.bot.curiosone.core.nlp.Rule The Rule Class
      */
     private Set<Rule> content = new HashSet<Rule>();
 
@@ -197,7 +222,9 @@ public class ParseTable {
     public Cell() {}
 
     /**
-     * Gets the set of rules inside the Cell.
+     * Gets all the Rules inside the cell.
+     * @return  the Set of Rules inside the Cell
+     * @see  com.github.bot.curiosone.core.nlp.Rule The Rule Class
      */
     public Set<Rule> get() {
       return content;
@@ -205,6 +232,7 @@ public class ParseTable {
 
     /**
      * Returns a String representation of this Cell.
+     * @return  a String representation of this Cell
      */
     @Override
     public String toString() {

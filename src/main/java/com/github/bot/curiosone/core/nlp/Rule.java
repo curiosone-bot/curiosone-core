@@ -15,15 +15,17 @@ import java.util.stream.Stream;
 
 
 /**
- * Utility class to handle a grammar rule.
- * A Rule in a context free grammar has a pair of POS values matching another single POS. This trio
- * describes a syntax procedure.
- * Provides useful methods to manage every single aspect of this syntax procedure.
+ * Utility class to handle a grammar Rule.
+ * A Rule in a context free Grammar is a trio, consisting of a source POS and a pair of target POS.
+ * Only Sentences that respect the "Source - Pair of target POS" relation are allowed in the Grammar.
+ * Provides useful methods to manage every single aspect of the Rule.
+ * @see  com.github.bot.curiosone.core.nlp.POS The POS Enum
+ * @see  com.github.bot.curiosone.core.util.Pair The Pair Class
  */
 public class Rule {
 
   /**
-   * Rules that belong to the grammar.
+   * Rules that belong to the used Grammar.
    */
   private static Set<Rule> rules;
 
@@ -33,19 +35,24 @@ public class Rule {
   private static String rulesPath = "/cyk/grammar.txt";
 
   /**
-   * The resulting POS value of joining those in 'to'.
+   * The source POS of this Grammar Rule.
+   * @see  com.github.bot.curiosone.core.nlp.POS The POS Enum
    */
   private POS from;
 
   /**
-   * Pair of POS values that match with that in 'from'.
+   * The target POS of this Grammar Rule.
+   * @see  com.github.bot.curiosone.core.nlp.POS The POS Enum
+   * @see  com.github.bot.curiosone.core.util.Pair The Pair Class
    */
   private Pair<POS, POS> to;
 
   /**
    * Constructs this Rule.
-   * @param from resulting POS value of joining those in 'to'.
-   * @param to pair of POS values that match with that in 'from'.
+   * @param  from
+   *         resulting POS value of joining those in 'to'.
+   * @param  to
+   *         pair of POS values that match with that in 'from'.
    */
   public Rule(POS from, Pair<POS, POS> to) {
     this.from = from;
@@ -53,21 +60,24 @@ public class Rule {
   }
 
   /**
-   * Returns the resulting POS value of joining those in 'to'.
+   * Gets the source POS of this Rule.
+   * @return  the source POS of this Rule
    */
   public POS getFrom() {
     return from;
   }
 
   /**
-   * Returns a pair of POS values that match with that in 'from'.
+   * Gets the target POS values of this Rule.
+   * @return  a Pair instance, containing the target POS values of this Rule
    */
   public Pair<POS, POS> getTo() {
     return to;
   }
 
   /**
-   * Returns a String representation of this Rule in the form F: (T0, T1).
+   * Returns a String representation of this Rule.
+   * @return  a String representation of this Rule in the form F: (T0, T1)
    */
   @Override
   public String toString() {
@@ -76,9 +86,10 @@ public class Rule {
 
   /**
   * Checks whether this transaction equals to the specified object.
-  * @param other the other Rule to be compared against
-  * @return {@code true} if this rule equals the other rule;
-  *         {@code false} otherwise
+  * @param  other
+  *         the other Rule to be compared against
+  * @return  {@code true} if this rule equals the other rule;
+  *          {@code false} otherwise
   */
   @Override
   public boolean equals(Object other) {
@@ -93,8 +104,9 @@ public class Rule {
   }
 
   /**
-   * Returns the HashCode for this Rule. The HashCode is computed using the HashCodes of the
-   * underlying objects.
+   * Calculates the HashCode for this Rule.
+   * The HashCode depends on all of the POS involved in the Rule.
+   * @return  the HashCode of this Rule
    */
   @Override
   public int hashCode() {
@@ -102,9 +114,11 @@ public class Rule {
   }
 
   /**
-   * Extracts all rules that has the same 'from' value as the one provided.
-   * @param from a POS value that has to match with that in 'from' of a rule
-   * @return a set of rules that matches
+   * Extracts all the Rules of the Grammar with the provided POS as source.
+   * @param  from
+   *         the POS value indicating the desired source
+   * @return  a Set containing all the Rules of the Grammar with the given POS as source
+   *
    */
   public static Set<Rule> allFrom(POS from) {
     load(); // Make sure that rules has been loaded
@@ -119,9 +133,10 @@ public class Rule {
   }
 
   /**
-   * Extracts all rules that has the same 'to' value as the one provided.
-   * @param to a pair of POS values that has to match with that in 'to' of a rule
-   * @return a Set of rules that matches
+   * Extracts all the Rules of the Grammar that have the given Pair instance as target.
+   * @param  to
+   *         the Pair instance containing the desired target
+   * @return  a Set containing all the Rules of the Grammar with the given Pair as target.
    */
   public static Set<Rule> allTo(Pair<POS, POS> to) {
     load(); // Make sure that rules has been loaded
@@ -136,7 +151,7 @@ public class Rule {
   }
 
   /**
-   * Loads the rules of the grammar.
+   * Loads the Rules of the Grammar.
    */
   private static void load() {
     if (rules != null) {

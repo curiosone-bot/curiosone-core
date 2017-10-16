@@ -18,8 +18,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Handles the precomputed answers to some common conversational phrases.
- * Provides an utility method to get an answer from a given sentence.
+ * Handles the precomputed answers to some common conversational Phrases.
+ * Provides an utility method to get an answer from a given Phrase.
+ * @see  com.github.bot.curiosone.core.nlp.Phrase The Phrase Class
  */
 public class Conversation {
 
@@ -30,6 +31,7 @@ public class Conversation {
 
   /**
    * Maps the recognized tokens to their possible phrases.
+   * @see  <a href="https://goo.gl/CR2S3b">The LinkedHashMap Class</a>
    */
   private static LinkedHashMap<String[], String[]> knownQuestions;
 
@@ -65,9 +67,13 @@ public class Conversation {
 
   /**
    * Answers the given Phrase.
-   * @param phrase the input phrase to be checked
-   * @return An Optional instance. The instance is empty, if the input is an unknown Phrase.
-   *         Otherwise, the istance contains the answer, encapsulated in a BrainResponse object.
+   * @param  phrase
+   *         the input phrase to be checked
+   * @return  An Optional instance. The instance is empty, if the input is an unknown Phrase.
+   *          Otherwise, the istance contains the answer, encapsulated in a BrainResponse object.
+   * @see  Phrase The Phrase Class
+   * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
+   * @see  BrainResponse The BrainResponse Class
    */
   public static Optional<BrainResponse> getAnswer(Phrase phrase) {
     if (knownQuestions == null) {
