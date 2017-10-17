@@ -15,6 +15,7 @@ import java.util.stream.Stream;
  * Provides a method to correct spelling errors in a Sentence.
  */
 public class Spelling {
+
   /**
    * String representation of the alphabet.
    */
@@ -65,7 +66,8 @@ public class Spelling {
   }
 
   /**
-   * Gets the instance of the spelling dictionary.
+   * Gets the Singleton instance.
+   * @return  the instance of the spelling dictionary
    */
   public static Spelling getInstance() {
     if  (instance != null) {
@@ -77,8 +79,9 @@ public class Spelling {
 
   /**
    * Tries to correct a mispelled word.
-   * @param word the word to be corrected. It should be lowercased.
-   * @return the corrected word if the world can be corrected
+   * @param  word
+   *         the word to be corrected. It should be lowercased.
+   * @return  the corrected word if the world can be corrected
    */
   public String correct(String word) {
     if (dict.containsKey(word)) {
@@ -95,8 +98,9 @@ public class Spelling {
 
   /**
    * Applies all possible single character modifications to a String.
-   * @param word the word to edit
-   * @return a stream containign all generated modified words from the original word
+   * @param  word
+   *         the word to edit
+   * @return  a stream containing all the modified words, generated from the original word
    */
   private Stream<String> edits(String word) {
     Stream<String> deletes = IntStream.range(0, word.length())
@@ -121,8 +125,9 @@ public class Spelling {
 
   /**
    * Checks whether the provided Stream of Strings is in {@link #dict} or not.
-   * @param words Stream of Strings
-   * @return a Stream containing only the Words represented by a String in {@link #dict}
+   * @param  words
+   *         Stream of Strings containing the Word to be checked
+   * @return  a Stream containing only the Words represented by a String in {@link #dict}
    */
   private Stream<String> known(Stream<String> words) {
     return words.filter((word) -> dict.containsKey(word));

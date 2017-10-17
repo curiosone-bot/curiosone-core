@@ -3,8 +3,8 @@ package com.github.bot.curiosone.core.analysis;
 import com.github.bot.curiosone.core.nlp.Phrase;
 
 /**
- * Handles emotion analysis for a Phrase.
- * Provides a single public static method to perform to calculate the emotion of a given Phrase.
+ * Handles phrasal emotion analysis.
+ * Provides a public static method to calculate the emotion of a given Phrase.
  */
 public class EmotionAnalysis {
 
@@ -15,8 +15,11 @@ public class EmotionAnalysis {
 
   /**
    * Performs an emotion analysis of the provided Phrase.
-   * @param phrase the Phrase to be analysed.
-   * @return a String representation of the calculated emotion. Supports "sad", "happy" and "angry"
+   * @param  phrase
+   *         the Phrase to be analysed.
+   * @return  a String representation of the calculated emotion. Supports "sad", "happy" and "angry"
+   *          emotions
+   * @see  Phrase The Phrase Class
    */
   public static String getEmotion(Phrase phrase) {
     double score = TokenScorer.calculateScore(phrase.getTokens());
