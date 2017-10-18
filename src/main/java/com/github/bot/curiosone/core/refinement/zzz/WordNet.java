@@ -1,11 +1,7 @@
-package com.github.bot.curiosone.core.refinement;
-/**
- * @author Claudio Venanzi
- */
+package com.github.bot.curiosone.core.refinement.zzz;
 
 import edu.mit.jwi.morph.SimpleStemmer;
 import edu.mit.jwi.morph.WordnetStemmer;
-
 import java.net.URL;
 import java.util.Comparator;
 import java.util.List;
@@ -63,13 +59,14 @@ public class WordNet {
 
   //-----------------------------------------------------------------------------------------------
   
-  /**
+  /** NOT WORKING SINCE WordPart DOES NOT CONTAIN A POS MAPPING FOR WORDNET ANYMORE.
+   * 
    * Find the stem of a word.
    * @param w word
    * @param p part
    * @return list of stems
-   */
-  public final String getStem(String w, Part p) {
+   *
+  public final String getStem(String w, WordPart p) {
     
     Comparator<String> byLength = (a, b) -> a.length() > b.length() ? 1 : -1;
     
@@ -82,7 +79,7 @@ public class WordNet {
         .min(byLength);
     
     return stem.isPresent() ? stem.get() : w;
-  }
+  }*/
 
   //-----------------------------------------------------------------------------------------------
 }
