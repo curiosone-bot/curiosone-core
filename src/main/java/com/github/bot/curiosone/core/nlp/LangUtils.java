@@ -7,26 +7,33 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Provides utility methos to perform basic Natural Language Process tasks.
+ * These methods, applied to a Sentence, allow to: split by puntaction, remove duplicated spaces,
+ * expand verbs in contracted form and remove non-alphanumeric characters.
  */
 public class LangUtils {
 
   /**
-   * Stores all supported verbs abbreviations in the expandVerbs method.
+   * Stores the regex used to remove all non-alphanumeric characters from a String.
+   */
+  private static final String REGEX_NON_ALPHANUM = "[^A-Za-z0-9 ]";
+
+  /**
+   * Stores all supported verbs abbreviations by the expandVerbs method.
    */
   private static final String[] SHORTS = {"'m", "'s", "'re", "'ve", "'ll",
       "won't", "n't"};
 
   /**
-   * Stores all the expanded forms for the supported contracted verbs by
-   * expandVerbs method.
+   * Stores all the expanded forms for the supported contracted verbs by expandVerbs method.
    */
   private static final String[] LONGS = {" am", " is", " are", " have", " will",
       "will not", " not"};
 
   /**
    * Splits a text in sentences by punctuation.
-   * @param str The original text to be splitted into sentences.
-   * @return a list of splitted sentences.
+   * @param  str
+   *         The original text to be splitted into sentences.
+   * @return  a list of splitted sentences.
    */
   public static List<String> splitByPuntaction(String str) {
     StringBuffer buff = new StringBuffer();
@@ -118,8 +125,9 @@ public class LangUtils {
 
   /**
    * Removes duplicated spaces from a String.
-   * @param str The string with duplicated spaces.
-   * @return the original string without double spaces.
+   * @param  str
+   *         The string with duplicated spaces.
+   * @return  the original string without double spaces.
    */
   public static String removeDuplicatedSpaces(String str) {
     return StringUtils.normalizeSpace(str);
@@ -129,10 +137,21 @@ public class LangUtils {
    * Expands all the contracted form verbs in a sentence.
    * Note: Works only with lowercased Strings.
    * Note: Saxon Genitive abbreviations could wrongly be treated as "is".
-   * @param contracted the phrase to work with
-   * @return a new String, containing the old phrase with all verbs expanded
+   * @param  contracted
+   *         the phrase to work with
+   * @return  a new String, containing the old phrase with all verbs expanded
    */
   public static String expandVerbs(String contracted) {
     return StringUtils.replaceEachRepeatedly(contracted, SHORTS, LONGS);
+  }
+
+  /**
+   * Removes non-alphanumeric characters from the given String.
+   * @param  str
+   *         the String to remove non-alphanumeric characters from
+   * @return  a new String containing the result of the non-alphanumeric characters removal
+   */
+  public static String removeNonAlphaNumeric(String str) {
+    return str.replaceAll(REGEX_NON_ALPHANUM, "");
   }
 }

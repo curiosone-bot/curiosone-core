@@ -3,25 +3,29 @@ package com.github.bot.curiosone.core.knowledge;
 import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
 /**
- * This class represents a Concept of a Semantic Network.
- * @author Christian Sordi.
+ * Represents a Concepts of a SemanticNetwork.
+ * @see  SemanticNetwork The SemanticNetwork Class
+ * @see  SemanticRelation The SemanticRelation Class
  */
 public class Concept implements Vertex {
+
   /**
-   * Name of the represented Concept.
+   * Represents the ID of the Concept.
    */
   private final String id;
 
   /**
-   * Default class constructor.
-   * @param id Concept name.
+   * Constructs this Concept with the given ID.
+   * @param  id
+   *         ID of this Concept.
    */
   public Concept(String id) {
     this.id = id;
   }
 
   /**
-   * Returns Concept name.
+   * Gets the ID of this Concept.
+   * @return  the ID of this Concept
    */
   @Override
   public String getId() {
@@ -29,24 +33,35 @@ public class Concept implements Vertex {
   }
 
   /**
-   * Returns Concept String representation.
+   * Returns the String representation of this Concept.
+   * @return  the String representation of this Concept
    */
   public String toString() {
     return getId();
   }
 
   /**
-   * Method to confront the instance with another object.
-   * @param o the other Concept to be confronted with.
-   * @return true, if the concept are equal, false if not.
+   * Checks whether this Concept equals to the given Object.
+   * @param  o
+   *         the other Concept to be compared against.
+   * @return  {@code true} if this Concept equals to the other Concept;
+   *          {@code false} otherwise
    */
   @Override
   public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+    if (o == null || o.getClass() != this.getClass()) {
+      return false;
+    }
     return this.id.equals(((Concept)o).getId());
   }
 
   /**
-   * Returns the HashCode of the Concept name.
+   * Returns the HashCode of this Concept.
+   * The HashCode depends on the ID of this Concept.
+   * @return  the HashCode of this Concept.
    */
   @Override
   public int hashCode() {

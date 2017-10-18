@@ -3,20 +3,26 @@ package com.github.bot.curiosone.core.util;
 import java.util.Objects;
 
 /**
- * Container to ease passing around a tuple of two objects.
+ * Provides utility methods to easily create and manage an immutable tuple of Objects.
  */
 public class Pair<F, S> {
-  /** The first element of the pair. */
+
+  /**
+   * Stores the first element of this Pair.
+   */
   private final F first;
 
-  /** The second element of the pair. */
+  /**
+   * Stores the second element of this Pair.
+   */
   private final S second;
 
   /**
-   * Constructor for a Pair.
-   *
-   * @param first the first object in the pair
-   * @param second the second object in the pair
+   * Constructs this Pair.
+   * @param  first
+   *         the first object in this Pair
+   * @param  second
+   *         the second object in this Pair
    */
   public Pair(F first, S second) {
     this.first = first;
@@ -24,30 +30,29 @@ public class Pair<F, S> {
   }
 
   /**
-   * Gets the first element of the pair.
-   *
-   * @return the first element of the pair.
+   * Gets the first element of this Pair.
+   * @return  the first element of this Pair
    */
   public F getFirst() {
     return first;
   }
 
   /**
-   * Gets the second element of the pair.
-   *
-   * @return the second element of the pair.
+   * Gets the second element of this Pair.
+   * @return  the second element of this Pair
    */
   public S getSecond() {
     return second;
   }
 
   /**
-   * Checks the two objects for equality by delegating to their respective
-   * {@link Object#equals(Object)} methods.
-   *
-   * @param other the {@link Pair} to which this one is to be checked for equality
-   * @return true if the underlying objects of the Pair are both considered
-   *         equal
+   * Checks whether this Pair equals to the given Object or not.
+   * The equality comparison is performed on the two Objects contained in the Pairs, so their
+   * respective {@link Object#equals(Object)} methods are called.
+   * @param  other
+   *         the {@link Pair} to be compared against
+   * @return  {@code true} if the Objects of the Pair are both equal;
+              {@code false} otherwise.
    */
   @Override
   public boolean equals(Object other) {
@@ -62,9 +67,9 @@ public class Pair<F, S> {
   }
 
   /**
-   * Compute a hash code using the hash codes of the underlying objects.
-   *
-   * @return a hashcode of the pair
+   * Calculates the HashCode for this Pair.
+   * The HashCode is based on the HashCode of each element.
+   * @return  the HashCode of this Pair
    */
   @Override
   public int hashCode() {
@@ -72,9 +77,8 @@ public class Pair<F, S> {
   }
 
   /**
-   * Returns a string representation of this pair.
-   *
-   * @return a string representation of this interval in the form (first, second)
+   * Returns a String representation of this Pair.
+   * @return  a String representation of this Pair in the form (first, second)
    */
   @Override
   public String toString() {
@@ -82,11 +86,16 @@ public class Pair<F, S> {
   }
 
   /**
-   * Convenience method for creating an appropriately typed pair.
-   *
-   * @param a the first object in the pair
-   * @param b the second object in the pair
-   * @return a pair that is templatized with the types of a and b
+   * Utility method to create a new immutable Pair.
+   * @param  <A>
+   *         the type of the first Object in this Pair
+   * @param  a
+   *         the first Object of the new immutable Pair
+   * @param  <B>
+   *         the type of the second Object in this Pair
+   * @param  b
+   *         the second Object of the new immutable Pair
+   * @return  the new immutable Pair
    */
   public static <A, B> Pair<A, B> create(A a, B b) {
     return new Pair<A, B>(a, b);

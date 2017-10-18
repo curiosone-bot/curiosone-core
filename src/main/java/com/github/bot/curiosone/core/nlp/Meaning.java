@@ -3,23 +3,33 @@ package com.github.bot.curiosone.core.nlp;
 import java.util.Objects;
 
 /**
- * A grammatical Meaning of a group of words.
+ * Handles a grammatical Meaning.
+ * Provides methods to create, change and retrieve information of the Meaning.
+ * @see  <a href="https://goo.gl/SmeEDX">The Comparable Interface</a>
  */
 public class Meaning implements Comparable<Meaning> {
-  /** The part of speech type of the meaning. */
+
+  /**
+   * The Part of the Speech type of this Meaning.
+   */
   POS pos;
 
-  /** The lexical category of the meaning. */
+  /**
+   * The Lexical Type of this Meaning.
+   */
   LEX lex;
 
-  /** The frequency of the meaning. */
+  /**
+   * The frequency of this Meaning.
+   */
   int freq;
 
   /**
-   * Constructor of a Meaning.
-   *
-   * @param pos the part of speech type of the new meaning
-   * @param lex the lexical category of the new meaning
+   * Constructs this Meaning instance with a given POS, LEX and a default frequency.
+   * @param  pos
+   *         the part of speech type for this new Meaning
+   * @param  lex
+   *         the lexical category for this new Meaning
    */
   public Meaning(POS pos, LEX lex) {
     this.pos = pos;
@@ -28,36 +38,33 @@ public class Meaning implements Comparable<Meaning> {
   }
 
   /**
-   * Gets the part of speech type of this meaning.
-   *
-   * @return the part of speech type of this meaning
+   * Gets the Part of Speech type for this Meaning.
+   * @return  the Part of Speech type for this Meaning
    */
   public POS getPOS() {
     return pos;
   }
 
   /**
-   * Gets the lexical category of this meaning.
-   *
-   * @return the lexical category of this meaning
+   * Gets the Lexical category for this Meaning.
+   * @return  the Lexical category for this Meaning
    */
   public LEX getLEX() {
     return lex;
   }
 
   /**
-   * Gets how much this meaning is frequent.
-   *
-   * @return a positive frequency of this meaning.
+   * Gets the frequency for this Meaning.
+   * @return  frequency for this Meaning
    */
   public int getFrequency() {
     return freq;
   }
 
   /**
-   * Sets how much this meaning is frequent.
-   *
-   * @param frequency a positive frequency to set
+   * Sets the frequency for this Meaning.
+   * @param frequency
+   *        the frequency value to be set. Must be a positive integer
    * @throws IllegalArgumentException if negative frequency is passed
    */
   public void setFrequency(int frequency) {
@@ -68,9 +75,8 @@ public class Meaning implements Comparable<Meaning> {
   }
 
   /**
-   * Returns a string representation of this meaning.
-   *
-   * @return a string representation of this meaning in the form [pos, lex, frequency]
+   * Returns a String representation of this Meaning.
+   * @return  a String representation of this Meaning in the form [pos, lex, frequency]
    */
   @Override
   public String toString() {
@@ -78,11 +84,11 @@ public class Meaning implements Comparable<Meaning> {
   }
 
   /**
-   * Compares this meaning to the specified object.
-   *
-   * @param  other the other meaning
-   * @return {@code true} if this meaning equals the other meaning;
-   *         {@code false} otherwise
+   * Checks whether this Meaning equals to the specified object.
+   * @param  other
+   *         the other Meaning to be compared against
+   * @return  {@code true} if this Meaning equals the other Meaning;
+   *          {@code false} otherwise
    */
   @Override
   public boolean equals(Object other) {
@@ -97,9 +103,9 @@ public class Meaning implements Comparable<Meaning> {
   }
 
   /**
-   * Returns an integer hash code for this meaning.
-   *
-   * @return an integer hash code for this meaning
+   * Calculates the HashCode for this Meaning.
+   * The HashCode is based on the POS and LEX values.
+   * @return the HashCode of this Meaning
    */
   @Override
   public int hashCode() {
@@ -107,9 +113,9 @@ public class Meaning implements Comparable<Meaning> {
   }
 
   /**
-   * Compares this meaning to the other meaning.
-   *
-   * @param other the other meaning
+   * Compares this Meaning to the other Meaning.
+   * @param  other
+   *         the other Meaning to be compared against
    * @return a negative value if this is ordered before other;
    *         a positive value if this is ordered after other;
    *         zero if this and other are ordered together.

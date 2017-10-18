@@ -9,24 +9,38 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * A Token is a list of words with a grammatical meaning.
+ * Handles a Token.
+ * A Token is a word with a grammatical meaning.
+ * Provides methods to create and manage a Token.
+ * @see  com.github.bot.curiosone.core.nlp.Meaning The Meaning Class
  */
 public class Token {
-  /** The text rappresentation of this token. */
+
+  /**
+   * Represents the text of this Token.
+   */
   String text;
 
-  /** Base form of the world. */
+  /**
+   * Stores the base form of the word.
+   */
   String lemma;
 
-  /** Meanings of the token. */
+  /**
+   * Stores all the possible meanings for this Token.
+   * @see  com.github.bot.curiosone.core.nlp.Meaning The Meaning Class
+   */
   Set<Meaning> means;
 
-  /** Whether this token is known or not. */
+  /**
+   * Whether this Token is known or not.
+   */
   boolean known;
 
   /**
    * Constructs a Token starting from a text.
-   * @param text the original text to start from
+   * @param  text
+   *         the original text for this Token
    */
   private Token(String text) {
     this.text = text;
@@ -34,6 +48,9 @@ public class Token {
     known = rt.isKnown();
     means = new HashSet<>();
     lemma = rt.getLemma();
+    if (lemma == null) {
+      lemma = text;
+    }
     rt.getWords().forEach(rw -> {
       Meaning meaning = new Meaning(rw.getPos(), rw.getLexType());
       meaning.setFrequency(rw.getNum());
@@ -42,46 +59,42 @@ public class Token {
   }
 
   /**
-   * Checks if this token as at least a meaning.
-   *
-   * @return {@code true} if this interval equals the other interval;
-   *         {@code false} otherwise
+   * Gets whether this Token is known or not.
+   * @return  {@code true} if this Token has at leas a Meaning;
+   *          {@code false} otherwise
    */
   public boolean isKnown() {
     return known;
   }
 
   /**
-   * Returns the concatenation of the words of this token.
-   *
-   * @return the concatenation of the words of this token.
+   * Gets the text of this Token.
+   * @return  the text of this Token
    */
   public String getText() {
     return text;
   }
 
   /**
-   * Returns the normalized concatenation of the words of this token.
-   *
-   * @return the normalized concatenation of the words of this token.
+   * Gets the normalized concatenation of the words of this token.
+   * @return  the normalized concatenation of the words of this token
    */
   public String getLemma() {
     return lemma;
   }
 
   /**
-   * Returns the list of the meanings of this token.
-   *
-   * @return the list of the meanings of this token.
+   * Gets all the Meanings of this Token.
+   * @return  a Set containing all the meanings of this Token
+   * @see  com.github.bot.curiosone.core.nlp.Meaning The Meaning Class
    */
   public Set<Meaning> getMeanings() {
     return means;
   }
 
   /**
-   * Returns a string representation of this token.
-   *
-   * @return a string representation of this token in the form [text, word, meanings]
+   * Returns a String representation of this Token.
+   * @return  a String representation of this Token, formatted as: [text, word, meanings]
    */
   @Override
   public String toString() {
@@ -89,11 +102,11 @@ public class Token {
   }
 
   /**
-   * Compares this token to the specified object.
-   *
-   * @param  other the other token
-   * @return {@code true} if this token equals the other token;
-   *         {@code false} otherwise
+   * Checks whether this token equals to the specified object.
+   * @param  other
+   *         the other Token to be compared against
+   * @return  {@code true} if this Token equals the other Token;
+   *          {@code false} otherwise
    */
   @Override
   public boolean equals(Object other) {
@@ -108,9 +121,9 @@ public class Token {
   }
 
   /**
-   * Returns an integer hash code for this token.
-   *
-   * @return an integer hash code for this token
+   * Calculates the HashCode for this Token.
+   * The HashCode is based on the HashCode of the original text.
+   * @return the HashCode of this Token
    */
   @Override
   public int hashCode() {
@@ -118,16 +131,17 @@ public class Token {
   }
 
   /**
-   * Splits a string in a list of tokens checking groups of words.
-   *
-   * @param str the string to be tokenized
-   * @return the list of tokens of the string
+   * Splits a String in a list of Tokens, checking groups of words.
+   * @param  str
+   *         the String to be tokenized
+   * @return  A List of tokens for the given the String
    */
   public static List<Token> tokenize(String str) {
     List<Token> tokens = new ArrayList<>();
     str = str.toLowerCase();
     str = LangUtils.removeDuplicatedSpaces(str);
     str = LangUtils.expandVerbs(str);
+    str = LangUtils.removeNonAlphaNumeric(str);
 
     String[] splitted = str.split(" ");
     int pos = splitted.length;
@@ -144,12 +158,16 @@ public class Token {
         }
       }
       String word = buff.toString();
-
-      Token token = new Token(word);
-      if (!token.isKnown()) {
-        word = Spelling.getInstance().correct(word);
-        token = new Token(word);
+      if (word.length() == 0) {
+        pos -= len;
+        continue;
       }
+      Token token = new Token(word);
+      // This has been removed since creates problems.
+      // if (!token.isKnown()) {
+      //   word = Spelling.getInstance().correct(word);
+      //   token = new Token(word);
+      // }
       if (token.isKnown()) {
         tokens.add(0, token);
         pos -= len;
@@ -157,6 +175,9 @@ public class Token {
         continue;
       }
       if (len == 1) {
+        // If we don't know this token we treat it as a Noun.
+        token.means = new HashSet<>();
+        token.means.add(new Meaning(POS.N, LEX.OBJECT));
         tokens.add(0, token);
         pos -= len;
         len = 4;

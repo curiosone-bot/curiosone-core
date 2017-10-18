@@ -3,6 +3,8 @@ package com.github.bot.curiosone.core.nlp;
 import com.github.bot.curiosone.core.util.Pair;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,27 +15,44 @@ import java.util.stream.Stream;
 
 
 /**
- * A Rule in a context free grammar has a pair of POS values matching another
- * single POS. This trio describe a syntax procedure.
+ * Utility class to handle a grammar Rule.
+ * A Rule in a context free Grammar is a trio, consisting of a source POS and a pair of target POS.
+ * Only Sentences that respect the "Source - Pair of target POS" relation are allowed in the Grammar.
+ * Provides useful methods to manage every single aspect of the Rule.
+ * @see  com.github.bot.curiosone.core.nlp.POS The POS Enum
+ * @see  com.github.bot.curiosone.core.util.Pair The Pair Class
  */
 public class Rule {
-  /** Rules that belongs to the grammar. */
+
+  /**
+   * Rules that belong to the used Grammar.
+   */
   private static Set<Rule> rules;
 
-  /** Grammar file path. */
-  private static final Path source = Paths.get("src/main/res/cyk/grammar.txt");
+  /**
+   * Path to the Grammar file.
+   */
+  private static String rulesPath = "/cyk/grammar.txt";
 
-  /** The resulting POS value of joining those in 'to'. */
+  /**
+   * The source POS of this Grammar Rule.
+   * @see  com.github.bot.curiosone.core.nlp.POS The POS Enum
+   */
   private POS from;
 
-  /** Pair of POS values that match with that in 'from'. */
+  /**
+   * The target POS of this Grammar Rule.
+   * @see  com.github.bot.curiosone.core.nlp.POS The POS Enum
+   * @see  com.github.bot.curiosone.core.util.Pair The Pair Class
+   */
   private Pair<POS, POS> to;
 
   /**
-   * Constructor for a Rule.
-   *
-   * @param from resulting POS value of joining those in 'to'.
-   * @param to pair of POS values that match with that in 'from'.
+   * Constructs this Rule.
+   * @param  from
+   *         resulting POS value of joining those in 'to'.
+   * @param  to
+   *         pair of POS values that match with that in 'from'.
    */
   public Rule(POS from, Pair<POS, POS> to) {
     this.from = from;
@@ -41,27 +60,24 @@ public class Rule {
   }
 
   /**
-   * Returns the resulting POS value of joining those in 'to'.
-   *
-   * @return Resulting POS
+   * Gets the source POS of this Rule.
+   * @return  the source POS of this Rule
    */
   public POS getFrom() {
     return from;
   }
 
   /**
-   * Returns a pair of POS values that match with that in 'from'.
-   *
-   * @return a pair of POS values that match with that in 'from'.
+   * Gets the target POS values of this Rule.
+   * @return  a Pair instance, containing the target POS values of this Rule
    */
   public Pair<POS, POS> getTo() {
     return to;
   }
 
   /**
-   * Returns a string representation of this rule.
-   *
-   * @return a string representation of this rule in the form F: (T0, T1)
+   * Returns a String representation of this Rule.
+   * @return  a String representation of this Rule in the form F: (T0, T1)
    */
   @Override
   public String toString() {
@@ -69,11 +85,11 @@ public class Rule {
   }
 
   /**
-  * Compares this transaction to the specified object.
-  *
-  * @param  other the other rule
-  * @return {@code true} if this rule equals the other rule;
-  *         {@code false} otherwise
+  * Checks whether this transaction equals to the specified object.
+  * @param  other
+  *         the other Rule to be compared against
+  * @return  {@code true} if this rule equals the other rule;
+  *          {@code false} otherwise
   */
   @Override
   public boolean equals(Object other) {
@@ -88,9 +104,9 @@ public class Rule {
   }
 
   /**
-   * Compute a hash code using the hash codes of the underlying objects.
-   *
-   * @return a hashcode of the Rule
+   * Calculates the HashCode for this Rule.
+   * The HashCode depends on all of the POS involved in the Rule.
+   * @return  the HashCode of this Rule
    */
   @Override
   public int hashCode() {
@@ -98,10 +114,11 @@ public class Rule {
   }
 
   /**
-   * Extracts all rules that has the same 'from' value as the one provided.
+   * Extracts all the Rules of the Grammar with the provided POS as source.
+   * @param  from
+   *         the POS value indicating the desired source
+   * @return  a Set containing all the Rules of the Grammar with the given POS as source
    *
-   * @param from a POS value that has to match with that in 'from' of a rule
-   * @return a set of rules that matches
    */
   public static Set<Rule> allFrom(POS from) {
     load(); // Make sure that rules has been loaded
@@ -116,10 +133,10 @@ public class Rule {
   }
 
   /**
-   * Extracts all rules that has the same 'to' value as the one provided.
-   *
-   * @param to a pair of POS values that has to match with that in 'to' of a rule
-   * @return a set of rules that matches
+   * Extracts all the Rules of the Grammar that have the given Pair instance as target.
+   * @param  to
+   *         the Pair instance containing the desired target
+   * @return  a Set containing all the Rules of the Grammar with the given Pair as target.
    */
   public static Set<Rule> allTo(Pair<POS, POS> to) {
     load(); // Make sure that rules has been loaded
@@ -134,14 +151,22 @@ public class Rule {
   }
 
   /**
-   * Loads the rules of the grammar.
+   * Loads the Rules of the Grammar.
    */
   private static void load() {
     if (rules != null) {
       return;
     }
+    Path path = null;
+    try {
+      URL resource = Rule.class.getResource(rulesPath);
+      path = Paths.get(resource.toURI());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+
     rules = new HashSet<Rule>();
-    try (Stream<String> stream = Files.lines(source)) {
+    try (Stream<String> stream = Files.lines(path)) {
       stream.forEach(line -> {
         String[] values = line.split(" ");
         rules.add(

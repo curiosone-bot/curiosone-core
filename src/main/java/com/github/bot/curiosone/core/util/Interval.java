@@ -3,22 +3,30 @@ package com.github.bot.curiosone.core.util;
 import java.util.Objects;
 
 /**
- *  The {@code Interval} class represents a one-dimensional interval.
- *  The interval is <em>closed</em>—it contains both endpoints.
- *  Intervals are immutable: their values cannot be changed after they are created.
+ * The {@code Interval} class represents a one-dimensional interval.
+ * The interval is <em>closed</em>—it contains both endpoints.
+ * Intervals are immutable: their values cannot be changed after they are created.
+ * Provides methods to create an Interval, retrieve its endpoints, check intesection with
+ * another Interval and verify appartenence of a single point.
  */
 public class Interval implements Comparable<Interval> {
-  /** The start of the interval. */
+
+  /**
+   * Stores the start of this Interval.
+   */
   private final int min;
 
-  /** The end of the interval. */
+  /**
+   * Stores the end of this Interval.
+   */
   private final int max;
 
   /**
-   * Initializes a closed interval [min, max].
-   *
-   * @param  min the smaller endpoint
-   * @param  max the larger endpoint
+   * Constructs an initialized closed interval [min, max].
+   * @param  min
+   *         the smaller endpoint
+   * @param  max
+   *         the larger endpoint
    * @throws IllegalArgumentException if the min endpoint is greater than the max endpoint
    */
   public Interval(int min, int max) {
@@ -30,61 +38,54 @@ public class Interval implements Comparable<Interval> {
   }
 
   /**
-   * Returns the min endpoint of this interval.
-   *
-   * @return the min endpoint of this interval
+   * Gets the minumum endpoint of this Interval.
+   * @return  the minumum endpoint of this Interval
    */
   public int min() {
     return min;
   }
 
   /**
-   * Returns the max endpoint of this interval.
-   *
-   * @return the max endpoint of this interval
+   * Gets the maximum endpoint of this Interval.
+   * @return  the maximum endpoint of this Interval
    */
   public int max() {
     return max;
   }
 
   /**
-   * Returns true if this interval intersects the specified interval.
-   *
-   * @param  that the other interval
-   * @return {@code true} if this interval intersects the argument interval;
-   *         {@code false} otherwise
+   * Checks Whether this Interval intersects the given Interval.
+   * @param that
+   *        the other Interval that must intersect this Interval
+   * @return  {@code true} if this Interval intersects the provided Interval;
+   *          {@code false} otherwise
    */
   public boolean intersects(Interval that) {
-    if (this.max < that.min || that.max < this.min) {
-      return false;
-    }
-    return true;
+    return !(this.max < that.min || that.max < this.min);
   }
 
   /**
-   * Returns true if this interval contains the specified value.
-   *
-   * @param x the value
-   * @return {@code true} if this interval contains the value {@code x};
-   *         {@code false} otherwise
+   * Checks whether this Interval contains the specified value.
+   * @param  x
+   *         the value to be included this Interval
+   * @return  {@code true} if this interval contains the value {@code x};
+   *          {@code false} otherwise
    */
   public boolean contains(int x) {
     return (min <= x) && (x <= max);
   }
 
   /**
-   * Returns the length of this interval.
-   *
-   * @return the length of this interval (max - min)
+   * Calculates the length of this Interval.
+   * @return  the length of this Interval
    */
   public double length() {
     return max - min;
   }
 
   /**
-   * Returns a string representation of this interval.
-   *
-   * @return a string representation of this interval in the form [min, max]
+   * Returns a String representation of this Interval.
+   * @return  a String representation of this interval in the form [min, max]
    */
   @Override
   public String toString() {
@@ -92,11 +93,11 @@ public class Interval implements Comparable<Interval> {
   }
 
   /**
-   * Compares this interval to the specified object.
-   *
-   * @param  other the other interval
-   * @return {@code true} if this interval equals the other interval;
-   *         {@code false} otherwise
+   * Checks whether this Interval is equal to the given Object.
+   * @param  other
+   *         the other Interval to be compared against
+   * @return  {@code true} if this Interval equals the other Interval;
+   *          {@code false} otherwise
    */
   @Override
   public boolean equals(Object other) {
@@ -111,9 +112,9 @@ public class Interval implements Comparable<Interval> {
   }
 
   /**
-   * Returns an integer hash code for this interval.
-   *
-   * @return an integer hash code for this interval
+   * Calculates the HashCode for this Interval.
+   * The HashCode depends on both the endpoints of this Interval.
+   * @return  the HashCode of this Interval
    */
   @Override
   public int hashCode() {
@@ -121,12 +122,13 @@ public class Interval implements Comparable<Interval> {
   }
 
   /**
-   * Compares this interval to the other interval.
-   *
-   * @param other the other interval
-   * @return a negative value if this is ordered before other;
-   *         a positive value if this is ordered after other;
-   *         zero if this and other are ordered together.
+   * Compares this Interval with another Interval.
+   * The comparison is performed between endpoints of the two Intervals
+   * @param  other
+   *         the other Interval to be compared against
+   * @return a negative value if this Interval is less than the given Interval;
+   *         a positive value if this Interval is greater than the given Interval;
+   *         zero if this Interval and the given Interval have the same endpoints.
    */
   @Override
   public int compareTo(Interval other) {

@@ -5,6 +5,7 @@ import com.github.bot.curiosone.core.util.Interval;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -13,22 +14,42 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
- * Semantically complete sentence.
+ * Represents a semantically complete Sentence.
+ * A semantically complete Sentence is a list of Words with a lookup check syntax table and a
+ * boolean flag, stating whether the Sentence is a question or not.
+ * Contains utility method to easily manage, check and get semantically information about the
+ * Sentence.
+ * @see  com.github.bot.curiosone.core.nlp.Word The Word Class
  */
 public class Sentence {
-  /** The list of words of the sentence. */
+
+  /**
+   * Lists the Words of this Sentence.
+   * @see  com.github.bot.curiosone.core.nlp.Word The Word Class
+   */
   private List<Word> words;
 
-  /** Control if this sentence is a question or not. */
+  /**
+   * Whether this Sentence is a question or not.
+   */
   private boolean question;
 
-  /** The lookup table used to check the syntax. */
+  /**
+   * The lookup table used to check the syntax.
+   * @see  com.github.bot.curiosone.core.nlp.POS The POS Enum
+   * @see  com.github.bot.curiosone.core.util.Interval The Interval Class
+   */
   private Map<POS, TreeSet<Interval>> lookup;
 
   /**
-   * Constructor of a Sentence.
-   * @param words a list of words that forms that particular sentence
-   * @param lookup the lookup table to use to check syntax
+   * Constructs this Sentence.
+   * @param  words
+   *         the List of Words of this Sentence
+   * @param  lookup
+   *         the lookup table used to check syntax of this Sentence
+   * @see  com.github.bot.curiosone.core.nlp.Word The Word Class
+   * @see  com.github.bot.curiosone.core.nlp.POS The POS Enum
+   * @see  com.github.bot.curiosone.core.util.Interval The Interval Class
    */
   private Sentence(List<Word> words, Map<POS, TreeSet<Interval>> lookup, boolean question) {
     this.words = words;
@@ -37,32 +58,46 @@ public class Sentence {
   }
 
   /**
-   * Checks if this sentence is a question.
-   *
-   * @return {@code true} if the original phrase from where the sentence was
-   *         extracted ends with a question mark.
-   *         {@code false} otherwise
+   * Gets whether this Sentence is a question or not.
+   * @return  {@code true} if the original phrase from where the sentence was extracted ends with a
+   *          question mark;
+   *          {@code false} otherwise
    */
   public boolean isQuestion() {
     return question;
   }
 
   /**
-   * Gets the list of words of the sentence.
-   * @return the list of words of the sentence
+   * Gets the Words of this Sentence.
+   * @return  the List of Words of the Sentence
+   * @see  com.github.bot.curiosone.core.nlp.Word The Word Class
    */
   public List<Word> getWords() {
     return words;
   }
 
   /**
-   * Gets a list of words of a certains POS type.
-   * @param pos the pos type to extract
-   * @return the list of words
+   * Checks whether this Sentence contains the given POS or not.
+   * @param  pos
+   *         the desired POS
+   * @return  {@code true} if this Sentence contains the given POS;
+   *          {@code false} otherwise.
+   * @see  com.github.bot.curiosone.core.nlp.POS The POS Enum
+   */
+  public boolean has(POS pos) {
+    return lookup.getOrDefault(pos, new TreeSet<>()).size() > 0;
+  }
+
+  /**
+   * Gets a List of Words with the given POS type.
+   * @param  pos
+   *         the desired POS
+   * @return  a List containing all the Words of this Phrase with the given POS.
+   * @see  com.github.bot.curiosone.core.nlp.POS The POS Enum
    */
   public List<Word> get(POS pos) {
     List<Word> l = new ArrayList<>();
-    for (Interval intr : lookup.get(pos)) {
+    for (Interval intr : lookup.getOrDefault(pos, new TreeSet<>())) {
       for (int j = intr.min(); j <= intr.max(); j++) {
         l.add(words.get(j));
       }
@@ -71,16 +106,21 @@ public class Sentence {
   }
 
   /**
-   * Checks whether the sentence respect the grammar structure provided.
-   * @param posl an array of POS to check against
-   * @return {@code true} if all POS can be found in the given order;
-   *         {@code false} otherwise
+   * Checks whether the Sentence respects the provided Grammar structure.
+   * A Sentence respects the provided Grammar structure if and only if it contains all the given POS
+   * in the given order.
+   * @param  posl
+   *         An array of POS. This array represents the Grammar structure that this Sentence should
+   *         respect.
+   * @return  {@code true} if this Sentence respects the given Grammar structure;
+   *          {@code false} otherwise
+   * @see  com.github.bot.curiosone.core.nlp.POS The POS Enum
    */
   public boolean respect(POS... posl) {
     int idx = 0;
     for (POS pos : posl) {
       int oidx = idx;
-      for (Interval intr : lookup.get(pos)) {
+      for (Interval intr : lookup.getOrDefault(pos, new TreeSet<>())) {
         if (intr.min() == idx) {
           idx = intr.max() + 1;
           break;
@@ -94,9 +134,14 @@ public class Sentence {
   }
 
   /**
-   * Gets parameters from the sentence respecting the structure provided.
-   * @param posl an array of POS to extract against
-   * @return an array of list of strings, one per each POS in posl
+   * Gets the Words of this Sentence that respect the given Grammar structure.
+   * Could return a partition of this Sentence, if the whole Sentence does not respect the given
+   * Grammar structure but the partition does.
+   * @param  posl
+   *         An array of POS. This Array holds the Grammar structure to be respected.
+   * @return  a List of Words.
+   *          Theese are the Words that respect the provided Grammar structure
+   * @see  com.github.bot.curiosone.core.nlp.POS The POS Enum
    */
   public List<Word>[] parse(POS... posl) {
     int idx = 0;
@@ -107,7 +152,7 @@ public class Sentence {
 
     for (int i = 0; i < posl.length; i++) {
       int oidx = idx;
-      for (Interval intr : lookup.get(posl[i])) {
+      for (Interval intr : lookup.getOrDefault(posl[i], new TreeSet<>())) {
         if (intr.min() == idx) {
           for (int j = idx; j <= intr.max(); j++) {
             l[i].add(words.get(j));
@@ -126,9 +171,8 @@ public class Sentence {
   }
 
   /**
-   * Returns a string representation of this sentence.
-   *
-   * @return a string representation of this sentence in the form [text, tokens]
+   * Returns a String representation of this Sentence.
+   * @return  a String representation of this Sentence, formatted as: [text, tokens]
    */
   @Override
   public String toString() {
@@ -136,11 +180,11 @@ public class Sentence {
   }
 
   /**
-   * Compares this sentence to the specified object.
-   *
-   * @param  other the other sentence
-   * @return {@code true} if this sentence equals the other sentence;
-   *         {@code false} otherwise
+   * Checks whether this Sentence equals to the specified object.
+   * @param  other
+   *         the other Sentence to be compared against
+   * @return  {@code true} if this Sentence equals the other Sentence;
+   *          {@code false} otherwise
    */
   @Override
   public boolean equals(Object other) {
@@ -155,9 +199,9 @@ public class Sentence {
   }
 
   /**
-   * Returns an integer hash code for this sentence.
-   *
-   * @return an integer hash code for this sentence
+   * Calculates the HashCode for this Sentence.
+   * The HashCode depends on the list of words and the lookup table of this Sentence.
+   * @return  the HashCode of this Sentence
    */
   @Override
   public int hashCode() {
@@ -165,10 +209,12 @@ public class Sentence {
   }
 
   /**
-   * Extracts semantically complete sentences from a phrase using the CYK table.
-   *
-   * @param phrase the phrase to be splitted in sentences
-   * @return the sentences of the given phrase
+   * Extracts semantically complete Sentences from a Phrase, using the CYK table.
+   * @param  phrase
+   *         the Phrase to be splitted into Sentences
+   * @return  the Sentences extracted from the given Phrase, according to the CYK table.
+   * @see  com.github.bot.curiosone.core.nlp.Phrase The Phrase Class
+   * @see  com.github.bot.curiosone.core.nlp.ParseTable The ParseTable Class
    */
   public static List<Sentence> extract(Phrase phrase) {
     List<Token> tokens = phrase.getTokens();
@@ -184,9 +230,9 @@ public class Sentence {
             Map<POS, TreeSet<Interval>> lookt = new HashMap<>();
             List<Set<Meaning>> means = new ArrayList<>(table.getHeight());
             for (int i = 0; i < table.getHeight(); i++) {
-              means.add(null);
+              means.add(new HashSet<>());
             }
-
+            // System.out.println(table);
             table.traverse(means, lookt, x, y, r);
 
             List<Word> words = new ArrayList<>(tokens.size());

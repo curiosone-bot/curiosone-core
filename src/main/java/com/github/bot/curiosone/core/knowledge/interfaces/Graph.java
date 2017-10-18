@@ -1,97 +1,206 @@
 package com.github.bot.curiosone.core.knowledge.interfaces;
 
+import com.github.bot.curiosone.core.knowledge.SemanticQuery;
 import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
-import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
 
+import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
 /**
- * Interfaccia che rappresenta un grafo.
- * @author navigli
- *
+ * Represents a Graph.
+ * @see  Vertex The Vertex Interface
+ * @see  Edge The Edge Interface
  */
 public interface Graph {
+
   /**
-   * Aggiunge un arco.
-   * @param e l'arco da aggiungere
+   * Adds an Edge to the Graph.
+   * @param  e
+   *         the Edge to be added
+   * @see  Edge The Edge Interface
    */
   void add(Edge e);
 
   /**
-   * Aggiunge un vertice.
-   * @param v il vertice da aggiungere
+   * Adds a Vertex to the Graph.
+   * @param  v
+   *         the Vertex to be added
+   * @see  Vertex The Vertex Interface
    */
   void add(Vertex v);
 
   /**
-   * Aggiunge un arco da v1 a v2 del tipo specificato.
-   * @param v1 sorgente
-   * @param v2 destinazione
-   * @param type tipo dell'arco
+   * Adds an Edge between two Vertices.
+   * @param  v1
+   *         the source of the Edge to be added
+   * @param  v2
+   *         the destination of the Edge to be added
+   * @param  type
+   *         the type of the Edge to be added
+   * @param  weight
+   *         the weight of the Edge to be added
+   * @see  Vertex The Vertex Interface
+   * @see  SemanticRelationType The SemanticRelationType
+   *       Enum
    */
-  void addEdge(Vertex v1, Vertex v2, SemanticRelationType type);
+  void addEdge(Vertex v1, Vertex v2, SemanticRelationType type, Integer weight);
 
   /**
-   * Restituisce true se l'arco e' contenuto nel grafo.
-   * @param e l'arco da verificare
-   * @return true se l'arco e' contenuto, false altrimenti
+   * Checks whether the Graph contains the given Edge or not.
+   * @param  e
+   *         the Edge to be searched
+   * @return  {@code true} if the Graph contains the given Edge,
+              {@code false} otherwise
+   * @see  Edge The Edge Interface
    */
   boolean containsEdge(Edge e);
 
   /**
-   * Restituisce true se il vertice e' contenuto nel grafo.
-   * @param v il vertice da verificare
-   * @return true se il vertice e' contenuto, false altrimenti
+   * Checks whether the Graph contains the given Vertex or not.
+   * @param  v
+   *         the Vertex to be searched
+   * @return  {@code true} if the Graph contains the given Vertex,
+              {@code false} otherwise
+   * @see  Vertex The Vertex Interface
    */
   boolean containsVertex(Vertex v);
 
   /**
-   * Restituisce una copia dell'insieme degli archi.
-   * @return l'insieme degli archi del grafo
+   * Gets all the Edges of this Graph.
+   * @return  a Set containing all the Edges of the Graph
+   * @see  Edge The Edge Interface
    */
   Set<Edge> edgeSet();
 
   /**
-   * Restituisce una copia dell'insieme dei vertici.
-   * @return l'insieme dei vertici
+   * Gets all the Vertices of this Graph.
+   * @return  a Set containing all the Vertices of the Graph
+   * @see  Vertex The Vertex Interface
    */
   Set<Vertex> vertexSet();
 
   /**
-   * Restituisce l'insieme di archi uscenti.
-   * @param v vertice su cui calcolare l'insieme di archi
-   * @return insieme degli archi uscenti
+   * Gets all the outgoing Edges from the given Vertices.
+   * @param  v
+   *         the interested Vertex
+   * @return  a Set containing all the outgoing Edges from the given Vertex
+   * @see  Vertex The Vertex Interface
+   * @see  Edge The Edge Interface
    */
   Set<Edge> outgoingEdges(Vertex v);
-  
+
   /**
-   * Restituisce l'insieme di archi entranti.
-   * @param v vertice su cui calcolare l'insieme di archi
-   * @return insieme degli archi uscenti
+   * Gets all the incoming Edges to the given Vertex.
+   * @param  v
+   *         the interested Vertex
+   * @return  a Set containing all the coming Edges to the given Vertex
+   * @see  Vertex The Vertex Interface
+   * @see  Edge The Edge Interface
    */
   Set<Edge> incomingEdges(Vertex v);
 
   /**
-   * Aggiunge tutti gli archi forniti in input.
-   * @param edgeSet gli archi da aggiungere
+   * Adds all the given Edges to the Edges of the Graph.
+   * @param  edgeSet
+   *         the Edges to be added
+   * @see  Edge The Edge Interface
+   * @see  <a href="https://goo.gl/CnxWAz">The Collection Interface</a>
    */
   void addEdges(Collection<? extends Edge> edgeSet);
 
   /**
-   * Checks if a SemanticRelation is present.
-   * @param tipo del collegamento dell'arco da cercare
-   * @param token vertice del quale cercare il significato collegato
-   * @return a Boolean that Checks if a SemanticRelation is present.
+   * Gets the Graph.
+   * @return  a Map representation of the Graph
+   * @see  Vertex The Vertex Interface
+   * @see  Edge The Edge Interface
+   * @see  <a href="https://goo.gl/9aXrZs">The Map Interface</a>
    */
-  Boolean isPresent(SemanticRelationType tipo, String token);
-  
+  Map<Vertex, Set<Edge>> getGraph();
+
   /**
-   * Returns a Set of Edge related to Concept token, if present.
-   * @param tipo del collegamento dell'arco da cercare
-   * @param token vertice del quale cercare il significato collegato
-   * @return Optional of Set of Edge
+   * Returns the strongest Edge of the given Concept.
+   * @param  v1
+   *         String representation of the Vertex source
+   * @return  An Optional instance. The instance is empty, if no Edge has been found, otherwise it
+   *          contains the found Edge.
+   * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
+   * @see  Edge The Edge Interface
    */
-  Optional<Set<Edge>> getAnswer(SemanticRelationType tipo, String token);
+  Optional<Edge> getAnswer(String v1);
+
+  /**
+   * Returns the strongest Edge of the given SemanticRelationType.
+   * @param  source
+   *         String representation of the Vertex source
+   * @param  type
+   *         SemanticRelationType of the strongest Edge to be searched
+   * @return  an Optional instance. The instance is empty, if no Edge is found. Otherwise, it
+   *          contains the found Edge.
+   * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
+   * @see  Edge The Edge Interface
+   * @see  SemanticRelationType The SemanticRelationType
+   *       Enum
+   */
+  Optional<Edge> getAnswer(String source,SemanticRelationType type);
+
+  /**
+   * Finds the strongest Edge in the given Edge List.
+   * @param  edges
+   *         Edge List to be searched in
+   * @return  an Optional instance. The instance contains an Edge, if the strongest Edge is found.
+   *          It is empty, otherwise
+   * @see  <a href="https://goo.gl/sWfXyh">The Optional Class</a>
+   * @see  Edge The Edge Interface
+   */
+  Optional<Edge> getAnswer(List<Edge> edges);
+
+  /**
+   * Learns the given Edge.
+   * @param  v1
+   *         String representation of the source for the Edge to be learned
+   * @param  relation
+   *         SemanticRelationType for the Edge to be learned
+   * @param  v2
+   *         String representation of the target for the Edge to be learned
+   * @see  SemanticRelationType The SemanticRelationType Enum
+   */
+  void learn(String v1, SemanticRelationType relation, String v2);
+
+  /**
+   * Increases the usage score for all the Edges with the given Vertex as target.
+   * @param  v
+   *         the target Vertex
+   * @param  score
+   *         the score of the Edge to be learnt
+   */
+  void increase(Vertex v, Integer score);
+
+  /**
+   * Executes a SemanticQuery.
+   * @param  sq
+   *         the SemanticQuery to be exectued
+   * @return  Returns an Optional instance.
+   *          The instance is empty, if no result is found.
+   *          Otherwise, it contains the query response
+   * @see  SemanticQuery The SemanticQuery Class
+   */
+  Optional<Edge> query(SemanticQuery sq);
+
+  /**
+   * Checks whether the given Edge is in the Graph.
+   * @param  v1
+   *         String representation of the source Vertex of the Edge to be searched
+   * @param  relation
+   *         SemanticRelationType of the Edge to be searched
+   * @param  v2
+   *         String representation of the target Vertex of the Edge to be searched
+   * @return  {@code true} if the Edge exists,
+   *          {@code false} otherwise
+   * @see  SemanticQuery The SemanticQuery Class Enum
+   */
+  boolean exist(String v1, SemanticRelationType relation, String v2);
 }
