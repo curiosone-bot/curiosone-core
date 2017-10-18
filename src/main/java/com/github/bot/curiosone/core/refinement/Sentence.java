@@ -1,28 +1,35 @@
 package com.github.bot.curiosone.core.refinement;
-/**
- * @author Claudio Venanzi
- */
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class Sentence {
-  
-  private List<Word> words = new LinkedList<>();
 
-  private void add(Word w, int i) {
-    words.add(i, w);
-  }
-  
-  //===============================================================================================
+  private ClauseMain main;
+  private SentenceType type;
   
   /**
-   * Append a word.
-   * @param w word
+   * Sentence constructor.
+   * @param type type of sentence
+   * @param main main clause
    */
-  public void add(Word w) {
-    words.add(w);
-  }    
-    
-  //-----------------------------------------------------------------------------------------------
+  public Sentence(SentenceType type, ClauseMain main) {
+    this.type = type;
+    this.main = main;
+  }
+  
+  /**
+   * Returns the main clause.
+   * @return clause
+   */
+  public ClauseMain getMainClause() {
+    return main;
+  }
+  
+  /**
+   * Refinement entry point.
+   */
+  @Override
+  public String toString() {
+    String temp = main.toString() + type.getMark();
+    return temp.substring(0, 1).toUpperCase() + temp.substring(1);
+  }
+  
 }

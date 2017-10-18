@@ -1,9 +1,12 @@
 package com.github.bot.curiosone.core.knowledge.interfaces;
 
+import com.github.bot.curiosone.core.knowledge.SemanticQuery;
 import com.github.bot.curiosone.core.knowledge.SemanticRelationType;
-import com.github.bot.curiosone.core.knowledge.interfaces.Edge;
 
+import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -30,8 +33,9 @@ public interface Graph {
    * @param v1 sorgente
    * @param v2 destinazione
    * @param type tipo dell'arco
+   * @param weight peso
    */
-  void addEdge(Vertex v1, Vertex v2, SemanticRelationType type);
+  void addEdge(Vertex v1, Vertex v2, SemanticRelationType type, Integer weight);
 
   /**
    * Restituisce true se l'arco e' contenuto nel grafo.
@@ -65,7 +69,7 @@ public interface Graph {
    * @return insieme degli archi uscenti
    */
   Set<Edge> outgoingEdges(Vertex v);
-  
+
   /**
    * Restituisce l'insieme di archi entranti.
    * @param v vertice su cui calcolare l'insieme di archi
@@ -80,37 +84,65 @@ public interface Graph {
   void addEdges(Collection<? extends Edge> edgeSet);
 
   /**
-   * Checks if a SemanticRelation is present.
-   * @param tipo del collegamento dell'arco da cercare.
-   * @param token vertice del quale cercare il significato collegato.
-   * @return a Boolean that Checks if a SemanticRelation is present.
+   * Method that returns semantic network graph.
+   * @return graph
    */
-  Boolean isPresent(SemanticRelationType tipo, String token);
+  Map<Vertex, Set<Edge>> getGrafo();
   
   /**
-   * Returns the Edge related to Concept token, if present.
-   * @param tipo del collegamento dell'arco da cercare.
-   * @param token vertice del quale cercare il significato collegato.
-   * @return Optional of Set of Edge.
+   * Method that returns best Edge of the Concept asked.
+   * @param v1 vertex source
+   * @return Optional of Egde
    */
+  Optional<Edge> getAnswer(String v1);
+
+  /**
+   * Method that seeks a response if a question is asked to Curiosone.
+   * @param source Concept
+   * @param type SemanticRelationType
+   * @return Optional of Edge if exists between source and relation.
+   * @throws IOException exception
+   */
+  Optional<Edge> getAnswer(String source,SemanticRelationType type);
+
+  /**
+   * Method that seeks a response if a question is asked to Curiosone
+   * and there are multiple possible response.
+   * @param edges List
+   * @return Optional of best Edge.
+   */
+  Optional<Edge> getAnswer(List<Edge> edges);
+
+  /**
+   * Method called if a question is asked to curiosone and
+   * doesn't know response so, learn.
+   * @param v1 Concept
+   * @param relation SemanticRelationType
+   * @param v2 Concept
+   */
+  void learn(String v1, SemanticRelationType relation, String v2);
+
+  /**
+   * Method called when curiosone need to increase an
+   * edge score after have learned or asked for a concept.
+   * @param v vertex
+   * @throws IOException exception
+   */
+  void increase(Vertex v, Integer score);
   
   /**
-   * Returns the Edge related to Concept token, if present.
-   * @param source Vertex ID's.
-   * @param daDefinire SemanticRelationType.
-   * @return Object Edge.
+   * Method called when something is asked to curiosone.
+   * @param sq SemanticQuery
+   * @return Optional of edge
    */
-  Optional<Edge> getAnswer(String source,Object daDefinire);
+  Optional<Edge> query(SemanticQuery sq);
   
   /**
-   * Returns true of false if this SemanticRelation is present.
-   * @param source Vertex ID's.
-   * @param daDefinire SemanticRelationType.
-   * @param target Vertex ID's.
-   * @return Object Edge.
+   * Method that check if Relation exists in the SemanticNetwork.
+   * @param v1 Concept source
+   * @param relation SemanticRelationType
+   * @param v2 Concept target
+   * @return true or false
    */
-  boolean getAnswer(String source,Object daDefinire,String target);
-  
-  
-  Optional<Edge> getAnswer(String token,String target);
+  boolean exist(String v1, SemanticRelationType relation, String v2);
 }

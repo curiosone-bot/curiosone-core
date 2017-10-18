@@ -14,10 +14,10 @@ public class Sentence implements ISentence {
 
   /**
    * Sentence typology.
-   * @see SentenceT
+   * @see SentenceType
    */
 
-  private SentenceT type;
+  private SentenceType type;
 
   /**
    * Original string provided in input by the user.
@@ -36,7 +36,7 @@ public class Sentence implements ISentence {
    * Constructor.
    */
 
-  public Sentence(SentenceT type, String original, List<IToken> tokens) {
+  public Sentence(SentenceType type, String original, List<IToken> tokens) {
     this.type = type;
     this.original = original;
     this.tokens = tokens;
@@ -49,7 +49,7 @@ public class Sentence implements ISentence {
    */
 
   @Override
-  public SentenceT getType() {
+  public SentenceType getType() {
     return type;
   }
 
@@ -82,7 +82,7 @@ public class Sentence implements ISentence {
    * @see #type
    */
 
-  @Override public void setType(SentenceT type) {
+  @Override public void setType(SentenceType type) {
     this.type = type;
   }
 
