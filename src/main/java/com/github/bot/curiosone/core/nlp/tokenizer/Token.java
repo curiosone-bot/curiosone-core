@@ -137,11 +137,11 @@ public class Token implements IToken {
   /**
    * Get Part of Speech (POS).
    *
-   * @return the PosT
-   * @see #PosT
+   * @return the PosType
+   * @see #PosType
    */
 
-  @Override public PosT getPos() {
+  @Override public PosType getPos() {
     if (!isKnown()) {
       return null;
     }
@@ -149,13 +149,13 @@ public class Token implements IToken {
   }
 
   /**
-   * Get LexT.
+   * Get LexType.
    *
    * @return the lexT
-   * @see #LexT
+   * @see #LexType
    */
 
-  @Override public LexT getLexT() {
+  @Override public LexType getLexT() {
     if (!isKnown()) {
       return null;
     }

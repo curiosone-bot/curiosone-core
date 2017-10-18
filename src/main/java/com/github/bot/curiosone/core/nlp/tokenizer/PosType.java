@@ -7,7 +7,7 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
  * @see https://en.oxforddictionaries.com/grammar/word-classes-or-parts-of-speech
  */
 
-public enum PosT {
+public enum PosType {
 
   /**
    * Nominal part.

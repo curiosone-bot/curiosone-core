@@ -9,7 +9,7 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
  * @see http://www.ucl.ac.uk/internet-grammar/wordclas/open.htm
  */
 
-public enum LexT {
+public enum LexType {
 
   /**
    * All adjective/adverb.

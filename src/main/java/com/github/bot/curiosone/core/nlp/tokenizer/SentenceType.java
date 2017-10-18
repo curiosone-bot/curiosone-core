@@ -7,7 +7,7 @@ package com.github.bot.curiosone.core.nlp.tokenizer;
  * @see percorso fino all grammatica da aggiungere successivamente
  */
 
-public enum SentenceT {
+public enum SentenceType {
 
   /**
    * Sentence in input is a question.

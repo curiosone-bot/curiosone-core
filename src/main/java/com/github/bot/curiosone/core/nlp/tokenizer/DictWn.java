@@ -9,7 +9,6 @@ import edu.mit.jwi.item.IWordID;
 import edu.mit.jwi.item.POS;
 import edu.mit.jwi.item.Pointer;
 import edu.mit.jwi.morph.WordnetStemmer;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +27,7 @@ import java.util.regex.Pattern;
  * @see https://wordnet.princeton.edu/
  */
 
-public class DictWn {
+class DictWn {
 
   /**
    * Singleton instance on class loading is thread-safe.
@@ -48,15 +47,15 @@ public class DictWn {
   /**
    * Private constructor.
    */
-  private DictWn() {
-  }
+  private DictWn() {}
 
   /**
    * Get DictWn instance.
+   * 
    * @return a new {@link #instance}
    */
-  public static DictWn getInstance() {
-    if  (instance != null) {
+  protected static DictWn getInstance() {
+    if (instance != null) {
       return instance;
     }
     instance = new DictWn();
@@ -72,17 +71,18 @@ public class DictWn {
 
   /**
    * Method to create Token Structure that contains Dictionary info.
+   * 
    * @param item String to search in WordNet
    * @return Token Structure that contains Dictionary info
    * @see com.github.bot.curiosone.core.nlp.tokenizer.Token
    */
-  public static Token getToken(String item) {
+  protected static Token getToken(String item) {
     if (item.length() == 0 || item.equals(" ")) {
       return null;
     }
     Token token = new Token(item);
     token = getTokenNotWn(token, item); // token outside WordNet
-    token = getTokenWn(token, item);    // token inside WordNet
+    token = getTokenWn(token, item); // token inside WordNet
     return token;
   }
 
@@ -91,25 +91,23 @@ public class DictWn {
    */
   private enum PronounsOutWn {
 
-      PERSONAL_SUBJECTIVE("i", "you", "he", "she", "it", "we", "you", "they"),
-      PERSONAL_OBJECTIVE("me", "you", "him", "her", "it", "us", "you", "them"),
-      POSSESSIVE("mine", "yours", "his", "hers", "ours", "theirs"),
-      REFLEXIVE("myself", "yourself", "himself", "herself", "itself", "oneself",
-          "ourselves", "yourselves", "themselves"),
-      RECIPROCAL("each", "other", "one", "another"),
-      RELATIVE("that", "which", "who", "whose", "whom", "where", "when"),
-      DEMONSTRATIVE("this", "that", "these", "those"),
-      INTERROGATIVE("who", "what", "why", "where", "when", "whatever"),
-      INDEFINITE("anything", "anybody", "anyone", "something", "somebody",
-              "someone", "nothing", "nobody", "none", "no one");
+    PERSONAL_SUBJECTIVE("i", "you", "he", "she", "it", "we", "you", "they"), PERSONAL_OBJECTIVE(
+        "me", "you", "him", "her", "it", "us", "you",
+        "them"), POSSESSIVE("mine", "yours", "his", "hers", "ours", "theirs"), REFLEXIVE("myself",
+            "yourself", "himself", "herself", "itself", "oneself", "ourselves", "yourselves",
+            "themselves"), RECIPROCAL("each", "other", "one", "another"), RELATIVE("that", "which",
+                "who", "whose", "whom", "where", "when"), DEMONSTRATIVE("this", "that", "these",
+                    "those"), INTERROGATIVE("who", "what", "why", "where", "when",
+                        "whatever"), INDEFINITE("anything", "anybody", "anyone", "something",
+                            "somebody", "someone", "nothing", "nobody", "none", "no one");
 
     private String[] items;
 
-    private PronounsOutWn(String...items) {
+    private PronounsOutWn(String... items) {
       this.items = items;
     }
 
-    public String[] getItems() {
+    private String[] getItems() {
       return items;
     }
   }
@@ -119,16 +117,15 @@ public class DictWn {
    */
   private enum DeterminersOutWn {
 
-    INDEFINITE_ARTICLE("a", "an"),
-    DEFINITE_ARTICLE("the");
+    INDEFINITE_ARTICLE("a", "an"), DEFINITE_ARTICLE("the");
 
     private String[] items;
 
-    private DeterminersOutWn(String...items) {
+    private DeterminersOutWn(String... items) {
       this.items = items;
     }
 
-    public String[] getItems() {
+    private String[] getItems() {
       return items;
     }
   }
@@ -138,16 +135,16 @@ public class DictWn {
    */
   private enum ConjunctionsOutWn {
 
-    COORDINATOR("and", "or", "but"),
-    SUBORDINATOR("while", "because", "before", "since", "till", "unless", "whereas", "wheter");
+    COORDINATOR("and", "or", "but"), SUBORDINATOR("while", "because", "before", "since", "till",
+        "unless", "whereas", "wheter");
 
     private String[] items;
 
-    private ConjunctionsOutWn(String...items) {
+    private ConjunctionsOutWn(String... items) {
       this.items = items;
     }
 
-    public String[] getItems() {
+    private String[] getItems() {
       return items;
     }
   }
@@ -161,11 +158,11 @@ public class DictWn {
 
     private String[] items;
 
-    private AdverbsOutWn(String...items) {
+    private AdverbsOutWn(String... items) {
       this.items = items;
     }
 
-    public String[] getItems() {
+    private String[] getItems() {
       return items;
     }
   }
@@ -175,21 +172,18 @@ public class DictWn {
    */
   private enum InterjectionsOutWn {
 
-    GENERIC("ah", "eh", "hmm", "phew", "tsk", "uhm"),
-    REGARDS("bye", "goodbye", "hello", "farewell", "hi"),
-    APOLOGIZE("so long excuse me", "sorry", "pardon", "i am sorry", "i'm sorry"),
-    GRATITUDE("thanks", "thank you", "thanks a lot"),
-    DISGUST("yuk"),
-    SURPRISE("oh"),
-    PAIN("ouch", "ohi");
+    GENERIC("ah", "eh", "hmm", "phew", "tsk", "uhm"), REGARDS("bye", "goodbye", "hello", "farewell",
+        "hi"), APOLOGIZE("so long excuse me", "sorry", "pardon", "i am sorry",
+            "i'm sorry"), GRATITUDE("thanks", "thank you",
+                "thanks a lot"), DISGUST("yuk"), SURPRISE("oh"), PAIN("ouch", "ohi");
 
     private String[] items;
 
-    private InterjectionsOutWn(String...items) {
+    private InterjectionsOutWn(String... items) {
       this.items = items;
     }
 
-    public String[] getItems() {
+    private String[] getItems() {
       return items;
     }
   }
@@ -204,11 +198,12 @@ public class DictWn {
 
   /**
    * Verify Mail String.
+   * 
    * @see http://howtodoinjava.com/regex/java-regex-validate-email-address/
    * @see http://www.rfc-editor.org/rfc/rfc5322.txt
    */
 
-  public static boolean isValidEmailAddress(String email) {
+  private static boolean isValidEmailAddress(String email) {
     String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]"
         + "+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 
@@ -239,11 +234,10 @@ public class DictWn {
      */
     if (isNumeric(item)) {
       token.setKnown(true);
-      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
-              retWord = new Word();
+      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord retWord = new Word();
       retWord.setLemma(item);
-      retWord.setPos(PosT.NUMB);
-      retWord.setLexType(LexT.QUANTITY);
+      retWord.setPos(PosType.NUMB);
+      retWord.setLexType(LexType.QUANTITY);
       retWord.setGloss("Numeric outside WordNet");
       token.addWord(retWord);
       return token;
@@ -253,11 +247,10 @@ public class DictWn {
      */
     if (isValidEmailAddress(item)) {
       token.setKnown(true);
-      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
-              retWord = new Word();
+      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord retWord = new Word();
       retWord.setLemma(item);
-      retWord.setPos(PosT.N);
-      retWord.setLexType(LexT.MAIL);
+      retWord.setPos(PosType.N);
+      retWord.setLexType(LexType.MAIL);
       retWord.setGloss("Mail address outside WordNet");
       token.addWord(retWord);
       return token;
@@ -265,17 +258,16 @@ public class DictWn {
     /**
      * Check Pronouns.
      */
-    for (PronounsOutWn n: PronounsOutWn.values()) {
-      if (!contains(n.getItems(),item)) {
+    for (PronounsOutWn n : PronounsOutWn.values()) {
+      if (!contains(n.getItems(), item)) {
         continue;
       }
 
       token.setKnown(true);
-      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
-              retWord = new Word();
+      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord retWord = new Word();
       retWord.setLemma(item);
-      retWord.setPos(PosT.PRON);
-      retWord.setLexType(LexT.valueOf(n.toString()));
+      retWord.setPos(PosType.PRON);
+      retWord.setLexType(LexType.valueOf(n.toString()));
       retWord.setGloss("Pronoun outside WordNet");
       token.addWord(retWord);
       return token;
@@ -283,17 +275,16 @@ public class DictWn {
     /**
      * Check Determiners.
      */
-    for (DeterminersOutWn n: DeterminersOutWn.values()) {
-      if (!contains(n.getItems(),item)) {
+    for (DeterminersOutWn n : DeterminersOutWn.values()) {
+      if (!contains(n.getItems(), item)) {
         continue;
       }
 
       token.setKnown(true);
-      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
-          retWord = new Word();
+      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord retWord = new Word();
       retWord.setLemma(item);
-      retWord.setPos(PosT.DET);
-      retWord.setLexType(LexT.valueOf(n.toString()));
+      retWord.setPos(PosType.DET);
+      retWord.setLexType(LexType.valueOf(n.toString()));
       retWord.setGloss("Determiners outside WordNet");
       token.addWord(retWord);
       return token;
@@ -301,17 +292,16 @@ public class DictWn {
     /**
      * Check Conjunctions.
      */
-    for (ConjunctionsOutWn n: ConjunctionsOutWn.values()) {
-      if (!contains(n.getItems(),item)) {
+    for (ConjunctionsOutWn n : ConjunctionsOutWn.values()) {
+      if (!contains(n.getItems(), item)) {
         continue;
       }
 
       token.setKnown(true);
-      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
-          retWord = new Word();
+      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord retWord = new Word();
       retWord.setLemma(item);
-      retWord.setPos(PosT.CONJ);
-      retWord.setLexType(LexT.valueOf(n.toString()));
+      retWord.setPos(PosType.CONJ);
+      retWord.setLexType(LexType.valueOf(n.toString()));
       retWord.setGloss("Conjunctions outside WordNet");
       token.addWord(retWord);
       return token;
@@ -319,17 +309,16 @@ public class DictWn {
     /**
      * Check Interjections.
      */
-    for (InterjectionsOutWn n: InterjectionsOutWn.values()) {
-      if (!contains(n.getItems(),item)) {
+    for (InterjectionsOutWn n : InterjectionsOutWn.values()) {
+      if (!contains(n.getItems(), item)) {
         continue;
       }
 
       token.setKnown(true);
-      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
-          retWord = new Word();
+      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord retWord = new Word();
       retWord.setLemma(item);
-      retWord.setPos(PosT.INTERJ);
-      retWord.setLexType(LexT.valueOf(n.toString()));
+      retWord.setPos(PosType.INTERJ);
+      retWord.setLexType(LexType.valueOf(n.toString()));
       retWord.setGloss("Interjections outside WordNet");
       token.addWord(retWord);
       return token;
@@ -337,17 +326,16 @@ public class DictWn {
     /**
      * Check Adverbs.
      */
-    for (AdverbsOutWn n: AdverbsOutWn.values()) {
-      if (!contains(n.getItems(),item)) {
+    for (AdverbsOutWn n : AdverbsOutWn.values()) {
+      if (!contains(n.getItems(), item)) {
         continue;
       }
 
       token.setKnown(true);
-      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord
-          retWord = new Word();
+      com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord retWord = new Word();
       retWord.setLemma(item);
-      retWord.setPos(PosT.ADV);
-      retWord.setLexType(LexT.valueOf(n.toString()));
+      retWord.setPos(PosType.ADV);
+      retWord.setLexType(LexType.valueOf(n.toString()));
       retWord.setGloss("Adverbs outside WordNet");
       token.addWord(retWord);
       return token;
@@ -356,8 +344,9 @@ public class DictWn {
   }
 
   /**
-   * Get Token from WordNet Database.
-   * List of Word descending ordered based on frequency occurrence (getTagCount()).
+   * Get Token from WordNet Database. List of Word descending ordered based on frequency occurrence
+   * (getTagCount()).
+   * 
    * @See https://stackoverflow.com/questions/21264158/how-to-access-frequency-count-in-wordnet-in-any-java-wordnet-interface
    */
   private static Token getTokenWn(Token token, String item) {
@@ -366,8 +355,8 @@ public class DictWn {
       getInstance();
     }
 
-    Set<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord>
-        retWords = new HashSet<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord>();
+    Set<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord> retWords =
+        new HashSet<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord>();
 
     for (POS p : POS.values()) {
       List<String> stems = new WordnetStemmer(dictionary).findStems(item, p);
@@ -378,50 +367,44 @@ public class DictWn {
           List<IWordID> wordIDs = indexWord.getWordIDs();
           for (IWordID id : wordIDs) {
             com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord retWord = new Word();
-            IWord word  = dictionary.getWord(id);
+            IWord word = dictionary.getWord(id);
 
             retWord.setLemma(lemma);
             switch (p) {
               case NOUN:
-                retWord.setPos(PosT.N);
+                retWord.setPos(PosType.N);
                 break;
               case VERB:
-                retWord.setPos(PosT.V);
+                retWord.setPos(PosType.V);
                 break;
               case ADJECTIVE:
-                retWord.setPos(PosT.ADJ);
+                retWord.setPos(PosType.ADJ);
                 break;
               case ADVERB:
-                retWord.setPos(PosT.ADV);
+                retWord.setPos(PosType.ADV);
                 break;
-              default: retWord.setPos(PosT.UNKN);
+              default:
+                retWord.setPos(PosType.UNKN);
             };
-            retWord.setLexType(LexT.valueOf(
-                word.getSynset()
-                            .getLexicalFile()
-                            .getName()
-                            .split("\\.")[1]
-                            .toUpperCase()
-                            ));
+            retWord.setLexType(LexType.valueOf(
+                word.getSynset().getLexicalFile().getName().split("\\.")[1].toUpperCase()));
             retWord.setGloss(word.getSynset().getGloss());
             retWord.setWordId(id);
-            retWord.setNum(dictionary
-                .getSenseEntry(word.getSenseKey())
-                .getTagCount());
+            retWord.setNum(dictionary.getSenseEntry(word.getSenseKey()).getTagCount());
 
             /**
              * Get semantic relations from synset.
-            */
+             */
 
             ISynset synset = word.getSynset();
 
-            for (Pointer pt: Pointer.values()) {
-              List<ISynsetID> synList = synset.getRelatedSynsets(pt) ;
+            for (Pointer pt : Pointer.values()) {
+              List<ISynsetID> synList = synset.getRelatedSynsets(pt);
               List<IWord> words;
-              for (ISynsetID sid: synList) {
+              for (ISynsetID sid : synList) {
                 words = dictionary.getSynset(sid).getWords();
                 for (Iterator<IWord> i = words.iterator(); i.hasNext();) {
-                    retWord.addRelation(pt.toString(), i.next().getLemma());
+                  retWord.addRelation(pt.toString(), i.next().getLemma());
                 }
               }
             }
@@ -430,24 +413,23 @@ public class DictWn {
              * Get lexical relations from word.
              */
 
-            for (Pointer pt: Pointer.values()) {
-              for (IWordID wid: word.getRelatedWords(pt)) {
+            for (Pointer pt : Pointer.values()) {
+              for (IWordID wid : word.getRelatedWords(pt)) {
                 retWord.addRelation(pt.toString(), dictionary.getWord(wid).getLemma());
               }
             }
 
-            //add retWord
+            // add retWord
             retWords.add(retWord);
 
           } // end for IWordID
         } // end if indexWOrd is null
       } // end for lemma
     } // end for POS
-    Comparator<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord> cmp =
-        Comparator.comparing(
-            com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord::getNum).reversed();
+    Comparator<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord> cmp = Comparator
+        .comparing(com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord::getNum).reversed();
     List<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord> retOrderedWords =
-            new ArrayList<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord>();
+        new ArrayList<com.github.bot.curiosone.core.nlp.tokenizer.interfaces.IWord>();
     retOrderedWords.addAll(retWords);
     Collections.sort(retOrderedWords, cmp);
     if (retOrderedWords.size() > 0) {
@@ -460,20 +442,18 @@ public class DictWn {
 
   /**
    * For test only.
+   * 
    * @param args input args
-
-  public static void main(String[] args) {
-
-    //System.out.println(DictWn.getToken("arivitto@gmail.com"));
-    //System.out.println("\n" + DictWn.getToken("rivitto.662503@studenti.uniroma1.it"));
-    //System.out.println("\n" + DictWn.getToken("13410"));
-    //System.out.println("\n" + DictWn.getToken("12.34"));
-    //System.out.println("\n" + DictWn.getToken("dog"));
-    //System.out.println("\n" + DictWn.getToken("crawler"));
-    //System.out.println("\n" + DictWn.getToken("dog"));
-    //System.out.println("\n" + DictWn.getToken("come back"));
-    //System.out.println(Pointer.values()); //List possible Pointer values
-    System.out.println("\n" + DictWn.getToken("cats"));
-  }
-  */
+   * 
+   *        public static void main(String[] args) {
+   * 
+   *        //System.out.println(DictWn.getToken("arivitto@gmail.com")); //System.out.println("\n" +
+   *        DictWn.getToken("rivitto.662503@studenti.uniroma1.it")); //System.out.println("\n" +
+   *        DictWn.getToken("13410")); //System.out.println("\n" + DictWn.getToken("12.34"));
+   *        //System.out.println("\n" + DictWn.getToken("dog")); //System.out.println("\n" +
+   *        DictWn.getToken("crawler")); //System.out.println("\n" + DictWn.getToken("dog"));
+   *        //System.out.println("\n" + DictWn.getToken("come back"));
+   *        //System.out.println(Pointer.values()); //List possible Pointer values
+   *        System.out.println("\n" + DictWn.getToken("cats")); }
+   */
 }
