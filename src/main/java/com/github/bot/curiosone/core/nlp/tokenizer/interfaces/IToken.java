@@ -60,7 +60,7 @@ public interface IToken {
    * @see LexType()
    */
 
-  LexType getLexT();
+  LexType getLexType();
 
   /**
    * Get synsets.

@@ -155,7 +155,7 @@ public class Token implements IToken {
    * @see #LexType
    */
 
-  @Override public LexType getLexT() {
+  @Override public LexType getLexType() {
     if (!isKnown()) {
       return null;
     }
