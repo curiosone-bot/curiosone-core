@@ -16,7 +16,7 @@ import java.util.stream.Stream;
  * @see Open source code under MIT license: http://www.opensource.org/licenses/mit-license.php
  */
 
-public class Spelling {
+class Spelling {
 
   /**
    * Dictionary.
@@ -30,7 +30,7 @@ public class Spelling {
    * It spells.
    * @throws Exception if something goes wrong while spelling
    */
-  public Spelling() throws Exception {
+  protected Spelling() throws Exception {
     Stream.of(new String(Files.readAllBytes(dictionaryFile)).toLowerCase().replaceAll("[^a-z ]", "")
         .split(" ")).forEach((word) -> {
           dict.compute(word, (k, v) -> v == null ? 1 : v + 1);
