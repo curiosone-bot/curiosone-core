@@ -94,4 +94,11 @@ public class ParseTableTest {
     pt = new ParseTable(lt);
     assertThat(pt.getWidthAt(2)).isEqualTo(3);
   }
+
+  @Test
+  public void testToString() {
+    List<Token> lt = Token.tokenize("what is an apple?");
+    ParseTable pt = new ParseTable(lt);
+    assertThat(pt.toString()).isNotNull().isNotEmpty();
+  }
 }
