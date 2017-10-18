@@ -1,9 +1,8 @@
 package com.github.bot.curiosone.core.nlp.tokenizer.interfaces;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.LexT;
-import com.github.bot.curiosone.core.nlp.tokenizer.PosT;
+import com.github.bot.curiosone.core.nlp.tokenizer.LexType;
+import com.github.bot.curiosone.core.nlp.tokenizer.PosType;
 import com.github.bot.curiosone.core.nlp.tokenizer.Token;
-
 import java.util.Collection;
 import java.util.List;
 
@@ -29,7 +28,7 @@ public interface IToken {
    * @see Token#getOValue()
    */
 
-  public String getOValue();
+  String getOValue();
 
   /**
    * Get lemma.
@@ -50,18 +49,18 @@ public interface IToken {
   /**
    * Get Part Of Speech (POS).
    *
-   * @see PosT()
+   * @see PosType()
    */
 
-  PosT getPos();
+  PosType getPos();
 
   /**
-   * Get LexT.
+   * Get LexType.
    *
-   * @see LexT()
+   * @see LexType()
    */
 
-  LexT getLexT();
+  LexType getLexT();
 
   /**
    * Get synsets.
@@ -77,15 +76,16 @@ public interface IToken {
    * @see Token#isCorrected()
    */
 
-  public boolean isCorrected();
+  boolean isCorrected();
 
   /**
    * Set a new {@link #corrected} value that is provided in input.
+   * 
    * @param corrected the corrected to set
    * @see #corrected
    */
 
-  public void setCorrected(boolean corrected);
+  void setCorrected(boolean corrected);
 
   /**
    * Set a new {@link #known} value that is provided in input.
@@ -93,7 +93,7 @@ public interface IToken {
    * @see #known
    */
 
-  public void setKnown(boolean known);
+  void setKnown(boolean known);
 
   /**
    * Set a new {@link #value} value that is provided in input.
@@ -101,7 +101,7 @@ public interface IToken {
    * @see #value
    */
 
-  public void setValue(String value);
+  void setValue(String value);
 
   /**
    * Add to {@link #word} a new instance of Word.
@@ -109,7 +109,7 @@ public interface IToken {
    * @see #words
    */
 
-  public void addWord(IWord word);
+  void addWord(IWord word);
 
   /**
    * Set to {@link #words} the list of Words.
@@ -117,6 +117,6 @@ public interface IToken {
    * @see #words
    */
 
-  public void addAllWords(Collection<? extends IWord> words);
+  void addAllWords(Collection<? extends IWord> words);
 
 }
