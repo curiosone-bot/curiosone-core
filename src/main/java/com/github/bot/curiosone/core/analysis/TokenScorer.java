@@ -1,6 +1,6 @@
 package com.github.bot.curiosone.core.analysis;
 
-import com.github.bot.curiosone.core.nlp.tokenizer.PosT;
+import com.github.bot.curiosone.core.nlp.tokenizer.PosType;
 import com.github.bot.curiosone.core.nlp.tokenizer.Token;
 import java.util.HashSet;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Map;
  */
 
 public class TokenScorer {
-  
+
   /**
    * HashSet containing tokens' score.
    */
@@ -26,21 +26,21 @@ public class TokenScorer {
 
   /**
    * Calculate the score of the Token.
-   * 
+   *
    * @param t is the Token add t's sentiment's score to scoreSet.
    */
   public static void calculateScore(Token t) {
-    if (t.getPos() == PosT.ADJ || t.getPos() == PosT.V || t.getPos() == PosT.ADV
-        || t.getPos() == PosT.N) {
+    if (t.getPos() == PosType.ADJ || t.getPos() == PosType.V || t.getPos() == PosType.ADV
+        || t.getPos() == PosType.N) {
       if (dictionary.containsKey(t.getLemma())) {
         scoreSet.add(dictionary.get(t.getLemma()));
       }
     }
   }
-  
+
   /**
    * Calculate the score of the input token's list.
-   * 
+   *
    * @param tokenList the token list.
    */
   public static void calculateScore(List<Token> tokenList) {
@@ -48,10 +48,10 @@ public class TokenScorer {
       calculateScore(x);
     }
   }
-  
+
   /**
    * Calculate the score of the token analyzed until this method call.
-   * 
+   *
    * @return  the score of analyzed tokens.
    */
   public static Double getScore() {
@@ -59,5 +59,5 @@ public class TokenScorer {
     scoreSet = new HashSet<>();
     return temp.stream().reduce(0.0, Double::sum) / temp.size();
   }
-  
+
 }
