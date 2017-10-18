@@ -26,4 +26,16 @@ public interface Edge {
    * @return Enum SemanticRelationType
    */
   SemanticRelationType getType();
+  
+  /**
+   * Method that returns SemanticRelation weight.
+   * @return Integer weight
+   */
+  Integer getWeight();
+  
+  /**
+   * Method that sets SemanticRelation weight.
+   * @param i weight
+   */
+  void setWeight(Integer i);
 }

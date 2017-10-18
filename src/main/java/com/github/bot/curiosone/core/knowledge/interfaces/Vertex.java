@@ -10,16 +10,4 @@ public interface Vertex {
    * @return Vertex ID.
    */
   String getId();
-  
-  /**
-   * Method that returns Vertex weight.
-   * @return Weight.
-   */
-  Integer getWeight();
-  
-  /**
-   * Method that sets Vertex weight.
-   * @param weight Integer set.
-   */
-  void setWeight(Integer weight);
 }

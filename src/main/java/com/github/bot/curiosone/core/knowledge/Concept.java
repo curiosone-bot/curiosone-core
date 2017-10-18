@@ -11,7 +11,6 @@ public class Concept implements Vertex {
    * Name of the represented Concept.
    */
   private final String id;
-  private Integer weight;
 
   /**
    * Default class constructor.
@@ -19,25 +18,6 @@ public class Concept implements Vertex {
    */
   public Concept(String id) {
     this.id = id;
-  }
-  
-  public Concept(String id, Integer weight) {
-    this.id = id;
-    this.weight = weight;
-  }
-  
-  /**
-   * Void method that sets Weight.
-   */
-  public void setWeight(Integer weight) {
-    this.weight = weight;
-  }
-  
-  /**
-   * Getter method that returns weight.
-   */
-  public Integer getWeight() {
-    return this.weight;
   }
   
   /**
