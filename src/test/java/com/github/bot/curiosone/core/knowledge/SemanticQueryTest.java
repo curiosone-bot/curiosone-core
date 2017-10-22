@@ -94,51 +94,6 @@ public class SemanticQueryTest {
     assertThat(sq).isEqualTo(sq);
   }
 
-  /*
-  TODO: fix null arguments in SemanticQuery constructors.
-  @Test
-  public void testEqualsSymmetric() {
-    SemanticQuery sq = new SemanticQuery(SemanticRelationType.SIMILAR_TO, "a", "b");
-    SemanticQuery sqq = new SemanticQuery(SemanticRelationType.SIMILAR_TO, "a", "b");
-    assertThat(sq).isEqualTo(sqq);
-    assertThat(sqq).isEqualTo(sq);
-
-    sq = new SemanticQuery(SemanticRelationType.TIME, "a", "b", "c");
-    sqq = new SemanticQuery(SemanticRelationType.TIME, "a", "b", "c");
-    assertThat(sq).isEqualTo(sqq);
-    assertThat(sqq).isEqualTo(sq);
-
-    sq = new SemanticQuery(SemanticRelationType.IS_PERSON, "", "", "");
-    sqq = new SemanticQuery(SemanticRelationType.IS_PERSON, "", "", "");
-    assertThat(sq).isEqualTo(sqq);
-    assertThat(sqq).isEqualTo(sq);
-  }
-
-  @Test
-  public void testEqualsTransitive() {
-    SemanticQuery sq = new SemanticQuery(SemanticRelationType.SIMILAR_TO, "a", "b");
-    SemanticQuery sqq = new SemanticQuery(SemanticRelationType.SIMILAR_TO, "a", "b");
-    SemanticQuery sqqq = new SemanticQuery(SemanticRelationType.SIMILAR_TO, "a", "b");
-    assertThat(sq).isEqualTo(sqq);
-    assertThat(sqq).isEqualTo(sqqq);
-    assertThat(sqqq).isEqualTo(sq);
-
-    sq = new SemanticQuery(SemanticRelationType.REGION, "+-", "*:");
-    sqq = new SemanticQuery(SemanticRelationType.REGION, "+-", "*:");
-    sqqq = new SemanticQuery(SemanticRelationType.REGION, "+-", "*:");
-    assertThat(sq).isEqualTo(sqq);
-    assertThat(sqq).isEqualTo(sqqq);
-    assertThat(sqqq).isEqualTo(sq);
-
-    sq = new SemanticQuery(SemanticRelationType.ENTAILMENT, "a", "b");
-    sqq = new SemanticQuery(SemanticRelationType.ENTAILMENT, "a", "b");
-    sqqq = new SemanticQuery(SemanticRelationType.ENTAILMENT, "a", "b");
-    assertThat(sq).isEqualTo(sqq);
-    assertThat(sqq).isEqualTo(sqqq);
-    assertThat(sqqq).isEqualTo(sq);
-  }
-  */
-
   @Test
   public void testEqualsCoherent() {
     SemanticQuery sq =
