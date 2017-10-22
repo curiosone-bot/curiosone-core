@@ -98,24 +98,6 @@ public class PhraseTest {
     assertThat(extract("a. bcd")).hasSize(2);
 
     assertThat(extract("a.b. ,c!")).hasSize(3);
-
-    /*
-    TODO: fix NullPointerException;
-
-    assertThat(extract("###")).hasSize(1);
-
-    assertThat(extract("abc.   !")).hasSize(2);
-
-    assertThat(extract(". I live in Rome")).hasSize(2);
-
-    assertThat(extract(" . I live in Rome")).hasSize(2);
-
-    assertThat(extract("@.#.")).hasSize(0);
-
-    assertThat(extract(" ")).hasSize(0);
-
-    assertThat(extract(" . ")).hasSize(0);
-    */
   }
 
   @Test
