@@ -27,9 +27,12 @@ public class Message {
 
   /**
    * Constructs this Message from a text/content and its scope.
-   * @param message Message content. Can be null.
-   * @param scope Message scope. Can be null.
-   * @param emotion Message emotion. Can be null.
+   * @param  message
+   *         Message content. Can be null.
+   * @param  scope
+   *         Message scope. Can be null.
+   * @param  emotion
+   *         Message emotion. Can be null.
    */
   public Message(String message, String scope, String emotion) {
     this.message = (message == null) ? "" : message;
@@ -39,6 +42,7 @@ public class Message {
 
   /**
    * Gets the content of this Message.
+   * @return  the content of this Message
    */
   public String getMessage() {
     return message;
@@ -46,6 +50,7 @@ public class Message {
 
   /**
    * Gets the scope of this Message.
+   * @return  the scope of this Message
    */
   public String getScope() {
     return scope;
@@ -53,6 +58,7 @@ public class Message {
 
   /**
    * Gets the emotion of this Message.
+   * @return  the emotion of this Message
    */
   public String getEmotion() {
     return emotion;
@@ -60,6 +66,7 @@ public class Message {
 
   /**
    * Returns a String representation of this Message.
+   * @return  a String representation of this Message
    */
   @Override
   public String toString() {
@@ -68,9 +75,10 @@ public class Message {
 
   /**
    * Checks whether this Message equals to the given Object.
-   * @param  other the other Message to be compared against.
-   * @return {@code true} if this Message equals the other Message;
-   *         {@code false} otherwise
+   * @param  other
+   *         the other Message to be compared against.
+   * @return  {@code true} if this Message equals the other Message;
+   *          {@code false} otherwise
    */
   @Override
   public boolean equals(Object other) {
@@ -87,8 +95,9 @@ public class Message {
   }
 
   /**
-   * Returns the HashCode of this Message.
+   * Calculates the HashCode of this Message.
    * The HashCode is based on the HashCodes of the Message content and its scope.
+   * @return  the HashCode of this Messagess
    */
   @Override
   public int hashCode() {

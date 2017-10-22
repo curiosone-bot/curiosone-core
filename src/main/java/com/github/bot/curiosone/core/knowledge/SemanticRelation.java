@@ -5,21 +5,27 @@ import com.github.bot.curiosone.core.knowledge.interfaces.Vertex;
 
 /**
  * Represents a Semantic Relation of a Semantic Network.
+ * Provides methods to create a Semantic Relation and get its information.
+ * @see  Vertex The Vertex Interface
+ * @see  SemanticRelationType The SemanticRelationType Enum
  */
 public class SemanticRelation implements Edge {
 
   /**
    * Stores the source Vertex of this SemanticRelation.
+   * @see  Vertex The Vertex Interface
    */
   private Vertex sorgente;
 
   /**
    * Stores the target Vertex of this SemanticRelation.
+   * @see  Vertex The Vertex Interface
    */
   private Vertex destinazione;
 
   /**
    * Stores the SemanticRelationType of this SemanticRelation.
+   * @see  SemanticRelationType The SemanticRelationType Enum
    */
   private SemanticRelationType collegamento;
 
@@ -30,10 +36,14 @@ public class SemanticRelation implements Edge {
 
   /**
    * Constructs a SemanticRelation.
-   * @param v1 source Vertex of this SemanticRelation
-   * @param v2 target Vertex of this SemanticRelation
-   * @param type SemanticRelationType of this SemanticRelation
-   * @param weight weight of this SemanticRelation
+   * @param  v1
+   *         source Vertex of this SemanticRelation
+   * @param  v2
+   *         target Vertex of this SemanticRelation
+   * @param  type
+   *         SemanticRelationType of this SemanticRelation
+   * @param  weight
+   *         weight of this SemanticRelation
    */
   public SemanticRelation(Vertex v1,Vertex v2, SemanticRelationType type, Integer weight) {
     this.sorgente = v1;
@@ -44,16 +54,20 @@ public class SemanticRelation implements Edge {
 
   /**
    * Constructs a SemanticRelation.
-   * @param v1 source Vertex of this SemanticRelation
-   * @param v2 target Vertex of this SemanticRelation
-   * @param type SemanticRelationType of this SemanticRelation
+   * @param  v1
+   *         source Vertex of this SemanticRelation
+   * @param  v2
+   *         target Vertex of this SemanticRelation
+   * @param  type
+   *         SemanticRelationType of this SemanticRelation
    */
   public SemanticRelation(Vertex v1, Vertex v2, SemanticRelationType type) {
     this(v1, v2, type, 0);
   }
 
   /**
-   * Returns the source Vertex of this SemanticRelation.
+   * Gets the source Vertex of this SemanticRelation Relation.
+   * @return  the source Vertex of this SemanticRelation
    */
   @Override
   public Vertex getSource() {
@@ -61,7 +75,8 @@ public class SemanticRelation implements Edge {
   }
 
   /**
-   * Returns the target Vertex of this SemanticRelation.
+   * Gets the target Vertex of this SemanticRelation.
+   * @return  the target Vertex of this SemanticRelation
    */
   @Override
   public Vertex getTarget() {
@@ -69,7 +84,8 @@ public class SemanticRelation implements Edge {
   }
 
   /**
-   * Returns the SemanticRelationType of this SemanticRelation.
+   * Gets the SemanticRelationType of this SemanticRelation.
+   * @return  the SemanticRelationType of this SemanticRelation
    */
   @Override
   public SemanticRelationType getType() {
@@ -77,7 +93,8 @@ public class SemanticRelation implements Edge {
   }
 
   /**
-   * Returns the weight of this SemanticRelation.
+   * Gets the weight of this SemanticRelation.
+   * @return  the weight of this SemanticRelation
    */
   @Override
   public Integer getWeight() {
@@ -94,6 +111,7 @@ public class SemanticRelation implements Edge {
 
   /**
    * Returns a String representation of this SemanticRelation.
+   * @return  a String representation of this SemanticRelation
    */
   @Override
   public String toString() {
@@ -103,9 +121,10 @@ public class SemanticRelation implements Edge {
 
   /**
    * Checks whether this SemanticRelation equals to the given Object.
-   * @param o the object to be compared against
-   * @return {@code true} if this SemanticRelation equals to the given object;
-   *         {@code false} othewise.
+   * @param  o
+   *         the object to be compared against
+   * @return  {@code true} if this SemanticRelation equals to the given object;
+   *          {@code false} othewise.
    */
   @Override
   public boolean equals(Object o) {
@@ -119,8 +138,9 @@ public class SemanticRelation implements Edge {
   }
 
   /**
-   * Returns the HashCode of this SemanticRelation.
+   * Calculates the HashCode of this SemanticRelation.
    * The HashCode depends on the Vertices and the SemanticRelationType.
+   * @return  the HashCode of this SemanticRelation
    */
   @Override
   public int hashCode() {

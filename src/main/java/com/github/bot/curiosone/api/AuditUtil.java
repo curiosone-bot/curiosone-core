@@ -4,8 +4,10 @@ import spark.Request;
 import spark.Response;
 
 /**
- * Converts requests and responses into audit logs.
- * Provides a public static method to format a request-response interaction.
+ * Converts Spark Requests and Responses into Audit logs.
+ * Provides a public static method to format a Spark request-response interaction.
+ * @see  <a href="https://goo.gl/T8LFRm">Spark Request Javadoc</a>
+ * @see  <a href="https://goo.gl/nFCekX">Spark Response Javadoc</a>
  */
 public class AuditUtil {
 
@@ -15,10 +17,14 @@ public class AuditUtil {
   private AuditUtil() {}
 
   /**
-   * Formats an audit log record.
-   * @param req The request object.
-   * @param res The response object.
-   * @return a String containing the audit log.
+   * Converts a Spark request-response interaction into an Audit log record.
+   * @param  req
+   *         The request object.
+   * @param  res
+   *         The response object.
+   * @return  a String containing the audit log.
+   * @see  <a href="https://goo.gl/T8LFRm">Spark Request Javadoc</a>
+   * @see  <a href="https://goo.gl/nFCekX">Spark Response Javadoc</a>
    */
   public static String format(Request req, Response res) {
     StringBuilder sb = new StringBuilder();
